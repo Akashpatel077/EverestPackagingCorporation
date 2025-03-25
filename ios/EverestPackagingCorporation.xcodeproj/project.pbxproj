@@ -9,8 +9,14 @@
 /* Begin PBXBuildFile section */
 		0C80B921A6F3F58F76C31292 /* libPods-EverestPackagingCorporation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DCACB8F33CDC322A6C60F78 /* libPods-EverestPackagingCorporation.a */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
+		146F8576950541E2A869E8E1 /* SchibstedGrotesk-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5117E8A66F7B401E9C603561 /* SchibstedGrotesk-Regular.ttf */; };
+		366539DF014444798A59F116 /* SchibstedGrotesk-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 373905F5DD344844A3FF0027 /* SchibstedGrotesk-Bold.ttf */; };
+		6C1DD2ECE7394EB3AD1E0521 /* SchibstedGrotesk-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5B59D6E6BCD84A118BBD3FEA /* SchibstedGrotesk-SemiBold.ttf */; };
 		761780ED2CA45674006654EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761780EC2CA45674006654EE /* AppDelegate.swift */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		BDBFCE7371F54ADBAD5FFDD0 /* SchibstedGrotesk-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 590B3841CC5B4B659EB00C9A /* SchibstedGrotesk-ExtraBold.ttf */; };
+		C2073BB62DFB4485946F11D2 /* SchibstedGrotesk-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C8E3453167394C218E9E55FF /* SchibstedGrotesk-Black.ttf */; };
+		D01A8D75DA694D4EA8A5AACF /* SchibstedGrotesk-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 49323313DAE448C7B8AF2878 /* SchibstedGrotesk-Medium.ttf */; };
 		FCC78F61E5A38E524040D762 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */; };
 /* End PBXBuildFile section */
 
@@ -19,11 +25,17 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = EverestPackagingCorporation/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = EverestPackagingCorporation/Info.plist; sourceTree = "<group>"; };
 		13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PrivacyInfo.xcprivacy; path = EverestPackagingCorporation/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		373905F5DD344844A3FF0027 /* SchibstedGrotesk-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SchibstedGrotesk-Bold.ttf"; path = "../assets/fonts/SchibstedGrotesk-Bold.ttf"; sourceTree = "<group>"; };
 		3B4392A12AC88292D35C810B /* Pods-EverestPackagingCorporation.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EverestPackagingCorporation.debug.xcconfig"; path = "Target Support Files/Pods-EverestPackagingCorporation/Pods-EverestPackagingCorporation.debug.xcconfig"; sourceTree = "<group>"; };
+		49323313DAE448C7B8AF2878 /* SchibstedGrotesk-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SchibstedGrotesk-Medium.ttf"; path = "../assets/fonts/SchibstedGrotesk-Medium.ttf"; sourceTree = "<group>"; };
+		5117E8A66F7B401E9C603561 /* SchibstedGrotesk-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SchibstedGrotesk-Regular.ttf"; path = "../assets/fonts/SchibstedGrotesk-Regular.ttf"; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-EverestPackagingCorporation.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EverestPackagingCorporation.release.xcconfig"; path = "Target Support Files/Pods-EverestPackagingCorporation/Pods-EverestPackagingCorporation.release.xcconfig"; sourceTree = "<group>"; };
+		590B3841CC5B4B659EB00C9A /* SchibstedGrotesk-ExtraBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SchibstedGrotesk-ExtraBold.ttf"; path = "../assets/fonts/SchibstedGrotesk-ExtraBold.ttf"; sourceTree = "<group>"; };
+		5B59D6E6BCD84A118BBD3FEA /* SchibstedGrotesk-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SchibstedGrotesk-SemiBold.ttf"; path = "../assets/fonts/SchibstedGrotesk-SemiBold.ttf"; sourceTree = "<group>"; };
 		5DCACB8F33CDC322A6C60F78 /* libPods-EverestPackagingCorporation.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EverestPackagingCorporation.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		761780EC2CA45674006654EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = EverestPackagingCorporation/AppDelegate.swift; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = EverestPackagingCorporation/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		C8E3453167394C218E9E55FF /* SchibstedGrotesk-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SchibstedGrotesk-Black.ttf"; path = "../assets/fonts/SchibstedGrotesk-Black.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -39,6 +51,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0B3CEDCDA0154EE4B84111A4 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				C8E3453167394C218E9E55FF /* SchibstedGrotesk-Black.ttf */,
+				373905F5DD344844A3FF0027 /* SchibstedGrotesk-Bold.ttf */,
+				590B3841CC5B4B659EB00C9A /* SchibstedGrotesk-ExtraBold.ttf */,
+				49323313DAE448C7B8AF2878 /* SchibstedGrotesk-Medium.ttf */,
+				5117E8A66F7B401E9C603561 /* SchibstedGrotesk-Regular.ttf */,
+				5B59D6E6BCD84A118BBD3FEA /* SchibstedGrotesk-SemiBold.ttf */,
+			);
+			name = Resources;
+			path = "";
+			sourceTree = "<group>";
+		};
 		13B07FAE1A68108700A75B9A /* EverestPackagingCorporation */ = {
 			isa = PBXGroup;
 			children = (
@@ -75,6 +101,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
+				0B3CEDCDA0154EE4B84111A4 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -161,6 +188,12 @@
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				FCC78F61E5A38E524040D762 /* PrivacyInfo.xcprivacy in Resources */,
+				C2073BB62DFB4485946F11D2 /* SchibstedGrotesk-Black.ttf in Resources */,
+				366539DF014444798A59F116 /* SchibstedGrotesk-Bold.ttf in Resources */,
+				BDBFCE7371F54ADBAD5FFDD0 /* SchibstedGrotesk-ExtraBold.ttf in Resources */,
+				D01A8D75DA694D4EA8A5AACF /* SchibstedGrotesk-Medium.ttf in Resources */,
+				146F8576950541E2A869E8E1 /* SchibstedGrotesk-Regular.ttf in Resources */,
+				6C1DD2ECE7394EB3AD1E0521 /* SchibstedGrotesk-SemiBold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
