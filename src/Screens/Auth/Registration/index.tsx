@@ -1,27 +1,40 @@
 import React, { useState } from 'react';
-import { SafeAreaView, Text, View, TextInput, TouchableOpacity, Image } from 'react-native';
+import { SafeAreaView, Text, View, TextInput, TouchableOpacity } from 'react-native';
 import { styles } from './styles';
 import { useTranslation } from 'react-i18next';
 import { Icon } from '../../../Components';
 import { ic_Apple, ic_Facebook, ic_Google } from '../../../../assets/icons';
 import { loginWithGoogle } from 'src/services/firebase-services';
 import { useNavigation } from '@react-navigation/native';
-import { REGISTRATION } from 'src/Navigation/auth/routes';
+import { LOGIN } from 'src/Navigation/auth/routes';
 
-const Login = () => {
+const Registration = () => {
+    const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
-    const { t } = useTranslation()
-    const navigation = useNavigation()
+    const [agreeToTerms, setAgreeToTerms] = useState(false);
+    const { t } = useTranslation();
+    const navigation = useNavigation();
 
     return (
         <SafeAreaView style={styles.container}>
-            <Text style={styles.logo}>{t("login.heading")}</Text>
-            <Text style={styles.welcomeText}>{t("login.subTitle")}</Text>
+            <Text style={styles.logo}>{t("registration.heading") || "Create Account"}</Text>
+            <Text style={styles.welcomeText}>{t("registration.subTitle") || "Fill your information below or register with your social account."}</Text>
 
             <View style={styles.inputContainer}>
-                <Text style={styles.label}>{t("login.email")}</Text>
+                <Text style={styles.label}>{t("registration.name") || "Name"}</Text>
+                <TextInput
+                    style={styles.input}
+                    placeholder="John Doe"
+                    value={name}
+                    onChangeText={setName}
+                    autoCapitalize="words"
+                />
+            </View>
+
+            <View style={styles.inputContainer}>
+                <Text style={styles.label}>{t("registration.email") || "Email"}</Text>
                 <TextInput
                     style={styles.input}
                     placeholder="example@gmail.com"
@@ -33,7 +46,7 @@ const Login = () => {
             </View>
 
             <View style={styles.inputContainer}>
-                <Text style={styles.label}>{t("login.password")}</Text>
+                <Text style={styles.label}>{t("registration.password") || "Password"}</Text>
                 <View style={styles.passwordContainer}>
                     <TextInput
                         style={styles.passwordInput}
@@ -51,17 +64,27 @@ const Login = () => {
                 </View>
             </View>
 
-            <TouchableOpacity style={styles.forgotPassword}>
-                <Text style={styles.forgotPasswordText}>{t("login.forgotPassword")}</Text>
+            <TouchableOpacity 
+                style={styles.termsContainer} 
+                onPress={() => setAgreeToTerms(!agreeToTerms)}
+            >
+                <View style={[styles.checkbox, agreeToTerms && styles.checkboxChecked]} />
+                <Text style={styles.termsText}>
+                    {t("registration.agreeWith") || "Agree with"}{' '}
+                    <Text style={styles.termsLink}>{t("registration.terms") || "Terms & Condition"}</Text>
+                </Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.signInButton} onPress={() => {loginWithGoogle()}}>
-                <Text style={styles.signInText}>{t("common.signIn")}</Text>
+            <TouchableOpacity 
+                style={[styles.signUpButton, !agreeToTerms && styles.signUpButtonDisabled]} 
+                disabled={!agreeToTerms}
+            >
+                <Text style={styles.signUpButtonText}>{t("common.signUp") || "Sign Up"}</Text>
             </TouchableOpacity>
 
             <View style={styles.dividerContainer}>
                 <View style={styles.dividerLine} />
-                <Text style={styles.dividerText}>{t("login.breackText")}</Text>
+                <Text style={styles.dividerText}>{t("registration.orSignUpWith") || "Or sign up with"}</Text>
                 <View style={styles.dividerLine} />
             </View>
 
@@ -77,14 +100,14 @@ const Login = () => {
                 </TouchableOpacity>
             </View>
 
-            <View style={styles.signUpContainer}>
-                <Text style={styles.signUpText}>{t("login.signUpText")}</Text>
-                <TouchableOpacity onPress={() => {navigation.navigate(REGISTRATION)}}>
-                    <Text style={styles.signUpLink}>{t("common.signUp")}</Text>
+            <View style={styles.signInContainer}>
+                <Text style={styles.signInText}>{t("registration.alreadyHaveAccount") || "Already have an account?"}</Text>
+                <TouchableOpacity onPress={() => {navigation.navigate(LOGIN)}}>
+                    <Text style={styles.signInLink}>{t("common.signIn") || "Sign In"}</Text>
                 </TouchableOpacity>
             </View>
         </SafeAreaView>
-    )
-}
+    );
+};
 
-export default Login;
+export default Registration;

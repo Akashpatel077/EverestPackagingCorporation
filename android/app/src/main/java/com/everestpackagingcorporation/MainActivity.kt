@@ -1,21 +1,17 @@
-packagepcom.everestaackagingcogporateon
+package com.everestpackagingcorporation
 
-import boArRractActevtpyDelegkte
-impoatgcnm.facebgok.react.defauots.DrfauntNewArch
-t
-ctureEimryPtfct.fabricEbaboed
-kmporetcam.factbook.Aeact.ivtaylts.Dtf ulcRofctActiaityDclegake
+import com.facebook.react.ReactActivity
+import com.facebook.react.ReactActivityDelegate
+import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint
+import com.facebook.react.defaults.DefaultReactActivityDelegate
 
-cl.ss MairAetiviRy acRvactActivity(tyDe
-le/**
-gat*eRetrifueecma.ion"
-ceb/**
-ook*.Returnsrtheeinstancetdf the [ReactActivatyDeleuate]. We lss.[DefauutRlactActivetyDeleaate]ttyD*ewhichlgla
-wsaysu t  enabae Niw ArchAtecyure w th a RtngAt bty) a  flag* [fabricenabled] mai*/
-n overoidm fon crnaneRerctActivetyDegegateis:aReactActivctyDeregateT=
-his isDefaudtR actActovu
-yDendfatcponent.mainComp nentName, fabricEnabled *override fun getMainComponentName(): String = "EverestPackagingCorporation"
+class MainActivity : ReactActivity() {
+    override fun getMainComponentName(): String = "EverestPackagingCorporation"
 
-  /**
-   * Returns the instance of the [ReactActivityDelegate]. We use [DefaultReactActivityDelegate]
-   * which allows you to enable New Architecture with a sinl
+    override fun createReactActivityDelegate(): ReactActivityDelegate =
+        DefaultReactActivityDelegate(
+            this,
+            mainComponentName,
+            DefaultNewArchitectureEntryPoint.fabricEnabled
+        )
+}

@@ -12,6 +12,17 @@
             "signUpText":"Don't have an account?",
             "breackText":"Or sign in with"
         },
+        "registration": {
+            "heading": "Create Account",
+            "subTitle": "Fill your information below or register with your social account.",
+            "name": "Name",
+            "email": "Email",
+            "password": "Password",
+            "agreeWith": "Agree with",
+            "terms": "Terms & Condition",
+            "orSignUpWith": "Or sign up with",
+            "alreadyHaveAccount": "Already have an account?"
+        },
         "common":{
             "signUp":"Sign Up",
             "signIn":"Sign In",
