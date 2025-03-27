@@ -1,0 +1,21 @@
+{
+    "local": "en",
+    "translation": {
+        "login":{
+            "heading":"Sign In",
+            "subTitle":"Hi! Welcome back, you've been missed",
+            "email":"Email",
+            "password":"Password",
+            "forgotPassword":"Forgot Password?",
+            "signIn":"Sign In",
+            "signUp":"Sign Up",
+            "signUpText":"Don't have an account?",
+            "breackText":"Or sign in with"
+        },
+        "common":{
+            "signUp":"Sign Up",
+            "signIn":"Sign In",
+            "signOut":"Sign Out"
+        }
+    }
+}

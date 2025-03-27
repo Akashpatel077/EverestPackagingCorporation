@@ -24,6 +24,58 @@
     {
       "path": "assets/fonts/SchibstedGrotesk-SemiBold.ttf",
       "sha1": "524854e64aab6cb1b1211a8835b70acaa38c6d21"
+    },
+    {
+      "path": "assets/images/banner.png",
+      "sha1": "d5bc51e422aad80f8e555d4d0e0056649e8606a7"
+    },
+    {
+      "path": "assets/images/close_icon.png",
+      "sha1": "5012d5d7799aecdce602e9837299f78953d0bbf4"
+    },
+    {
+      "path": "assets/images/dark_search.png",
+      "sha1": "af75d673d9130e16e6dc57ebb4fe3c4742714189"
+    },
+    {
+      "path": "assets/images/search.png",
+      "sha1": "fc3d9114728be2dbceca9592f36b04a5752195cb"
+    },
+    {
+      "path": "assets/images/user.png",
+      "sha1": "9bf636cf8915757d93729c9a1e753fa4e5f0cc67"
+    },
+    {
+      "path": "assets/icons/Apple.svg",
+      "sha1": "f7e4f322207fe9fdf75af545bd865b82642ee681"
+    },
+    {
+      "path": "assets/icons/Buy.svg",
+      "sha1": "3b21b85dfd7676d8cdd27589fc71b18276a079a5"
+    },
+    {
+      "path": "assets/icons/Heart.svg",
+      "sha1": "aea3620f213af72c1fb6fd8c3c0ccf0f60b3d10e"
+    },
+    {
+      "path": "assets/icons/Home.svg",
+      "sha1": "264ed7fc2b86e9ce86b9d1923e1ca70727a7f816"
+    },
+    {
+      "path": "assets/icons/Notification.svg",
+      "sha1": "1178214a2608188dbd6fd4bed9784dbd88acce75"
+    },
+    {
+      "path": "assets/icons/Paper.svg",
+      "sha1": "c0791e665ab7879a4fb4704263ef38422f6b0acb"
+    },
+    {
+      "path": "assets/icons/Profile.svg",
+      "sha1": "83be5c0a7e8271cb89427448d73c5f86347461ef"
+    },
+    {
+      "path": "assets/icons/index.ts",
+      "sha1": "41d5d9c0be68e9c2ba76b0d070e57b5470af72dd"
     }
   ]
 }

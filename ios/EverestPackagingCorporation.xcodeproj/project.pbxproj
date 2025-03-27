@@ -18,6 +18,19 @@
 		C2073BB62DFB4485946F11D2 /* SchibstedGrotesk-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C8E3453167394C218E9E55FF /* SchibstedGrotesk-Black.ttf */; };
 		D01A8D75DA694D4EA8A5AACF /* SchibstedGrotesk-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 49323313DAE448C7B8AF2878 /* SchibstedGrotesk-Medium.ttf */; };
 		FCC78F61E5A38E524040D762 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */; };
+		12E15733CB044957A8728285 /* banner.png in Resources */ = {isa = PBXBuildFile; fileRef = 03B43FDE76F04E219042DB25 /* banner.png */; };
+		B80AAAB556634775A5A7B65E /* close_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D4339E4AD8140318AD9314F /* close_icon.png */; };
+		8ABB835F223842EBA75A715B /* dark_search.png in Resources */ = {isa = PBXBuildFile; fileRef = 153DC3FD4D2B4E3A816634BA /* dark_search.png */; };
+		39CD6AF7E370461AA801C1DA /* search.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A9B17DB55574148B997FAA7 /* search.png */; };
+		92AA3BE991F14452AE30E595 /* user.png in Resources */ = {isa = PBXBuildFile; fileRef = F44C28F0F92B4530836EBB28 /* user.png */; };
+		A7DAF7BFC7324B9285926527 /* Apple.svg in Resources */ = {isa = PBXBuildFile; fileRef = C3963CAA8B4E4A9FAEC9AFA0 /* Apple.svg */; };
+		49D710F95C6A4079A44F556B /* Buy.svg in Resources */ = {isa = PBXBuildFile; fileRef = 06A8BB918CC043358C4EE6C3 /* Buy.svg */; };
+		81097CD7295D4707A750EBB6 /* Heart.svg in Resources */ = {isa = PBXBuildFile; fileRef = 86661D897F554CD4B0B4AE44 /* Heart.svg */; };
+		55868BF766514DD2B592C28A /* Home.svg in Resources */ = {isa = PBXBuildFile; fileRef = 8D0BF31BC955492283D8BB28 /* Home.svg */; };
+		9B3BC6E26AA243BE9B590E9C /* Notification.svg in Resources */ = {isa = PBXBuildFile; fileRef = C5EDBDC7F97140D383D16BB7 /* Notification.svg */; };
+		CB6C63DEB9B44BFD97FB38B3 /* Paper.svg in Resources */ = {isa = PBXBuildFile; fileRef = E3A51F1DFC0E40BA97B0975B /* Paper.svg */; };
+		24DAB08262C547F7A6D29C4C /* Profile.svg in Resources */ = {isa = PBXBuildFile; fileRef = 869E6E48052E40D2B2996567 /* Profile.svg */; };
+		B38EF0C43DCD4DC6986DB175 /* index.ts in Resources */ = {isa = PBXBuildFile; fileRef = D7D380CA058F4EF4ABE89B1A /* index.ts */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,18 +38,31 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = EverestPackagingCorporation/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = EverestPackagingCorporation/Info.plist; sourceTree = "<group>"; };
 		13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PrivacyInfo.xcprivacy; path = EverestPackagingCorporation/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
-		373905F5DD344844A3FF0027 /* SchibstedGrotesk-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SchibstedGrotesk-Bold.ttf"; path = "../assets/fonts/SchibstedGrotesk-Bold.ttf"; sourceTree = "<group>"; };
+		373905F5DD344844A3FF0027 /* SchibstedGrotesk-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SchibstedGrotesk-Bold.ttf"; path = "../assets/fonts/SchibstedGrotesk-Bold.ttf"; sourceTree = "<group>"; };
 		3B4392A12AC88292D35C810B /* Pods-EverestPackagingCorporation.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EverestPackagingCorporation.debug.xcconfig"; path = "Target Support Files/Pods-EverestPackagingCorporation/Pods-EverestPackagingCorporation.debug.xcconfig"; sourceTree = "<group>"; };
-		49323313DAE448C7B8AF2878 /* SchibstedGrotesk-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SchibstedGrotesk-Medium.ttf"; path = "../assets/fonts/SchibstedGrotesk-Medium.ttf"; sourceTree = "<group>"; };
-		5117E8A66F7B401E9C603561 /* SchibstedGrotesk-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SchibstedGrotesk-Regular.ttf"; path = "../assets/fonts/SchibstedGrotesk-Regular.ttf"; sourceTree = "<group>"; };
+		49323313DAE448C7B8AF2878 /* SchibstedGrotesk-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SchibstedGrotesk-Medium.ttf"; path = "../assets/fonts/SchibstedGrotesk-Medium.ttf"; sourceTree = "<group>"; };
+		5117E8A66F7B401E9C603561 /* SchibstedGrotesk-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SchibstedGrotesk-Regular.ttf"; path = "../assets/fonts/SchibstedGrotesk-Regular.ttf"; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-EverestPackagingCorporation.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EverestPackagingCorporation.release.xcconfig"; path = "Target Support Files/Pods-EverestPackagingCorporation/Pods-EverestPackagingCorporation.release.xcconfig"; sourceTree = "<group>"; };
-		590B3841CC5B4B659EB00C9A /* SchibstedGrotesk-ExtraBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SchibstedGrotesk-ExtraBold.ttf"; path = "../assets/fonts/SchibstedGrotesk-ExtraBold.ttf"; sourceTree = "<group>"; };
-		5B59D6E6BCD84A118BBD3FEA /* SchibstedGrotesk-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SchibstedGrotesk-SemiBold.ttf"; path = "../assets/fonts/SchibstedGrotesk-SemiBold.ttf"; sourceTree = "<group>"; };
+		590B3841CC5B4B659EB00C9A /* SchibstedGrotesk-ExtraBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SchibstedGrotesk-ExtraBold.ttf"; path = "../assets/fonts/SchibstedGrotesk-ExtraBold.ttf"; sourceTree = "<group>"; };
+		5B59D6E6BCD84A118BBD3FEA /* SchibstedGrotesk-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SchibstedGrotesk-SemiBold.ttf"; path = "../assets/fonts/SchibstedGrotesk-SemiBold.ttf"; sourceTree = "<group>"; };
 		5DCACB8F33CDC322A6C60F78 /* libPods-EverestPackagingCorporation.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EverestPackagingCorporation.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		761780EC2CA45674006654EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = EverestPackagingCorporation/AppDelegate.swift; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = EverestPackagingCorporation/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		C8E3453167394C218E9E55FF /* SchibstedGrotesk-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SchibstedGrotesk-Black.ttf"; path = "../assets/fonts/SchibstedGrotesk-Black.ttf"; sourceTree = "<group>"; };
+		C8E3453167394C218E9E55FF /* SchibstedGrotesk-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SchibstedGrotesk-Black.ttf"; path = "../assets/fonts/SchibstedGrotesk-Black.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		03B43FDE76F04E219042DB25 /* banner.png */ = {isa = PBXFileReference; name = "banner.png"; path = "../assets/images/banner.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		2D4339E4AD8140318AD9314F /* close_icon.png */ = {isa = PBXFileReference; name = "close_icon.png"; path = "../assets/images/close_icon.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		153DC3FD4D2B4E3A816634BA /* dark_search.png */ = {isa = PBXFileReference; name = "dark_search.png"; path = "../assets/images/dark_search.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		0A9B17DB55574148B997FAA7 /* search.png */ = {isa = PBXFileReference; name = "search.png"; path = "../assets/images/search.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		F44C28F0F92B4530836EBB28 /* user.png */ = {isa = PBXFileReference; name = "user.png"; path = "../assets/images/user.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		C3963CAA8B4E4A9FAEC9AFA0 /* Apple.svg */ = {isa = PBXFileReference; name = "Apple.svg"; path = "../assets/icons/Apple.svg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		06A8BB918CC043358C4EE6C3 /* Buy.svg */ = {isa = PBXFileReference; name = "Buy.svg"; path = "../assets/icons/Buy.svg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		86661D897F554CD4B0B4AE44 /* Heart.svg */ = {isa = PBXFileReference; name = "Heart.svg"; path = "../assets/icons/Heart.svg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		8D0BF31BC955492283D8BB28 /* Home.svg */ = {isa = PBXFileReference; name = "Home.svg"; path = "../assets/icons/Home.svg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		C5EDBDC7F97140D383D16BB7 /* Notification.svg */ = {isa = PBXFileReference; name = "Notification.svg"; path = "../assets/icons/Notification.svg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		E3A51F1DFC0E40BA97B0975B /* Paper.svg */ = {isa = PBXFileReference; name = "Paper.svg"; path = "../assets/icons/Paper.svg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		869E6E48052E40D2B2996567 /* Profile.svg */ = {isa = PBXFileReference; name = "Profile.svg"; path = "../assets/icons/Profile.svg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		D7D380CA058F4EF4ABE89B1A /* index.ts */ = {isa = PBXFileReference; name = "index.ts"; path = "../assets/icons/index.ts"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,9 +86,21 @@
 				49323313DAE448C7B8AF2878 /* SchibstedGrotesk-Medium.ttf */,
 				5117E8A66F7B401E9C603561 /* SchibstedGrotesk-Regular.ttf */,
 				5B59D6E6BCD84A118BBD3FEA /* SchibstedGrotesk-SemiBold.ttf */,
+				03B43FDE76F04E219042DB25 /* banner.png */,
+				2D4339E4AD8140318AD9314F /* close_icon.png */,
+				153DC3FD4D2B4E3A816634BA /* dark_search.png */,
+				0A9B17DB55574148B997FAA7 /* search.png */,
+				F44C28F0F92B4530836EBB28 /* user.png */,
+				C3963CAA8B4E4A9FAEC9AFA0 /* Apple.svg */,
+				06A8BB918CC043358C4EE6C3 /* Buy.svg */,
+				86661D897F554CD4B0B4AE44 /* Heart.svg */,
+				8D0BF31BC955492283D8BB28 /* Home.svg */,
+				C5EDBDC7F97140D383D16BB7 /* Notification.svg */,
+				E3A51F1DFC0E40BA97B0975B /* Paper.svg */,
+				869E6E48052E40D2B2996567 /* Profile.svg */,
+				D7D380CA058F4EF4ABE89B1A /* index.ts */,
 			);
 			name = Resources;
-			path = "";
 			sourceTree = "<group>";
 		};
 		13B07FAE1A68108700A75B9A /* EverestPackagingCorporation */ = {
@@ -194,6 +232,19 @@
 				D01A8D75DA694D4EA8A5AACF /* SchibstedGrotesk-Medium.ttf in Resources */,
 				146F8576950541E2A869E8E1 /* SchibstedGrotesk-Regular.ttf in Resources */,
 				6C1DD2ECE7394EB3AD1E0521 /* SchibstedGrotesk-SemiBold.ttf in Resources */,
+				12E15733CB044957A8728285 /* banner.png in Resources */,
+				B80AAAB556634775A5A7B65E /* close_icon.png in Resources */,
+				8ABB835F223842EBA75A715B /* dark_search.png in Resources */,
+				39CD6AF7E370461AA801C1DA /* search.png in Resources */,
+				92AA3BE991F14452AE30E595 /* user.png in Resources */,
+				A7DAF7BFC7324B9285926527 /* Apple.svg in Resources */,
+				49D710F95C6A4079A44F556B /* Buy.svg in Resources */,
+				81097CD7295D4707A750EBB6 /* Heart.svg in Resources */,
+				55868BF766514DD2B592C28A /* Home.svg in Resources */,
+				9B3BC6E26AA243BE9B590E9C /* Notification.svg in Resources */,
+				CB6C63DEB9B44BFD97FB38B3 /* Paper.svg in Resources */,
+				24DAB08262C547F7A6D29C4C /* Profile.svg in Resources */,
+				B38EF0C43DCD4DC6986DB175 /* index.ts in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -293,6 +344,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = BPVNMF56F8;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = EverestPackagingCorporation/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
@@ -321,6 +373,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = BPVNMF56F8;
 				INFOPLIST_FILE = EverestPackagingCorporation/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LD_RUNPATH_SEARCH_PATHS = (
