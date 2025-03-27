@@ -1,0 +1,209 @@
+import { StyleSheet, Dimensions } from 'react-native';
+
+const { width } = Dimensions.get('window');
+
+export const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#FFFFFF',
+  },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+  },
+  backButton: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: '#FFFFFF',
+    justifyContent: 'center',
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
+  },
+  backIcon: {
+    fontSize: 30,
+    color: '#000000',
+  },
+  headerTitle: {
+    fontSize: 18,
+    fontWeight: '600',
+    color: '#000000',
+  },
+  favoriteButton: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: '#FFFFFF',
+    justifyContent: 'center',
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
+  },
+  mainImageContainer: {
+    width: '100%',
+    height: width,
+    backgroundColor: '#F5F5F5',
+  },
+  mainImage: {
+    width: '100%',
+    height: '100%',
+    resizeMode: 'cover',
+  },
+  thumbnailContainer: {
+    marginTop: 16,
+    paddingHorizontal: 16,
+  },
+  thumbnailList: {
+    gap: 8,
+  },
+  thumbnailImage: {
+    width: 64,
+    height: 64,
+    borderRadius: 8,
+    backgroundColor: '#F5F5F5',
+  },
+  productInfo: {
+    padding: 16,
+  },
+  category: {
+    fontSize: 14,
+    color: '#666666',
+    marginBottom: 8,
+  },
+  titleRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 12,
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: '600',
+    color: '#000000',
+    flex: 1,
+  },
+  ratingContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  ratingIcon: {
+    color: '#FFD700',
+    fontSize: 16,
+    marginRight: 4,
+  },
+  rating: {
+    fontSize: 16,
+    color: '#000000',
+    fontWeight: '500',
+  },
+  description: {
+    fontSize: 14,
+    color: '#666666',
+    lineHeight: 20,
+    marginBottom: 8,
+  },
+  readMore: {
+    fontSize: 14,
+    color: '#8B4513',
+    marginBottom: 24,
+  },
+  sectionTitle: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#000000',
+    marginBottom: 12,
+  },
+  sizeContainer: {
+    flexDirection: 'row',
+    gap: 12,
+    marginBottom: 24,
+  },
+  sizeButton: {
+    width: 40,
+    height: 40,
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: '#8B4513',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 12,
+    backgroundColor: '#FAF3EE',
+  },
+  selectedSize: {
+    backgroundColor: '#8B4513',
+    borderColor: '#8B4513',
+  },
+  sizeText: {
+    fontSize: 14,
+    color: '#000000',
+  },
+  selectedSizeText: {
+    color: '#FFFFFF',
+  },
+  colorSection: {
+    marginBottom: 24,
+  },
+  colorContainer: {
+    flexDirection: 'row',
+    gap: 16,
+    marginTop: 12,
+  },
+  colorButton: {
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    borderWidth: 1,
+    borderColor: '#E0E0E0',
+  },
+  bottomContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginTop: 16,
+    paddingTop: 16,
+    borderTopWidth: 1,
+    borderTopColor: '#F0F0F0',
+  },
+  priceContainer: {
+    flex: 1,
+  },
+  priceLabel: {
+    fontSize: 12,
+    color: '#666666',
+    marginBottom: 4,
+  },
+  price: {
+    fontSize: 24,
+    fontWeight: '600',
+    color: '#000000',
+  },
+  addToCartButton: {
+    flex: 1,
+    backgroundColor: '#8B4513',
+    borderRadius: 25,
+    paddingVertical: 12,
+    marginLeft: 16,
+    alignItems: 'center',
+  },
+  addToCartText: {
+    color: '#FFFFFF',
+    fontSize: 16,
+    fontWeight: '600',
+  },
+});

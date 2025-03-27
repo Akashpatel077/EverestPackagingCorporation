@@ -6,13 +6,11 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#FFFFFF',
+    padding:15
   },
   searchContainer: {
-    // paddingHorizontal: 16,
-    // paddingVertical: 12,
   },
   bannerContainer: {
-    // marginHorizontal: 16,
     marginBottom: 24,
     marginTop: 24,
     borderRadius: 12,
@@ -78,10 +76,14 @@ export const styles = StyleSheet.create({
   },
   categoryList: {
     paddingHorizontal: 12,
+    justifyContent: 'space-around',
   },
   categoryItem: {
     alignItems: 'center',
-    marginHorizontal: 4,
+    position: 'relative',
+    zIndex: 1000,
+    width: 80,
+    marginHorizontal: 8,
   },
   categoryIcon: {
     width: 60,
@@ -96,6 +98,35 @@ export const styles = StyleSheet.create({
     fontSize: 24,
   },
   categoryName: {
+    fontSize: 12,
+    color: '#333333',
+  },
+  dropdownContainer: {
+    position: 'absolute',
+    top: '100%',
+    left: 0,
+    backgroundColor: '#FFFFFF',
+    borderRadius: 8,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+    zIndex: 1001,
+    width: 200,
+    marginTop: 4,
+    paddingVertical: 8,
+  },
+  dropdownItem: {
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+    borderBottomWidth: 1,
+    borderBottomColor: '#F0F0F0',
+  },
+  dropdownText: {
     fontSize: 12,
     color: '#333333',
   },

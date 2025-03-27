@@ -14,7 +14,7 @@ const App = () => {
   ];
 
   return (
-      <SafeAreaView style={{flex:1,margin:15}}>
+      <SafeAreaView style={{flex:1,backgroundColor:"#FFFFFF"}}>
         <I18nextProvider i18n={i18n}>
           <MainContainer/>
         </I18nextProvider>
