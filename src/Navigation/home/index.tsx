@@ -1,7 +1,7 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { HomeScreen, ProductDetails, WishlistScreen } from 'src/Screens/Home';
-import { HOMESCREEN, PRODUCT_DETAILS, WISHLIST } from './routes';
+import { HomeScreen, ProductDetails, WishlistScreen,MyCart } from 'src/Screens/Home';
+import { HOMESCREEN, MYCART, PRODUCT_DETAILS, WISHLIST } from './routes';
 import { SvgProps } from 'react-native-svg';
 import { Home, Buy, Heart, Paper, Profile } from 'assets/icons';
 import { Icon } from 'src/Components';
@@ -24,6 +24,10 @@ const HomeStack = () => {
     {
       name: WISHLIST,
       component: WishlistScreen,
+    },
+    {
+      name: MYCART,
+      component: MyCart,
     },
   ];
   return (
@@ -55,6 +59,23 @@ const WishlistStack = () => {
   );
 }
 
+const MyCartStack = () => {
+  const screens = [
+    {
+      name: MYCART,
+      component: MyCart,
+    },
+  ];
+  return (
+    <Stack.Navigator screenOptions={{headerShown:false}}>
+      {screens.map((item,index) => {
+        return (
+          <Stack.Screen key={index} name={item.name} component={item.component} />
+        )
+      })}
+    </Stack.Navigator>
+  );
+}
 interface TabIconProps extends SvgProps {
   focused: boolean;
 }
@@ -75,7 +96,7 @@ const tabConfig: TabConfig[] = [
   },
   {
     name: 'Cart',
-    component: HomeScreen,
+    component: MyCartStack,
     label: 'Cart',
     icon: Buy,
   },
