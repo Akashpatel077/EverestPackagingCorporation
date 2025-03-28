@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -10,8 +10,9 @@ import {
   SafeAreaView,
   StatusBar,
 } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 import styles from './styles';
+import {CHECKOUT} from 'src/Navigation/home/routes';
 
 interface CartItem {
   id: string;
@@ -68,7 +69,7 @@ const MyCart = () => {
   // Calculate subtotal
   const subtotal = cartItems.reduce(
     (sum, item) => sum + item.price * item.quantity,
-    0
+    0,
   );
 
   // Calculate total
@@ -77,27 +78,27 @@ const MyCart = () => {
   // Handle quantity increase
   const increaseQuantity = (id: string) => {
     setCartItems(
-      cartItems.map((item) =>
-        item.id === id ? { ...item, quantity: item.quantity + 1 } : item
-      )
+      cartItems.map(item =>
+        item.id === id ? {...item, quantity: item.quantity + 1} : item,
+      ),
     );
   };
 
   // Handle quantity decrease
   const decreaseQuantity = (id: string) => {
     setCartItems(
-      cartItems.map((item) =>
+      cartItems.map(item =>
         item.id === id && item.quantity > 1
-          ? { ...item, quantity: item.quantity - 1 }
-          : item
-      )
+          ? {...item, quantity: item.quantity - 1}
+          : item,
+      ),
     );
   };
 
   // Handle remove item
   const handleRemoveItem = () => {
     if (selectedItem) {
-      setCartItems(cartItems.filter((item) => item.id !== selectedItem.id));
+      setCartItems(cartItems.filter(item => item.id !== selectedItem.id));
       setShowRemoveModal(false);
       setSelectedItem(null);
     }
@@ -120,7 +121,7 @@ const MyCart = () => {
   };
 
   // Render cart item
-  const renderCartItem = ({ item }: { item: CartItem }) => (
+  const renderCartItem = ({item}: {item: CartItem}) => (
     <View style={styles.cartItemContainer}>
       <Image source={item.image} style={styles.itemImage} />
       <View style={styles.itemDetails}>
@@ -130,23 +131,20 @@ const MyCart = () => {
         <View style={styles.quantityControl}>
           <TouchableOpacity
             style={styles.quantityButton}
-            onPress={() => decreaseQuantity(item.id)}
-          >
+            onPress={() => decreaseQuantity(item.id)}>
             <Text style={styles.quantityButtonText}>-</Text>
           </TouchableOpacity>
           <Text style={styles.quantityText}>{item.quantity}</Text>
           <TouchableOpacity
             style={[styles.quantityButton, styles.increaseButton]}
-            onPress={() => increaseQuantity(item.id)}
-          >
+            onPress={() => increaseQuantity(item.id)}>
             <Text style={styles.quantityButtonText}>+</Text>
           </TouchableOpacity>
         </View>
       </View>
       <TouchableOpacity
         style={styles.removeButton}
-        onPress={() => showRemoveConfirmation(item)}
-      >
+        onPress={() => showRemoveConfirmation(item)}>
         <Text style={styles.removeButtonText}>🗑️</Text>
       </TouchableOpacity>
     </View>
@@ -155,10 +153,12 @@ const MyCart = () => {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="dark-content" />
-      
+
       {/* Header */}
       <View style={styles.header}>
-        <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
+        <TouchableOpacity
+          style={styles.backButton}
+          onPress={() => navigation.goBack()}>
           <Text style={styles.backIcon}>←</Text>
         </TouchableOpacity>
         <Text style={styles.headerTitle}>My Cart</Text>
@@ -169,7 +169,7 @@ const MyCart = () => {
       <FlatList
         data={cartItems}
         renderItem={renderCartItem}
-        keyExtractor={(item) => item.id}
+        keyExtractor={item => item.id}
         style={styles.cartItemsList}
         showsVerticalScrollIndicator={false}
       />
@@ -185,8 +185,7 @@ const MyCart = () => {
         />
         <TouchableOpacity
           style={styles.promoApplyButton}
-          onPress={applyPromoCode}
-        >
+          onPress={applyPromoCode}>
           <Text style={styles.promoApplyText}>Apply</Text>
         </TouchableOpacity>
       </View>
@@ -212,38 +211,45 @@ const MyCart = () => {
       </View>
 
       {/* Checkout Button */}
-      <TouchableOpacity style={styles.checkoutButton}>
+      <TouchableOpacity
+        style={styles.checkoutButton}
+        onPress={() => {
+          navigation.navigate(CHECKOUT);
+        }}>
         <Text style={styles.checkoutButtonText}>Proceed to Checkout</Text>
       </TouchableOpacity>
 
       {/* Remove Confirmation Modal */}
-      <Modal
-        visible={showRemoveModal}
-        transparent={true}
-        animationType="fade"
-      >
+      <Modal visible={showRemoveModal} transparent={true} animationType="fade">
         <View style={styles.modalOverlay}>
           <View style={styles.modalContainer}>
             <Text style={styles.modalTitle}>Remove from Cart?</Text>
             {selectedItem && (
               <View style={styles.modalItemContainer}>
-                <Image source={selectedItem.image} style={styles.modalItemImage} />
+                <Image
+                  source={selectedItem.image}
+                  style={styles.modalItemImage}
+                />
                 <View style={styles.modalItemDetails}>
                   <Text style={styles.modalItemName}>{selectedItem.name}</Text>
-                  <Text style={styles.modalItemSize}>Size : {selectedItem.size}</Text>
-                  <Text style={styles.modalItemPrice}>${selectedItem.price.toFixed(2)}</Text>
+                  <Text style={styles.modalItemSize}>
+                    Size : {selectedItem.size}
+                  </Text>
+                  <Text style={styles.modalItemPrice}>
+                    ${selectedItem.price.toFixed(2)}
+                  </Text>
                   <View style={styles.quantityControl}>
                     <TouchableOpacity
                       style={styles.quantityButton}
-                      disabled={true}
-                    >
+                      disabled={true}>
                       <Text style={styles.quantityButtonText}>-</Text>
                     </TouchableOpacity>
-                    <Text style={styles.quantityText}>{selectedItem.quantity}</Text>
+                    <Text style={styles.quantityText}>
+                      {selectedItem.quantity}
+                    </Text>
                     <TouchableOpacity
                       style={[styles.quantityButton, styles.increaseButton]}
-                      disabled={true}
-                    >
+                      disabled={true}>
                       <Text style={styles.quantityButtonText}>+</Text>
                     </TouchableOpacity>
                   </View>
@@ -253,14 +259,12 @@ const MyCart = () => {
             <View style={styles.modalButtonsContainer}>
               <TouchableOpacity
                 style={styles.modalCancelButton}
-                onPress={() => setShowRemoveModal(false)}
-              >
+                onPress={() => setShowRemoveModal(false)}>
                 <Text style={styles.modalCancelButtonText}>Cancel</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.modalRemoveButton}
-                onPress={handleRemoveItem}
-              >
+                onPress={handleRemoveItem}>
                 <Text style={styles.modalRemoveButtonText}>Yes, Remove</Text>
               </TouchableOpacity>
             </View>

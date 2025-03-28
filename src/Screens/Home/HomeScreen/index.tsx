@@ -9,12 +9,10 @@ import {
 } from 'react-native';
 import SearchBar from '../../../Components/CustomSearch';
 import {styles} from './styles.ts';
-import { ic_Bags, ic_Boxes, ic_Tapes } from 'assets/icons/index.ts';
-import { Icon } from 'src/Components/index.ts';
-import { useNavigation } from '@react-navigation/native';
-import { PRODUCT_DETAILS } from 'src/Navigation/home/routes.ts';
-
-
+import {ic_Bags, ic_Boxes, ic_Tapes} from 'assets/icons/index.ts';
+import {Icon} from 'src/Components/index.ts';
+import {useNavigation} from '@react-navigation/native';
+import {PRODUCT_DETAILS} from 'src/Navigation/home/routes.ts';
 
 const categoryData = [
   {
@@ -28,8 +26,8 @@ const categoryData = [
       'NON WOVEN BAGS',
       'CARRY BAG',
       'ZIP LOCK POUCHES',
-      'BUBBLE POSTAL ENVELOPES'
-    ]
+      'BUBBLE POSTAL ENVELOPES',
+    ],
   },
   {id: '2', name: 'Boxes', Icon: ic_Boxes},
   {id: '3', name: 'Tapes', Icon: ic_Tapes},
@@ -46,7 +44,7 @@ const productsData = [
   {
     id: '2',
     name: 'Brown Suite',
-    price: 120.00,
+    price: 120.0,
     rating: 5.0,
     image: require('../../../../assets/images/banner.png'),
   },
@@ -60,7 +58,7 @@ const productsData = [
   {
     id: '4',
     name: 'Yellow Shirt',
-    price: 120.00,
+    price: 120.0,
     rating: 5.0,
     image: require('../../../../assets/images/banner.png'),
   },
@@ -91,10 +89,11 @@ const HomeScreen = () => {
 
   const renderCategoryItem = ({item}: {item: any}) => (
     <View>
-      <TouchableOpacity 
+      <TouchableOpacity
         style={styles.categoryItem}
-        onPress={() => setSelectedCategory(selectedCategory === item.id ? null : item.id)}
-      >
+        onPress={() =>
+          setSelectedCategory(selectedCategory === item.id ? null : item.id)
+        }>
         <View style={styles.categoryIcon}>
           <Icon name={item.Icon} width={30} height={30} />
         </View>
@@ -103,11 +102,10 @@ const HomeScreen = () => {
       {selectedCategory === item.id && item.subCategories && (
         <View style={styles.dropdownContainer}>
           {item.subCategories.map((subCategory: string, index: number) => (
-            <TouchableOpacity 
+            <TouchableOpacity
               key={index}
               style={styles.dropdownItem}
-              onPress={() => console.log(subCategory)}
-            >
+              onPress={() => console.log(subCategory)}>
               <Text style={styles.dropdownText}>{subCategory}</Text>
             </TouchableOpacity>
           ))}
@@ -117,7 +115,11 @@ const HomeScreen = () => {
   );
 
   const renderProductItem = ({item}: {item: any}) => (
-    <TouchableOpacity style={styles.productCard} onPress={() => {navigation.navigate(PRODUCT_DETAILS)}}>
+    <TouchableOpacity
+      style={styles.productCard}
+      onPress={() => {
+        navigation.navigate(PRODUCT_DETAILS);
+      }}>
       <View style={styles.productImageContainer}>
         <Image source={item.image} style={styles.productImage} />
         <TouchableOpacity style={styles.favoriteButton}>
@@ -125,20 +127,20 @@ const HomeScreen = () => {
         </TouchableOpacity>
       </View>
       <View style={styles.productInfo}>
-        <Text style={styles.productName}>{item.name}</Text>
         <View style={styles.productDetails}>
-          <Text style={styles.productPrice}>${item.price}</Text>
+          <Text style={styles.productName}>{item.name}</Text>
           <View style={styles.ratingContainer}>
             <Text style={styles.ratingIcon}>⭐</Text>
             <Text style={styles.ratingText}>{item.rating}</Text>
           </View>
         </View>
+        <Text style={styles.productPrice}>${item.price}</Text>
       </View>
     </TouchableOpacity>
   );
 
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
       <View style={styles.searchContainer}>
         <SearchBar placeholder="Search" />
       </View>
@@ -184,9 +186,14 @@ const HomeScreen = () => {
             <Text style={styles.timerText}>{formatTime(timeLeft)}</Text>
           </View>
         </View>
-        <View style={styles.filterContainer}>
+        <ScrollView
+          showsHorizontalScrollIndicator={false}
+          style={styles.filterContainer}
+          horizontal>
           <TouchableOpacity style={[styles.filterButton, styles.filterActive]}>
-            <Text style={[styles.filterText, styles.filterTextActive]}>All</Text>
+            <Text style={[styles.filterText, styles.filterTextActive]}>
+              All
+            </Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.filterButton}>
             <Text style={styles.filterText}>Newest</Text>
@@ -200,8 +207,9 @@ const HomeScreen = () => {
           <TouchableOpacity style={styles.filterButton}>
             <Text style={styles.filterText}>Woman</Text>
           </TouchableOpacity>
-        </View>
+        </ScrollView>
         <FlatList
+          style={{paddingHorizontal: 12}}
           data={productsData}
           renderItem={renderProductItem}
           numColumns={2}

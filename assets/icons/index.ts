@@ -10,9 +10,24 @@ import ic_Facebook from './Facebook.svg';
 import ic_Bags from './Bags.svg';
 import ic_Boxes from './Boxes.svg';
 import ic_Tapes from './Tapes.svg';
+import ApplePay from './ApplePay.svg';
+import CreditCard from './CreditCard.svg';
+import PayPal from './PayPal.svg';
 
 export {
-    Buy, Heart, Home, Notification, Paper, Profile, ic_Apple, ic_Google, ic_Facebook, ic_Bags,
-    ic_Boxes,
-    ic_Tapes,
+  Buy,
+  Heart,
+  Home,
+  Notification,
+  Paper,
+  Profile,
+  ic_Apple,
+  ic_Google,
+  ic_Facebook,
+  ic_Bags,
+  ic_Boxes,
+  ic_Tapes,
+  ApplePay,
+  CreditCard,
+  PayPal,
 };

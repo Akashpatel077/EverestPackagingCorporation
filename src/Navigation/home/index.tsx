@@ -1,11 +1,31 @@
 import React from 'react';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { HomeScreen, ProductDetails, WishlistScreen,MyCart } from 'src/Screens/Home';
-import { HOMESCREEN, MYCART, PRODUCT_DETAILS, WISHLIST } from './routes';
-import { SvgProps } from 'react-native-svg';
-import { Home, Buy, Heart, Paper, Profile } from 'assets/icons';
-import { Icon } from 'src/Components';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {
+  HomeScreen,
+  ProductDetails,
+  WishlistScreen,
+  MyCart,
+  ProfileScreen,
+  SettingScreen,
+  ShippingAddressScreen,
+} from 'src/Screens/Home';
+import {
+  CHECKOUT,
+  HOMESCREEN,
+  MYCART,
+  PAYMENT_METHOD,
+  PRODUCT_DETAILS,
+  PROFILE,
+  SETTING_SCREEN,
+  SHIPPING_ADDRESS,
+  WISHLIST,
+} from './routes';
+import {SvgProps} from 'react-native-svg';
+import {Home, Buy, Heart, Paper, Profile} from 'assets/icons';
+import {Icon} from 'src/Components';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import PaymentMethodScreen from 'src/Screens/Home/PaymentMethod';
+import CheckoutScreen from 'src/Screens/Home/Checkout';
 
 const Tab = createBottomTabNavigator();
 
@@ -31,15 +51,19 @@ const HomeStack = () => {
     },
   ];
   return (
-    <Stack.Navigator screenOptions={{headerShown:false}}>
-      {screens.map((item,index) => {
+    <Stack.Navigator screenOptions={{headerShown: false}}>
+      {screens.map((item, index) => {
         return (
-          <Stack.Screen key={index} name={item.name} component={item.component} />
+          <Stack.Screen
+            key={index}
+            name={item.name}
+            component={item.component}
+          />
         );
       })}
     </Stack.Navigator>
   );
-}
+};
 
 const WishlistStack = () => {
   const screens = [
@@ -49,15 +73,19 @@ const WishlistStack = () => {
     },
   ];
   return (
-    <Stack.Navigator screenOptions={{headerShown:false}}>
-      {screens.map((item,index) => {
+    <Stack.Navigator screenOptions={{headerShown: false}}>
+      {screens.map((item, index) => {
         return (
-          <Stack.Screen key={index} name={item.name} component={item.component} />
+          <Stack.Screen
+            key={index}
+            name={item.name}
+            component={item.component}
+          />
         );
       })}
     </Stack.Navigator>
   );
-}
+};
 
 const MyCartStack = () => {
   const screens = [
@@ -65,17 +93,59 @@ const MyCartStack = () => {
       name: MYCART,
       component: MyCart,
     },
+    {
+      name: CHECKOUT,
+      component: CheckoutScreen,
+    },
+    {
+      name: SHIPPING_ADDRESS,
+      component: ShippingAddressScreen,
+    },
   ];
   return (
-    <Stack.Navigator screenOptions={{headerShown:false}}>
-      {screens.map((item,index) => {
+    <Stack.Navigator screenOptions={{headerShown: false}}>
+      {screens.map((item, index) => {
         return (
-          <Stack.Screen key={index} name={item.name} component={item.component} />
-        )
+          <Stack.Screen
+            key={index}
+            name={item.name}
+            component={item.component}
+          />
+        );
       })}
     </Stack.Navigator>
   );
-}
+};
+
+const ProfileStack = () => {
+  const screens = [
+    {
+      name: PROFILE,
+      component: ProfileScreen,
+    },
+    {
+      name: SETTING_SCREEN,
+      component: SettingScreen,
+    },
+    {
+      name: PAYMENT_METHOD,
+      component: PaymentMethodScreen,
+    },
+  ];
+  return (
+    <Stack.Navigator screenOptions={{headerShown: false}}>
+      {screens.map((item, index) => {
+        return (
+          <Stack.Screen
+            key={index}
+            name={item.name}
+            component={item.component}
+          />
+        );
+      })}
+    </Stack.Navigator>
+  );
+};
 interface TabIconProps extends SvgProps {
   focused: boolean;
 }
@@ -114,7 +184,7 @@ const tabConfig: TabConfig[] = [
   },
   {
     name: 'Profile',
-    component: HomeScreen,
+    component: ProfileStack,
     label: 'Profile',
     icon: Profile,
   },
@@ -138,9 +208,8 @@ const HomeContainer = () => {
         },
         tabBarActiveTintColor: '#8B4513',
         tabBarInactiveTintColor: '#999999',
-      }}
-    >
-      {tabConfig.map((tab) => (
+      }}>
+      {tabConfig.map(tab => (
         <Tab.Screen
           key={tab.name}
           name={tab.name}

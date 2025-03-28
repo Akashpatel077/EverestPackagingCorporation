@@ -6,10 +6,9 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#FFFFFF',
-    padding:15
+    padding: 15,
   },
-  searchContainer: {
-  },
+  searchContainer: {},
   bannerContainer: {
     marginBottom: 24,
     marginTop: 24,
@@ -62,7 +61,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingHorizontal: 16,
+    paddingHorizontal: 12,
     marginBottom: 16,
   },
   sectionTitle: {
@@ -82,8 +81,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     position: 'relative',
     zIndex: 1000,
-    width: 80,
-    marginHorizontal: 8,
+    marginRight: 20,
   },
   categoryIcon: {
     width: 60,
@@ -147,8 +145,7 @@ export const styles = StyleSheet.create({
     fontWeight: '600',
   },
   filterContainer: {
-    flexDirection: 'row',
-    paddingHorizontal: 16,
+    paddingHorizontal: 12,
     marginBottom: 16,
     gap: 8,
   },
@@ -156,6 +153,7 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 6,
     borderRadius: 16,
+    marginRight: 12,
     backgroundColor: '#F5F5F5',
   },
   filterActive: {
@@ -169,20 +167,18 @@ export const styles = StyleSheet.create({
     color: '#FFFFFF',
   },
   productGrid: {
-    paddingHorizontal: 12,
     justifyContent: 'space-between',
   },
   productCard: {
-    width: (width - 48) / 2,
-    marginHorizontal: 4,
+    width: (width - 70) / 2,
     marginBottom: 16,
     backgroundColor: '#FFFFFF',
-    borderRadius: 12,
-    overflow: 'hidden',
   },
   productImageContainer: {
     position: 'relative',
     aspectRatio: 1,
+    borderRadius: 12,
+    overflow: 'hidden',
   },
   productImage: {
     width: '100%',
@@ -205,7 +201,8 @@ export const styles = StyleSheet.create({
     color: '#666666',
   },
   productInfo: {
-    padding: 12,
+    paddingVertical: 12,
+    paddingHorizontal: 5,
   },
   productName: {
     fontSize: 14,
