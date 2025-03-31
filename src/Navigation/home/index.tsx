@@ -8,16 +8,25 @@ import {
   ProfileScreen,
   SettingScreen,
   ShippingAddressScreen,
+  OrderScreen,
+  ReviewScreen,
+  TrackOrderScreen,
 } from 'src/Screens/Home';
 import {
+  ADD_CARD_SCREEN,
   CHECKOUT,
   HOMESCREEN,
   MYCART,
+  ORDER_SCREEN,
   PAYMENT_METHOD,
+  PAYMENT_SUCCESS_SCREEN,
   PRODUCT_DETAILS,
   PROFILE,
+  REVIEW_SCREEN,
+  SEARCH_SCREEN,
   SETTING_SCREEN,
   SHIPPING_ADDRESS,
+  TRACK_ORDER_SCREEN,
   WISHLIST,
 } from './routes';
 import {SvgProps} from 'react-native-svg';
@@ -26,6 +35,9 @@ import {Icon} from 'src/Components';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import PaymentMethodScreen from 'src/Screens/Home/PaymentMethod';
 import CheckoutScreen from 'src/Screens/Home/Checkout';
+import AddCardScreen from 'src/Screens/Home/AddCardScreen';
+import PaymentSuccessScreen from 'src/Screens/Home/PaymentSuccessScreen';
+import SearchScreen from 'src/Screens/Home/SearchScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -48,6 +60,10 @@ const HomeStack = () => {
     {
       name: MYCART,
       component: MyCart,
+    },
+    {
+      name: SEARCH_SCREEN,
+      component: SearchScreen,
     },
   ];
   return (
@@ -101,9 +117,23 @@ const MyCartStack = () => {
       name: SHIPPING_ADDRESS,
       component: ShippingAddressScreen,
     },
+    {
+      name: PAYMENT_METHOD,
+      component: PaymentMethodScreen,
+    },
+    {
+      name: ADD_CARD_SCREEN,
+      component: AddCardScreen,
+    },
+    {
+      name: PAYMENT_SUCCESS_SCREEN,
+      component: PaymentSuccessScreen,
+    },
   ];
   return (
-    <Stack.Navigator screenOptions={{headerShown: false}}>
+    <Stack.Navigator
+      screenOptions={{headerShown: false}}
+      initialRouteName={PAYMENT_SUCCESS_SCREEN}>
       {screens.map((item, index) => {
         return (
           <Stack.Screen
@@ -130,6 +160,18 @@ const ProfileStack = () => {
     {
       name: PAYMENT_METHOD,
       component: PaymentMethodScreen,
+    },
+    {
+      name: ORDER_SCREEN,
+      component: OrderScreen,
+    },
+    {
+      name: REVIEW_SCREEN,
+      component: ReviewScreen,
+    },
+    {
+      name: TRACK_ORDER_SCREEN,
+      component: TrackOrderScreen,
     },
   ];
   return (

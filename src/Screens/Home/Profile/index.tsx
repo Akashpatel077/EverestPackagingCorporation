@@ -4,14 +4,18 @@ import {Icon} from 'src/Components';
 import {Profile as ProfileIcon, Paper, Buy, Heart} from 'assets/icons';
 import {styles} from './styles';
 import {useNavigation} from '@react-navigation/native';
-import {PAYMENT_METHOD, SETTING_SCREEN} from 'src/Navigation/home/routes';
+import {
+  ORDER_SCREEN,
+  PAYMENT_METHOD,
+  SETTING_SCREEN,
+} from 'src/Navigation/home/routes';
 
 const ProfileScreen = () => {
   const navigation = useNavigation();
   const menuItems = [
     {id: 1, title: 'Your profile', icon: ProfileIcon, screen: ''},
     {id: 2, title: 'Payment Methods', icon: Buy, screen: PAYMENT_METHOD},
-    {id: 3, title: 'My Orders', icon: Paper, screen: ''},
+    {id: 3, title: 'My Orders', icon: Paper, screen: ORDER_SCREEN},
     {id: 4, title: 'Settings', icon: ProfileIcon, screen: SETTING_SCREEN},
     {id: 5, title: 'Help Center', icon: Paper, screen: ''},
     {id: 6, title: 'Privacy Policy', icon: Paper, screen: ''},

@@ -6,6 +6,7 @@ import {
   ScrollView,
   TouchableOpacity,
   FlatList,
+  SafeAreaView,
 } from 'react-native';
 import SearchBar from '../../../Components/CustomSearch';
 import {styles} from './styles.ts';
@@ -140,84 +141,87 @@ const HomeScreen = () => {
   );
 
   return (
-    <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
-      <View style={styles.searchContainer}>
-        <SearchBar placeholder="Search" />
-      </View>
-
-      <View style={styles.bannerContainer}>
-        <Image
-          source={require('../../../../assets/images/banner.png')}
-          style={styles.bannerImage}
-        />
-        <View style={styles.bannerContent}>
-          <Text style={styles.bannerTitle}>New Collection</Text>
-          <Text style={styles.bannerSubtitle}>
-            Discount 50% for{`\n`}the first transaction
-          </Text>
-          <TouchableOpacity style={styles.shopNowButton}>
-            <Text style={styles.shopNowText}>Shop Now</Text>
-          </TouchableOpacity>
+    <SafeAreaView style={{flex: 1}}>
+      <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
+        <View style={styles.searchContainer}>
+          <SearchBar placeholder="Search" />
         </View>
-      </View>
 
-      <View style={styles.categorySection}>
-        <View style={styles.sectionHeader}>
-          <Text style={styles.sectionTitle}>Category</Text>
-          <TouchableOpacity>
-            <Text style={styles.seeAllButton}>See All</Text>
-          </TouchableOpacity>
-        </View>
-        <FlatList
-          data={categoryData}
-          renderItem={renderCategoryItem}
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          keyExtractor={item => item.id}
-          contentContainerStyle={styles.categoryList}
-        />
-      </View>
-
-      <View style={styles.flashSaleSection}>
-        <View style={styles.sectionHeader}>
-          <Text style={styles.sectionTitle}>Flash Sale</Text>
-          <View style={styles.timerContainer}>
-            <Text style={styles.closingText}>Closing in : </Text>
-            <Text style={styles.timerText}>{formatTime(timeLeft)}</Text>
+        <View style={styles.bannerContainer}>
+          <Image
+            source={require('../../../../assets/images/banner.png')}
+            style={styles.bannerImage}
+          />
+          <View style={styles.bannerContent}>
+            <Text style={styles.bannerTitle}>New Collection</Text>
+            <Text style={styles.bannerSubtitle}>
+              Discount 50% for{`\n`}the first transaction
+            </Text>
+            <TouchableOpacity style={styles.shopNowButton}>
+              <Text style={styles.shopNowText}>Shop Now</Text>
+            </TouchableOpacity>
           </View>
         </View>
-        <ScrollView
-          showsHorizontalScrollIndicator={false}
-          style={styles.filterContainer}
-          horizontal>
-          <TouchableOpacity style={[styles.filterButton, styles.filterActive]}>
-            <Text style={[styles.filterText, styles.filterTextActive]}>
-              All
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.filterButton}>
-            <Text style={styles.filterText}>Newest</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.filterButton}>
-            <Text style={styles.filterText}>Popular</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.filterButton}>
-            <Text style={styles.filterText}>Man</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.filterButton}>
-            <Text style={styles.filterText}>Woman</Text>
-          </TouchableOpacity>
-        </ScrollView>
-        <FlatList
-          style={{paddingHorizontal: 12}}
-          data={productsData}
-          renderItem={renderProductItem}
-          numColumns={2}
-          keyExtractor={item => item.id}
-          columnWrapperStyle={styles.productGrid}
-        />
-      </View>
-    </ScrollView>
+
+        <View style={styles.categorySection}>
+          <View style={styles.sectionHeader}>
+            <Text style={styles.sectionTitle}>Category</Text>
+            <TouchableOpacity>
+              <Text style={styles.seeAllButton}>See All</Text>
+            </TouchableOpacity>
+          </View>
+          <FlatList
+            data={categoryData}
+            renderItem={renderCategoryItem}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            keyExtractor={item => item.id}
+            contentContainerStyle={styles.categoryList}
+          />
+        </View>
+
+        <View style={styles.flashSaleSection}>
+          <View style={styles.sectionHeader}>
+            <Text style={styles.sectionTitle}>Flash Sale</Text>
+            <View style={styles.timerContainer}>
+              <Text style={styles.closingText}>Closing in : </Text>
+              <Text style={styles.timerText}>{formatTime(timeLeft)}</Text>
+            </View>
+          </View>
+          <ScrollView
+            showsHorizontalScrollIndicator={false}
+            style={styles.filterContainer}
+            horizontal>
+            <TouchableOpacity
+              style={[styles.filterButton, styles.filterActive]}>
+              <Text style={[styles.filterText, styles.filterTextActive]}>
+                All
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.filterButton}>
+              <Text style={styles.filterText}>Newest</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.filterButton}>
+              <Text style={styles.filterText}>Popular</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.filterButton}>
+              <Text style={styles.filterText}>Man</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.filterButton}>
+              <Text style={styles.filterText}>Woman</Text>
+            </TouchableOpacity>
+          </ScrollView>
+          <FlatList
+            style={{paddingHorizontal: 12}}
+            data={productsData}
+            renderItem={renderProductItem}
+            numColumns={2}
+            keyExtractor={item => item.id}
+            columnWrapperStyle={styles.productGrid}
+          />
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 

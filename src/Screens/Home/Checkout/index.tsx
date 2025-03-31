@@ -4,7 +4,7 @@ import {Icon} from 'src/Components';
 import {Heart, Home} from 'assets/icons';
 import {styles} from './styles';
 import {useNavigation} from '@react-navigation/native';
-import {SHIPPING_ADDRESS} from 'src/Navigation/home/routes';
+import {PAYMENT_METHOD, SHIPPING_ADDRESS} from 'src/Navigation/home/routes';
 
 const CheckoutScreen = ({route}) => {
   const navigation = useNavigation();
@@ -100,7 +100,11 @@ const CheckoutScreen = ({route}) => {
         ))}
       </View>
 
-      <TouchableOpacity style={styles.paymentButton}>
+      <TouchableOpacity
+        style={styles.paymentButton}
+        onPress={() => {
+          navigation.navigate(PAYMENT_METHOD);
+        }}>
         <Text style={styles.paymentButtonText}>Continue to Payment</Text>
       </TouchableOpacity>
     </View>

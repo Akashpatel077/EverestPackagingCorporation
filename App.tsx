@@ -1,7 +1,7 @@
-import { SafeAreaView} from 'react-native';
+import {SafeAreaView} from 'react-native';
 import React from 'react';
 import MainContainer from './src/Navigation';
-import { I18nextProvider } from 'react-i18next';
+import {I18nextProvider} from 'react-i18next';
 import i18n from './src/Multilanguage';
 
 const App = () => {
@@ -14,23 +14,12 @@ const App = () => {
   ];
 
   return (
-      <SafeAreaView style={{flex:1,backgroundColor:"#FFFFFF"}}>
-        <I18nextProvider i18n={i18n}>
-          <MainContainer/>
-        </I18nextProvider>
-      </SafeAreaView>
+    <SafeAreaView style={{flex: 1, backgroundColor: '#FFFFFF'}}>
+      <I18nextProvider i18n={i18n}>
+        <MainContainer />
+      </I18nextProvider>
+    </SafeAreaView>
   );
 };
 
 export default App;
-
-
-
-
-
-
-
-
-
-
-

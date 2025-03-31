@@ -4,6 +4,7 @@ import {Icon} from 'src/Components';
 import {Heart, CreditCard, PayPal, ApplePay} from 'assets/icons';
 import {styles} from './styles';
 import {useNavigation} from '@react-navigation/native';
+import {ADD_CARD_SCREEN} from 'src/Navigation/home/routes';
 
 const PaymentMethodScreen = () => {
   const navigation = useNavigation();
@@ -20,7 +21,11 @@ const PaymentMethodScreen = () => {
       </View>
 
       <Text style={styles.sectionTitle}>Credit & Debit Card</Text>
-      <TouchableOpacity style={styles.paymentOption}>
+      <TouchableOpacity
+        style={styles.paymentOption}
+        onPress={() => {
+          navigation.navigate(ADD_CARD_SCREEN);
+        }}>
         <View style={styles.paymentOptionLeft}>
           <Icon name={CreditCard} width={24} height={24} />
           <Text style={styles.paymentOptionText}>Add New Card</Text>

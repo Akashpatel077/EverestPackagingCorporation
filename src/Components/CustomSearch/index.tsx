@@ -1,6 +1,15 @@
 import React from 'react';
-import {View, TextInput, StyleSheet, TextInputProps, Image} from 'react-native';
+import {
+  View,
+  TextInput,
+  StyleSheet,
+  TextInputProps,
+  Image,
+  TouchableOpacity,
+} from 'react-native';
 import {search} from '../../Constants/images';
+import {useNavigation} from '@react-navigation/native';
+import {SEARCH_SCREEN} from 'src/Navigation/home/routes';
 
 interface SearchBarProps extends TextInputProps {
   placeholder?: string;
@@ -10,16 +19,22 @@ const SearchBar: React.FC<SearchBarProps> = ({
   placeholder = 'Search here ...',
   ...props
 }) => {
+  const navigation = useNavigation();
   return (
-    <View style={styles.container}>
+    <TouchableOpacity
+      style={styles.container}
+      onPress={() => {
+        navigation.navigate(SEARCH_SCREEN);
+      }}>
       <Image source={search} style={styles.icon} />
       <TextInput
         style={styles.input}
         placeholder={placeholder}
         placeholderTextColor="#999"
         {...props}
+        editable={false}
       />
-    </View>
+    </TouchableOpacity>
   );
 };
 
