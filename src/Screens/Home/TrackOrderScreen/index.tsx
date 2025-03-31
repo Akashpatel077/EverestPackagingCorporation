@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text, TouchableOpacity, Image} from 'react-native';
-import {Icon} from 'src/Components';
-import {Heart, OrderPlaced, InProgress, Shipped, Delivered} from 'assets/icons';
+import {Header, Icon} from 'src/Components';
+import {Heart, OrderPlaced, InProgress, Shipped, Delivered, BackIcon} from 'assets/icons';
 import {styles} from './styles';
 import {useNavigation} from '@react-navigation/native';
 
@@ -45,15 +45,7 @@ const TrackOrderScreen = ({route}) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity
-          style={styles.backButton}
-          onPress={() => navigation.goBack()}>
-          <Icon name={Heart} width={24} height={24} />
-        </TouchableOpacity>
-        <Text style={styles.headerTitle}>Track Order</Text>
-      </View>
-
+    <Header title="Track Order" icon1={BackIcon} />
       <View style={styles.productSection}>
         <Image source={orderDetails.image} style={styles.productImage} />
         <View style={styles.productDetails}>

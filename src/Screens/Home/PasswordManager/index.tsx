@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {View, Text, TouchableOpacity, TextInput} from 'react-native';
-import {Icon} from 'src/Components';
-import {Heart, Eye, Password_Hide} from 'assets/icons';
+import {Header, Icon} from 'src/Components';
+import {Heart, Eye, Password_Hide, BackIcon} from 'assets/icons';
 import {styles} from './styles';
 import {useNavigation} from '@react-navigation/native';
 
@@ -21,14 +21,7 @@ const PasswordManager = () => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity
-          style={styles.backButton}
-          onPress={() => navigation.goBack()}>
-          <Icon name={Heart} width={24} height={24} />
-        </TouchableOpacity>
-        <Text style={styles.headerTitle}>Password Manager</Text>
-      </View>
+    <Header title='Password Manager' icon1={BackIcon}/>
 
       <View style={styles.content}>
         <Text style={styles.label}>Current Password</Text>

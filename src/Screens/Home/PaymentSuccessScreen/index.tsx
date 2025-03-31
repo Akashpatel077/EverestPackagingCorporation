@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
-import {Icon} from 'src/Components';
-import {Heart} from 'assets/icons';
+import {Header, Icon} from 'src/Components';
+import {BackIcon, Heart} from 'assets/icons';
 import {styles} from './styles';
 import {useNavigation} from '@react-navigation/native';
 
@@ -10,14 +10,7 @@ const PaymentSuccessScreen = () => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity
-          style={styles.backButton}
-          onPress={() => navigation.goBack()}>
-          <Icon name={Heart} width={24} height={24} />
-        </TouchableOpacity>
-        <Text style={styles.headerTitle}>Payment</Text>
-      </View>
+      <Header title="Payment" icon1={BackIcon} />
 
       <View style={styles.content}>
         <View style={styles.successIcon}>

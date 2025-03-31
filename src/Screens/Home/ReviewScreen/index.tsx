@@ -7,8 +7,8 @@ import {
   TextInput,
   SafeAreaView,
 } from 'react-native';
-import {Icon} from 'src/Components';
-import {Heart, Camera, Star} from 'assets/icons';
+import {Header, Icon} from 'src/Components';
+import {Heart, Camera, Star, BackIcon} from 'assets/icons';
 import {styles} from './styles';
 import {useNavigation} from '@react-navigation/native';
 
@@ -29,14 +29,7 @@ const ReviewScreen = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity
-          style={styles.backButton}
-          onPress={() => navigation.goBack()}>
-          <Icon name={Heart} width={24} height={24} />
-        </TouchableOpacity>
-        <Text style={styles.headerTitle}>Leave Review</Text>
-      </View>
+      <Header title="Review" icon1={BackIcon}/>
 
       <View style={styles.productContainer}>
         <Image

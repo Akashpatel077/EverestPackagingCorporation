@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
-import {Icon} from 'src/Components';
-import {Heart, Economy, Regular, Cargo, FriendsHouse} from 'assets/icons';
+import {Header, Icon} from 'src/Components';
+import {Heart, Economy, Regular, Cargo, FriendsHouse, BackIcon} from 'assets/icons';
 import {styles} from './styles';
 import {useNavigation} from '@react-navigation/native';
 import {CHECKOUT} from 'src/Navigation/home/routes';
@@ -33,15 +33,7 @@ const ShippingTypeScreen = () => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity
-          style={styles.backButton}
-          onPress={() => navigation.goBack()}>
-          <Icon name={Heart} width={24} height={24} />
-        </TouchableOpacity>
-        <Text style={styles.headerTitle}>Choose Shipping</Text>
-      </View>
-
+      <Header title="Shipping Type" icon1={BackIcon} />
       {shippingTypes.map(type => (
         <TouchableOpacity
           key={type.id}

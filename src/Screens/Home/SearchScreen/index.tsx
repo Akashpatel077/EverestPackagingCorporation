@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {View, Text, TouchableOpacity, TextInput, FlatList} from 'react-native';
-import {Icon} from 'src/Components';
-import {Search, Close, Heart} from 'assets/icons';
+import {Header, Icon} from 'src/Components';
+import {Search, Close, Heart, BackIcon} from 'assets/icons';
 import {styles} from './styles';
 import {useNavigation} from '@react-navigation/native';
 
@@ -55,14 +55,7 @@ const SearchScreen = () => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity
-          style={styles.backButton}
-          onPress={() => navigation.goBack()}>
-          <Icon name={Heart} width={24} height={24} />
-        </TouchableOpacity>
-        <Text style={styles.headerTitle}>Search</Text>
-      </View>
+      <Header title="Search" icon1={BackIcon}/>
 
       <View style={styles.searchContainer}>
         <Icon

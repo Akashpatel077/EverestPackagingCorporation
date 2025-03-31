@@ -9,9 +9,10 @@ import {
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {Icon} from 'src/Components/Icons';
-import {Heart} from 'assets/icons';
+import {BackIcon, Heart} from 'assets/icons';
 import styles from './styles';
 import {REVIEW_SCREEN, TRACK_ORDER_SCREEN} from 'src/Navigation/home/routes';
+import { Header } from 'src/Components';
 
 interface OrderItem {
   id: string;
@@ -119,16 +120,7 @@ const OrderScreen = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity
-          style={styles.backButton}
-          onPress={() => navigation.goBack()}>
-          <Icon name={Heart} width={24} height={24} />
-        </TouchableOpacity>
-        <Text style={styles.headerTitle}>My Orders</Text>
-        <View style={styles.emptyView} />
-      </View>
-
+      <Header title="My Orders" icon1={BackIcon} />
       <View style={styles.tabContainer}>
         <TouchableOpacity
           style={[styles.tab, activeTab === 'active' && styles.activeTab]}

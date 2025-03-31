@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
-import {Icon} from 'src/Components';
-import {Heart, Notification, Profile} from 'assets/icons';
+import {Header, Icon} from 'src/Components';
+import {BackIcon, Heart, Notification, Profile} from 'assets/icons';
 import {styles} from './styles';
 import {PASSWORD_MANAGER} from 'src/Navigation/home/routes';
 import {useNavigation} from '@react-navigation/native';
@@ -31,12 +31,7 @@ const SettingScreen = () => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity style={styles.backButton}>
-          <Icon name={Heart} width={24} height={24} />
-        </TouchableOpacity>
-        <Text style={styles.headerTitle}>Settings</Text>
-      </View>
+      <Header title="Settings" icon1={BackIcon} />
       <View style={styles.menuContainer}>{menuItems.map(renderMenuItem)}</View>
     </View>
   );

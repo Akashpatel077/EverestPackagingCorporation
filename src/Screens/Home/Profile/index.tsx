@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text, TouchableOpacity, Image} from 'react-native';
-import {Icon} from 'src/Components';
-import {Profile as ProfileIcon, Paper, Buy, Heart} from 'assets/icons';
+import {Header, Icon} from 'src/Components';
+import {Profile as ProfileIcon, Paper, Buy, Heart, BackIcon} from 'assets/icons';
 import {styles} from './styles';
 import {useNavigation} from '@react-navigation/native';
 import {
@@ -40,12 +40,7 @@ const ProfileScreen = () => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity style={styles.backButton}>
-          <Icon name={Heart} width={24} height={24} />
-        </TouchableOpacity>
-        <Text style={styles.headerTitle}>Profile</Text>
-      </View>
+      <Header title='Profile' icon1={BackIcon}/>
 
       <View style={styles.profileSection}>
         <View style={styles.avatarContainer}>

@@ -13,6 +13,8 @@ import {
 import {useNavigation} from '@react-navigation/native';
 import styles from './styles';
 import {CHECKOUT} from 'src/Navigation/home/routes';
+import { Header } from 'src/Components';
+import { BackIcon } from 'assets/icons';
 
 interface CartItem {
   id: string;
@@ -154,16 +156,7 @@ const MyCart = () => {
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="dark-content" />
 
-      {/* Header */}
-      <View style={styles.header}>
-        <TouchableOpacity
-          style={styles.backButton}
-          onPress={() => navigation.goBack()}>
-          <Text style={styles.backIcon}>←</Text>
-        </TouchableOpacity>
-        <Text style={styles.headerTitle}>My Cart</Text>
-        <View style={styles.emptyView} />
-      </View>
+      <Header icon1={BackIcon} title='My Cart' />
 
       {/* Cart Items */}
       <FlatList

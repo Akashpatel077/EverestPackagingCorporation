@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {View, Text, TouchableOpacity, TextInput} from 'react-native';
-import {Icon} from 'src/Components';
-import {Heart} from 'assets/icons';
+import {Header, Icon} from 'src/Components';
+import {BackIcon, Heart} from 'assets/icons';
 import {styles} from './styles';
 import {useNavigation} from '@react-navigation/native';
 
@@ -15,14 +15,8 @@ const AddCardScreen = () => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity
-          style={styles.backButton}
-          onPress={() => navigation.goBack()}>
-          <Icon name={Heart} width={24} height={24} />
-        </TouchableOpacity>
-        <Text style={styles.headerTitle}>Add Card</Text>
-      </View>
+
+      <Header title='Add Card' icon1={BackIcon}/>
 
       <View style={styles.cardPreview}>
         <Text style={styles.cardNumber}>{cardNumber}</Text>

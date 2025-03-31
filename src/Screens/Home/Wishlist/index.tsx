@@ -4,13 +4,12 @@ import {
   Text,
   Image,
   TouchableOpacity,
-  ScrollView,
   FlatList,
   SafeAreaView,
 } from 'react-native';
 import { styles } from './styles';
-import { Heart } from 'assets/icons';
-import { Icon } from 'src/Components';
+import { BackIcon, Heart } from 'assets/icons';
+import { Header, Icon } from 'src/Components';
 import { useNavigation } from '@react-navigation/native';
 import { PRODUCT_DETAILS } from 'src/Navigation/home/routes';
 
@@ -71,7 +70,7 @@ const WishlistScreen = () => {
     },
   ];
 
-  const renderCategoryItem = ({ item }) => (
+  const renderCategoryItem = ({ item }:any) => (
     <TouchableOpacity
       style={[styles.categoryButton, selectedCategory === item && styles.categoryButtonActive]}
       onPress={() => setSelectedCategory(item)}
@@ -82,7 +81,7 @@ const WishlistScreen = () => {
     </TouchableOpacity>
   );
 
-  const renderWishlistItem = ({ item }) => (
+  const renderWishlistItem = ({ item }:any) => (
     <TouchableOpacity 
       style={styles.productCard} 
       onPress={() => navigation.navigate(PRODUCT_DETAILS)}
@@ -111,13 +110,7 @@ const WishlistScreen = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
-          <Text style={styles.backIcon}>←</Text>
-        </TouchableOpacity>
-        <Text style={styles.headerTitle}>My Wishlist</Text>
-        <View style={styles.emptyView} />
-      </View>
+      <Header title="Wishlist" icon1={BackIcon} />
 
       <View style={styles.categoryContainer}>
         <FlatList

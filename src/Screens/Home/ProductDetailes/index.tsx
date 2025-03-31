@@ -9,8 +9,8 @@ import {
   SafeAreaView,
 } from 'react-native';
 import { styles } from './styles';
-import { Heart } from 'assets/icons';
-import { Icon } from 'src/Components';
+import { BackIcon, Heart } from 'assets/icons';
+import { Header, Icon } from 'src/Components';
 
 const ProductDetails = () => {
   const [selectedSize, setSelectedSize] = useState('M');
@@ -46,7 +46,7 @@ const ProductDetails = () => {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={styles.header}>
+        {/* <View style={styles.header}>
           <TouchableOpacity style={styles.backButton}>
             <Text style={styles.backIcon}>←</Text>
           </TouchableOpacity>
@@ -57,7 +57,9 @@ const ProductDetails = () => {
           >
             <Icon width={24} height={24} name={Heart} />
           </TouchableOpacity>
-        </View>
+        </View> */}
+
+        <Header title='Product Details' icon1={BackIcon} icon2={Heart}/>
 
         <View style={styles.mainImageContainer}>
           <Image 
