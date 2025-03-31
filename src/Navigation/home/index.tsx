@@ -11,6 +11,8 @@ import {
   OrderScreen,
   ReviewScreen,
   TrackOrderScreen,
+  PasswordManager,
+  ShippingTypeScreen,
 } from 'src/Screens/Home';
 import {
   ADD_CARD_SCREEN,
@@ -18,6 +20,7 @@ import {
   HOMESCREEN,
   MYCART,
   ORDER_SCREEN,
+  PASSWORD_MANAGER,
   PAYMENT_METHOD,
   PAYMENT_SUCCESS_SCREEN,
   PRODUCT_DETAILS,
@@ -26,6 +29,7 @@ import {
   SEARCH_SCREEN,
   SETTING_SCREEN,
   SHIPPING_ADDRESS,
+  SHIPPING_TYPE_SCREEN,
   TRACK_ORDER_SCREEN,
   WISHLIST,
 } from './routes';
@@ -129,11 +133,15 @@ const MyCartStack = () => {
       name: PAYMENT_SUCCESS_SCREEN,
       component: PaymentSuccessScreen,
     },
+    {
+      name: SHIPPING_TYPE_SCREEN,
+      component: ShippingTypeScreen,
+    },
   ];
   return (
     <Stack.Navigator
       screenOptions={{headerShown: false}}
-      initialRouteName={PAYMENT_SUCCESS_SCREEN}>
+      initialRouteName={MYCART}>
       {screens.map((item, index) => {
         return (
           <Stack.Screen
@@ -172,6 +180,10 @@ const ProfileStack = () => {
     {
       name: TRACK_ORDER_SCREEN,
       component: TrackOrderScreen,
+    },
+    {
+      name: PASSWORD_MANAGER,
+      component: PasswordManager,
     },
   ];
   return (

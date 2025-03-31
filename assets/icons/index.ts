@@ -21,6 +21,12 @@ import Delivered from './Delivered.svg';
 import OrderPlaced from './OrderPlaced.svg';
 import InProgress from './InProgress.svg';
 import Shipped from './Shipped.svg';
+import Eye from './Eye.svg';
+import Password_Hide from './Password_Hide.svg';
+import Cargo from './Cargo.svg';
+import FriendsHouse from './FriendsHouse.svg';
+import Economy from './Economy.svg';
+import Regular from './Regular.svg';
 
 export {
   Buy,
@@ -46,4 +52,10 @@ export {
   OrderPlaced,
   InProgress,
   Shipped,
+  Eye,
+  Password_Hide,
+  Cargo,
+  FriendsHouse,
+  Economy,
+  Regular,
 };

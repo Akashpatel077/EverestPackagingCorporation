@@ -4,11 +4,16 @@ import {Icon} from 'src/Components';
 import {Heart, Home} from 'assets/icons';
 import {styles} from './styles';
 import {useNavigation} from '@react-navigation/native';
-import {PAYMENT_METHOD, SHIPPING_ADDRESS} from 'src/Navigation/home/routes';
+import {
+  PAYMENT_METHOD,
+  SHIPPING_ADDRESS,
+  SHIPPING_TYPE_SCREEN,
+} from 'src/Navigation/home/routes';
 
 const CheckoutScreen = ({route}) => {
   const navigation = useNavigation();
   const selectedAddress = route.params?.selectedAddress;
+  const selectedShippingType = route.params?.selectedShipping;
 
   return (
     <View style={styles.container}>
@@ -52,13 +57,20 @@ const CheckoutScreen = ({route}) => {
           <View style={styles.shippingLeft}>
             <Icon name={Home} width={24} height={24} />
             <View style={styles.shippingDetails}>
-              <Text style={styles.shippingType}>Economy</Text>
+              <Text style={styles.addressType}>
+                {selectedShippingType ? selectedShippingType.type : 'Economy'}
+              </Text>
               <Text style={styles.shippingDate}>
-                Estimated Arrival 25 August 2023
+                {selectedShippingType
+                  ? selectedShippingType.estimatedArrival
+                  : '25 August 2023'}
               </Text>
             </View>
           </View>
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate(SHIPPING_TYPE_SCREEN);
+            }}>
             <Text style={styles.changeButton}>CHANGE</Text>
           </TouchableOpacity>
         </View>

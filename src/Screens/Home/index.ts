@@ -8,6 +8,8 @@ import ShippingAddressScreen from './ShippingAddress';
 import OrderScreen from './OrderScreen/Index';
 import ReviewScreen from './ReviewScreen';
 import TrackOrderScreen from './TrackOrderScreen';
+import PasswordManager from './PasswordManager';
+import ShippingTypeScreen from './ShippingTypeScreen';
 
 export {
   HomeScreen,
@@ -20,4 +22,6 @@ export {
   OrderScreen,
   ReviewScreen,
   TrackOrderScreen,
+  PasswordManager,
+  ShippingTypeScreen,
 };
