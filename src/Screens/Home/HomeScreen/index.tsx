@@ -11,126 +11,135 @@ import {
 } from 'react-native';
 import {useAppDispatch, useAppSelector} from 'src/store/hooks';
 import {fetchProducts} from 'src/store/slices/productsSlice';
+import {fetchCategories} from 'src/store/slices/categorySlice';
 import SearchBar from '../../../Components/CustomSearch';
 import {styles} from './styles.ts';
-import {ic_Bags, ic_Boxes, ic_Tapes} from 'assets/icons/index.ts';
 import {Icon} from 'src/Components/index.ts';
 import {useNavigation} from '@react-navigation/native';
 import {PRODUCT_DETAILS} from 'src/Navigation/home/routes.ts';
 
-const categoryData = [
-  {
-    id: '1',
-    name: 'Bags',
-    Icon: ic_Bags,
-    subCategories: [
-      'COURIER BAGS',
-      'CUSTOM PRINTED COURIER BAGS',
-      'FROSTED ZIPPER BAGS',
-      'NON WOVEN BAGS',
-      'CARRY BAG',
-      'ZIP LOCK POUCHES',
-      'BUBBLE POSTAL ENVELOPES',
-    ],
-  },
-  {id: '2', name: 'Boxes', Icon: ic_Boxes},
-  {id: '3', name: 'Tapes', Icon: ic_Tapes},
-];
-
 const HomeScreen = () => {
-  const [timeLeft, setTimeLeft] = useState(7200); // 2 hours in seconds
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [timeLeft, setTimeLeft] = useState(7200);
+  const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
+  const [filteredProducts, setFilteredProducts] = useState<any[]>([]);
   const navigation = useNavigation();
   const dispatch = useAppDispatch();
   const {
     items: products,
-    loading,
-    error,
+    loading: productsLoading,
+    error: productsError,
   } = useAppSelector(state => state.products);
+  const {
+    categories,
+    status: categoriesStatus,
+    error: categoriesError,
+  } = useAppSelector(state => state.categories);
 
   useEffect(() => {
     dispatch(fetchProducts());
+    dispatch(fetchCategories());
   }, [dispatch]);
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setTimeLeft(prevTime => (prevTime > 0 ? prevTime - 1 : 0));
-    }, 1000);
+    if (selectedCategory) {
+      const category = categories.find(cat => cat.id === selectedCategory);
+      if (category) {
+        const filtered = products.filter(product =>
+          product.categories.some(cat =>
+            cat.name.toLowerCase().includes(category.name.toLowerCase()),
+          ),
+        );
+        setFilteredProducts(filtered);
+      }
+    } else {
+      setFilteredProducts(products);
+    }
+  }, [selectedCategory, products, categories]);
 
-    return () => clearInterval(timer);
-  }, []);
+  const defaultCategories = categories.filter(
+    category => category.display === 'default',
+  );
 
-  const formatTime = (seconds: number) => {
-    const hours = Math.floor(seconds / 3600);
-    const minutes = Math.floor((seconds % 3600) / 60);
-    const secs = seconds % 60;
-    return `${String(hours).padStart(2, '0')} : ${String(minutes).padStart(
-      2,
-      '0',
-    )} : ${String(secs).padStart(2, '0')}`;
+  const timer = setInterval(() => {
+    setTimeLeft(prevTime => (prevTime > 0 ? prevTime - 1 : 0));
+  }, 1000);
+
+  const toggleCategory = (categoryId: number) => {
+    const updatedCategories = categories.map(category => {
+      if (category.id === categoryId) {
+        return {...category, isExpanded: !category.isExpanded};
+      }
+      return category;
+    });
+    dispatch({type: 'categories/updateCategories', payload: updatedCategories});
+    setSelectedCategory(selectedCategory === categoryId ? null : categoryId);
+  };
+
+  const renderSubCategories = (subCategories: any[]) => {
+    return (
+      <View style={styles.dropdownContainer}>
+        {subCategories.map(subCategory => (
+          <TouchableOpacity
+            key={subCategory.id}
+            style={styles.dropdownItem}
+            onPress={() => setSelectedCategory(subCategory.id)}>
+            <Text style={styles.dropdownText}>{subCategory.name}</Text>
+          </TouchableOpacity>
+        ))}
+      </View>
+    );
   };
 
   const renderCategoryItem = ({item}: {item: any}) => (
     <View>
       <TouchableOpacity
-        style={styles.categoryItem}
-        onPress={() =>
-          setSelectedCategory(selectedCategory === item.id ? null : item.id)
-        }>
+        style={[
+          styles.categoryItem,
+          selectedCategory === item.id && styles.selectedCategory,
+        ]}
+        onPress={() => toggleCategory(item.id)}>
         <View style={styles.categoryIcon}>
-          <Icon name={item.Icon} width={30} height={30} />
+          {item.image ? (
+            <Image
+              source={{uri: item.image.src}}
+              style={{width: 30, height: 30}}
+            />
+          ) : (
+            <Icon name="TShirt" width={30} height={30} />
+          )}
         </View>
         <Text style={styles.categoryName}>{item.name}</Text>
       </TouchableOpacity>
-      {selectedCategory === item.id && item.subCategories && (
-        <View style={styles.dropdownContainer}>
-          {item.subCategories.map((subCategory: string, index: number) => (
-            <TouchableOpacity
-              key={index}
-              style={styles.dropdownItem}
-              onPress={() => console.log(subCategory)}>
-              <Text style={styles.dropdownText}>{subCategory}</Text>
-            </TouchableOpacity>
-          ))}
-        </View>
-      )}
+      {item.isExpanded &&
+        item.subCategories &&
+        item.subCategories.length > 0 && (
+          <View style={styles.subCategoriesContainer}>
+            {item.subCategories.map((subCategory: any) => (
+              <TouchableOpacity
+                key={subCategory.id}
+                style={[
+                  styles.categoryItem,
+                  selectedCategory === subCategory.id &&
+                    styles.selectedCategory,
+                ]}
+                onPress={() => setSelectedCategory(subCategory.id)}>
+                <View style={styles.categoryIcon}>
+                  {subCategory.image ? (
+                    <Image
+                      source={{uri: subCategory.image.src}}
+                      style={{width: 30, height: 30}}
+                    />
+                  ) : (
+                    <Icon name="TShirt" width={30} height={30} />
+                  )}
+                </View>
+                <Text style={styles.categoryName}>{subCategory.name}</Text>
+              </TouchableOpacity>
+            ))}
+          </View>
+        )}
     </View>
   );
-
-  const renderProductItem = ({item}: {item: any}) => (
-    <TouchableOpacity
-      style={styles.productCard}
-      onPress={() => {
-        navigation.navigate(PRODUCT_DETAILS);
-      }}>
-      <View style={styles.productImageContainer}>
-        <Image
-          source={
-            item.images?.[0]?.src
-              ? {uri: item.images[0].src}
-              : require('../../../../assets/images/banner.png')
-          }
-          style={styles.productImage}
-        />
-        <TouchableOpacity style={styles.favoriteButton}>
-          <Text style={styles.favoriteIcon}>♡</Text>
-        </TouchableOpacity>
-      </View>
-      <View style={styles.productInfo}>
-        <View style={styles.productDetails}>
-          <Text style={styles.productName}>{item.name}</Text>
-          <View style={styles.ratingContainer}>
-            <Text style={styles.ratingIcon}>⭐</Text>
-            <Text style={styles.ratingText}>
-              {item.average_rating || '0.0'}
-            </Text>
-          </View>
-        </View>
-        <Text style={styles.productPrice}>${item.price}</Text>
-      </View>
-    </TouchableOpacity>
-  );
-
   return (
     <SafeAreaView style={{flex: 1}}>
       <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
@@ -162,7 +171,7 @@ const HomeScreen = () => {
             </TouchableOpacity>
           </View>
           <FlatList
-            data={categoryData}
+            data={categories}
             renderItem={renderCategoryItem}
             horizontal
             showsHorizontalScrollIndicator={false}
@@ -174,10 +183,6 @@ const HomeScreen = () => {
         <View style={styles.flashSaleSection}>
           <View style={styles.sectionHeader}>
             <Text style={styles.sectionTitle}>Flash Sale</Text>
-            <View style={styles.timerContainer}>
-              <Text style={styles.closingText}>Closing in : </Text>
-              <Text style={styles.timerText}>{formatTime(timeLeft)}</Text>
-            </View>
           </View>
           <ScrollView
             showsHorizontalScrollIndicator={false}
@@ -202,18 +207,20 @@ const HomeScreen = () => {
               <Text style={styles.filterText}>Woman</Text>
             </TouchableOpacity>
           </ScrollView>
-          {loading ? (
+          {productsLoading || categoriesStatus === 'loading' ? (
             <ActivityIndicator
               size="large"
               color="#000"
               style={styles.loader}
             />
-          ) : error ? (
-            <Text style={styles.errorText}>{error}</Text>
+          ) : productsError || categoriesError ? (
+            <Text style={styles.errorText}>
+              {productsError || categoriesError}
+            </Text>
           ) : (
             <FlatList
               style={{paddingHorizontal: 12}}
-              data={products}
+              data={filteredProducts}
               renderItem={renderProductItem}
               numColumns={2}
               keyExtractor={item => item.id.toString()}
@@ -227,3 +234,35 @@ const HomeScreen = () => {
 };
 
 export default HomeScreen;
+
+const renderProductItem = ({item}: {item: any}) => (
+  <TouchableOpacity
+    style={styles.productCard}
+    onPress={() => {
+      navigation.navigate(PRODUCT_DETAILS, {product: item});
+    }}>
+    <View style={styles.productImageContainer}>
+      <Image
+        source={
+          item.images?.[0]?.src
+            ? {uri: item.images[0].src}
+            : require('../../../../assets/images/banner.png')
+        }
+        style={styles.productImage}
+      />
+      <TouchableOpacity style={styles.favoriteButton}>
+        <Text style={styles.favoriteIcon}>♡</Text>
+      </TouchableOpacity>
+    </View>
+    <View style={styles.productInfo}>
+      <View style={styles.productDetails}>
+        <Text style={styles.productName}>{item.name}</Text>
+        <View style={styles.ratingContainer}>
+          <Text style={styles.ratingIcon}>⭐</Text>
+          <Text style={styles.ratingText}>{item.average_rating || '0.0'}</Text>
+        </View>
+      </View>
+      <Text style={styles.productPrice}>${item.price}</Text>
+    </View>
+  </TouchableOpacity>
+);

@@ -86,6 +86,12 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 12,
     justifyContent: 'space-around',
   },
+  subCategoriesContainer: {
+    flexDirection: 'row',
+    paddingHorizontal: 16,
+    marginTop: 8,
+    gap: 12,
+  },
   categoryItem: {
     alignItems: 'center',
     position: 'relative',

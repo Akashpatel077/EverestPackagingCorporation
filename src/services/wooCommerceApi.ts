@@ -96,8 +96,26 @@ export const getCustomers = async () => {
   }
 };
 
+export const getCategories = async () => {
+  try {
+    const isConnected = await isNetworkConnected();
+    if (!isConnected) {
+      throw new Error(
+        'No internet connection. Please check your network settings.',
+      );
+    }
+    const response = await wooCommerceApi.get('/products/categories');
+    console.log('Product category', response.data, 'response.data');
+
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export default {
   getProducts,
   getOrders,
   getCustomers,
+  getCategories,
 };
