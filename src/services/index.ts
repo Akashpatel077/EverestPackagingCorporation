@@ -1,3 +1,4 @@
 import RequestService from './api-requests';
+import WooCommerceApi from './wooCommerceApi';
 
-export {RequestService};
+export {RequestService, WooCommerceApi};

@@ -7,7 +7,10 @@ import {
   TouchableOpacity,
   FlatList,
   SafeAreaView,
+  ActivityIndicator,
 } from 'react-native';
+import {useAppDispatch, useAppSelector} from 'src/store/hooks';
+import {fetchProducts} from 'src/store/slices/productsSlice';
 import SearchBar from '../../../Components/CustomSearch';
 import {styles} from './styles.ts';
 import {ic_Bags, ic_Boxes, ic_Tapes} from 'assets/icons/index.ts';
@@ -34,41 +37,20 @@ const categoryData = [
   {id: '3', name: 'Tapes', Icon: ic_Tapes},
 ];
 
-const productsData = [
-  {
-    id: '1',
-    name: 'Brown Jacket',
-    price: 83.97,
-    rating: 4.9,
-    image: require('../../../../assets/images/banner.png'),
-  },
-  {
-    id: '2',
-    name: 'Brown Suite',
-    price: 120.0,
-    rating: 5.0,
-    image: require('../../../../assets/images/banner.png'),
-  },
-  {
-    id: '3',
-    name: 'Brown Jacket',
-    price: 83.97,
-    rating: 4.9,
-    image: require('../../../../assets/images/banner.png'),
-  },
-  {
-    id: '4',
-    name: 'Yellow Shirt',
-    price: 120.0,
-    rating: 5.0,
-    image: require('../../../../assets/images/banner.png'),
-  },
-];
-
 const HomeScreen = () => {
   const [timeLeft, setTimeLeft] = useState(7200); // 2 hours in seconds
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const navigation = useNavigation();
+  const dispatch = useAppDispatch();
+  const {
+    items: products,
+    loading,
+    error,
+  } = useAppSelector(state => state.products);
+
+  useEffect(() => {
+    dispatch(fetchProducts());
+  }, [dispatch]);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -122,7 +104,14 @@ const HomeScreen = () => {
         navigation.navigate(PRODUCT_DETAILS);
       }}>
       <View style={styles.productImageContainer}>
-        <Image source={item.image} style={styles.productImage} />
+        <Image
+          source={
+            item.images?.[0]?.src
+              ? {uri: item.images[0].src}
+              : require('../../../../assets/images/banner.png')
+          }
+          style={styles.productImage}
+        />
         <TouchableOpacity style={styles.favoriteButton}>
           <Text style={styles.favoriteIcon}>♡</Text>
         </TouchableOpacity>
@@ -132,7 +121,9 @@ const HomeScreen = () => {
           <Text style={styles.productName}>{item.name}</Text>
           <View style={styles.ratingContainer}>
             <Text style={styles.ratingIcon}>⭐</Text>
-            <Text style={styles.ratingText}>{item.rating}</Text>
+            <Text style={styles.ratingText}>
+              {item.average_rating || '0.0'}
+            </Text>
           </View>
         </View>
         <Text style={styles.productPrice}>${item.price}</Text>
@@ -211,14 +202,24 @@ const HomeScreen = () => {
               <Text style={styles.filterText}>Woman</Text>
             </TouchableOpacity>
           </ScrollView>
-          <FlatList
-            style={{paddingHorizontal: 12}}
-            data={productsData}
-            renderItem={renderProductItem}
-            numColumns={2}
-            keyExtractor={item => item.id}
-            columnWrapperStyle={styles.productGrid}
-          />
+          {loading ? (
+            <ActivityIndicator
+              size="large"
+              color="#000"
+              style={styles.loader}
+            />
+          ) : error ? (
+            <Text style={styles.errorText}>{error}</Text>
+          ) : (
+            <FlatList
+              style={{paddingHorizontal: 12}}
+              data={products}
+              renderItem={renderProductItem}
+              numColumns={2}
+              keyExtractor={item => item.id.toString()}
+              columnWrapperStyle={styles.productGrid}
+            />
+          )}
         </View>
       </ScrollView>
     </SafeAreaView>

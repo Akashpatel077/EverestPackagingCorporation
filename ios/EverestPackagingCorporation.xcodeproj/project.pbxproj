@@ -30,7 +30,32 @@
 		9B3BC6E26AA243BE9B590E9C /* Notification.svg in Resources */ = {isa = PBXBuildFile; fileRef = C5EDBDC7F97140D383D16BB7 /* Notification.svg */; };
 		CB6C63DEB9B44BFD97FB38B3 /* Paper.svg in Resources */ = {isa = PBXBuildFile; fileRef = E3A51F1DFC0E40BA97B0975B /* Paper.svg */; };
 		24DAB08262C547F7A6D29C4C /* Profile.svg in Resources */ = {isa = PBXBuildFile; fileRef = 869E6E48052E40D2B2996567 /* Profile.svg */; };
-		B38EF0C43DCD4DC6986DB175 /* index.ts in Resources */ = {isa = PBXBuildFile; fileRef = D7D380CA058F4EF4ABE89B1A /* index.ts */; };
+		A9A1AB43A60145DD8B363AB7 /* ApplePay.svg in Resources */ = {isa = PBXBuildFile; fileRef = 2DBC1E411A2C4836930E4125 /* ApplePay.svg */; };
+		25D97DD9B4B04C618B44F3F2 /* BackIcon.svg in Resources */ = {isa = PBXBuildFile; fileRef = E37C90FC622D4ACE98206C06 /* BackIcon.svg */; };
+		2F2BAAA0E43A47D993557607 /* Bags.svg in Resources */ = {isa = PBXBuildFile; fileRef = A2B045A335534166ACF94863 /* Bags.svg */; };
+		B588BCE3321C42399318F2E0 /* Boxes.svg in Resources */ = {isa = PBXBuildFile; fileRef = 58417BE08DAA4452979A7CA0 /* Boxes.svg */; };
+		B0544AEA101D4B458ABEAEF4 /* Camera.svg in Resources */ = {isa = PBXBuildFile; fileRef = BF8037D75A874D4DA1D6C7A6 /* Camera.svg */; };
+		E8239C35679A406B966AE1E2 /* Cargo.svg in Resources */ = {isa = PBXBuildFile; fileRef = 213F605C61594B4B86EB5054 /* Cargo.svg */; };
+		882F7B78D0B64C29B712CC8F /* Close.svg in Resources */ = {isa = PBXBuildFile; fileRef = 8F8541A3FC1B4EEAA1B30000 /* Close.svg */; };
+		3D84FAE739F749389748CC39 /* CreditCard.svg in Resources */ = {isa = PBXBuildFile; fileRef = B7EF7D5E0845403D9DCBD420 /* CreditCard.svg */; };
+		435A69343D71404289956C86 /* Delivered.svg in Resources */ = {isa = PBXBuildFile; fileRef = 2DF165E800FF4D5394243022 /* Delivered.svg */; };
+		A4F73AB37CDF43E5A00E3255 /* Economy.svg in Resources */ = {isa = PBXBuildFile; fileRef = 3E2F5E5BDEDF4101B842DCE6 /* Economy.svg */; };
+		077D571A9145496FADFAD1F4 /* Eye.svg in Resources */ = {isa = PBXBuildFile; fileRef = 2A82D9301F4B4B40838567CB /* Eye.svg */; };
+		07A1F1AF908142C4BCFF5B3E /* EyeOpen.svg in Resources */ = {isa = PBXBuildFile; fileRef = 8B7C04CDE8B1435399C14FFD /* EyeOpen.svg */; };
+		973F483AF9DD45C3AE14E42F /* Facebook.svg in Resources */ = {isa = PBXBuildFile; fileRef = 15E1C42E9EEB4B38AA56485E /* Facebook.svg */; };
+		3C5CF161C73348B0BDB2091A /* FriendsHouse.svg in Resources */ = {isa = PBXBuildFile; fileRef = 985378BAB194496B85DAF7F0 /* FriendsHouse.svg */; };
+		9AA785627CC449E8A871A3CD /* Google.svg in Resources */ = {isa = PBXBuildFile; fileRef = F8C42E2C511B43549C9BC444 /* Google.svg */; };
+		C781C538F7EF423E9B3426BF /* InProgress.svg in Resources */ = {isa = PBXBuildFile; fileRef = 1F3CD78838964A0BB803006B /* InProgress.svg */; };
+		BE6720DF5DAF4505B029ABF0 /* OrderPlaced.svg in Resources */ = {isa = PBXBuildFile; fileRef = 35AC6914F7BF4FD9BDE42657 /* OrderPlaced.svg */; };
+		A9422592737046719B339345 /* Password_Hide.svg in Resources */ = {isa = PBXBuildFile; fileRef = 9A67B6C808DC43F5B4166840 /* Password_Hide.svg */; };
+		0755CEC79F854322B29BEFA8 /* PayPal.svg in Resources */ = {isa = PBXBuildFile; fileRef = 8142EDB3B9064551B077F87E /* PayPal.svg */; };
+		91E10969CC6E4D1ABCF05BC0 /* Regular.svg in Resources */ = {isa = PBXBuildFile; fileRef = 499889AF85AD448CBF87FB96 /* Regular.svg */; };
+		C237EE8126584E5DBB7750EA /* Search.svg in Resources */ = {isa = PBXBuildFile; fileRef = F2763C1B1A1644FCB09FDFF9 /* Search.svg */; };
+		7CBA191633364ECE9A467FB5 /* Shipped.svg in Resources */ = {isa = PBXBuildFile; fileRef = 96E4E7C44E2A42389392C4FE /* Shipped.svg */; };
+		7CEA0038D6E848DE9EF0CB87 /* Star.svg in Resources */ = {isa = PBXBuildFile; fileRef = 0C6543BB7C1A46D9AE284635 /* Star.svg */; };
+		17F0EDD7FBF04758A5729073 /* TShirt.svg in Resources */ = {isa = PBXBuildFile; fileRef = 28AC09197CE548B08270A59D /* TShirt.svg */; };
+		F3F47F8C33464536964CAEB2 /* Tapes.svg in Resources */ = {isa = PBXBuildFile; fileRef = 1D4AC02CC8D540F0A0AA98DD /* Tapes.svg */; };
+		65313D64B89A4069BE830716 /* index.ts in Resources */ = {isa = PBXBuildFile; fileRef = 2A3E8C33092A497B929CD0A4 /* index.ts */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,7 +87,32 @@
 		C5EDBDC7F97140D383D16BB7 /* Notification.svg */ = {isa = PBXFileReference; name = "Notification.svg"; path = "../assets/icons/Notification.svg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		E3A51F1DFC0E40BA97B0975B /* Paper.svg */ = {isa = PBXFileReference; name = "Paper.svg"; path = "../assets/icons/Paper.svg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		869E6E48052E40D2B2996567 /* Profile.svg */ = {isa = PBXFileReference; name = "Profile.svg"; path = "../assets/icons/Profile.svg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		D7D380CA058F4EF4ABE89B1A /* index.ts */ = {isa = PBXFileReference; name = "index.ts"; path = "../assets/icons/index.ts"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		2DBC1E411A2C4836930E4125 /* ApplePay.svg */ = {isa = PBXFileReference; name = "ApplePay.svg"; path = "../assets/icons/ApplePay.svg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		E37C90FC622D4ACE98206C06 /* BackIcon.svg */ = {isa = PBXFileReference; name = "BackIcon.svg"; path = "../assets/icons/BackIcon.svg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		A2B045A335534166ACF94863 /* Bags.svg */ = {isa = PBXFileReference; name = "Bags.svg"; path = "../assets/icons/Bags.svg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		58417BE08DAA4452979A7CA0 /* Boxes.svg */ = {isa = PBXFileReference; name = "Boxes.svg"; path = "../assets/icons/Boxes.svg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		BF8037D75A874D4DA1D6C7A6 /* Camera.svg */ = {isa = PBXFileReference; name = "Camera.svg"; path = "../assets/icons/Camera.svg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		213F605C61594B4B86EB5054 /* Cargo.svg */ = {isa = PBXFileReference; name = "Cargo.svg"; path = "../assets/icons/Cargo.svg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		8F8541A3FC1B4EEAA1B30000 /* Close.svg */ = {isa = PBXFileReference; name = "Close.svg"; path = "../assets/icons/Close.svg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		B7EF7D5E0845403D9DCBD420 /* CreditCard.svg */ = {isa = PBXFileReference; name = "CreditCard.svg"; path = "../assets/icons/CreditCard.svg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		2DF165E800FF4D5394243022 /* Delivered.svg */ = {isa = PBXFileReference; name = "Delivered.svg"; path = "../assets/icons/Delivered.svg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		3E2F5E5BDEDF4101B842DCE6 /* Economy.svg */ = {isa = PBXFileReference; name = "Economy.svg"; path = "../assets/icons/Economy.svg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		2A82D9301F4B4B40838567CB /* Eye.svg */ = {isa = PBXFileReference; name = "Eye.svg"; path = "../assets/icons/Eye.svg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		8B7C04CDE8B1435399C14FFD /* EyeOpen.svg */ = {isa = PBXFileReference; name = "EyeOpen.svg"; path = "../assets/icons/EyeOpen.svg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		15E1C42E9EEB4B38AA56485E /* Facebook.svg */ = {isa = PBXFileReference; name = "Facebook.svg"; path = "../assets/icons/Facebook.svg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		985378BAB194496B85DAF7F0 /* FriendsHouse.svg */ = {isa = PBXFileReference; name = "FriendsHouse.svg"; path = "../assets/icons/FriendsHouse.svg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		F8C42E2C511B43549C9BC444 /* Google.svg */ = {isa = PBXFileReference; name = "Google.svg"; path = "../assets/icons/Google.svg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		1F3CD78838964A0BB803006B /* InProgress.svg */ = {isa = PBXFileReference; name = "InProgress.svg"; path = "../assets/icons/InProgress.svg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		35AC6914F7BF4FD9BDE42657 /* OrderPlaced.svg */ = {isa = PBXFileReference; name = "OrderPlaced.svg"; path = "../assets/icons/OrderPlaced.svg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		9A67B6C808DC43F5B4166840 /* Password_Hide.svg */ = {isa = PBXFileReference; name = "Password_Hide.svg"; path = "../assets/icons/Password_Hide.svg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		8142EDB3B9064551B077F87E /* PayPal.svg */ = {isa = PBXFileReference; name = "PayPal.svg"; path = "../assets/icons/PayPal.svg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		499889AF85AD448CBF87FB96 /* Regular.svg */ = {isa = PBXFileReference; name = "Regular.svg"; path = "../assets/icons/Regular.svg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		F2763C1B1A1644FCB09FDFF9 /* Search.svg */ = {isa = PBXFileReference; name = "Search.svg"; path = "../assets/icons/Search.svg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		96E4E7C44E2A42389392C4FE /* Shipped.svg */ = {isa = PBXFileReference; name = "Shipped.svg"; path = "../assets/icons/Shipped.svg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		0C6543BB7C1A46D9AE284635 /* Star.svg */ = {isa = PBXFileReference; name = "Star.svg"; path = "../assets/icons/Star.svg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		28AC09197CE548B08270A59D /* TShirt.svg */ = {isa = PBXFileReference; name = "TShirt.svg"; path = "../assets/icons/TShirt.svg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		1D4AC02CC8D540F0A0AA98DD /* Tapes.svg */ = {isa = PBXFileReference; name = "Tapes.svg"; path = "../assets/icons/Tapes.svg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		2A3E8C33092A497B929CD0A4 /* index.ts */ = {isa = PBXFileReference; name = "index.ts"; path = "../assets/icons/index.ts"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,7 +148,32 @@
 				C5EDBDC7F97140D383D16BB7 /* Notification.svg */,
 				E3A51F1DFC0E40BA97B0975B /* Paper.svg */,
 				869E6E48052E40D2B2996567 /* Profile.svg */,
-				D7D380CA058F4EF4ABE89B1A /* index.ts */,
+				2DBC1E411A2C4836930E4125 /* ApplePay.svg */,
+				E37C90FC622D4ACE98206C06 /* BackIcon.svg */,
+				A2B045A335534166ACF94863 /* Bags.svg */,
+				58417BE08DAA4452979A7CA0 /* Boxes.svg */,
+				BF8037D75A874D4DA1D6C7A6 /* Camera.svg */,
+				213F605C61594B4B86EB5054 /* Cargo.svg */,
+				8F8541A3FC1B4EEAA1B30000 /* Close.svg */,
+				B7EF7D5E0845403D9DCBD420 /* CreditCard.svg */,
+				2DF165E800FF4D5394243022 /* Delivered.svg */,
+				3E2F5E5BDEDF4101B842DCE6 /* Economy.svg */,
+				2A82D9301F4B4B40838567CB /* Eye.svg */,
+				8B7C04CDE8B1435399C14FFD /* EyeOpen.svg */,
+				15E1C42E9EEB4B38AA56485E /* Facebook.svg */,
+				985378BAB194496B85DAF7F0 /* FriendsHouse.svg */,
+				F8C42E2C511B43549C9BC444 /* Google.svg */,
+				1F3CD78838964A0BB803006B /* InProgress.svg */,
+				35AC6914F7BF4FD9BDE42657 /* OrderPlaced.svg */,
+				9A67B6C808DC43F5B4166840 /* Password_Hide.svg */,
+				8142EDB3B9064551B077F87E /* PayPal.svg */,
+				499889AF85AD448CBF87FB96 /* Regular.svg */,
+				F2763C1B1A1644FCB09FDFF9 /* Search.svg */,
+				96E4E7C44E2A42389392C4FE /* Shipped.svg */,
+				0C6543BB7C1A46D9AE284635 /* Star.svg */,
+				28AC09197CE548B08270A59D /* TShirt.svg */,
+				1D4AC02CC8D540F0A0AA98DD /* Tapes.svg */,
+				2A3E8C33092A497B929CD0A4 /* index.ts */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -244,7 +319,32 @@
 				9B3BC6E26AA243BE9B590E9C /* Notification.svg in Resources */,
 				CB6C63DEB9B44BFD97FB38B3 /* Paper.svg in Resources */,
 				24DAB08262C547F7A6D29C4C /* Profile.svg in Resources */,
-				B38EF0C43DCD4DC6986DB175 /* index.ts in Resources */,
+				A9A1AB43A60145DD8B363AB7 /* ApplePay.svg in Resources */,
+				25D97DD9B4B04C618B44F3F2 /* BackIcon.svg in Resources */,
+				2F2BAAA0E43A47D993557607 /* Bags.svg in Resources */,
+				B588BCE3321C42399318F2E0 /* Boxes.svg in Resources */,
+				B0544AEA101D4B458ABEAEF4 /* Camera.svg in Resources */,
+				E8239C35679A406B966AE1E2 /* Cargo.svg in Resources */,
+				882F7B78D0B64C29B712CC8F /* Close.svg in Resources */,
+				3D84FAE739F749389748CC39 /* CreditCard.svg in Resources */,
+				435A69343D71404289956C86 /* Delivered.svg in Resources */,
+				A4F73AB37CDF43E5A00E3255 /* Economy.svg in Resources */,
+				077D571A9145496FADFAD1F4 /* Eye.svg in Resources */,
+				07A1F1AF908142C4BCFF5B3E /* EyeOpen.svg in Resources */,
+				973F483AF9DD45C3AE14E42F /* Facebook.svg in Resources */,
+				3C5CF161C73348B0BDB2091A /* FriendsHouse.svg in Resources */,
+				9AA785627CC449E8A871A3CD /* Google.svg in Resources */,
+				C781C538F7EF423E9B3426BF /* InProgress.svg in Resources */,
+				BE6720DF5DAF4505B029ABF0 /* OrderPlaced.svg in Resources */,
+				A9422592737046719B339345 /* Password_Hide.svg in Resources */,
+				0755CEC79F854322B29BEFA8 /* PayPal.svg in Resources */,
+				91E10969CC6E4D1ABCF05BC0 /* Regular.svg in Resources */,
+				C237EE8126584E5DBB7750EA /* Search.svg in Resources */,
+				7CBA191633364ECE9A467FB5 /* Shipped.svg in Resources */,
+				7CEA0038D6E848DE9EF0CB87 /* Star.svg in Resources */,
+				17F0EDD7FBF04758A5729073 /* TShirt.svg in Resources */,
+				F3F47F8C33464536964CAEB2 /* Tapes.svg in Resources */,
+				65313D64B89A4069BE830716 /* index.ts in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

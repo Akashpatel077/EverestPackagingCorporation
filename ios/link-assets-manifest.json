@@ -50,8 +50,68 @@
       "sha1": "f7e4f322207fe9fdf75af545bd865b82642ee681"
     },
     {
+      "path": "assets/icons/ApplePay.svg",
+      "sha1": "4b75d04a6a8ba6661986f7049018387258ba2518"
+    },
+    {
+      "path": "assets/icons/BackIcon.svg",
+      "sha1": "b9589b1a64a77d1bcd129935b36b57437d4359a7"
+    },
+    {
+      "path": "assets/icons/Bags.svg",
+      "sha1": "971d171cfe67bdca6e1f3ec74ef59534a3f89570"
+    },
+    {
+      "path": "assets/icons/Boxes.svg",
+      "sha1": "6098045090d6c0f2472f9f2229c0690999deeae8"
+    },
+    {
       "path": "assets/icons/Buy.svg",
       "sha1": "3b21b85dfd7676d8cdd27589fc71b18276a079a5"
+    },
+    {
+      "path": "assets/icons/Camera.svg",
+      "sha1": "9551b14aacbd26327ed1236c1a5419396d69f37d"
+    },
+    {
+      "path": "assets/icons/Cargo.svg",
+      "sha1": "262fa51f7bdf2b2b82408b59bb98ac4cd9f71ea0"
+    },
+    {
+      "path": "assets/icons/Close.svg",
+      "sha1": "267c30c16278ade2078bd83bf69e36f20c92a4ea"
+    },
+    {
+      "path": "assets/icons/CreditCard.svg",
+      "sha1": "6cad81e19203e2ba97095d22ad31edaaf9db5da5"
+    },
+    {
+      "path": "assets/icons/Delivered.svg",
+      "sha1": "753eeb8ebc9662ecdd8cbd342d5feefadf92b4ec"
+    },
+    {
+      "path": "assets/icons/Economy.svg",
+      "sha1": "8c362be419986f89864609e77d90c327798b1f68"
+    },
+    {
+      "path": "assets/icons/Eye.svg",
+      "sha1": "efe562a57a90d48d4e4110179bc48a72586d0c7d"
+    },
+    {
+      "path": "assets/icons/EyeOpen.svg",
+      "sha1": "efe562a57a90d48d4e4110179bc48a72586d0c7d"
+    },
+    {
+      "path": "assets/icons/Facebook.svg",
+      "sha1": "5df747f4afcb9126326a0311706480dd8d9769cd"
+    },
+    {
+      "path": "assets/icons/FriendsHouse.svg",
+      "sha1": "3436f63f487b904a4a2ace737bb249fc27fc27ed"
+    },
+    {
+      "path": "assets/icons/Google.svg",
+      "sha1": "42345a10805c6d93213c566ed76b7fdaed1fc2b7"
     },
     {
       "path": "assets/icons/Heart.svg",
@@ -62,20 +122,60 @@
       "sha1": "264ed7fc2b86e9ce86b9d1923e1ca70727a7f816"
     },
     {
+      "path": "assets/icons/InProgress.svg",
+      "sha1": "c02ec6007249e31ea7a01c8089cf8ded5d7b699a"
+    },
+    {
       "path": "assets/icons/Notification.svg",
       "sha1": "1178214a2608188dbd6fd4bed9784dbd88acce75"
+    },
+    {
+      "path": "assets/icons/OrderPlaced.svg",
+      "sha1": "1e458d2cc2d438bada67a4d8ab78076b9932b9df"
     },
     {
       "path": "assets/icons/Paper.svg",
       "sha1": "c0791e665ab7879a4fb4704263ef38422f6b0acb"
     },
     {
+      "path": "assets/icons/Password_Hide.svg",
+      "sha1": "e05e5697f6b8e1fe58f6e2a4843af3c4bacd7390"
+    },
+    {
+      "path": "assets/icons/PayPal.svg",
+      "sha1": "b276456aad89a3d4e71c63a3ace70359d449ad58"
+    },
+    {
       "path": "assets/icons/Profile.svg",
       "sha1": "83be5c0a7e8271cb89427448d73c5f86347461ef"
     },
     {
+      "path": "assets/icons/Regular.svg",
+      "sha1": "7e1fbab0de3dff2a4890436f28daa75d7571e280"
+    },
+    {
+      "path": "assets/icons/Search.svg",
+      "sha1": "f0228867d6da0702c08e32c4964a7feef1684d1b"
+    },
+    {
+      "path": "assets/icons/Shipped.svg",
+      "sha1": "1cdcf0edd99daf56ab121835ba3c5f6dc9a03ed8"
+    },
+    {
+      "path": "assets/icons/Star.svg",
+      "sha1": "f3c1a1b84391ec8be8e26382627d1cff94714ab3"
+    },
+    {
+      "path": "assets/icons/TShirt.svg",
+      "sha1": "da39a3ee5e6b4b0d3255bfef95601890afd80709"
+    },
+    {
+      "path": "assets/icons/Tapes.svg",
+      "sha1": "f5af4ce9a7297a06eabb1ddf8e36843caa9e95f7"
+    },
+    {
       "path": "assets/icons/index.ts",
-      "sha1": "41d5d9c0be68e9c2ba76b0d070e57b5470af72dd"
+      "sha1": "ba953a0dbd98711fea5042924cc957d58799967b"
     }
   ]
 }

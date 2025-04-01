@@ -3,6 +3,15 @@ import {StyleSheet, Dimensions} from 'react-native';
 const {width} = Dimensions.get('window');
 
 export const styles = StyleSheet.create({
+  loader: {
+    marginTop: 20,
+  },
+  errorText: {
+    textAlign: 'center',
+    color: 'red',
+    marginTop: 20,
+    fontSize: 16,
+  },
   container: {
     flex: 1,
     backgroundColor: '#FFFFFF',
