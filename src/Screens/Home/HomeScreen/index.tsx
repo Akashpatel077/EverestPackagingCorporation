@@ -7,22 +7,21 @@ import {
   TouchableOpacity,
   FlatList,
   SafeAreaView,
-  ActivityIndicator,
 } from 'react-native';
 import {useAppDispatch, useAppSelector} from 'src/store/hooks';
 import {fetchProducts} from 'src/store/slices/productsSlice';
-import {fetchCategories} from 'src/store/slices/categorySlice';
+import {
+  fetchCategories,
+  fetchSubCategories,
+} from 'src/store/slices/categorySlice';
 import SearchBar from '../../../Components/CustomSearch';
 import {styles} from './styles.ts';
 import {Icon} from 'src/Components/index.ts';
 import {useNavigation} from '@react-navigation/native';
-import {PRODUCT_DETAILS} from 'src/Navigation/home/routes.ts';
 
 const HomeScreen = () => {
-  const [timeLeft, setTimeLeft] = useState(7200);
   const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
   const [filteredProducts, setFilteredProducts] = useState<any[]>([]);
-  const navigation = useNavigation();
   const dispatch = useAppDispatch();
   const {
     items: products,
@@ -45,122 +44,103 @@ const HomeScreen = () => {
       const category = categories.find(cat => cat.id === selectedCategory);
       if (category) {
         const filtered = products.filter(product =>
-          product.categories.some(cat =>
-            cat.name.toLowerCase().includes(category.name.toLowerCase()),
+          product.categories.some(
+            cat =>
+              cat.name.toLowerCase() !== 'uncategorized' &&
+              cat.name.toLowerCase().includes(category.name.toLowerCase()),
           ),
         );
         setFilteredProducts(filtered);
       }
     } else {
-      setFilteredProducts(products);
+      setFilteredProducts(
+        products.filter(product =>
+          product.categories.some(
+            cat =>
+              cat.name.toLowerCase() !== 'uncategorized' &&
+              cat.name.toLowerCase() !== 'box strap roll',
+          ),
+        ),
+      );
     }
   }, [selectedCategory, products, categories]);
 
-  const defaultCategories = categories.filter(
-    category => category.display === 'default',
-  );
-
-  const timer = setInterval(() => {
-    setTimeLeft(prevTime => (prevTime > 0 ? prevTime - 1 : 0));
-  }, 1000);
-
   const toggleCategory = (categoryId: number) => {
-    const updatedCategories = categories.map(category => {
-      if (category.id === categoryId) {
-        return {...category, isExpanded: !category.isExpanded};
-      }
-      return category;
-    });
-    dispatch({type: 'categories/updateCategories', payload: updatedCategories});
-    setSelectedCategory(selectedCategory === categoryId ? null : categoryId);
-  };
-
-  const renderSubCategories = (subCategories: any[]) => {
-    return (
-      <View style={styles.dropdownContainer}>
-        {subCategories.map(subCategory => (
-          <TouchableOpacity
-            key={subCategory.id}
-            style={styles.dropdownItem}
-            onPress={() => setSelectedCategory(subCategory.id)}>
-            <Text style={styles.dropdownText}>{subCategory.name}</Text>
-          </TouchableOpacity>
-        ))}
-      </View>
-    );
+    const category = categories.find(cat => cat.id === categoryId);
+    if (category) {
+      dispatch(fetchSubCategories(categoryId));
+      setSelectedCategory(selectedCategory === categoryId ? null : categoryId);
+    }
   };
 
   const renderCategoryItem = ({item}: {item: any}) => (
-    <View>
-      <TouchableOpacity
-        style={[
-          styles.categoryItem,
-          selectedCategory === item.id && styles.selectedCategory,
-        ]}
-        onPress={() => toggleCategory(item.id)}>
-        <View style={styles.categoryIcon}>
-          {item.image ? (
-            <Image
-              source={{uri: item.image.src}}
-              style={{width: 30, height: 30}}
-            />
-          ) : (
-            <Icon name="TShirt" width={30} height={30} />
-          )}
-        </View>
-        <Text style={styles.categoryName}>{item.name}</Text>
-      </TouchableOpacity>
-      {item.isExpanded &&
-        item.subCategories &&
-        item.subCategories.length > 0 && (
-          <View style={styles.subCategoriesContainer}>
-            {item.subCategories.map((subCategory: any) => (
-              <TouchableOpacity
-                key={subCategory.id}
-                style={[
-                  styles.categoryItem,
-                  selectedCategory === subCategory.id &&
-                    styles.selectedCategory,
-                ]}
-                onPress={() => setSelectedCategory(subCategory.id)}>
-                <View style={styles.categoryIcon}>
-                  {subCategory.image ? (
-                    <Image
-                      source={{uri: subCategory.image.src}}
-                      style={{width: 30, height: 30}}
-                    />
-                  ) : (
-                    <Icon name="TShirt" width={30} height={30} />
-                  )}
-                </View>
-                <Text style={styles.categoryName}>{subCategory.name}</Text>
-              </TouchableOpacity>
-            ))}
-          </View>
+    <TouchableOpacity
+      style={[
+        styles.categoryItem,
+        selectedCategory === item.id && styles.selectedCategory,
+      ]}
+      onPress={() => toggleCategory(item.id)}>
+      <View style={styles.categoryIcon}>
+        {item.image ? (
+          <Image
+            source={{uri: item.image.src}}
+            style={{width: 30, height: 30}}
+          />
+        ) : (
+          <Icon name="TShirt" width={30} height={30} />
         )}
-    </View>
+      </View>
+      <Text style={styles.categoryName}>{item.name}</Text>
+    </TouchableOpacity>
+  );
+
+  const renderSubCategoryItem = ({item}: {item: any}) => (
+    <TouchableOpacity
+      style={[
+        styles.subCategoryItem,
+        {
+          backgroundColor: '#FFFFFF',
+          padding: 12,
+          borderRadius: 16,
+          // marginRight: 12,
+          flexDirection: 'row',
+          alignItems: 'center',
+          width: 400,
+          height: 100,
+          marginVertical: 8,
+          shadowColor: '#000',
+          shadowOffset: {width: 0, height: 2},
+          shadowOpacity: 0.1,
+          shadowRadius: 4,
+          elevation: 3,
+        },
+        selectedCategory === item.id && styles.selectedCategory,
+      ]}
+      onPress={() => toggleCategory(item.id)}>
+      <View style={[styles.subCategoryIcon, {marginRight: 12}]}>
+        {item.image ? (
+          <Image
+            source={{uri: item.image.src}}
+            style={{width: 80, height: 80, borderRadius: 12}}
+          />
+        ) : (
+          <Icon name="TShirt" width={30} height={30} />
+        )}
+      </View>
+      <Text
+        style={[
+          styles.categoryName,
+          {color: '#222429', fontSize: 16, flex: 1},
+        ]}>
+        {item.name}
+      </Text>
+    </TouchableOpacity>
   );
   return (
     <SafeAreaView style={{flex: 1}}>
       <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
         <View style={styles.searchContainer}>
           <SearchBar placeholder="Search" />
-        </View>
-
-        <View style={styles.bannerContainer}>
-          <Image
-            source={require('../../../../assets/images/banner.png')}
-            style={styles.bannerImage}
-          />
-          <View style={styles.bannerContent}>
-            <Text style={styles.bannerTitle}>New Collection</Text>
-            <Text style={styles.bannerSubtitle}>
-              Discount 50% for{`\n`}the first transaction
-            </Text>
-            <TouchableOpacity style={styles.shopNowButton}>
-              <Text style={styles.shopNowText}>Shop Now</Text>
-            </TouchableOpacity>
-          </View>
         </View>
 
         <View style={styles.categorySection}>
@@ -170,63 +150,45 @@ const HomeScreen = () => {
               <Text style={styles.seeAllButton}>See All</Text>
             </TouchableOpacity>
           </View>
-          <FlatList
-            data={categories}
-            renderItem={renderCategoryItem}
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            keyExtractor={item => item.id}
-            contentContainerStyle={styles.categoryList}
-          />
-        </View>
-
-        <View style={styles.flashSaleSection}>
-          <View style={styles.sectionHeader}>
-            <Text style={styles.sectionTitle}>Flash Sale</Text>
-          </View>
-          <ScrollView
-            showsHorizontalScrollIndicator={false}
-            style={styles.filterContainer}
-            horizontal>
-            <TouchableOpacity
-              style={[styles.filterButton, styles.filterActive]}>
-              <Text style={[styles.filterText, styles.filterTextActive]}>
-                All
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.filterButton}>
-              <Text style={styles.filterText}>Newest</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.filterButton}>
-              <Text style={styles.filterText}>Popular</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.filterButton}>
-              <Text style={styles.filterText}>Man</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.filterButton}>
-              <Text style={styles.filterText}>Woman</Text>
-            </TouchableOpacity>
-          </ScrollView>
-          {productsLoading || categoriesStatus === 'loading' ? (
-            <ActivityIndicator
-              size="large"
-              color="#000"
-              style={styles.loader}
-            />
-          ) : productsError || categoriesError ? (
-            <Text style={styles.errorText}>
-              {productsError || categoriesError}
-            </Text>
-          ) : (
+          <View>
             <FlatList
-              style={{paddingHorizontal: 12}}
-              data={filteredProducts}
-              renderItem={renderProductItem}
-              numColumns={2}
-              keyExtractor={item => item.id.toString()}
-              columnWrapperStyle={styles.productGrid}
+              data={categories.filter(
+                category =>
+                  category.name.toLowerCase() !== 'uncategorized' &&
+                  category.name.toLowerCase() !== 'box strap roll',
+              )}
+              renderItem={renderCategoryItem}
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              keyExtractor={item => item.id}
+              contentContainerStyle={styles.categoryList}
             />
-          )}
+            {selectedCategory && (
+              <>
+                <View style={[styles.sectionHeader, {marginTop: 15}]}>
+                  <Text style={styles.sectionTitle}>Sub Categories</Text>
+                  <TouchableOpacity>
+                    <Text style={styles.seeAllButton}>See All</Text>
+                  </TouchableOpacity>
+                </View>
+                {/* <View style={styles.subCategoryBox}> */}
+                <FlatList
+                  data={
+                    categories.find(cat => cat.id === selectedCategory)
+                      ?.subCategories || []
+                  }
+                  renderItem={renderSubCategoryItem}
+                  showsHorizontalScrollIndicator={false}
+                  keyExtractor={item => item.id}
+                  contentContainerStyle={[
+                    styles.subCategoryList,
+                    {marginTop: 10},
+                  ]}
+                />
+                {/* </View> */}
+              </>
+            )}
+          </View>
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -234,35 +196,3 @@ const HomeScreen = () => {
 };
 
 export default HomeScreen;
-
-const renderProductItem = ({item}: {item: any}) => (
-  <TouchableOpacity
-    style={styles.productCard}
-    onPress={() => {
-      navigation.navigate(PRODUCT_DETAILS, {product: item});
-    }}>
-    <View style={styles.productImageContainer}>
-      <Image
-        source={
-          item.images?.[0]?.src
-            ? {uri: item.images[0].src}
-            : require('../../../../assets/images/banner.png')
-        }
-        style={styles.productImage}
-      />
-      <TouchableOpacity style={styles.favoriteButton}>
-        <Text style={styles.favoriteIcon}>♡</Text>
-      </TouchableOpacity>
-    </View>
-    <View style={styles.productInfo}>
-      <View style={styles.productDetails}>
-        <Text style={styles.productName}>{item.name}</Text>
-        <View style={styles.ratingContainer}>
-          <Text style={styles.ratingIcon}>⭐</Text>
-          <Text style={styles.ratingText}>{item.average_rating || '0.0'}</Text>
-        </View>
-      </View>
-      <Text style={styles.productPrice}>${item.price}</Text>
-    </View>
-  </TouchableOpacity>
-);

@@ -10,16 +10,12 @@ GoogleSignin.configure({
 
 const loginWithGoogle = async () => {
   await GoogleSignin.hasPlayServices({showPlayServicesUpdateDialog: false});
-const userInfo = await GoogleSignin.signIn();
+  const userInfo = await GoogleSignin.signIn();
 
-console.log("userInfo",userInfo);
+  const idToken = userInfo.idToken;
 
-const idToken = userInfo.idToken;
-  console.log("idToken",idToken);
-  
   const googleCredential = auth.GoogleAuthProvider.credential(idToken);
-  console.log("googleCredential",googleCredential);
-  
+
   return auth().signInWithCredential(googleCredential);
 };
 
@@ -28,7 +24,6 @@ const loginWithApple = async () => {
     requestedOperation: appleAuth.Operation.LOGIN,
     requestedScopes: [appleAuth.Scope.FULL_NAME, appleAuth.Scope.EMAIL],
   });
-  console.log('appleAuthRequestResponse', appleAuthRequestResponse);
   if (!appleAuthRequestResponse.identityToken) {
     throw new Error('Apple Sign-In failed - no identify token returned');
   }
@@ -37,11 +32,7 @@ const loginWithApple = async () => {
     identityToken,
     nonce,
   );
-  console.log('appleCredential', appleCredential);
   return auth().signInWithCredential(appleCredential);
 };
 
-export {
-  loginWithGoogle,
-  loginWithApple,
-};
+export {loginWithGoogle, loginWithApple};

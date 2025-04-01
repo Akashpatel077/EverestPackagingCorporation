@@ -16,12 +16,11 @@ const PasswordManager = () => {
 
   const handleChangePassword = () => {
     // Implement password change logic here
-    console.log('Change password');
   };
 
   return (
     <View style={styles.container}>
-    <Header title='Password Manager' icon1={BackIcon}/>
+      <Header title="Password Manager" icon1={BackIcon} />
 
       <View style={styles.content}>
         <Text style={styles.label}>Current Password</Text>

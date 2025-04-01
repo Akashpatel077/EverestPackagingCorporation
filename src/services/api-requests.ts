@@ -13,8 +13,6 @@ const post = (url: string, payload: any, headers: any): Promise<any> => {
 };
 
 const upload = (url: string, payload: any, headers: any): Promise<any> => {
-  console.log('API Header', headers);
-
   return fetch(url, {
     method: 'POST',
     headers: {
@@ -43,7 +41,6 @@ export const getUserOptions = async (id: any, token: any) => {
       console.log('error', err);
     });
 
-  console.log('success', success);
   return success;
 };
 

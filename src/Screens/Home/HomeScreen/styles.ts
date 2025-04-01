@@ -88,15 +88,38 @@ export const styles = StyleSheet.create({
   },
   subCategoriesContainer: {
     flexDirection: 'row',
-    paddingHorizontal: 16,
-    marginTop: 8,
-    gap: 12,
+    marginTop: 12,
+    marginBottom: 8,
+    paddingVertical: 8,
+    backgroundColor: '#F8F8F8',
+    borderRadius: 12,
+  },
+  subCategoryIcon: {
+    width: 100,
+    height: 100,
+    borderRadius: 16,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 8,
+    padding: 8,
   },
   categoryItem: {
     alignItems: 'center',
     position: 'relative',
     zIndex: 1000,
     marginRight: 20,
+    paddingHorizontal: 8,
+  },
+  subCategoryList: {
+    width: '100%',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-evenly',
+    marginTop: 8,
+    // borderWidth: 1,
+  },
+  subCategoryItem: {
+    // borderWidth: 1,
   },
   categoryIcon: {
     width: 60,
@@ -113,6 +136,8 @@ export const styles = StyleSheet.create({
   categoryName: {
     fontSize: 12,
     color: '#333333',
+    flexWrap: 'wrap',
+    textAlign: 'center',
   },
   dropdownContainer: {
     position: 'absolute',

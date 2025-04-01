@@ -57,7 +57,6 @@ export const getProducts = async () => {
         'No internet connection. Please check your network settings.',
       );
     }
-    console.log('BASE_URL', BASE_URL, CONSUMER_SECRET, CONSUMER_KEY);
 
     const response = await wooCommerceApi.get('/products');
     return response.data;
@@ -96,7 +95,10 @@ export const getCustomers = async () => {
   }
 };
 
-export const getCategories = async () => {
+export const getCategories = async (params?: {
+  per_page?: number;
+  parent?: number;
+}) => {
   try {
     const isConnected = await isNetworkConnected();
     if (!isConnected) {
@@ -104,9 +106,28 @@ export const getCategories = async () => {
         'No internet connection. Please check your network settings.',
       );
     }
-    const response = await wooCommerceApi.get('/products/categories');
-    console.log('Product category', response.data, 'response.data');
+    const response = await wooCommerceApi.get('/products/categories', {params});
 
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const getSubCategories = async (parentId: number) => {
+  try {
+    const isConnected = await isNetworkConnected();
+    if (!isConnected) {
+      throw new Error(
+        'No internet connection. Please check your network settings.',
+      );
+    }
+    const response = await wooCommerceApi.get('/products/categories', {
+      params: {
+        per_page: 50,
+        parent: parentId,
+      },
+    });
     return response.data;
   } catch (error) {
     throw error;
