@@ -9,7 +9,6 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import {useAppDispatch, useAppSelector} from 'src/store/hooks';
-import {fetchProducts} from 'src/store/slices/productsSlice';
 import {
   fetchCategories,
   fetchSubCategories,
@@ -32,10 +31,7 @@ const HomeScreen = () => {
     error: categoriesError,
   } = useAppSelector(state => state.categories);
 
-  console.log('categoriesss : ', status);
-
   useEffect(() => {
-    dispatch(fetchProducts());
     dispatch(fetchCategories());
   }, [dispatch]);
 

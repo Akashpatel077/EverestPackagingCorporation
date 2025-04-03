@@ -49,7 +49,7 @@ wooCommerceApi.interceptors.response.use(
 );
 
 // API methods
-export const getProducts = async () => {
+export const getProducts = async (categoryId: number) => {
   try {
     const isConnected = await isNetworkConnected();
     if (!isConnected) {
@@ -58,7 +58,9 @@ export const getProducts = async () => {
       );
     }
 
-    const response = await wooCommerceApi.get('/products');
+    const response = await wooCommerceApi.get(
+      `/products?category=${categoryId}`,
+    );
     return response.data;
   } catch (error) {
     throw error;

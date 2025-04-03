@@ -134,7 +134,7 @@ export const styles = StyleSheet.create({
     color: '#333333',
     flexWrap: 'wrap',
     textAlign: 'center',
-    width:90
+    width: 90,
   },
   dropdownContainer: {
     position: 'absolute',
@@ -210,6 +210,8 @@ export const styles = StyleSheet.create({
     width: (width - 70) / 2,
     marginBottom: 16,
     backgroundColor: '#FFFFFF',
+    elevation: 5,
+    borderRadius: 12,
   },
   productImageContainer: {
     position: 'relative',

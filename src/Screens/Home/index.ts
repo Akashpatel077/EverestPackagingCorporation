@@ -11,6 +11,7 @@ import TrackOrderScreen from './TrackOrderScreen';
 import PasswordManager from './PasswordManager';
 import ShippingTypeScreen from './ShippingTypeScreen';
 import ShopScreen from './ShopScreen';
+import ProductList from './ProductList';
 
 export {
   HomeScreen,
@@ -26,4 +27,5 @@ export {
   PasswordManager,
   ShippingTypeScreen,
   ShopScreen,
+  ProductList,
 };
