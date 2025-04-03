@@ -10,6 +10,7 @@ import ReviewScreen from './ReviewScreen';
 import TrackOrderScreen from './TrackOrderScreen';
 import PasswordManager from './PasswordManager';
 import ShippingTypeScreen from './ShippingTypeScreen';
+import ShopScreen from './ShopScreen';
 
 export {
   HomeScreen,
@@ -24,4 +25,5 @@ export {
   TrackOrderScreen,
   PasswordManager,
   ShippingTypeScreen,
+  ShopScreen,
 };

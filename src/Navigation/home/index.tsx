@@ -13,6 +13,7 @@ import {
   TrackOrderScreen,
   PasswordManager,
   ShippingTypeScreen,
+  ShopScreen,
 } from 'src/Screens/Home';
 import {
   ADD_CARD_SCREEN,
@@ -32,6 +33,7 @@ import {
   SHIPPING_TYPE_SCREEN,
   TRACK_ORDER_SCREEN,
   WISHLIST,
+  SHOP_SCREEN,
 } from './routes';
 import {SvgProps} from 'react-native-svg';
 import {Home, Buy, Heart, Paper, Profile} from 'assets/icons';
@@ -216,6 +218,12 @@ const tabConfig: TabConfig[] = [
     name: HOMESCREEN,
     component: HomeStack,
     label: 'Home',
+    icon: Home,
+  },
+  {
+    name: SHOP_SCREEN,
+    component: ShopScreen,
+    label: 'Shop',
     icon: Home,
   },
   {
