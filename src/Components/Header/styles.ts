@@ -6,6 +6,7 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between',
         paddingVertical: 12,
+        paddingHorizontal: 16,
       },
       backButton: {
         width: 40,

@@ -14,13 +14,14 @@ import {BackIcon, Heart} from 'assets/icons';
 import {Header, Icon} from 'src/Components';
 import {useAppDispatch, useAppSelector} from 'src/store/hooks';
 import {fetchProductDetails} from '../../../store/slices/productDetailsSlice';
+import {addToWishlist, removeFromWishlist, isProductInWishlist} from '../../../store/slices/wishlistSlice';
 import RenderHtml from 'react-native-render-html';
 
 const ProductDetails = ({route}) => {
   const {productId} = route.params;
   const [selectedColor, setSelectedColor] = useState('');
-  const [isFavorite, setIsFavorite] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
+  const isInWishlist = useAppSelector(state => isProductInWishlist(state, productId));
   const dispatch = useAppDispatch();
   const {loading, productDetails, error} = useAppSelector(
     state => state.productDetails,
@@ -74,7 +75,19 @@ const ProductDetails = ({route}) => {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <Header title="Product Details" icon1={BackIcon} icon2={Heart} />
+        <Header 
+          title="Product Details" 
+          icon1={BackIcon} 
+          icon2={Heart} 
+          onPressSecond={() => {
+            if (isInWishlist) {
+              dispatch(removeFromWishlist(productId));
+            } else {
+              dispatch(addToWishlist(productDetails));
+            }
+          }}
+          icon2Color={isInWishlist ? '#CC5656' : '#FFF'}
+        />
         <View style={styles.mainImageContainer}>
           <Image
             source={{

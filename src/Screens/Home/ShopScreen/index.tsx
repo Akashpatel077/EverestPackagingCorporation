@@ -256,9 +256,9 @@ const ShopScreen = () => {
                       {categories.find(cat => cat.id === selectedCategory)
                         ?.name || ''}
                     </Text>
-                    <TouchableOpacity>
+                    {/* <TouchableOpacity>
                       <Text style={styles.seeAllButton}>See All</Text>
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
                   </View>
                   <FlatList
                     data={
