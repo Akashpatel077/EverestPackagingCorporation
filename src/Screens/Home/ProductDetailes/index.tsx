@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -7,63 +7,79 @@ import {
   ScrollView,
   FlatList,
   SafeAreaView,
+  ActivityIndicator,
 } from 'react-native';
-import { styles } from './styles';
-import { BackIcon, Heart } from 'assets/icons';
-import { Header, Icon } from 'src/Components';
+import {styles} from './styles';
+import {BackIcon, Heart} from 'assets/icons';
+import {Header, Icon} from 'src/Components';
+import {useAppDispatch, useAppSelector} from 'src/store/hooks';
+import {fetchProductDetails} from '../../../store/slices/productDetailsSlice';
+import RenderHtml from 'react-native-render-html';
 
-const ProductDetails = () => {
-  const [selectedSize, setSelectedSize] = useState('M');
-  const [selectedColor, setSelectedColor] = useState('Brown');
+const ProductDetails = ({route}) => {
+  const {productId} = route.params;
+  const [selectedColor, setSelectedColor] = useState('');
   const [isFavorite, setIsFavorite] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
+  const dispatch = useAppDispatch();
+  const {loading, productDetails, error} = useAppSelector(
+    state => state.productDetails,
+  );
 
-  const sizes = ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'];
-  const colors = ['#E6C7B8', '#8B4513', '#DEB887', '#A0522D', '#CD853F', '#000000'];
+  useEffect(() => {
+    dispatch(fetchProductDetails(productId));
+  }, [productId]);
 
-  const images = [
-    require('assets/images/banner.png'),
-    require('assets/images/banner.png'),
-    require('assets/images/banner.png'),
-    require('assets/images/banner.png'),
-    require('assets/images/banner.png'),
-    require('assets/images/banner.png'),
-  ];
+  const colorOptions =
+    productDetails.wcpa_form_fields?.fields.find(
+      field => field.type === 'color-group',
+    )?.values || [];
+
+  useEffect(() => {
+    if (colorOptions.length > 0) {
+      const defaultColor =
+        colorOptions.find(color => color.selected)?.value ||
+        colorOptions[0].value;
+      setSelectedColor(defaultColor);
+    }
+  }, [colorOptions]);
+
+  const images = productDetails.images;
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  const renderImageItem = ({ item, index }:any) => (
+  const renderImageItem = ({item, index}: any) => (
     <TouchableOpacity onPress={() => setCurrentImageIndex(index)}>
-      <Image 
-        source={item} 
-        style={[styles.thumbnailImage, currentImageIndex === index && {
-          borderColor: '#8B4513',
-          borderWidth: 2,
-        }]} 
+      <Image
+        source={{uri: item?.src}}
+        style={[
+          styles.thumbnailImage,
+          currentImageIndex === index && {
+            borderColor: '#8B4513',
+            borderWidth: 2,
+          },
+        ]}
       />
     </TouchableOpacity>
   );
 
+  if (loading) {
+    return (
+      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        <ActivityIndicator size={'large'} />
+      </View>
+    );
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
-        {/* <View style={styles.header}>
-          <TouchableOpacity style={styles.backButton}>
-            <Text style={styles.backIcon}>←</Text>
-          </TouchableOpacity>
-          <Text style={styles.headerTitle}>Product Details</Text>
-          <TouchableOpacity 
-            style={styles.favoriteButton}
-            onPress={() => setIsFavorite(!isFavorite)}
-          >
-            <Icon width={24} height={24} name={Heart} />
-          </TouchableOpacity>
-        </View> */}
-
-        <Header title='Product Details' icon1={BackIcon} icon2={Heart}/>
-
+        <Header title="Product Details" icon1={BackIcon} icon2={Heart} />
         <View style={styles.mainImageContainer}>
-          <Image 
-            source={images[currentImageIndex]} 
+          <Image
+            source={{
+              uri: images.length ? images[currentImageIndex].src : '',
+            }}
             style={styles.mainImage}
           />
         </View>
@@ -79,49 +95,61 @@ const ProductDetails = () => {
         </View>
 
         <View style={styles.productInfo}>
-          <Text style={styles.category}>Female's Style</Text>
           <View style={styles.titleRow}>
-            <Text style={styles.title}>Light Brown Jacket</Text>
-            <View style={styles.ratingContainer}>
-              <Text style={styles.ratingIcon}>★</Text>
-              <Text style={styles.rating}>4.5</Text>
-            </View>
+            <Text style={styles.title}>{productDetails.name}</Text>
           </View>
-
-          <Text style={styles.description}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-            ut labore et dolore magna aliqua
-          </Text>
-          <TouchableOpacity>
-            <Text style={styles.readMore}>Read more</Text>
-          </TouchableOpacity>
-
-          <Text style={styles.sectionTitle}>Select Size</Text>
-          <View style={styles.sizeContainer}>
-            {sizes.map((size) => (
-              <TouchableOpacity
-                key={size}
-                style={[styles.sizeButton, selectedSize === size && styles.selectedSize]}
-                onPress={() => setSelectedSize(size)}
-              >
-                <Text style={[styles.sizeText, selectedSize === size && styles.selectedSizeText]}>
-                  {size}
+          <View style={styles.reviewContainer}>
+            <View style={styles.starContainer}>
+              {[1, 2, 3, 4, 5].map(star => (
+                <Text key={star} style={styles.starIcon}>
+                  {Number(productDetails.average_rating) >= star ? '★' : '☆'}
                 </Text>
-              </TouchableOpacity>
-            ))}
-          </View>
-
-          <View style={styles.colorSection}>
-            <Text style={styles.sectionTitle}>Select Color : {selectedColor}</Text>
-            <View style={styles.colorContainer}>
-              {colors.map((color) => (
-                <TouchableOpacity
-                  key={color}
-                  style={[styles.colorButton, { backgroundColor: color }]}
-                  onPress={() => setSelectedColor(color === '#8B4513' ? 'Brown' : color)}
-                />
               ))}
             </View>
+            <Text style={styles.reviewText}>( There are no reviews yet. )</Text>
+          </View>
+          <View style={styles.priceRow}>
+            <Text style={styles.regularPrice}>₹1,333.60</Text>
+            <Text style={styles.salePrice}>₹889.00</Text>
+          </View>
+
+          <View
+            style={{maxHeight: isExpanded ? 'auto' : 92, overflow: 'hidden'}}>
+            <RenderHtml source={{html: productDetails.description}} />
+          </View>
+          {/* <Text style={styles.description}>{productDetails.description}</Text> */}
+          <TouchableOpacity
+            onPress={() => setIsExpanded(prevValue => !prevValue)}>
+            <Text style={styles.readMore}>
+              {isExpanded ? 'Read less' : 'Read more'}
+            </Text>
+          </TouchableOpacity>
+
+          {productDetails.attributes.length &&
+            productDetails.attributes.map(item => (
+              <RenderAttributes item={item} />
+            ))}
+
+          <View style={styles.colorSection}>
+            <Text style={styles.sectionTitle}>
+              Select Color : {selectedColor}
+            </Text>
+            <ScrollView
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              contentContainerStyle={styles.colorContainer}>
+              {colorOptions.map(({color, value}) => (
+                <TouchableOpacity
+                  key={value}
+                  style={[
+                    styles.colorButton,
+                    {backgroundColor: color},
+                    selectedColor === value && styles.selectedColorButton,
+                  ]}
+                  onPress={() => setSelectedColor(value)}
+                />
+              ))}
+            </ScrollView>
           </View>
 
           <View style={styles.bottomContainer}>
@@ -140,3 +168,52 @@ const ProductDetails = () => {
 };
 
 export default ProductDetails;
+
+type AttributeItem = {
+  options: string[];
+  name: string;
+};
+
+const RenderAttributes = ({item}: {item: AttributeItem}) => {
+  const defaultValue =
+    item.name === 'Non woven sizes'
+      ? '8x10'
+      : item.name === 'Quantity'
+      ? '100 pcs'
+      : item.name === 'Printing Side'
+      ? 'Single Side'
+      : item.options[0];
+  const [selectedItem, setSelectedItem] = useState(defaultValue);
+
+  return (
+    <>
+      <Text style={styles.sectionTitle}>
+        {item.name}
+        {selectedItem ? ` : ${selectedItem}` : ''}
+      </Text>
+      <ScrollView
+        showsHorizontalScrollIndicator={false}
+        horizontal
+        style={styles.optionContainer}>
+        {item?.options &&
+          item.options.map(option => (
+            <TouchableOpacity
+              key={option}
+              style={[
+                styles.optionButton,
+                selectedItem === option && styles.selectedItem,
+              ]}
+              onPress={() => setSelectedItem(option)}>
+              <Text
+                style={[
+                  styles.optionText,
+                  selectedItem === option && styles.selectedItemText,
+                ]}>
+                {option}
+              </Text>
+            </TouchableOpacity>
+          ))}
+      </ScrollView>
+    </>
+  );
+};

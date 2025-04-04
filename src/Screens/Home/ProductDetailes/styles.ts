@@ -1,6 +1,6 @@
-import { StyleSheet, Dimensions } from 'react-native';
+import {StyleSheet, Dimensions} from 'react-native';
 
-const { width } = Dimensions.get('window');
+const {width} = Dimensions.get('window');
 
 export const styles = StyleSheet.create({
   container: {
@@ -87,30 +87,47 @@ export const styles = StyleSheet.create({
     marginBottom: 8,
   },
   titleRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 12,
+    marginBottom: 8,
   },
   title: {
     fontSize: 24,
     fontWeight: '600',
     color: '#000000',
-    flex: 1,
+    lineHeight: 32,
   },
-  ratingContainer: {
+  reviewContainer: {
     flexDirection: 'row',
     alignItems: 'center',
+    marginBottom: 12,
   },
-  ratingIcon: {
+  starContainer: {
+    flexDirection: 'row',
+    marginRight: 8,
+  },
+  starIcon: {
     color: '#FFD700',
     fontSize: 16,
-    marginRight: 4,
+    marginRight: 2,
   },
-  rating: {
-    fontSize: 16,
+  reviewText: {
+    fontSize: 14,
+    color: '#666666',
+  },
+  priceRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 16,
+  },
+  regularPrice: {
+    fontSize: 18,
+    color: '#666666',
+    textDecorationLine: 'line-through',
+    marginRight: 8,
+  },
+  salePrice: {
+    fontSize: 24,
+    fontWeight: '600',
     color: '#000000',
-    fontWeight: '500',
   },
   description: {
     fontSize: 14,
@@ -129,13 +146,13 @@ export const styles = StyleSheet.create({
     color: '#000000',
     marginBottom: 12,
   },
-  sizeContainer: {
+  optionContainer: {
     flexDirection: 'row',
     gap: 12,
     marginBottom: 24,
   },
-  sizeButton: {
-    width: 40,
+  optionButton: {
+    width: 85,
     height: 40,
     borderRadius: 8,
     borderWidth: 1,
@@ -145,15 +162,15 @@ export const styles = StyleSheet.create({
     marginRight: 12,
     backgroundColor: '#FAF3EE',
   },
-  selectedSize: {
+  selectedItem: {
     backgroundColor: '#8B4513',
     borderColor: '#8B4513',
   },
-  sizeText: {
+  optionText: {
     fontSize: 14,
     color: '#000000',
   },
-  selectedSizeText: {
+  selectedItemText: {
     color: '#FFFFFF',
   },
   colorSection: {
@@ -161,15 +178,21 @@ export const styles = StyleSheet.create({
   },
   colorContainer: {
     flexDirection: 'row',
-    gap: 16,
-    marginTop: 12,
+    paddingVertical: 12,
+    paddingHorizontal: 4,
+    gap: 12,
   },
   colorButton: {
-    width: 32,
-    height: 32,
-    borderRadius: 16,
-    borderWidth: 1,
-    borderColor: '#E0E0E0',
+    width: 45,
+    height: 45,
+    borderRadius: 25,
+    padding: 4,
+    marginHorizontal: 6,
+  },
+  selectedColorButton: {
+    borderColor: '#000000',
+    borderWidth: 2,
+    transform: [{scale: 1.1}],
   },
   bottomContainer: {
     flexDirection: 'row',

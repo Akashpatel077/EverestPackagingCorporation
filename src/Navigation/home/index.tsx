@@ -14,7 +14,6 @@ import {
   PasswordManager,
   ShippingTypeScreen,
   ShopScreen,
-  ProductList,
 } from 'src/Screens/Home';
 import {
   ADD_CARD_SCREEN,
@@ -35,7 +34,6 @@ import {
   TRACK_ORDER_SCREEN,
   WISHLIST,
   SHOP_SCREEN,
-  PRODUCT_LIST,
 } from './routes';
 import {SvgProps} from 'react-native-svg';
 import {Home, Buy, Heart, Paper, Profile} from 'assets/icons';
@@ -57,7 +55,10 @@ const HomeStack = () => {
       name: HOMESCREEN,
       component: HomeScreen,
     },
-
+    {
+      name: PRODUCT_DETAILS,
+      component: ProductDetails,
+    },
     {
       name: WISHLIST,
       component: WishlistScreen,
@@ -108,7 +109,7 @@ const WishlistStack = () => {
   );
 };
 
-const ShopScreenStack = () => {
+const ShopStack = () => {
   const screens = [
     {
       name: SHOP_SCREEN,
@@ -117,10 +118,6 @@ const ShopScreenStack = () => {
     {
       name: PRODUCT_DETAILS,
       component: ProductDetails,
-    },
-    {
-      name: PRODUCT_LIST,
-      component: ProductList,
     },
   ];
   return (
@@ -251,7 +248,7 @@ const tabConfig: TabConfig[] = [
   },
   {
     name: SHOP_SCREEN,
-    component: ShopScreenStack,
+    component: ShopStack,
     label: 'Shop',
     icon: Home,
   },

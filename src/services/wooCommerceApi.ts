@@ -136,9 +136,26 @@ export const getSubCategories = async (parentId: number) => {
   }
 };
 
+export const getProductDetails = async (productId: number) => {
+  try {
+    const isConnected = await isNetworkConnected();
+    if (!isConnected) {
+      throw new Error(
+        'No internet connection. Please check your network settings.',
+      );
+    }
+
+    const response = await wooCommerceApi.get(`/products/${productId}`);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export default {
   getProducts,
   getOrders,
   getCustomers,
   getCategories,
+  getProductDetails,
 };

@@ -19,7 +19,7 @@ import SearchBar from '../../../Components/CustomSearch';
 import {styles} from './styles.ts';
 import {Icon} from 'src/Components/index.ts';
 import {useNavigation} from '@react-navigation/native';
-import {PRODUCT_LIST} from 'src/Navigation/home/routes.ts';
+import {PRODUCT_DETAILS} from 'src/Navigation/home/routes.ts';
 
 const ShopScreen = () => {
   const navigation = useNavigation();
@@ -123,7 +123,7 @@ const ShopScreen = () => {
     <TouchableOpacity
       style={styles.productCard}
       onPress={() => {
-        navigation.navigate(PRODUCT_DETAILS, {product: item});
+        navigation.navigate(PRODUCT_DETAILS, {productId: item.id});
       }}>
       <View style={styles.productImageContainer}>
         <Image
@@ -165,7 +165,7 @@ const ShopScreen = () => {
           alignItems: 'center',
         }}>
         <TouchableOpacity
-          style={[styles.categoryItem]}
+          style={styles.categoryItem}
           onPress={() => {
             toggleSubCategory(item.id);
           }}>
@@ -187,7 +187,7 @@ const ShopScreen = () => {
             )}
           </View>
         </TouchableOpacity>
-        <Text style={[styles.categoryName]}>{item.name}</Text>
+        <Text style={styles.categoryName}>{item.name}</Text>
       </View>
     );
   };
@@ -204,6 +204,9 @@ const ShopScreen = () => {
         <View style={styles.categorySection}>
           <View style={styles.sectionHeader}>
             <Text style={styles.sectionTitle}>Category</Text>
+            <TouchableOpacity>
+              <Text style={styles.seeAllButton}>See All</Text>
+            </TouchableOpacity>
           </View>
           <View>
             <FlatList
@@ -229,6 +232,9 @@ const ShopScreen = () => {
                       {categories.find(cat => cat.id === selectedCategory)
                         ?.name || ''}
                     </Text>
+                    <TouchableOpacity>
+                      <Text style={styles.seeAllButton}>See All</Text>
+                    </TouchableOpacity>
                   </View>
                   <FlatList
                     data={
@@ -260,17 +266,7 @@ const ShopScreen = () => {
                 <>
                   <View style={[styles.sectionHeader, {marginTop: 20}]}>
                     <Text style={styles.sectionTitle}>Products</Text>
-                    <TouchableOpacity
-                      onPress={() => {
-                        navigation.navigate(PRODUCT_LIST, {
-                          category: selectedCategory
-                            ? categories.find(
-                                cat => cat.id === selectedCategory,
-                              )?.name
-                            : 'All',
-                          products: filteredProducts,
-                        });
-                      }}>
+                    <TouchableOpacity>
                       <Text style={styles.seeAllButton}>See All</Text>
                     </TouchableOpacity>
                   </View>
