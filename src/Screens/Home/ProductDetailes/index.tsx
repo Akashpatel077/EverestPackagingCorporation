@@ -109,8 +109,16 @@ const ProductDetails = ({route}) => {
             <Text style={styles.reviewText}>( There are no reviews yet. )</Text>
           </View>
           <View style={styles.priceRow}>
-            <Text style={styles.regularPrice}>₹1,333.60</Text>
-            <Text style={styles.salePrice}>₹889.00</Text>
+            <Text style={styles.regularPrice}>
+              {productDetails.regular_price
+                ? `₹${productDetails.regular_price}`
+                : ''}
+            </Text>
+            <Text style={styles.salePrice}>
+              {productDetails.sale_price
+                ? `₹${productDetails.sale_price}`
+                : `₹${productDetails.price}`}
+            </Text>
           </View>
 
           <View
@@ -130,32 +138,36 @@ const ProductDetails = ({route}) => {
               <RenderAttributes item={item} />
             ))}
 
-          <View style={styles.colorSection}>
-            <Text style={styles.sectionTitle}>
-              Select Color : {selectedColor}
-            </Text>
-            <ScrollView
-              horizontal
-              showsHorizontalScrollIndicator={false}
-              contentContainerStyle={styles.colorContainer}>
-              {colorOptions.map(({color, value}) => (
-                <TouchableOpacity
-                  key={value}
-                  style={[
-                    styles.colorButton,
-                    {backgroundColor: color},
-                    selectedColor === value && styles.selectedColorButton,
-                  ]}
-                  onPress={() => setSelectedColor(value)}
-                />
-              ))}
-            </ScrollView>
-          </View>
+          {colorOptions.length > 0 && (
+            <View style={styles.colorSection}>
+              <Text style={styles.sectionTitle}>
+                Select Color : {selectedColor}
+              </Text>
+              <ScrollView
+                horizontal
+                showsHorizontalScrollIndicator={false}
+                contentContainerStyle={styles.colorContainer}>
+                {colorOptions.map(({color, value}) => (
+                  <TouchableOpacity
+                    key={value}
+                    style={[
+                      styles.colorButton,
+                      {backgroundColor: color},
+                      selectedColor === value && styles.selectedColorButton,
+                    ]}
+                    onPress={() => setSelectedColor(value)}
+                  />
+                ))}
+              </ScrollView>
+            </View>
+          )}
 
           <View style={styles.bottomContainer}>
             <View style={styles.priceContainer}>
               <Text style={styles.priceLabel}>Total Price</Text>
-              <Text style={styles.price}>$83.97</Text>
+              <Text style={styles.price}>
+                ₹{productDetails.sale_price || productDetails.price}
+              </Text>
             </View>
             <TouchableOpacity style={styles.addToCartButton}>
               <Text style={styles.addToCartText}>🛍 Add to Cart</Text>

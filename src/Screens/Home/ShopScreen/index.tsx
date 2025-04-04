@@ -19,7 +19,7 @@ import SearchBar from '../../../Components/CustomSearch';
 import {styles} from './styles.ts';
 import {Icon} from 'src/Components/index.ts';
 import {useNavigation} from '@react-navigation/native';
-import {PRODUCT_DETAILS} from 'src/Navigation/home/routes.ts';
+import {PRODUCT_DETAILS, PRODUCT_LIST} from 'src/Navigation/home/routes.ts';
 
 const ShopScreen = () => {
   const navigation = useNavigation();
@@ -266,7 +266,17 @@ const ShopScreen = () => {
                 <>
                   <View style={[styles.sectionHeader, {marginTop: 20}]}>
                     <Text style={styles.sectionTitle}>Products</Text>
-                    <TouchableOpacity>
+                    <TouchableOpacity
+                      onPress={() => {
+                        navigation.navigate(PRODUCT_LIST, {
+                          category: selectedCategory
+                            ? categories.find(
+                                cat => cat.id === selectedCategory,
+                              )?.name
+                            : 'All',
+                          products: filteredProducts,
+                        });
+                      }}>
                       <Text style={styles.seeAllButton}>See All</Text>
                     </TouchableOpacity>
                   </View>

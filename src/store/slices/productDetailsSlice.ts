@@ -2,6 +2,8 @@ import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import {getProductDetails} from '../../services/wooCommerceApi';
 
 interface ProductDetails {
+  regular_price: any;
+  sale_price: any;
   id: number;
   name: string;
   price: string;
