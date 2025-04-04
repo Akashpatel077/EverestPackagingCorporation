@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import {
   View,
   Text,
@@ -12,93 +12,64 @@ import { BackIcon, Heart } from 'assets/icons';
 import { Header, Icon } from 'src/Components';
 import { useNavigation } from '@react-navigation/native';
 import { PRODUCT_DETAILS } from 'src/Navigation/home/routes';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectWishlistItems, removeFromWishlist } from 'src/store/slices/wishlistSlice';
 
 const WishlistScreen = () => {
   const navigation = useNavigation();
-  const [selectedCategory, setSelectedCategory] = useState('Jacket');
+  const dispatch = useDispatch();
+  const [selectedCategory, setSelectedCategory] = useState('All');
+  
+  const wishlistItems = useSelector(selectWishlistItems) || [];
+  
+  const categories = useMemo(() => {
+    const uniqueCategories = new Set(['All']);
+    if (Array.isArray(wishlistItems)) {
+      wishlistItems.forEach(item => {
+        if (item?.categories && Array.isArray(item.categories) && item.categories.length > 0) {
+          item.categories.forEach(cat => cat?.name && uniqueCategories.add(cat.name));
+        }
+      });
+    }
+    return Array.from(uniqueCategories);
+  }, [wishlistItems]);
 
-  const categories = ['All', 'Jacket', 'Shirt', 'Pant', 'T-Shirt'];
+  const filteredItems = useMemo(() => {
+    if (selectedCategory === 'All') return wishlistItems;
+    return wishlistItems.filter(item => 
+      item.categories?.some(cat => cat.name === selectedCategory)
+    );
+  }, [selectedCategory, wishlistItems]);
 
-  const wishlistItems = [
-    {
-      id: '1',
-      name: 'Brown Jacket',
-      price: 83.97,
-      rating: 4.9,
-      image: require('../../../../assets/images/banner.png'),
-      isFavorite: true,
-    },
-    {
-      id: '2',
-      name: 'Brown Suite',
-      price: 120.00,
-      rating: 5.0,
-      image: require('../../../../assets/images/banner.png'),
-      isFavorite: true,
-    },
-    {
-      id: '3',
-      name: 'Brown Jacket',
-      price: 83.97,
-      rating: 4.9,
-      image: require('../../../../assets/images/banner.png'),
-      isFavorite: true,
-    },
-    {
-      id: '4',
-      name: 'Yellow Shirt',
-      price: 120.00,
-      rating: 5.0,
-      image: require('../../../../assets/images/banner.png'),
-      isFavorite: true,
-    },
-    {
-      id: '5',
-      name: 'Brown Jacket',
-      price: 83.97,
-      rating: 4.9,
-      image: require('../../../../assets/images/banner.png'),
-      isFavorite: true,
-    },
-    {
-      id: '6',
-      name: 'Brown Hoodie',
-      price: 120.00,
-      rating: 5.0,
-      image: require('../../../../assets/images/banner.png'),
-      isFavorite: true,
-    },
-  ];
-
-  const renderCategoryItem = ({ item }:any) => (
-    <TouchableOpacity
-      style={[styles.categoryButton, selectedCategory === item && styles.categoryButtonActive]}
-      onPress={() => setSelectedCategory(item)}
-    >
-      <Text style={[styles.categoryText, selectedCategory === item && styles.categoryTextActive]}>
-        {item}
-      </Text>
-    </TouchableOpacity>
-  );
+  const handleRemoveFromWishlist = (productId: number) => {
+    dispatch(removeFromWishlist(productId));
+  };
 
   const renderWishlistItem = ({ item }:any) => (
     <TouchableOpacity 
       style={styles.productCard} 
-      onPress={() => navigation.navigate(PRODUCT_DETAILS)}
+      onPress={() => navigation.navigate(PRODUCT_DETAILS, { product: item })}
     >
       <View style={styles.productImageContainer}>
-        <Image source={item.image} style={styles.productImage} />
+        <Image 
+          source={
+            item.images?.[0]?.src
+              ? {uri: item.images[0].src}
+              : require('../../../../assets/images/banner.png')
+          } 
+          style={styles.productImage} 
+        />
         <TouchableOpacity 
           style={styles.favoriteButton}
-          onPress={() => console.log('Toggle favorite')}
+          onPress={() => handleRemoveFromWishlist(item.id)}
         >
-          <Icon width={20} height={20} name={Heart} color={item.isFavorite ? '#8B4513' : '#FFFFFF'} />
+          <Icon width={20} height={20} name={Heart} color="#CC5656" />
         </TouchableOpacity>
       </View>
       <View style={styles.productInfo}>
         <Text style={styles.productName}>{item.name}</Text>
         <View style={styles.productDetails}>
-          <Text style={styles.productPrice}>${item.price.toFixed(2)}</Text>
+          <Text style={styles.productPrice}>${item.price}</Text>
           <View style={styles.ratingContainer}>
             <Text style={styles.ratingIcon}>★</Text>
             <Text style={styles.ratingText}>{item.rating}</Text>
@@ -111,24 +82,20 @@ const WishlistScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
       <Header title="Wishlist" icon1={BackIcon} />
-
-      <View style={styles.categoryContainer}>
+      {filteredItems.length === 0 ? (
+        <View style={styles.emptyContainer}>
+          <Text style={styles.emptyText}>No items in wishlist</Text>
+        </View>
+      ) : (
         <FlatList
-          data={categories}
-          renderItem={renderCategoryItem}
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          contentContainerStyle={styles.categoryList}
+          data={filteredItems}
+          renderItem={renderWishlistItem}
+          numColumns={2}
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={styles.productGrid}
+          keyExtractor={item => item.id.toString()}
         />
-      </View>
-
-      <FlatList
-        data={wishlistItems}
-        renderItem={renderWishlistItem}
-        numColumns={2}
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={styles.productGrid}
-      />
+      )}
     </SafeAreaView>
   );
 };

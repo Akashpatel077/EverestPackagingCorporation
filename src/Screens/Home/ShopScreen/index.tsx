@@ -10,6 +10,7 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import {useAppDispatch, useAppSelector} from 'src/store/hooks';
+import {addToWishlist, removeFromWishlist, isProductInWishlist} from 'src/store/slices/wishlistSlice';
 import {fetchProducts} from 'src/store/slices/productsSlice';
 import {
   fetchCategories,
@@ -20,6 +21,7 @@ import {styles} from './styles.ts';
 import {Icon} from 'src/Components/index.ts';
 import {useNavigation} from '@react-navigation/native';
 import {PRODUCT_DETAILS, PRODUCT_LIST} from 'src/Navigation/home/routes.ts';
+import { Heart } from 'assets/icons/index.ts';
 
 const ShopScreen = () => {
   const navigation = useNavigation();
@@ -119,7 +121,21 @@ const ShopScreen = () => {
     </TouchableOpacity>
   );
 
-  const renderProductItem = ({item}: {item: any}) => (
+  // Get wishlist items at the component level
+  const wishlistItems = useAppSelector(state => state.wishlist.items);
+
+  const renderProductItem = ({item}: {item: any}) => {
+    const isInWishlist = wishlistItems.some(wishlistItem => wishlistItem.id === item.id);
+    
+    const handleWishlistToggle = () => {
+      if (isInWishlist) {
+        dispatch(removeFromWishlist(item.id));
+      } else {
+        dispatch(addToWishlist(item));
+      }
+    };
+
+    return (
     <TouchableOpacity
       style={styles.productCard}
       onPress={() => {
@@ -134,8 +150,15 @@ const ShopScreen = () => {
           }
           style={styles.productImage}
         />
-        <TouchableOpacity style={styles.favoriteButton}>
-          <Text style={styles.favoriteIcon}>♡</Text>
+        <TouchableOpacity 
+          style={styles.favoriteButton}
+          onPress={handleWishlistToggle}>
+          <Icon 
+            name={Heart} 
+            width={20} 
+            height={20} 
+            color={isInWishlist ? '#CC5656' : '#FFF'} 
+          />
         </TouchableOpacity>
       </View>
       <View style={styles.productInfo}>
@@ -152,6 +175,7 @@ const ShopScreen = () => {
       </View>
     </TouchableOpacity>
   );
+}
 
   const toggleSubCategory = (categoryId: number) => {
     dispatch(fetchProducts(categoryId));

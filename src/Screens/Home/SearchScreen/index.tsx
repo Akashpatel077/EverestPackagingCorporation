@@ -1,5 +1,13 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, TouchableOpacity, TextInput, FlatList, Image, ActivityIndicator} from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  TextInput,
+  FlatList,
+  Image,
+  ActivityIndicator,
+} from 'react-native';
 import {Header, Icon} from 'src/Components';
 import {Search, Close, Heart, BackIcon} from 'assets/icons';
 import {styles} from './styles';
@@ -7,13 +15,22 @@ import {useNavigation} from '@react-navigation/native';
 import {useAppSelector, useAppDispatch} from 'src/store/hooks';
 import {PRODUCT_DETAILS} from '../../../Navigation/home/routes';
 import {fetchAllProducts} from '../../../store/slices/productsSlice';
+import {
+  addToWishlist,
+  removeFromWishlist,
+} from '../../../store/slices/wishlistSlice';
 
 const SearchScreen = () => {
   const navigation = useNavigation();
   const dispatch = useAppDispatch();
   const [searchText, setSearchText] = useState('');
   const [filteredProducts, setFilteredProducts] = useState([]);
-  const {items: products, loading, error} = useAppSelector(state => state.products);
+  const {
+    items: products,
+    loading,
+    error,
+  } = useAppSelector(state => state.products);
+  const wishlistItems = useAppSelector(state => state.wishlist.items);
   const [recentSearches, setRecentSearches] = useState([
     'Blue Shirt',
     'CosmicChic Jacket',
@@ -26,8 +43,7 @@ const SearchScreen = () => {
     'Fluffernova Coat',
   ]);
 
-  console.log("items",products);
-  
+  console.log('items', products);
 
   useEffect(() => {
     dispatch(fetchAllProducts());
@@ -39,9 +55,10 @@ const SearchScreen = () => {
         searchText,
         ...prevSearches.filter(item => item !== searchText),
       ]);
-      const filtered = products.filter(product =>
-        product.name.toLowerCase().includes(searchText.toLowerCase()) ||
-        product.description?.toLowerCase().includes(searchText.toLowerCase())
+      const filtered = products.filter(
+        product =>
+          product.name.toLowerCase().includes(searchText.toLowerCase()) ||
+          product.description?.toLowerCase().includes(searchText.toLowerCase()),
       );
       setFilteredProducts(filtered);
     } else {
@@ -78,7 +95,7 @@ const SearchScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Header title="Search" icon1={BackIcon}/>
+      <Header title="Search" icon1={BackIcon} />
 
       <View style={styles.searchContainer}>
         <Icon
@@ -131,7 +148,9 @@ const SearchScreen = () => {
           renderItem={({item}) => (
             <TouchableOpacity
               style={styles.productCard}
-              onPress={() => navigation.navigate(PRODUCT_DETAILS, {product: item})}>
+              onPress={() =>
+                navigation.navigate(PRODUCT_DETAILS, {product: item})
+              }>
               <View style={styles.productImageContainer}>
                 <Image
                   source={
@@ -141,8 +160,30 @@ const SearchScreen = () => {
                   }
                   style={styles.productImage}
                 />
-                <TouchableOpacity style={styles.favoriteButton}>
-                  <Text style={styles.favoriteIcon}>♡</Text>
+                <TouchableOpacity
+                  style={styles.favoriteButton}
+                  onPress={() => {
+                    const isInWishlist = wishlistItems.some(
+                      wishlistItem => wishlistItem.id === item.id,
+                    );
+                    if (isInWishlist) {
+                      dispatch(removeFromWishlist(item.id));
+                    } else {
+                      dispatch(addToWishlist(item));
+                    }
+                  }}>
+                  <Icon
+                    name={Heart}
+                    width={20}
+                    height={20}
+                    color={
+                      wishlistItems.some(
+                        wishlistItem => wishlistItem.id === item.id,
+                      )
+                        ? '#CC5656'
+                        : '#FFFFFF'
+                    }
+                  />
                 </TouchableOpacity>
               </View>
               <View style={styles.productInfo}>

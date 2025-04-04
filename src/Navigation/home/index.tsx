@@ -272,12 +272,6 @@ const tabConfig: TabConfig[] = [
     icon: Heart,
   },
   {
-    name: 'Chat',
-    component: HomeScreen,
-    label: 'Chat',
-    icon: Paper,
-  },
-  {
     name: 'Profile',
     component: ProfileStack,
     label: 'Profile',
@@ -286,8 +280,10 @@ const tabConfig: TabConfig[] = [
 ];
 
 const HomeContainer = () => {
-  const getTabBarIcon = (name: React.FC<TabIconProps>) => {
-    return <Icon width={24} height={24} name={name} />;
+  const getTabBarIcon = (name: React.FC<TabIconProps>,tabName:string) => {
+    console.log("tabName",tabName);
+    
+    return (tabName === 'Home' ? (<Icon width={24} height={24} name={name} color='#000'/>) : (<Icon width={24} height={24} name={name} />));
   };
 
   return (
@@ -311,7 +307,7 @@ const HomeContainer = () => {
           component={tab.component}
           options={{
             tabBarLabel: tab.label,
-            tabBarIcon: () => getTabBarIcon(tab.icon),
+            tabBarIcon: () => getTabBarIcon(tab.icon ,tab.label),
           }}
         />
       ))}
