@@ -9,8 +9,8 @@ const CONSUMER_SECRET = Config.WOO_COMMERCE_CONSUMER_SECRET;
 const wooCommerceApi = axios.create({
   baseURL: BASE_URL,
   auth: {
-    username: CONSUMER_KEY,
-    password: CONSUMER_SECRET,
+    username: CONSUMER_KEY || '',
+    password: CONSUMER_SECRET || '',
   },
   timeout: 10000, // Set timeout to 10 seconds
   // Add retry mechanism
@@ -136,6 +136,26 @@ export const getSubCategories = async (parentId: number) => {
   }
 };
 
+export const getAllProducts = async () => {
+  try {
+    const isConnected = await isNetworkConnected();
+    if (!isConnected) {
+      throw new Error(
+        'No internet connection. Please check your network settings.',
+      );
+    }
+
+    const response = await wooCommerceApi.get('/products', {
+      params: {
+        per_page: 100, // Maximum allowed per page
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export const getProductDetails = async (productId: number) => {
   try {
     const isConnected = await isNetworkConnected();
@@ -154,6 +174,7 @@ export const getProductDetails = async (productId: number) => {
 
 export default {
   getProducts,
+  getAllProducts,
   getOrders,
   getCustomers,
   getCategories,

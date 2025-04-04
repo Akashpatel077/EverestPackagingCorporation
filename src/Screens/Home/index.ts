@@ -12,6 +12,8 @@ import PasswordManager from './PasswordManager';
 import ShippingTypeScreen from './ShippingTypeScreen';
 import ShopScreen from './ShopScreen';
 import ProductList from './ProductList';
+import SearchScreen from './SearchScreen';
+
 
 export {
   HomeScreen,
@@ -28,4 +30,5 @@ export {
   ShippingTypeScreen,
   ShopScreen,
   ProductList,
+  SearchScreen,
 };

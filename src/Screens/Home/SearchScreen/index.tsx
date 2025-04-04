@@ -1,13 +1,19 @@
-import React, {useState} from 'react';
-import {View, Text, TouchableOpacity, TextInput, FlatList} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {View, Text, TouchableOpacity, TextInput, FlatList, Image, ActivityIndicator} from 'react-native';
 import {Header, Icon} from 'src/Components';
 import {Search, Close, Heart, BackIcon} from 'assets/icons';
 import {styles} from './styles';
 import {useNavigation} from '@react-navigation/native';
+import {useAppSelector, useAppDispatch} from 'src/store/hooks';
+import {PRODUCT_DETAILS} from '../../../Navigation/home/routes';
+import {fetchAllProducts} from '../../../store/slices/productsSlice';
 
 const SearchScreen = () => {
   const navigation = useNavigation();
+  const dispatch = useAppDispatch();
   const [searchText, setSearchText] = useState('');
+  const [filteredProducts, setFilteredProducts] = useState([]);
+  const {items: products, loading, error} = useAppSelector(state => state.products);
   const [recentSearches, setRecentSearches] = useState([
     'Blue Shirt',
     'CosmicChic Jacket',
@@ -20,15 +26,32 @@ const SearchScreen = () => {
     'Fluffernova Coat',
   ]);
 
+  console.log("items",products);
+  
+
+  useEffect(() => {
+    dispatch(fetchAllProducts());
+  }, [dispatch]);
+
   const handleSearch = () => {
     if (searchText.trim()) {
       setRecentSearches(prevSearches => [
         searchText,
         ...prevSearches.filter(item => item !== searchText),
       ]);
-      // TODO: Implement search functionality
+      const filtered = products.filter(product =>
+        product.name.toLowerCase().includes(searchText.toLowerCase()) ||
+        product.description?.toLowerCase().includes(searchText.toLowerCase())
+      );
+      setFilteredProducts(filtered);
+    } else {
+      setFilteredProducts([]);
     }
   };
+
+  useEffect(() => {
+    handleSearch();
+  }, [searchText]);
 
   const clearAllSearches = () => {
     setRecentSearches([]);
@@ -75,23 +98,72 @@ const SearchScreen = () => {
         />
       </View>
 
-      {recentSearches.length > 0 && (
-        <View>
-          <View style={styles.recentHeader}>
-            <Text style={styles.recentTitle}>Recent</Text>
-            <TouchableOpacity
-              style={styles.clearButton}
-              onPress={clearAllSearches}>
-              <Text style={styles.clearText}>Clear All</Text>
-            </TouchableOpacity>
-          </View>
-          <FlatList
-            data={recentSearches}
-            renderItem={renderSearchItem}
-            keyExtractor={(item, index) => `${item}-${index}`}
-            showsVerticalScrollIndicator={false}
-          />
+      {loading ? (
+        <View style={styles.loadingContainer}>
+          <ActivityIndicator size="large" color="#8B4513" />
         </View>
+      ) : error ? (
+        <View style={styles.errorContainer}>
+          <Text style={styles.errorText}>{error}</Text>
+        </View>
+      ) : searchText.trim() === '' ? (
+        recentSearches.length > 0 && (
+          <View>
+            <View style={styles.recentHeader}>
+              <Text style={styles.recentTitle}>Recent</Text>
+              <TouchableOpacity
+                style={styles.clearButton}
+                onPress={clearAllSearches}>
+                <Text style={styles.clearText}>Clear All</Text>
+              </TouchableOpacity>
+            </View>
+            <FlatList
+              data={recentSearches}
+              renderItem={renderSearchItem}
+              keyExtractor={(item, index) => `${item}-${index}`}
+              showsVerticalScrollIndicator={false}
+            />
+          </View>
+        )
+      ) : (
+        <FlatList
+          data={filteredProducts}
+          renderItem={({item}) => (
+            <TouchableOpacity
+              style={styles.productCard}
+              onPress={() => navigation.navigate(PRODUCT_DETAILS, {product: item})}>
+              <View style={styles.productImageContainer}>
+                <Image
+                  source={
+                    item.images?.[0]?.src
+                      ? {uri: item.images[0].src}
+                      : require('../../../../assets/images/banner.png')
+                  }
+                  style={styles.productImage}
+                />
+                <TouchableOpacity style={styles.favoriteButton}>
+                  <Text style={styles.favoriteIcon}>♡</Text>
+                </TouchableOpacity>
+              </View>
+              <View style={styles.productInfo}>
+                <Text style={styles.productName}>{item.name}</Text>
+                <View style={styles.productDetails}>
+                  <Text style={styles.productPrice}>₹{item.price}</Text>
+                  <View style={styles.ratingContainer}>
+                    <Text style={styles.ratingIcon}>⭐</Text>
+                    <Text style={styles.ratingText}>
+                      {item.average_rating || '0.0'}
+                    </Text>
+                  </View>
+                </View>
+              </View>
+            </TouchableOpacity>
+          )}
+          numColumns={2}
+          keyExtractor={item => item.id.toString()}
+          columnWrapperStyle={styles.productGrid}
+          showsVerticalScrollIndicator={false}
+        />
       )}
     </View>
   );

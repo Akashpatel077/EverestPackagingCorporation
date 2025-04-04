@@ -28,6 +28,7 @@ import FriendsHouse from './FriendsHouse.svg';
 import Economy from './Economy.svg';
 import Regular from './Regular.svg';
 import BackIcon from './BackIcon.svg';
+import Shop from './Shop.svg';
 
 export {
   Buy,
@@ -60,4 +61,5 @@ export {
   Economy,
   Regular,
   BackIcon,
+  Shop,
 };

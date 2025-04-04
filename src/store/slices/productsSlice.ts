@@ -1,5 +1,5 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
-import {getProducts} from '../../services/wooCommerceApi';
+import {getProducts, getAllProducts} from '../../services/wooCommerceApi';
 
 interface Product {
   id: number;
@@ -30,6 +30,14 @@ export const fetchProducts = createAsyncThunk(
   },
 );
 
+export const fetchAllProducts = createAsyncThunk(
+  'products/fetchAllProducts',
+  async () => {
+    const products = await getAllProducts();
+    return products;
+  },
+);
+
 const productsSlice = createSlice({
   name: 'products',
   initialState,
@@ -47,6 +55,18 @@ const productsSlice = createSlice({
       .addCase(fetchProducts.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message || 'Failed to fetch products';
+      })
+      .addCase(fetchAllProducts.pending, state => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchAllProducts.fulfilled, (state, action) => {
+        state.loading = false;
+        state.items = action.payload;
+      })
+      .addCase(fetchAllProducts.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message || 'Failed to fetch all products';
       });
   },
 });
