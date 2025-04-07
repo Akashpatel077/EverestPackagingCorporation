@@ -4,6 +4,7 @@ import categoryReducer from './slices/categorySlice';
 import productDetailsReducer from './slices/productDetailsSlice';
 import wishlistReducer from './slices/wishlistSlice';
 import addressReducer from './slices/addressSlice';
+import cartReducer from './slices/cartSlice';
 import { persistStore } from 'redux-persist';
 import { createPersistedReducer } from './persistConfig';
 import { combineReducers } from '@reduxjs/toolkit';
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   productDetails: productDetailsReducer,
   wishlist: wishlistReducer,
   address: addressReducer,
+  cart: cartReducer,
 });
 
 const persistedReducer = createPersistedReducer(rootReducer);

@@ -4,7 +4,7 @@ import { persistReducer } from 'redux-persist';
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  whitelist: ['products', 'categories', 'productDetails', 'wishlist', 'address'],
+  whitelist: ['products', 'categories', 'productDetails', 'wishlist', 'address', 'cart'],
 };
 
 export const createPersistedReducer = (rootReducer: any) => {

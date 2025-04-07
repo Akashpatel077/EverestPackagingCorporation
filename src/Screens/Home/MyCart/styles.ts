@@ -171,6 +171,42 @@ export default StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
   },
+  emptyCartContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: 20,
+  },
+  emptyCartImage: {
+    width: 120,
+    height: 120,
+    marginBottom: 20,
+    tintColor: '#8B4513',
+  },
+  emptyCartTitle: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#8B4513',
+    marginBottom: 10,
+    textAlign: 'center',
+  },
+  emptyCartText: {
+    fontSize: 16,
+    color: '#666',
+    textAlign: 'center',
+    marginBottom: 30,
+  },
+  shopNowButton: {
+    backgroundColor: '#8B4513',
+    paddingHorizontal: 40,
+    paddingVertical: 15,
+    borderRadius: 25,
+  },
+  shopNowButtonText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
   modalOverlay: {
     flex: 1,
     backgroundColor: 'rgba(0, 0, 0, 0.5)',

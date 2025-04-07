@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -11,19 +11,25 @@ import {
   StatusBar,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import styles from './styles';
-import { BILLING_ADDRESS_FORM, CHECKOUT,  SHIPPING_ADDRESS_FORM} from 'src/Navigation/home/routes';
+import { BILLING_ADDRESS_FORM, CHECKOUT,  SHIPPING_ADDRESS_FORM, SHOP_SCREEN} from 'src/Navigation/home/routes';
 import { Header } from 'src/Components';
 import { BackIcon } from 'assets/icons';
+import { selectCartItems, selectCartTotal, updateQuantity, removeFromCart } from 'src/store/slices/cartSlice';
 
 interface CartItem {
-  id: string;
+  id: number;
   name: string;
-  size: string;
-  price: number;
+  price: string;
+  sale_price?: string;
   quantity: number;
-  image: any; // In a real app, this would be a proper image source
+  color?: string;
+  attributes?: Array<{
+    name: string;
+    value: string;
+  }>;
+  image?: string;
 }
 
 const MyCart = () => {
@@ -36,43 +42,15 @@ const MyCart = () => {
   const selectedBillingAddress = addresses.billingAddresses.find(
     (address: any) => address.id === addresses.selectedBillingAddressId
   );
-  const [cartItems, setCartItems] = useState<CartItem[]>([
-    {
-      id: '1',
-      name: 'Brown Jacket',
-      size: 'XL',
-      price: 83.97,
-      quantity: 1,
-      image: require('../../../../assets/images/user.png'), // Placeholder image
-    },
-    {
-      id: '2',
-      name: 'Brown Suite',
-      size: 'XL',
-      price: 120,
-      quantity: 1,
-      image: require('../../../../assets/images/user.png'), // Placeholder image
-    },
-    {
-      id: '3',
-      name: 'Brown Jacket',
-      size: 'XL',
-      price: 83.97,
-      quantity: 1,
-      image: require('../../../../assets/images/user.png'), // Placeholder image
-    },
-    {
-      id: '4',
-      name: 'Brown Suite',
-      size: 'XL',
-      price: 120,
-      quantity: 1,
-      image: require('../../../../assets/images/user.png'), // Placeholder image
-    },
-  ]);
+  const dispatch = useDispatch();
+  const cartItems = useSelector(selectCartItems);
+  const cartTotal = useSelector(selectCartTotal);
+
+  console.log("cartItems",cartItems);
+  
 
   const [promoCode, setPromoCode] = useState('');
-  const [discount, setDiscount] = useState(35);
+  // const [discount, setDiscount] = useState(35);
   const [deliveryFee, setDeliveryFee] = useState(25);
   const [showRemoveModal, setShowRemoveModal] = useState(false);
   const [selectedItem, setSelectedItem] = useState<CartItem | null>(null);
@@ -84,32 +62,28 @@ const MyCart = () => {
   );
 
   // Calculate total
-  const total = subtotal + deliveryFee - discount;
+  const total = subtotal + deliveryFee ;
 
   // Handle quantity increase
-  const increaseQuantity = (id: string) => {
-    setCartItems(
-      cartItems.map(item =>
-        item.id === id ? {...item, quantity: item.quantity + 1} : item,
-      ),
-    );
+  const increaseQuantity = (id: number) => {
+    const item = cartItems.find(item => item.id === id);
+    if (item) {
+      dispatch(updateQuantity({ id, quantity: item.quantity + 1 }));
+    }
   };
 
   // Handle quantity decrease
-  const decreaseQuantity = (id: string) => {
-    setCartItems(
-      cartItems.map(item =>
-        item.id === id && item.quantity > 1
-          ? {...item, quantity: item.quantity - 1}
-          : item,
-      ),
-    );
+  const decreaseQuantity = (id: number) => {
+    const item = cartItems.find(item => item.id === id);
+    if (item && item.quantity > 1) {
+      dispatch(updateQuantity({ id, quantity: item.quantity - 1 }));
+    }
   };
 
   // Handle remove item
   const handleRemoveItem = () => {
     if (selectedItem) {
-      setCartItems(cartItems.filter(item => item.id !== selectedItem.id));
+      dispatch(removeFromCart(selectedItem.id));
       setShowRemoveModal(false);
       setSelectedItem(null);
     }
@@ -126,7 +100,7 @@ const MyCart = () => {
     // In a real app, you would validate the promo code here
     if (promoCode.trim() !== '') {
       // Apply a fixed discount for demo purposes
-      setDiscount(35);
+      // setDiscount(35);
       setPromoCode('');
     }
   };
@@ -134,11 +108,11 @@ const MyCart = () => {
   // Render cart item
   const renderCartItem = ({item}: {item: CartItem}) => (
     <View style={styles.cartItemContainer}>
-      <Image source={item.image} style={styles.itemImage} />
+      <Image source={{ uri: item.image }} style={styles.itemImage} />
       <View style={styles.itemDetails}>
         <Text style={styles.itemName}>{item.name}</Text>
         <Text style={styles.itemSize}>Size : {item.size}</Text>
-        <Text style={styles.itemPrice}>${item.price.toFixed(2)}</Text>
+        <Text style={styles.itemPrice}>${Number(item.price).toFixed(2)}</Text>
         <View style={styles.quantityControl}>
           <TouchableOpacity
             style={styles.quantityButton}
@@ -160,6 +134,30 @@ const MyCart = () => {
       </TouchableOpacity>
     </View>
   );
+
+  if (cartItems.length === 0) {
+    return (
+      <SafeAreaView style={styles.container}>
+        <StatusBar barStyle="dark-content" />
+        <Header icon1={BackIcon} title='My Cart' />
+        <View style={styles.emptyCartContainer}>
+          <Image
+            source={require('assets/icons/Bags.svg')}
+            style={styles.emptyCartImage}
+          />
+          <Text style={styles.emptyCartTitle}>Your Cart is Empty</Text>
+          <Text style={styles.emptyCartText}>
+            Looks like you haven't added anything to your cart yet
+          </Text>
+          <TouchableOpacity
+            style={styles.shopNowButton}
+            onPress={() => navigation.navigate(SHOP_SCREEN)}>
+            <Text style={styles.shopNowButtonText}>Shop Now</Text>
+          </TouchableOpacity>
+        </View>
+      </SafeAreaView>
+    );
+  }
 
   return (
     <SafeAreaView style={styles.container}>
@@ -201,10 +199,10 @@ const MyCart = () => {
           <Text style={styles.summaryLabel}>Delivery Fee</Text>
           <Text style={styles.summaryValue}>${deliveryFee.toFixed(2)}</Text>
         </View>
-        <View style={styles.summaryRow}>
+        {/* <View style={styles.summaryRow}>
           <Text style={styles.summaryLabel}>Discount</Text>
           <Text style={styles.summaryValue}>-${discount.toFixed(2)}</Text>
-        </View>
+        </View> */}
         <View style={[styles.summaryRow, styles.totalRow]}>
           <Text style={styles.totalLabel}>Total Cost</Text>
           <Text style={styles.totalValue}>${total.toFixed(2)}</Text>
@@ -237,7 +235,7 @@ const MyCart = () => {
             {selectedItem && (
               <View style={styles.modalItemContainer}>
                 <Image
-                  source={selectedItem.image}
+                  source={{ uri: selectedItem.image }}
                   style={styles.modalItemImage}
                 />
                 <View style={styles.modalItemDetails}>
@@ -246,7 +244,7 @@ const MyCart = () => {
                     Size : {selectedItem.size}
                   </Text>
                   <Text style={styles.modalItemPrice}>
-                    ${selectedItem.price.toFixed(2)}
+                    ${typeof selectedItem.price === 'string' ? Number(selectedItem.price).toFixed(2) : selectedItem.price.toFixed(2)}
                   </Text>
                   <View style={styles.quantityControl}>
                     <TouchableOpacity

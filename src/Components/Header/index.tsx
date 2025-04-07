@@ -14,6 +14,9 @@ interface Props {
 }
  const Header: React.FC<Props> = ({ title, onPressSecond ,icon1,icon2,icon2Color,onPressFirst}) => {
     const navigation = useNavigation();
+
+    console.log('icon2Color',icon2Color);
+    
   return (
     <View style={styles.header}>
         <TouchableOpacity

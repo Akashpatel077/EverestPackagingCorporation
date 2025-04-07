@@ -15,6 +15,7 @@ import {Header, Icon} from 'src/Components';
 import {useAppDispatch, useAppSelector} from 'src/store/hooks';
 import {fetchProductDetails} from '../../../store/slices/productDetailsSlice';
 import {addToWishlist, removeFromWishlist, isProductInWishlist} from '../../../store/slices/wishlistSlice';
+import {addToCart} from '../../../store/slices/cartSlice';
 import RenderHtml from 'react-native-render-html';
 
 const ProductDetails = ({route}) => {
@@ -86,7 +87,7 @@ const ProductDetails = ({route}) => {
               dispatch(addToWishlist(productDetails));
             }
           }}
-          icon2Color={isInWishlist ? '#CC5656' : '#FFF'}
+          icon2Color={isInWishlist ? '#CC5656' : '#333333'}
         />
         <View style={styles.mainImageContainer}>
           <Image
@@ -113,8 +114,8 @@ const ProductDetails = ({route}) => {
           </View>
           <View style={styles.reviewContainer}>
             <View style={styles.starContainer}>
-              {[1, 2, 3, 4, 5].map(star => (
-                <Text key={star} style={styles.starIcon}>
+              {[1, 2, 3, 4, 5].map((star:any,index:any) => (
+                <Text key={index} style={styles.starIcon}>
                   {Number(productDetails.average_rating) >= star ? '★' : '☆'}
                 </Text>
               ))}
@@ -147,8 +148,8 @@ const ProductDetails = ({route}) => {
           </TouchableOpacity>
 
           {productDetails.attributes.length &&
-            productDetails.attributes.map(item => (
-              <RenderAttributes item={item} />
+            productDetails.attributes.map((item:any,index:any) => (
+              <RenderAttributes item={item} key={index}/>
             ))}
 
           {colorOptions.length > 0 && (
@@ -160,7 +161,7 @@ const ProductDetails = ({route}) => {
                 horizontal
                 showsHorizontalScrollIndicator={false}
                 contentContainerStyle={styles.colorContainer}>
-                {colorOptions.map(({color, value}) => (
+                {colorOptions.map(({color, value}:any) => (
                   <TouchableOpacity
                     key={value}
                     style={[
@@ -182,7 +183,26 @@ const ProductDetails = ({route}) => {
                 ₹{productDetails.sale_price || productDetails.price}
               </Text>
             </View>
-            <TouchableOpacity style={styles.addToCartButton}>
+            <TouchableOpacity 
+              style={styles.addToCartButton}
+              onPress={() => {
+                const selectedAttributes = productDetails.attributes.map(attr => ({
+                  name: attr.name,
+                  value: attr.options[0] // Using first option as default if not selected
+                }));
+                
+                dispatch(addToCart({
+                  id: productDetails.id,
+                  quantity: 1,
+                  name: productDetails.name,
+                  price: productDetails.price,
+                  sale_price: productDetails.sale_price,
+                  color: selectedColor,
+                  attributes: selectedAttributes,
+                  image: productDetails.images?.[0]?.src
+                }));
+              }}
+            >
               <Text style={styles.addToCartText}>🛍 Add to Cart</Text>
             </TouchableOpacity>
           </View>
@@ -221,9 +241,9 @@ const RenderAttributes = ({item}: {item: AttributeItem}) => {
         horizontal
         style={styles.optionContainer}>
         {item?.options &&
-          item.options.map(option => (
+          item.options.map((option:any,index:any) => (
             <TouchableOpacity
-              key={option}
+              key={index}
               style={[
                 styles.optionButton,
                 selectedItem === option && styles.selectedItem,
