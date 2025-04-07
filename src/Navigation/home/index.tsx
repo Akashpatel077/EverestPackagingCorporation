@@ -15,6 +15,9 @@ import {
   ShippingTypeScreen,
   ShopScreen,
   ProductList,
+  BillingAddress,
+  ShippingAddressForm,
+  BillingAddressForm,
 } from 'src/Screens/Home';
 import {
   ADD_CARD_SCREEN,
@@ -36,6 +39,9 @@ import {
   WISHLIST,
   SHOP_SCREEN,
   PRODUCT_LIST,
+  BILLING_ADDRESS,
+  SHIPPING_ADDRESS_FORM,
+  BILLING_ADDRESS_FORM,
 } from './routes';
 import {SvgProps} from 'react-native-svg';
 import {Home, Buy, Heart, Paper, Profile, Shop} from 'assets/icons';
@@ -172,6 +178,18 @@ const MyCartStack = () => {
       name: SHIPPING_TYPE_SCREEN,
       component: ShippingTypeScreen,
     },
+    {
+      name: BILLING_ADDRESS,
+      component: BillingAddress,
+    },
+    {
+      name: SHIPPING_ADDRESS_FORM,
+      component: ShippingAddressForm,
+    },
+    {
+      name: BILLING_ADDRESS_FORM,
+      component: BillingAddressForm,
+    },
   ];
   return (
     <Stack.Navigator
@@ -283,7 +301,7 @@ const HomeContainer = () => {
   const getTabBarIcon = (name: React.FC<TabIconProps>,tabName:string) => {
     console.log("tabName",tabName);
     
-    return (tabName === 'Home' ? (<Icon width={24} height={24} name={name} color='#000'/>) : (<Icon width={24} height={24} name={name} />));
+    return (tabName === 'Home' ? (<Icon width={24} height={24} name={name} color='#000'/>) : (<Icon width={24} height={24} name={name} color='#FFF'/>));
   };
 
   return (

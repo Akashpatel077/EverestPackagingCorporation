@@ -29,6 +29,7 @@ import Economy from './Economy.svg';
 import Regular from './Regular.svg';
 import BackIcon from './BackIcon.svg';
 import Shop from './Shop.svg';
+import Location from './Location.svg';
 
 export {
   Buy,
@@ -62,4 +63,5 @@ export {
   Regular,
   BackIcon,
   Shop,
+  Location,
 };

@@ -13,6 +13,9 @@ import ShippingTypeScreen from './ShippingTypeScreen';
 import ShopScreen from './ShopScreen';
 import ProductList from './ProductList';
 import SearchScreen from './SearchScreen';
+import BillingAddress from './BillingAddress';
+import ShippingAddressForm from './ShippingAddressForm';
+import BillingAddressForm from './BillingAddressForm';
 
 
 export {
@@ -31,4 +34,7 @@ export {
   ShopScreen,
   ProductList,
   SearchScreen,
+  BillingAddress,
+  ShippingAddressForm,
+  BillingAddressForm,
 };

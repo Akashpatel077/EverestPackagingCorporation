@@ -11,8 +11,9 @@ import {
   StatusBar,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
+import {useSelector} from 'react-redux';
 import styles from './styles';
-import {CHECKOUT} from 'src/Navigation/home/routes';
+import { BILLING_ADDRESS_FORM, CHECKOUT,  SHIPPING_ADDRESS_FORM} from 'src/Navigation/home/routes';
 import { Header } from 'src/Components';
 import { BackIcon } from 'assets/icons';
 
@@ -27,6 +28,14 @@ interface CartItem {
 
 const MyCart = () => {
   const navigation = useNavigation();
+  const addresses = useSelector((state: any) => state.address);
+  
+  const selectedShippingAddress = addresses.shippingAddresses.find(
+    (address: any) => address.id === addresses.selectedShippingAddressId
+  );
+  const selectedBillingAddress = addresses.billingAddresses.find(
+    (address: any) => address.id === addresses.selectedBillingAddressId
+  );
   const [cartItems, setCartItems] = useState<CartItem[]>([
     {
       id: '1',
@@ -158,7 +167,6 @@ const MyCart = () => {
 
       <Header icon1={BackIcon} title='My Cart' />
 
-      {/* Cart Items */}
       <FlatList
         data={cartItems}
         renderItem={renderCartItem}
@@ -207,7 +215,16 @@ const MyCart = () => {
       <TouchableOpacity
         style={styles.checkoutButton}
         onPress={() => {
-          navigation.navigate(CHECKOUT);
+          
+          if (!selectedBillingAddress) {
+            navigation.navigate(BILLING_ADDRESS_FORM);  
+          }
+          else if (!selectedShippingAddress) {
+            navigation.navigate(SHIPPING_ADDRESS_FORM);
+          }
+          else{
+            navigation.navigate(CHECKOUT);
+          }
         }}>
         <Text style={styles.checkoutButtonText}>Proceed to Checkout</Text>
       </TouchableOpacity>

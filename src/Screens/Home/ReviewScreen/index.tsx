@@ -29,7 +29,7 @@ const ReviewScreen = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Header title="Review" icon1={BackIcon}/>
+      <Header title="Leave Review" icon1={BackIcon}/>
 
       <View style={styles.productContainer}>
         <Image
@@ -57,14 +57,14 @@ const ReviewScreen = () => {
 
       <TextInput
         style={styles.reviewInput}
-        placeholder="Add detailed review"
+        placeholder="Enter here"
         multiline
         placeholderTextColor="#666666"
       />
 
       <TouchableOpacity style={styles.addPhotoButton}>
         <Icon name={Camera} width={24} height={24} color="#8B4513" />
-        <Text style={styles.addPhotoText}>add photo</Text>
+        <Text style={styles.addPhotoText}>Add photo</Text>
       </TouchableOpacity>
 
       <View style={styles.buttonContainer}>

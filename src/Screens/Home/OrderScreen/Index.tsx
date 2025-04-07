@@ -71,7 +71,7 @@ const OrderScreen = () => {
 
   const filteredOrders = orders.filter(order => order.status === activeTab);
 
-  const getActionButton = (status: string) => {
+  const getActionButton = (status: string, item: OrderItem) => {
     switch (status) {
       case 'active':
         return (
@@ -88,7 +88,7 @@ const OrderScreen = () => {
           <TouchableOpacity
             style={styles.actionButton}
             onPress={() => {
-              navigation.navigate(REVIEW_SCREEN);
+              navigation.navigate(REVIEW_SCREEN, { orderItem: item });
             }}>
             <Text style={styles.actionButtonText}>Leave Review</Text>
           </TouchableOpacity>
@@ -114,7 +114,7 @@ const OrderScreen = () => {
         </Text>
         <Text style={styles.itemPrice}>${item.price}</Text>
       </View>
-      {getActionButton(item.status)}
+      {getActionButton(item.status, item)}
     </View>
   );
 

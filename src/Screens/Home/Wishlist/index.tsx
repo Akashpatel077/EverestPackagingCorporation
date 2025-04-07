@@ -63,7 +63,7 @@ const WishlistScreen = () => {
           style={styles.favoriteButton}
           onPress={() => handleRemoveFromWishlist(item.id)}
         >
-          <Icon width={20} height={20} name={Heart} color="#CC5656" />
+          <Icon name={Heart} width={20} height={20}  color="#CC5656" />
         </TouchableOpacity>
       </View>
       <View style={styles.productInfo}>

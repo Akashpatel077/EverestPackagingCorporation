@@ -8,7 +8,7 @@ interface IIconProps {
   color?: string;
 }
 
-const Icon = ({name, height = 20, width = 20, color = "#FFF"}: IIconProps) => {
+const Icon = ({name, height = 20, width = 20, color}: IIconProps) => {
   return <SvgXml xml={name} height={height} width={width} fill={color} />;
 };
 

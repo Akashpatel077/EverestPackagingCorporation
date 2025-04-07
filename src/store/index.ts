@@ -3,6 +3,7 @@ import productsReducer from './slices/productsSlice';
 import categoryReducer from './slices/categorySlice';
 import productDetailsReducer from './slices/productDetailsSlice';
 import wishlistReducer from './slices/wishlistSlice';
+import addressReducer from './slices/addressSlice';
 import { persistStore } from 'redux-persist';
 import { createPersistedReducer } from './persistConfig';
 import { combineReducers } from '@reduxjs/toolkit';
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
   categories: categoryReducer,
   productDetails: productDetailsReducer,
   wishlist: wishlistReducer,
+  address: addressReducer,
 });
 
 const persistedReducer = createPersistedReducer(rootReducer);

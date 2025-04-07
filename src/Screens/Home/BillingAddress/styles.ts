@@ -1,7 +1,6 @@
-import {StyleSheet} from 'react-native';
-import {colors} from 'src/theme';
+import { StyleSheet } from 'react-native';
 
-export const styles = StyleSheet.create({
+const styles = StyleSheet.create({
   emptyContainer: {
     flex: 1,
     alignItems: 'center',
@@ -12,51 +11,18 @@ export const styles = StyleSheet.create({
   emptyText: {
     fontSize: 18,
     fontWeight: '600',
-    color: colors.textPrimary,
+    color: '#000000',
     marginBottom: 8,
   },
   emptySubText: {
     fontSize: 14,
-    color: colors.textSecondary,
+    color: '#666666',
     textAlign: 'center',
-  },
-  disabledButton: {
-    opacity: 0.5,
-  },
-  applyButton: {
-    backgroundColor: '#8B4513',
-    borderRadius: 12,
-    padding: 16,
-    alignItems: 'center',
-    position: 'absolute',
-    bottom: 24,
-    left: 16,
-    right: 16,
-  },
-  applyButtonText: {
-    color: '#FFFFFF',
-    fontSize: 16,
-    fontWeight: '600',
   },
   container: {
     flex: 1,
     backgroundColor: '#FFFFFF',
     paddingHorizontal: 16,
-  },
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingVertical: 16,
-    marginBottom: 16,
-  },
-  backButton: {
-    padding: 8,
-    marginRight: 16,
-  },
-  headerTitle: {
-    fontSize: 20,
-    fontWeight: '600',
-    color: '#000000',
   },
   addressContainer: {
     flexDirection: 'row',
@@ -122,4 +88,24 @@ export const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '600',
   },
+  applyButton: {
+    backgroundColor: '#8B4513',
+    borderRadius: 12,
+    padding: 16,
+    alignItems: 'center',
+    position: 'absolute',
+    bottom: 24,
+    left: 16,
+    right: 16,
+  },
+  disabledButton: {
+    opacity: 0.5,
+  },
+  applyButtonText: {
+    color: '#FFFFFF',
+    fontSize: 16,
+    fontWeight: '600',
+  },
 });
+
+export default styles;

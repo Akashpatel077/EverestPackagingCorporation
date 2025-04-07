@@ -19,3 +19,6 @@ export const TRACK_ORDER_SCREEN = `${homePrefix}/TRACK_ORDER_SCREEN`;
 export const PASSWORD_MANAGER = `${homePrefix}/PASSWORD_MANAGER`;
 export const SHIPPING_TYPE_SCREEN = `${homePrefix}/SHIPPING_TYPE_SCREEN`;
 export const PRODUCT_LIST = `${homePrefix}/PRODUCT_LIST`;
+export const BILLING_ADDRESS = `${homePrefix}/BILLING_ADDRESS`;
+export const SHIPPING_ADDRESS_FORM = `${homePrefix}/SHIPPING_ADDRESS_FORM`;
+export const BILLING_ADDRESS_FORM = `${homePrefix}/BILLING_ADDRESS_FORM`;

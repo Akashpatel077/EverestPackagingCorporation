@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
-import {Icon} from 'src/Components';
-import {Heart, CreditCard, PayPal, ApplePay} from 'assets/icons';
+import {Header, Icon} from 'src/Components';
+import {Heart, CreditCard, PayPal, ApplePay, BackIcon} from 'assets/icons';
 import {styles} from './styles';
 import {useNavigation} from '@react-navigation/native';
 import {ADD_CARD_SCREEN} from 'src/Navigation/home/routes';
@@ -11,14 +11,8 @@ const PaymentMethodScreen = () => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity
-          style={styles.backButton}
-          onPress={() => navigation.goBack()}>
-          <Icon name={Heart} width={24} height={24} />
-        </TouchableOpacity>
-        <Text style={styles.headerTitle}>Payment Methods</Text>
-      </View>
+      
+      <Header title="Payment Methods" icon1={BackIcon}/>
 
       <Text style={styles.sectionTitle}>Credit & Debit Card</Text>
       <TouchableOpacity
