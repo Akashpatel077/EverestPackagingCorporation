@@ -29,6 +29,8 @@ const SubCategoryScreen = ({route}) => {
     
     const handleSubCategoryPress = async () => {
       const response = await getProducts(item.id);
+      console.log("response",response);
+      
       navigation.navigate(PRODUCT_LIST, {
         category: item.name,
         products: response,
