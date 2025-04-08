@@ -22,3 +22,4 @@ export const PRODUCT_LIST = `${homePrefix}/PRODUCT_LIST`;
 export const BILLING_ADDRESS = `${homePrefix}/BILLING_ADDRESS`;
 export const SHIPPING_ADDRESS_FORM = `${homePrefix}/SHIPPING_ADDRESS_FORM`;
 export const BILLING_ADDRESS_FORM = `${homePrefix}/BILLING_ADDRESS_FORM`;
+export const WELCOME = `${homePrefix}/WELCOME`;

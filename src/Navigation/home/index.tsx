@@ -42,6 +42,7 @@ import {
   BILLING_ADDRESS,
   SHIPPING_ADDRESS_FORM,
   BILLING_ADDRESS_FORM,
+  WELCOME,
 } from './routes';
 import {SvgProps} from 'react-native-svg';
 import {Home, Buy, Heart, Paper, Profile, Shop} from 'assets/icons';
@@ -59,6 +60,7 @@ const Stack = createNativeStackNavigator();
 
 const HomeStack = () => {
   const screens = [
+    
     {
       name: HOMESCREEN,
       component: HomeScreen,
