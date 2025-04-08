@@ -198,10 +198,10 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginTop: 16,
-    paddingTop: 16,
     borderTopWidth: 1,
     borderTopColor: '#F0F0F0',
+    paddingHorizontal: 20,
+    paddingVertical: 5,
   },
   priceContainer: {
     flex: 1,
@@ -209,7 +209,7 @@ export const styles = StyleSheet.create({
   priceLabel: {
     fontSize: 12,
     color: '#666666',
-    marginBottom: 4,
+    marginBottom: 0,
   },
   price: {
     fontSize: 24,

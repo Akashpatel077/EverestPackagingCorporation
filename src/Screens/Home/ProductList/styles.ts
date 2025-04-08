@@ -87,10 +87,17 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
-  productPrice: {
+  regularPrice: {
     fontSize: 16,
+    fontFamily: 'SchibstedGrotesk-Medium',
+    color: '#666666',
+    textDecorationLine: 'line-through',
+  },
+  salePrice: {
+    fontSize: 18,
     fontFamily: 'SchibstedGrotesk-Bold',
     color: '#8B4513',
+    marginLeft: 4,
   },
   ratingContainer: {
     flexDirection: 'row',

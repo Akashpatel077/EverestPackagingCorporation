@@ -25,7 +25,6 @@ const ProductList = ({route}) => {
     <TouchableOpacity
       style={styles.productCard}
       onPress={() => navigation.navigate(PRODUCT_DETAILS, {product: item})}>
-        
       <View style={styles.productImageContainer}>
         <Image
           source={
@@ -41,7 +40,14 @@ const ProductList = ({route}) => {
       <View style={styles.productInfo}>
         <Text style={styles.productName}>{item.name}</Text>
         <View style={styles.productDetails}>
-          <Text style={styles.productPrice}>₹{item.price}</Text>
+          <View style={{flexDirection:'row' , justifyContent:'center',alignItems:'center'}}>
+            {item.regular_price && (
+              <Text style={styles.regularPrice}>₹{item.regular_price}</Text>
+            )}
+            <Text style={styles.salePrice}>
+              {item.sale_price ? `₹${item.sale_price}` : `₹${item.price}`}
+            </Text>
+          </View>
           <View style={styles.ratingContainer}>
             <Text style={styles.ratingIcon}>⭐</Text>
             <Text style={styles.ratingText}>
