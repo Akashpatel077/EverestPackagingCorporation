@@ -30,6 +30,8 @@ import Regular from './Regular.svg';
 import BackIcon from './BackIcon.svg';
 import Shop from './Shop.svg';
 import Location from './Location.svg';
+import Filter from './Filter.svg';
+import Category from './Category.svg';
 
 export {
   Buy,
@@ -64,4 +66,6 @@ export {
   BackIcon,
   Shop,
   Location,
+  Filter,
+  Category,
 };

@@ -17,23 +17,25 @@ import styles from './styles';
 const ProductList = ({route}) => {
   const navigation = useNavigation();
   const {category, products} = route.params || {category: 'All', products: []};
-  const [filteredProducts, setFilteredProducts] = useState(products || []);
+
+  console.log("products",products,category);
+  
 
   const renderProductItem = ({item}) => (
     <TouchableOpacity
       style={styles.productCard}
       onPress={() => navigation.navigate(PRODUCT_DETAILS, {product: item})}>
+        
       <View style={styles.productImageContainer}>
         <Image
           source={
             item.images?.[0]?.src
-              ? {uri: item.images[0].src}
-              : require('../../../../assets/images/banner.png')
+              && {uri: item.images[0].src}
           }
           style={styles.productImage}
         />
         <TouchableOpacity style={styles.favoriteButton}>
-          <Text style={styles.favoriteIcon}>♡</Text>
+          <Icon icon={Heart} size={18} color="#000" />
         </TouchableOpacity>
       </View>
       <View style={styles.productInfo}>
@@ -55,7 +57,7 @@ const ProductList = ({route}) => {
     <SafeAreaView style={styles.container}>
       <Header title={`${category} Products`} icon1={BackIcon} />
       <FlatList
-        data={filteredProducts}
+        data={products}
         renderItem={renderProductItem}
         numColumns={2}
         showsVerticalScrollIndicator={false}

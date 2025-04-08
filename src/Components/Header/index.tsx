@@ -14,19 +14,18 @@ interface Props {
 }
  const Header: React.FC<Props> = ({ title, onPressSecond ,icon1,icon2,icon2Color,onPressFirst}) => {
     const navigation = useNavigation();
-
-    console.log('icon2Color',icon2Color);
-    
   return (
     <View style={styles.header}>
+      <View style={styles.headerContainer}>
         <TouchableOpacity
           style={icon1 ? styles.backButton : undefined}
           onPress={() => onPressFirst ? onPressFirst() : navigation.goBack()}>
           {icon1 && <Icon name={icon1} width={24} height={24} color='#FFF'/>}
         </TouchableOpacity>
-        <Text style={styles.headerTitle}>{title}</Text>
+        <Text style={[styles.headerTitle,{marginLeft: icon1 ? 16 : 0}]}>{title}</Text>
+      </View>
         <TouchableOpacity
-          style={icon2 ? styles.backButton : undefined}
+          style={[styles.RightButton,{display:icon2? 'flex':'none'}]}
           onPress={() => onPressSecond && onPressSecond()}>
           {icon2 && <Icon name={icon2} width={24} height={24} color={icon2Color} />}
         </TouchableOpacity>

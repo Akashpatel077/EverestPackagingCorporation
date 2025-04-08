@@ -18,6 +18,8 @@ import {
   BillingAddress,
   ShippingAddressForm,
   BillingAddressForm,
+  CategoryScreen,
+  SubCategoryScreen,
 } from 'src/Screens/Home';
 import {
   ADD_CARD_SCREEN,
@@ -43,9 +45,11 @@ import {
   SHIPPING_ADDRESS_FORM,
   BILLING_ADDRESS_FORM,
   WELCOME,
+  CATEGORY_SCREEN,
+  SUB_CATEGORY_SCREEN,
 } from './routes';
 import {SvgProps} from 'react-native-svg';
-import {Home, Buy, Heart, Paper, Profile, Shop} from 'assets/icons';
+import {Home, Buy, Heart, Paper, Profile, Shop, Category} from 'assets/icons';
 import {Icon} from 'src/Components';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import PaymentMethodScreen from 'src/Screens/Home/PaymentMethod';
@@ -116,19 +120,23 @@ const WishlistStack = () => {
   );
 };
 
-const ShopScreenStack = () => {
+const CategoryStack = () => {
   const screens = [
     {
-      name: SHOP_SCREEN,
-      component: ShopScreen,
+      name: CATEGORY_SCREEN,
+      component: CategoryScreen,
     },
     {
-      name: PRODUCT_DETAILS,
-      component: ProductDetails,
+      name: SUB_CATEGORY_SCREEN,
+      component: SubCategoryScreen,
     },
     {
       name: PRODUCT_LIST,
       component: ProductList,
+    },
+    {
+      name: PRODUCT_DETAILS,
+      component: ProductDetails,
     },
     {
       name: SEARCH_SCREEN,
@@ -268,16 +276,16 @@ interface TabConfig {
 
 const tabConfig: TabConfig[] = [
   {
-    name: HOMESCREEN,
+    name: 'Home',
     component: HomeStack,
     label: 'Home',
     icon: Home,
   },
   {
-    name: SHOP_SCREEN,
-    component: ShopScreenStack,
-    label: 'Shop',
-    icon: Shop,
+    name: 'Category',
+    component: CategoryStack,
+    label: 'Category',
+    icon: Category,
   },
   {
     name: 'Cart',

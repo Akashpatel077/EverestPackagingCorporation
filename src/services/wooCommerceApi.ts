@@ -109,9 +109,12 @@ export const getCategories = async (params?: {
       );
     }
     const response = await wooCommerceApi.get('/products/categories', {params});
-
+    console.log("response",response);
+    
     return response.data;
   } catch (error) {
+    console.log("error",error);
+    
     throw error;
   }
 };
@@ -166,6 +169,10 @@ export const getProductDetails = async (productId: number) => {
     }
 
     const response = await wooCommerceApi.get(`/products/${productId}`);
+    console.log("response All Peoducts",response.data);
+
+    return response.data;
+    
     return response.data;
   } catch (error) {
     throw error;

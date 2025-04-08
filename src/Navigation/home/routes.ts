@@ -1,7 +1,8 @@
 const homePrefix = '@home';
 
 export const HOMESCREEN = `${homePrefix}/HOMESCREEN`;
-export const SHOP_SCREEN = `${homePrefix}/SHOP_SCREEN`;
+export const CATEGORY_SCREEN = `${homePrefix}/CATEGORY_SCREEN`;
+export const SUB_CATEGORY_SCREEN = `${homePrefix}/SUB_CATEGORY_SCREEN`;
 export const PRODUCT_DETAILS = `${homePrefix}/PRODUCT_DETAILS`;
 export const WISHLIST = `${homePrefix}/WISHLIST`;
 export const MYCART = `${homePrefix}/MYCART`;
