@@ -10,6 +10,7 @@ import {
   SHIPPING_ADDRESS,
   BILLING_ADDRESS,
 } from 'src/Navigation/home/routes';
+import {selectCartItems} from 'src/store/slices/cartSlice';
 import {RootState} from 'src/store';
 
 const CheckoutScreen = ({route}) => {
@@ -75,35 +76,19 @@ const CheckoutScreen = ({route}) => {
 
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>Order List</Text>
-        {[
-          {
-            id: 1,
-            title: 'Brown Jacket',
-            size: 'XL',
-            price: 83.97,
-            image: require('assets/images/user.png'),
-          },
-          {
-            id: 2,
-            title: 'Brown Suite',
-            size: 'XL',
-            price: 120,
-            image: require('assets/images/user.png'),
-          },
-          {
-            id: 3,
-            title: 'Brown Jacket',
-            size: 'XL',
-            price: 83.97,
-            image: require('assets/images/user.png'),
-          },
-        ].map(item => (
+        {useSelector(selectCartItems).map(item => (
           <View key={item.id} style={styles.orderItem}>
-            <Image source={item.image} style={styles.orderImage} />
+            <Image 
+              source={item.image && {uri: item.image}} 
+              style={styles.orderImage} 
+            />
             <View style={styles.orderDetails}>
-              <Text style={styles.orderTitle}>{item.title}</Text>
-              <Text style={styles.orderSize}>Size : {item.size}</Text>
-              <Text style={styles.orderPrice}>${item.price}</Text>
+              <Text style={styles.orderTitle}>{item.name}</Text>
+              {item.attributes?.map(attr => (
+                <Text key={attr.name} style={styles.orderSize}>{attr.name}: {attr.value}</Text>
+              ))}
+              <Text style={styles.orderPrice}>${item.sale_price || item.price}</Text>
+              <Text style={styles.quantity}>Quantity: {item.quantity}</Text>
             </View>
           </View>
         ))}

@@ -147,8 +147,8 @@ const MyCart = () => {
   if (cartItems.length === 0) {
     return (
       <SafeAreaView style={styles.container}>
-        <StatusBar barStyle="dark-content" />
         <Header icon1={BackIcon} title="My Cart" />
+        <StatusBar barStyle="dark-content" />
         <View style={styles.emptyCartContainer}>
           <Image
             source={require('assets/icons/Bags.svg')}
@@ -170,124 +170,129 @@ const MyCart = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar barStyle="dark-content" />
-
       <Header icon1={BackIcon} title="My Cart" />
 
-      <FlatList
-        data={cartItems}
-        renderItem={renderCartItem}
-        keyExtractor={item => item.id}
-        style={styles.cartItemsList}
-        showsVerticalScrollIndicator={false}
-      />
-
-      {/* Promo Code */}
-      <View style={styles.promoContainer}>
-        <TextInput
-          style={styles.promoInput}
-          placeholder="Promo Code"
-          placeholderTextColor="#999"
-          value={promoCode}
-          onChangeText={setPromoCode}
+      <View style={{paddingHorizontal: 16,flex:1,paddingVertical:8}}>
+        <FlatList
+          data={cartItems}
+          renderItem={renderCartItem}
+          keyExtractor={item => item.id}
+          style={styles.cartItemsList}
+          showsVerticalScrollIndicator={false}
         />
-        <TouchableOpacity
-          style={styles.promoApplyButton}
-          onPress={applyPromoCode}>
-          <Text style={styles.promoApplyText}>Apply</Text>
-        </TouchableOpacity>
-      </View>
 
-      {/* Price Summary */}
-      <View style={styles.summaryContainer}>
-        <View style={styles.summaryRow}>
-          <Text style={styles.summaryLabel}>Sub-Total</Text>
-          <Text style={styles.summaryValue}>${subtotal.toFixed(2)}</Text>
+        {/* Promo Code */}
+        <View style={styles.promoContainer}>
+          <TextInput
+            style={styles.promoInput}
+            placeholder="Promo Code"
+            placeholderTextColor="#999"
+            value={promoCode}
+            onChangeText={setPromoCode}
+          />
+          <TouchableOpacity
+            style={styles.promoApplyButton}
+            onPress={applyPromoCode}>
+            <Text style={styles.promoApplyText}>Apply</Text>
+          </TouchableOpacity>
         </View>
-        <View style={styles.summaryRow}>
-          <Text style={styles.summaryLabel}>Delivery Fee</Text>
-          <Text style={styles.summaryValue}>${deliveryFee.toFixed(2)}</Text>
-        </View>
-        {/* <View style={styles.summaryRow}>
+
+        {/* Price Summary */}
+        <View style={styles.summaryContainer}>
+          <View style={styles.summaryRow}>
+            <Text style={styles.summaryLabel}>Sub-Total</Text>
+            <Text style={styles.summaryValue}>${subtotal.toFixed(2)}</Text>
+          </View>
+          <View style={styles.summaryRow}>
+            <Text style={styles.summaryLabel}>Delivery Fee</Text>
+            <Text style={styles.summaryValue}>${deliveryFee.toFixed(2)}</Text>
+          </View>
+          {/* <View style={styles.summaryRow}>
           <Text style={styles.summaryLabel}>Discount</Text>
           <Text style={styles.summaryValue}>-${discount.toFixed(2)}</Text>
         </View> */}
-        <View style={[styles.summaryRow, styles.totalRow]}>
-          <Text style={styles.totalLabel}>Total Cost</Text>
-          <Text style={styles.totalValue}>${total.toFixed(2)}</Text>
-        </View>
-      </View>
-
-      {/* Checkout Button */}
-      <TouchableOpacity
-        style={styles.checkoutButton}
-        onPress={() => {
-          if (!selectedBillingAddress) {
-            navigation.navigate(BILLING_ADDRESS_FORM);
-          } else if (!selectedShippingAddress) {
-            navigation.navigate(SHIPPING_ADDRESS_FORM);
-          } else {
-            navigation.navigate(CHECKOUT);
-          }
-        }}>
-        <Text style={styles.checkoutButtonText}>Proceed to Checkout</Text>
-      </TouchableOpacity>
-
-      {/* Remove Confirmation Modal */}
-      <Modal visible={showRemoveModal} transparent={true} animationType="fade">
-        <View style={styles.modalOverlay}>
-          <View style={styles.modalContainer}>
-            <Text style={styles.modalTitle}>Remove from Cart?</Text>
-            {selectedItem && (
-              <View style={styles.modalItemContainer}>
-                <Image
-                  source={{uri: selectedItem.image}}
-                  style={styles.modalItemImage}
-                />
-                <View style={styles.modalItemDetails}>
-                  <Text style={styles.modalItemName}>{selectedItem.name}</Text>
-                  <Text style={styles.modalItemSize}>
-                    Size : {selectedItem.size}
-                  </Text>
-                  <Text style={styles.modalItemPrice}>
-                    $
-                    {typeof selectedItem.price === 'string'
-                      ? Number(selectedItem.price).toFixed(2)
-                      : selectedItem.price.toFixed(2)}
-                  </Text>
-                  <View style={styles.quantityControl}>
-                    <TouchableOpacity
-                      style={styles.quantityButton}
-                      disabled={true}>
-                      <Text style={styles.quantityButtonText}>-</Text>
-                    </TouchableOpacity>
-                    <Text style={styles.quantityText}>
-                      {selectedItem.quantity}
-                    </Text>
-                    <TouchableOpacity
-                      style={[styles.quantityButton, styles.increaseButton]}
-                      disabled={true}>
-                      <Text style={styles.quantityButtonText}>+</Text>
-                    </TouchableOpacity>
-                  </View>
-                </View>
-              </View>
-            )}
-            <View style={styles.modalButtonsContainer}>
-              <TouchableOpacity
-                style={styles.modalCancelButton}
-                onPress={() => setShowRemoveModal(false)}>
-                <Text style={styles.modalCancelButtonText}>Cancel</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.modalRemoveButton}
-                onPress={handleRemoveItem}>
-                <Text style={styles.modalRemoveButtonText}>Yes, Remove</Text>
-              </TouchableOpacity>
-            </View>
+          <View style={[styles.summaryRow, styles.totalRow]}>
+            <Text style={styles.totalLabel}>Total Cost</Text>
+            <Text style={styles.totalValue}>${total.toFixed(2)}</Text>
           </View>
         </View>
-      </Modal>
+
+        {/* Checkout Button */}
+        <TouchableOpacity
+          style={styles.checkoutButton}
+          onPress={() => {
+            if (!selectedBillingAddress) {
+              navigation.navigate(BILLING_ADDRESS_FORM);
+            } else if (!selectedShippingAddress) {
+              navigation.navigate(SHIPPING_ADDRESS_FORM);
+            } else {
+              navigation.navigate(CHECKOUT);
+            }
+          }}>
+          <Text style={styles.checkoutButtonText}>Proceed to Checkout</Text>
+        </TouchableOpacity>
+
+        {/* Remove Confirmation Modal */}
+        <Modal
+          visible={showRemoveModal}
+          transparent={true}
+          animationType="fade">
+          <View style={styles.modalOverlay}>
+            <View style={styles.modalContainer}>
+              <Text style={styles.modalTitle}>Remove from Cart?</Text>
+              {selectedItem && (
+                <View style={styles.modalItemContainer}>
+                  <Image
+                    source={{uri: selectedItem.image}}
+                    style={styles.modalItemImage}
+                  />
+                  <View style={styles.modalItemDetails}>
+                    <Text style={styles.modalItemName}>
+                      {selectedItem.name}
+                    </Text>
+                    <Text style={styles.modalItemSize}>
+                      Size : {selectedItem.size}
+                    </Text>
+                    <Text style={styles.modalItemPrice}>
+                      $
+                      {typeof selectedItem.price === 'string'
+                        ? Number(selectedItem.price).toFixed(2)
+                        : selectedItem.price.toFixed(2)}
+                    </Text>
+                    <View style={styles.quantityControl}>
+                      <TouchableOpacity
+                        style={styles.quantityButton}
+                        disabled={true}>
+                        <Text style={styles.quantityButtonText}>-</Text>
+                      </TouchableOpacity>
+                      <Text style={styles.quantityText}>
+                        {selectedItem.quantity}
+                      </Text>
+                      <TouchableOpacity
+                        style={[styles.quantityButton, styles.increaseButton]}
+                        disabled={true}>
+                        <Text style={styles.quantityButtonText}>+</Text>
+                      </TouchableOpacity>
+                    </View>
+                  </View>
+                </View>
+              )}
+              <View style={styles.modalButtonsContainer}>
+                <TouchableOpacity
+                  style={styles.modalCancelButton}
+                  onPress={() => setShowRemoveModal(false)}>
+                  <Text style={styles.modalCancelButtonText}>Cancel</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={styles.modalRemoveButton}
+                  onPress={handleRemoveItem}>
+                  <Text style={styles.modalRemoveButtonText}>Yes, Remove</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </View>
+        </Modal>
+      </View>
     </SafeAreaView>
   );
 };

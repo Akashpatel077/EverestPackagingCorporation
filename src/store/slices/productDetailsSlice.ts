@@ -49,7 +49,7 @@ export const fetchProductDetails = createAsyncThunk(
     console.log('productId', productId);
 
     const products = await getProductDetails(productId);
-    console.log('productId', productId);
+    console.log('productId', products);
     return products;
   },
 );
