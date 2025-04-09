@@ -10,7 +10,11 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import {useAppDispatch, useAppSelector} from 'src/store/hooks';
-import {addToWishlist, removeFromWishlist, isProductInWishlist} from 'src/store/slices/wishlistSlice';
+import {
+  addToWishlist,
+  removeFromWishlist,
+  isProductInWishlist,
+} from 'src/store/slices/wishlistSlice';
 import {fetchProducts} from 'src/store/slices/productsSlice';
 import {
   fetchCategories,
@@ -21,7 +25,7 @@ import {styles} from './styles.ts';
 import {Icon} from 'src/Components/index.ts';
 import {useNavigation} from '@react-navigation/native';
 import {PRODUCT_DETAILS, PRODUCT_LIST} from 'src/Navigation/home/routes.ts';
-import { Heart } from 'assets/icons/index.ts';
+import {Heart} from 'assets/icons/index.ts';
 
 const ShopScreen = () => {
   const navigation = useNavigation();
@@ -79,10 +83,10 @@ const ShopScreen = () => {
       const category = categories.find(cat => cat.id === selectedCategory);
       if (category) {
         if (!category?.subCategories?.length) {
-          dispatch(fetchProducts(selectedCategory));
+          dispatch(fetchProducts({categoryId: selectedCategory}));
         } else {
           setSelectedSubCategory(category?.subCategories[0].id);
-          dispatch(fetchProducts(category?.subCategories[0].id));
+          dispatch(fetchProducts({categoryId: category?.subCategories[0].id}));
         }
       }
     }
@@ -125,8 +129,10 @@ const ShopScreen = () => {
   const wishlistItems = useAppSelector(state => state.wishlist.items);
 
   const renderProductItem = ({item}: {item: any}) => {
-    const isInWishlist = wishlistItems.some(wishlistItem => wishlistItem.id === item.id);
-    
+    const isInWishlist = wishlistItems.some(
+      wishlistItem => wishlistItem.id === item.id,
+    );
+
     const handleWishlistToggle = () => {
       if (isInWishlist) {
         dispatch(removeFromWishlist(item.id));
@@ -136,49 +142,49 @@ const ShopScreen = () => {
     };
 
     return (
-    <TouchableOpacity
-      style={styles.productCard}
-      onPress={() => {
-        navigation.navigate(PRODUCT_DETAILS, {productId: item.id});
-      }}>
-      <View style={styles.productImageContainer}>
-        <Image
-          source={
-            item.images?.[0]?.src
-              ? {uri: item.images[0].src}
-              : require('../../../../assets/images/banner.png')
-          }
-          style={styles.productImage}
-        />
-        <TouchableOpacity 
-          style={styles.favoriteButton}
-          onPress={handleWishlistToggle}>
-          <Icon 
-            name={Heart} 
-            width={20} 
-            height={20} 
-            color={isInWishlist ? '#CC5656' : '#FFF'} 
+      <TouchableOpacity
+        style={styles.productCard}
+        onPress={() => {
+          navigation.navigate(PRODUCT_DETAILS, {productId: item.id});
+        }}>
+        <View style={styles.productImageContainer}>
+          <Image
+            source={
+              item.images?.[0]?.src
+                ? {uri: item.images[0].src}
+                : require('../../../../assets/images/banner.png')
+            }
+            style={styles.productImage}
           />
-        </TouchableOpacity>
-      </View>
-      <View style={styles.productInfo}>
-        <Text style={styles.productName}>{item.name}</Text>
-        <View style={styles.productDetails}>
-          <Text style={styles.productPrice}>₹{item.price}</Text>
-          <View style={styles.ratingContainer}>
-            <Text style={styles.ratingIcon}>⭐</Text>
-            <Text style={styles.ratingText}>
-              {item.average_rating || '0.0'}
-            </Text>
+          <TouchableOpacity
+            style={styles.favoriteButton}
+            onPress={handleWishlistToggle}>
+            <Icon
+              name={Heart}
+              width={20}
+              height={20}
+              color={isInWishlist ? '#CC5656' : '#FFF'}
+            />
+          </TouchableOpacity>
+        </View>
+        <View style={styles.productInfo}>
+          <Text style={styles.productName}>{item.name}</Text>
+          <View style={styles.productDetails}>
+            <Text style={styles.productPrice}>₹{item.price}</Text>
+            <View style={styles.ratingContainer}>
+              <Text style={styles.ratingIcon}>⭐</Text>
+              <Text style={styles.ratingText}>
+                {item.average_rating || '0.0'}
+              </Text>
+            </View>
           </View>
         </View>
-      </View>
-    </TouchableOpacity>
-  );
-}
+      </TouchableOpacity>
+    );
+  };
 
   const toggleSubCategory = (categoryId: number) => {
-    dispatch(fetchProducts(categoryId));
+    dispatch(fetchProducts({categoryId}));
     setSelectedSubCategory(categoryId);
   };
 

@@ -6,9 +6,11 @@ import {
   FlatList,
   TouchableOpacity,
   Image,
+  ActivityIndicator,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {useDispatch, useSelector} from 'react-redux';
+
 import {Header} from '../../../Components';
 import {BackIcon, Heart} from '../../../../assets/icons';
 import {Icon} from '../../../Components/Icons';
@@ -19,13 +21,25 @@ import {
   isProductInWishlist,
 } from '../../../store/slices/wishlistSlice';
 import styles from './styles';
+import {useAppDispatch, useAppSelector} from 'src/store/hooks';
+import {fetchProducts} from 'src/store/slices/productsSlice';
 
 const ProductList = ({route}) => {
   const navigation = useNavigation();
-  const dispatch = useDispatch();
-  const {category, products} = route.params || {category: 'All', products: []};
+  const dispatch = useAppDispatch();
+  const [currentPage, setCurrentPage] = useState(1);
+  const {
+    items: products,
+    loading: productsLoading,
+    error: productsError,
+    paginationLoading,
+    hasMore,
+  } = useAppSelector(state => state.products);
+  const {category, categoryId} = route.params || {
+    category: 'All',
+    products: [],
+  };
   const wishlistItems = useSelector(state => state.wishlist.items);
-
   const handleWishlistToggle = product => {
     const isInWishlist = wishlistItems.some(item => item.id === product.id);
     if (isInWishlist) {
@@ -34,9 +48,20 @@ const ProductList = ({route}) => {
       dispatch(addToWishlist(product));
     }
   };
+  useEffect(() => {
+    dispatch(fetchProducts({categoryId, currentPage}));
+  }, [categoryId, currentPage]);
+
+  const handleLoadMore = () => {
+    if (!paginationLoading && hasMore) {
+      setCurrentPage(prev => prev + 1);
+    }
+  };
 
   const renderProductItem = ({item}) => {
-    const isInWishlist = wishlistItems.some(wishlistItem => wishlistItem.id === item.id);
+    const isInWishlist = wishlistItems.some(
+      wishlistItem => wishlistItem.id === item.id,
+    );
 
     return (
       <TouchableOpacity
@@ -52,7 +77,12 @@ const ProductList = ({route}) => {
           <TouchableOpacity
             style={styles.favoriteButton}
             onPress={() => handleWishlistToggle(item)}>
-            <Icon name={Heart} width={25} height={25} color={isInWishlist ? '#CC5656' : '#ffffff'} />
+            <Icon
+              name={Heart}
+              width={25}
+              height={25}
+              color={isInWishlist ? '#CC5656' : '#ffffff'}
+            />
           </TouchableOpacity>
         </View>
         <View style={styles.productInfo}>
@@ -82,6 +112,13 @@ const ProductList = ({route}) => {
       </TouchableOpacity>
     );
   };
+  if (productsLoading) {
+    return (
+      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        <ActivityIndicator size={'large'} />
+      </View>
+    );
+  }
 
   return (
     <SafeAreaView style={styles.container}>
@@ -90,8 +127,16 @@ const ProductList = ({route}) => {
         data={products}
         renderItem={renderProductItem}
         numColumns={2}
+        keyExtractor={(item, index) => item.id?.toString() || index.toString()}
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.productGrid}
+        onEndReached={handleLoadMore}
+        onEndReachedThreshold={0.5}
+        ListFooterComponent={
+          paginationLoading ? (
+            <ActivityIndicator size="small" style={{marginVertical: 10}} />
+          ) : null
+        }
       />
     </SafeAreaView>
   );

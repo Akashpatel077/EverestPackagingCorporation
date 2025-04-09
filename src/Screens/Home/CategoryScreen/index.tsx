@@ -19,11 +19,7 @@ import Header from '../../../Components/Header';
 import styles from './styles';
 import {BackIcon} from 'assets/icons';
 import {PRODUCT_LIST, SUB_CATEGORY_SCREEN} from 'src/Navigation/home/routes';
-import {
-  getAllProducts,
-  getProducts,
-  getSubCategories,
-} from 'src/services/wooCommerceApi';
+import {getSubCategories} from 'src/services/wooCommerceApi';
 
 const CategoryScreen = () => {
   const navigation = useNavigation();
@@ -55,10 +51,9 @@ const CategoryScreen = () => {
           subCategories: subCategoryResponse,
         });
       } else {
-        const productResponse = await getProducts(category.id);
         navigation.navigate(PRODUCT_LIST, {
           category: category.name,
-          products: productResponse,
+          categoryId: category.id,
         });
       }
     } catch (error) {

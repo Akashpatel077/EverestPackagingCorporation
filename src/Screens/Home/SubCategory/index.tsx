@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -9,31 +9,24 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import {useSelector, useDispatch} from 'react-redux';
+import {useSelector} from 'react-redux';
 import {Header} from 'src/Components';
 import {BackIcon} from 'assets/icons';
 import {PRODUCT_LIST} from 'src/Navigation/home/routes';
 import {styles} from './styles';
 import {RootState} from 'src/store';
 import {Category} from 'src/store/slices/categorySlice';
-import {fetchProducts} from 'src/store/slices/productsSlice';
-import { getProducts } from 'src/services/wooCommerceApi';
 
 const SubCategoryScreen = ({route}) => {
   const navigation = useNavigation();
-  const dispatch = useDispatch();
-  const { category, subCategories} = route.params;
+  const {category, subCategories} = route.params;
   const {status} = useSelector((state: RootState) => state.categories);
-  
+
   const renderSubCategoryItem = ({item}: {item: Category}) => {
-    
     const handleSubCategoryPress = async () => {
-      const response = await getProducts(item.id);
-      console.log("response",response);
-      
       navigation.navigate(PRODUCT_LIST, {
         category: item.name,
-        products: response,
+        categoryId: item.id,
       });
     };
 
@@ -43,11 +36,8 @@ const SubCategoryScreen = ({route}) => {
         onPress={handleSubCategoryPress}>
         <View style={styles.productImageContainer}>
           <Image
-            source={
-              item.image && item.image.src
-                && {uri: item.image.src}
-            }
-            resizeMode='contain'
+            source={item.image && item.image.src && {uri: item.image.src}}
+            resizeMode="contain"
             style={styles.productImage}
           />
         </View>
@@ -69,8 +59,7 @@ const SubCategoryScreen = ({route}) => {
     );
   }
 
-  console.log("subCategories",subCategories);
-  
+  console.log('subCategories', subCategories);
 
   return (
     <SafeAreaView style={styles.container}>

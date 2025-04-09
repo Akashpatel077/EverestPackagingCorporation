@@ -13,22 +13,31 @@ interface Product {
 interface ProductsState {
   items: Product[];
   loading: boolean;
+  paginationLoading: boolean;
   error: string | null;
+  hasMore: boolean;
 }
 
 const initialState: ProductsState = {
   items: [],
   loading: false,
   error: null,
+  hasMore: true,
+  paginationLoading: true,
 };
 
 export const fetchProducts = createAsyncThunk(
   'products/fetchProducts',
-  async (categoryId: number) => {
-    const products = await getProducts(categoryId);
-    console.log("products API",products);
-    
-    return products;
+  async ({
+    categoryId,
+    currentPage = 1,
+  }: {
+    categoryId: number;
+    currentPage?: number;
+  }) => {
+    const products = await getProducts(categoryId, currentPage);
+
+    return {products, currentPage};
   },
 );
 
@@ -40,22 +49,44 @@ export const fetchAllProducts = createAsyncThunk(
   },
 );
 
+const PAGE_SIZE = 10;
+
 const productsSlice = createSlice({
   name: 'products',
   initialState,
   reducers: {},
   extraReducers: builder => {
     builder
-      .addCase(fetchProducts.pending, state => {
-        state.loading = true;
+      .addCase(fetchProducts.pending, (state, action) => {
+        const {currentPage} = action.meta.arg;
+
+        if (currentPage === 1) {
+          state.loading = true;
+        } else {
+          state.paginationLoading = true;
+        }
         state.error = null;
       })
       .addCase(fetchProducts.fulfilled, (state, action) => {
+        const {
+          products,
+          currentPage,
+        }: {products: Product[]; currentPage: number} = action.payload;
+
+        if (currentPage === 1) {
+          state.items = products;
+        } else {
+          state.items = [...state.items, ...products];
+        }
+
+        state.hasMore = products.length === PAGE_SIZE;
         state.loading = false;
-        state.items = action.payload;
+        state.paginationLoading = false;
+        state.error = null;
       })
       .addCase(fetchProducts.rejected, (state, action) => {
         state.loading = false;
+        state.paginationLoading = false;
         state.error = action.error.message || 'Failed to fetch products';
       })
       .addCase(fetchAllProducts.pending, state => {
