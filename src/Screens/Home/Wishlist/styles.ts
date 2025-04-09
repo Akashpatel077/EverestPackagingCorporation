@@ -1,6 +1,6 @@
-import { StyleSheet, Dimensions } from 'react-native';
+import {StyleSheet, Dimensions} from 'react-native';
 
-const { width } = Dimensions.get('window');
+const {width} = Dimensions.get('window');
 
 export const styles = StyleSheet.create({
   container: {
@@ -67,28 +67,31 @@ export const styles = StyleSheet.create({
     fontWeight: '500',
   },
   productGrid: {
-    paddingHorizontal: 16,
+    paddingHorizontal: 12,
     paddingBottom: 20,
+    gap: 10,
   },
   productCard: {
-    width: (width - 48) / 2,
-    marginHorizontal: 4,
-    marginBottom: 16,
+    flex: 1,
+    margin: 5,
     backgroundColor: '#FFFFFF',
     borderRadius: 12,
-    overflow: 'hidden',
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
       height: 2,
     },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 2,
+    shadowOpacity: 0.15,
+    shadowRadius: 5,
+    elevation: 4,
   },
   productImageContainer: {
     position: 'relative',
-    aspectRatio: 1,
+    width: '100%',
+    height: 180,
+    borderTopLeftRadius: 12,
+    borderTopRightRadius: 12,
+    overflow: 'hidden',
   },
   productImage: {
     width: '100%',
@@ -97,22 +100,14 @@ export const styles = StyleSheet.create({
   },
   favoriteButton: {
     position: 'absolute',
-    top: 8,
-    right: 8,
+    top: 10,
+    right: 10,
+    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+    borderRadius: 20,
     width: 32,
     height: 32,
-    borderRadius: 16,
-    backgroundColor: '#FFFFFF',
     justifyContent: 'center',
     alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.2,
-    shadowRadius: 2,
-    elevation: 2,
   },
   favoriteIcon: {
     fontSize: 18,
@@ -123,31 +118,39 @@ export const styles = StyleSheet.create({
   },
   productName: {
     fontSize: 14,
-    fontWeight: '500',
+    fontFamily: 'SchibstedGrotesk-Medium',
     color: '#333333',
-    marginBottom: 6,
+    marginBottom: 8,
+    height: 40,
   },
   productDetails: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
   },
-  productPrice: {
-    fontSize: 14,
-    fontWeight: '600',
-    color: '#000000',
+  regularPrice: {
+    fontSize: 16,
+    fontFamily: 'SchibstedGrotesk-Medium',
+    color: '#666666',
+    textDecorationLine: 'line-through',
+  },
+  salePrice: {
+    fontSize: 18,
+    fontFamily: 'SchibstedGrotesk-Bold',
+    color: '#0088cc',
+    marginLeft: 4,
   },
   ratingContainer: {
     flexDirection: 'row',
     alignItems: 'center',
   },
   ratingIcon: {
-    fontSize: 12,
     color: '#FFD700',
     marginRight: 2,
   },
   ratingText: {
     fontSize: 12,
     color: '#666666',
+    fontFamily: 'SchibstedGrotesk-Regular',
   },
 });

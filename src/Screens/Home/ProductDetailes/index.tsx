@@ -54,7 +54,7 @@ const ProductDetails = ({route}) => {
     {},
   );
   const isInWishlist = useAppSelector(state =>
-    isProductInWishlist(state, productDetails?.id),
+    isProductInWishlist(state, productId),
   );
 
   console.log('selectedCustomExtraFields  : ', selectedAttributes);
@@ -147,7 +147,7 @@ const ProductDetails = ({route}) => {
         style={[
           styles.thumbnailImage,
           currentImageIndex === index && {
-            borderColor: '#0088cc',
+            borderColor: '#8B4513',
             borderWidth: 2,
           },
         ]}
@@ -169,15 +169,15 @@ const ProductDetails = ({route}) => {
         <Header
           title="Product Details"
           icon1={BackIcon}
-          icon2={Heart}
-          onPressSecond={() => {
+          showWishlistIcon
+          isInWishlist={isInWishlist}
+          onWishlistPress={() => {
             if (isInWishlist) {
-              dispatch(removeFromWishlist(productDetails.id));
+              dispatch(removeFromWishlist(productId));
             } else {
               dispatch(addToWishlist(productDetails));
             }
           }}
-          icon2Color={isInWishlist ? '#CC5656' : '#333333'}
         />
         <View style={styles.mainImageContainer}>
           <Image
@@ -187,6 +187,7 @@ const ProductDetails = ({route}) => {
             style={styles.mainImage}
           />
         </View>
+
         <View style={styles.thumbnailContainer}>
           <FlatList
             data={images}
@@ -196,6 +197,7 @@ const ProductDetails = ({route}) => {
             contentContainerStyle={styles.thumbnailList}
           />
         </View>
+
         <View style={styles.productInfo}>
           <View style={styles.titleRow}>
             <Text style={styles.title}>{productDetails.name}</Text>
@@ -340,6 +342,7 @@ const RenderAttributes = ({
   setSelectedAttributes: (value: {}) => void;
 }) => {
   const defaultValue = item.options[0];
+
   const [selectedItem, setSelectedItem] = useState(defaultValue);
 
   useEffect(() => {

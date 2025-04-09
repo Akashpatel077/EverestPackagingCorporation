@@ -64,7 +64,6 @@ const Stack = createNativeStackNavigator();
 
 const HomeStack = () => {
   const screens = [
-    
     {
       name: HOMESCREEN,
       component: HomeScreen,
@@ -103,6 +102,10 @@ const WishlistStack = () => {
     {
       name: WISHLIST,
       component: WishlistScreen,
+    },
+    {
+      name: PRODUCT_DETAILS,
+      component: ProductDetails,
     },
   ];
   return (
@@ -308,10 +311,14 @@ const tabConfig: TabConfig[] = [
 ];
 
 const HomeContainer = () => {
-  const getTabBarIcon = (name: React.FC<TabIconProps>,tabName:string) => {
-    console.log("tabName",tabName);
-    
-    return (tabName === 'Home' ? (<Icon width={24} height={24} name={name} color='#000'/>) : (<Icon width={24} height={24} name={name} color='#FFF'/>));
+  const getTabBarIcon = (name: React.FC<TabIconProps>, tabName: string) => {
+    console.log('tabName', tabName);
+
+    return tabName === 'Home' ? (
+      <Icon width={24} height={24} name={name} color="#000" />
+    ) : (
+      <Icon width={24} height={24} name={name} color="#FFF" />
+    );
   };
 
   return (
@@ -335,7 +342,7 @@ const HomeContainer = () => {
           component={tab.component}
           options={{
             tabBarLabel: tab.label,
-            tabBarIcon: () => getTabBarIcon(tab.icon ,tab.label),
+            tabBarIcon: () => getTabBarIcon(tab.icon, tab.label),
           }}
         />
       ))}

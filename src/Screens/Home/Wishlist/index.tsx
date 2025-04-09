@@ -57,7 +57,9 @@ const WishlistScreen = () => {
   const renderWishlistItem = ({item}: any) => (
     <TouchableOpacity
       style={styles.productCard}
-      onPress={() => navigation.navigate(PRODUCT_DETAILS, {product: item})}>
+      onPress={() =>
+        navigation.navigate(PRODUCT_DETAILS, {productId: item.id})
+      }>
       <View style={styles.productImageContainer}>
         <Image
           source={item.images?.[0]?.src && {uri: item.images[0].src}}
@@ -72,10 +74,24 @@ const WishlistScreen = () => {
       <View style={styles.productInfo}>
         <Text style={styles.productName}>{item.name}</Text>
         <View style={styles.productDetails}>
-          <Text style={styles.productPrice}>${item.price}</Text>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+            {item.regular_price && (
+              <Text style={styles.regularPrice}>₹{item.regular_price}</Text>
+            )}
+            <Text style={styles.salePrice}>
+              {item.sale_price ? `₹${item.sale_price}` : `₹${item.price}`}
+            </Text>
+          </View>
           <View style={styles.ratingContainer}>
-            <Text style={styles.ratingIcon}>★</Text>
-            <Text style={styles.ratingText}>{item.rating}</Text>
+            <Text style={styles.ratingIcon}>⭐</Text>
+            <Text style={styles.ratingText}>
+              {item.average_rating || '0.0'}
+            </Text>
           </View>
         </View>
       </View>

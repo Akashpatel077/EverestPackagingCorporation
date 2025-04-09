@@ -1,11 +1,18 @@
 import React from 'react';
-import {View, Text, TextInput, TouchableOpacity, Alert, ScrollView} from 'react-native';
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  Alert,
+  ScrollView,
+} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {useDispatch} from 'react-redux';
 import {addBillingAddress} from 'src/store/slices/addressSlice';
 import styles from './styles';
-import { Header } from 'src/Components';
-import { BackIcon } from 'assets/icons';
+import {Header} from 'src/Components';
+import {BackIcon} from 'assets/icons';
 
 const BillingAddressForm: React.FC = () => {
   const navigation = useNavigation();
@@ -20,20 +27,27 @@ const BillingAddressForm: React.FC = () => {
     postcode: '',
     countryRegion: 'India',
     addressType: 'Home',
-  })
+  });
 
   const handleChange = (name, value) => {
     setFormData(prevData => ({
       ...prevData,
       [name]: value,
-    }))
-  }
+    }));
+  };
   const dispatch = useDispatch();
 
   const validateForm = () => {
-    const requiredFields = ['firstName', 'lastName', 'streetAddress', 'townCity', 'stateCounty', 'postcode'];
+    const requiredFields = [
+      'firstName',
+      'lastName',
+      'streetAddress',
+      'townCity',
+      'stateCounty',
+      'postcode',
+    ];
     const emptyFields = requiredFields.filter(field => !formData[field]);
-    
+
     if (emptyFields.length > 0) {
       Alert.alert('Error', 'Please fill in all required fields');
       return false;
@@ -47,7 +61,9 @@ const BillingAddressForm: React.FC = () => {
     const addressData = {
       id: Date.now().toString(),
       name: `${formData.firstName} ${formData.lastName}`,
-      street: formData.streetAddress + (formData.apartment ? `, ${formData.apartment}` : ''),
+      street:
+        formData.streetAddress +
+        (formData.apartment ? `, ${formData.apartment}` : ''),
       city: formData.townCity,
       state: formData.stateCounty,
       zipCode: formData.postcode,
@@ -63,118 +79,137 @@ const BillingAddressForm: React.FC = () => {
   return (
     <View style={styles.container}>
       <Header title="Billing Address" icon1={BackIcon} />
-      <ScrollView showsHorizontalScrollIndicator={false} showsVerticalScrollIndicator={false}>
+      <ScrollView
+        showsHorizontalScrollIndicator={false}
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{padding: 16}}>
+        <View style={styles.row}>
+          <View style={styles.halfField}>
+            <Text style={styles.label}>
+              First name <Text style={styles.required}>*</Text>
+            </Text>
+            <TextInput
+              style={styles.input}
+              value={formData.firstName}
+              onChangeText={value => handleChange('firstName', value)}
+              placeholder="First name"
+            />
+          </View>
+          <View style={styles.halfField}>
+            <Text style={styles.label}>
+              Last name <Text style={styles.required}>*</Text>
+            </Text>
+            <TextInput
+              style={styles.input}
+              value={formData.lastName}
+              onChangeText={value => handleChange('lastName', value)}
+              placeholder="Last name"
+            />
+          </View>
+        </View>
 
-      <View style={styles.row}>
-        <View style={styles.halfField}>
-          <Text style={styles.label}>First name <Text style={styles.required}>*</Text></Text>
+        <View style={styles.field}>
+          <Text style={styles.label}>Company name (optional)</Text>
           <TextInput
             style={styles.input}
-            value={formData.firstName}
-            onChangeText={value => handleChange('firstName', value)}
-            placeholder="First name"
+            value={formData.companyName}
+            onChangeText={value => handleChange('companyName', value)}
+            placeholder="Company name"
           />
         </View>
-        <View style={styles.halfField}>
-          <Text style={styles.label}>Last name <Text style={styles.required}>*</Text></Text>
+
+        <View style={styles.field}>
+          <Text style={styles.label}>
+            Country / Region <Text style={styles.required}>*</Text>
+          </Text>
           <TextInput
             style={styles.input}
-            value={formData.lastName}
-            onChangeText={value => handleChange('lastName', value)}
-            placeholder="Last name"
+            value={formData.countryRegion}
+            onChangeText={value => handleChange('countryRegion', value)}
+            placeholder="Country / Region"
+            readOnly={true}
+            editable={false}
           />
         </View>
-      </View>
 
-      <View style={styles.field}>
-        <Text style={styles.label}>Company name (optional)</Text>
-        <TextInput
-          style={styles.input}
-          value={formData.companyName}
-          onChangeText={value => handleChange('companyName', value)}
-          placeholder="Company name"
-        />
-      </View>
+        <View style={styles.field}>
+          <Text style={styles.label}>
+            Street address <Text style={styles.required}>*</Text>
+          </Text>
+          <TextInput
+            style={styles.input}
+            value={formData.streetAddress}
+            onChangeText={value => handleChange('streetAddress', value)}
+            placeholder="House number and street name"
+          />
+        </View>
 
-      <View style={styles.field}>
-        <Text style={styles.label}>Country / Region <Text style={styles.required}>*</Text></Text>
-        <TextInput
-          style={styles.input}
-          value={formData.countryRegion}
-          onChangeText={value => handleChange('countryRegion', value)}
-          placeholder="Country / Region"
-          readOnly={true}
-          editable={false}
-        />
-      </View>
+        <View style={styles.field}>
+          <Text style={styles.label}>
+            Apartment, suite, unit, etc. (optional)
+          </Text>
+          <TextInput
+            style={styles.input}
+            value={formData.apartment}
+            onChangeText={value => handleChange('apartment', value)}
+            placeholder="Apartment, suite, unit, etc."
+          />
+        </View>
 
-      <View style={styles.field}>
-        <Text style={styles.label}>Street address <Text style={styles.required}>*</Text></Text>
-        <TextInput
-          style={styles.input}
-          value={formData.streetAddress}
-          onChangeText={value => handleChange('streetAddress', value)}
-          placeholder="House number and street name"
-        />
-      </View>
+        <View style={styles.field}>
+          <Text style={styles.label}>
+            Town / City <Text style={styles.required}>*</Text>
+          </Text>
+          <TextInput
+            style={styles.input}
+            value={formData.townCity}
+            onChangeText={value => handleChange('townCity', value)}
+            placeholder="Town / City"
+          />
+        </View>
 
-      <View style={styles.field}>
-        <Text style={styles.label}>Apartment, suite, unit, etc. (optional)</Text>
-        <TextInput
-          style={styles.input}
-          value={formData.apartment}
-          onChangeText={value => handleChange('apartment', value)}
-          placeholder="Apartment, suite, unit, etc."
-        />
-      </View>
+        <View style={styles.field}>
+          <Text style={styles.label}>
+            State / County <Text style={styles.required}>*</Text>
+          </Text>
+          <TextInput
+            style={styles.input}
+            value={formData.stateCounty}
+            onChangeText={value => handleChange('stateCounty', value)}
+            placeholder="State / County"
+          />
+        </View>
 
-      <View style={styles.field}>
-        <Text style={styles.label}>Town / City <Text style={styles.required}>*</Text></Text>
-        <TextInput
-          style={styles.input}
-          value={formData.townCity}
-          onChangeText={value => handleChange('townCity', value)}
-          placeholder="Town / City"
-        />
-      </View>
+        <View style={styles.field}>
+          <Text style={styles.label}>
+            Postcode / ZIP <Text style={styles.required}>*</Text>
+          </Text>
+          <TextInput
+            style={styles.input}
+            value={formData.postcode}
+            onChangeText={value => handleChange('postcode', value)}
+            placeholder="Postcode / ZIP"
+          />
+        </View>
 
-      <View style={styles.field}>
-        <Text style={styles.label}>State / County <Text style={styles.required}>*</Text></Text>
-        <TextInput
-          style={styles.input}
-          value={formData.stateCounty}
-          onChangeText={value => handleChange('stateCounty', value)}
-          placeholder="State / County"
-        />
-      </View>
+        <View style={styles.field}>
+          <Text style={styles.label}>
+            Address Type <Text style={styles.required}>*</Text>
+          </Text>
+          <TextInput
+            style={styles.input}
+            value={formData.addressType}
+            onChangeText={value => handleChange('addressType', value)}
+            placeholder="Select address type"
+          />
+        </View>
 
-      <View style={styles.field}>
-        <Text style={styles.label}>Postcode / ZIP <Text style={styles.required}>*</Text></Text>
-        <TextInput
-          style={styles.input}
-          value={formData.postcode}
-          onChangeText={value => handleChange('postcode', value)}
-          placeholder="Postcode / ZIP"
-        />
-      </View>
-
-      <View style={styles.field}>
-        <Text style={styles.label}>Address Type <Text style={styles.required}>*</Text></Text>
-        <TextInput
-          style={styles.input}
-          value={formData.addressType}
-          onChangeText={value => handleChange('addressType', value)}
-          placeholder="Select address type"
-        />
-      </View>
-
-      <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-        <Text style={styles.buttonText}>SAVE ADDRESS</Text>
-      </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+          <Text style={styles.buttonText}>SAVE ADDRESS</Text>
+        </TouchableOpacity>
       </ScrollView>
-      
     </View>
-  )
-}
+  );
+};
 
 export default BillingAddressForm;

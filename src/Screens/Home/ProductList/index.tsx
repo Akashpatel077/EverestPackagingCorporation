@@ -36,7 +36,7 @@ const ProductList = ({route}) => {
   };
 
   const renderProductItem = ({item}) => {
-    const isInWishlist = wishlistItems.some(item => item.id === item.id);
+    const isInWishlist = wishlistItems.some(wishlistItem => wishlistItem.id === item.id);
 
     return (
       <TouchableOpacity
@@ -52,7 +52,7 @@ const ProductList = ({route}) => {
           <TouchableOpacity
             style={styles.favoriteButton}
             onPress={() => handleWishlistToggle(item)}>
-            <Icon name={Heart} width={25} height={25} color="#ffffff" />
+            <Icon name={Heart} width={25} height={25} color={isInWishlist ? '#CC5656' : '#ffffff'} />
           </TouchableOpacity>
         </View>
         <View style={styles.productInfo}>

@@ -1,4 +1,4 @@
-import { Dimensions, StyleSheet } from "react-native";
+import {Dimensions, StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
@@ -6,12 +6,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   videoContainer: {
-    width: Dimensions.get('window').width-20,
-    height: 300,
+    width: '95%',
+    height: 220,
     backgroundColor: '#000',
     justifyContent: 'center',
     alignItems: 'center',
-    margin:10
+    margin: 10,
   },
   video: {
     width: '100%',
