@@ -18,19 +18,17 @@ const ProductList = ({route}) => {
   const navigation = useNavigation();
   const {category, products} = route.params || {category: 'All', products: []};
 
-  console.log("products",products,category);
-  
+  console.log('products', products, category);
 
   const renderProductItem = ({item}) => (
     <TouchableOpacity
       style={styles.productCard}
-      onPress={() => navigation.navigate(PRODUCT_DETAILS, {product: item})}>
+      onPress={() =>
+        navigation.navigate(PRODUCT_DETAILS, {productId: item.id})
+      }>
       <View style={styles.productImageContainer}>
         <Image
-          source={
-            item.images?.[0]?.src
-              && {uri: item.images[0].src}
-          }
+          source={item.images?.[0]?.src && {uri: item.images[0].src}}
           style={styles.productImage}
         />
         <TouchableOpacity style={styles.favoriteButton}>
@@ -40,7 +38,12 @@ const ProductList = ({route}) => {
       <View style={styles.productInfo}>
         <Text style={styles.productName}>{item.name}</Text>
         <View style={styles.productDetails}>
-          <View style={{flexDirection:'row' , justifyContent:'center',alignItems:'center'}}>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
             {item.regular_price && (
               <Text style={styles.regularPrice}>₹{item.regular_price}</Text>
             )}

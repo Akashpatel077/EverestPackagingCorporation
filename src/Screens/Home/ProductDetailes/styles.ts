@@ -229,4 +229,34 @@ export const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '600',
   },
+  alertLabel: {
+    fontSize: 15,
+    fontWeight: '500',
+    color: '#000000',
+  },
+  qtyContainer: {
+    marginBottom: 10,
+    marginTop: 10,
+    flexDirection: 'row',
+    alignSelf: 'flex-start',
+    borderRadius: 5,
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: '#AAAAAA',
+  },
+  incDecrButton: {
+    paddingVertical: 5,
+  },
+  qtyCountText: {
+    borderLeftWidth: 1,
+    borderRightWidth: 1,
+    borderColor: '#AAAAAA',
+    padding: 8,
+    fontSize: 16,
+  },
+  plusMinusText: {
+    fontSize: 20,
+    width: 25,
+    textAlign: 'center',
+  },
 });

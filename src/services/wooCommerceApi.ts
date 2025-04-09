@@ -109,12 +109,9 @@ export const getCategories = async (params?: {
       );
     }
     const response = await wooCommerceApi.get('/products/categories', {params});
-    console.log("response",response);
-    
+
     return response.data;
   } catch (error) {
-    console.log("error",error);
-    
     throw error;
   }
 };
@@ -169,10 +166,24 @@ export const getProductDetails = async (productId: number) => {
     }
 
     const response = await wooCommerceApi.get(`/products/${productId}`);
-    console.log("response All Peoducts",response.data);
-
     return response.data;
-    
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const getProductVariations = async (productId: number) => {
+  try {
+    const isConnected = await isNetworkConnected();
+    if (!isConnected) {
+      throw new Error(
+        'No internet connection. Please check your network settings.',
+      );
+    }
+
+    const response = await wooCommerceApi.get(
+      `/products/${productId}/variations?per_page=100`,
+    );
     return response.data;
   } catch (error) {
     throw error;
@@ -186,4 +197,5 @@ export default {
   getCustomers,
   getCategories,
   getProductDetails,
+  getProductVariations,
 };

@@ -19,7 +19,11 @@ import Header from '../../../Components/Header';
 import styles from './styles';
 import {BackIcon} from 'assets/icons';
 import {PRODUCT_LIST, SUB_CATEGORY_SCREEN} from 'src/Navigation/home/routes';
-import {getAllProducts, getProducts, getSubCategories} from 'src/services/wooCommerceApi';
+import {
+  getAllProducts,
+  getProducts,
+  getSubCategories,
+} from 'src/services/wooCommerceApi';
 
 const CategoryScreen = () => {
   const navigation = useNavigation();
@@ -59,7 +63,7 @@ const CategoryScreen = () => {
       }
     } catch (error) {
       console.error('Error fetching category data:', error);
-    } 
+    }
   };
 
   const renderCategoryItem = ({item}: any) => (
@@ -81,7 +85,11 @@ const CategoryScreen = () => {
 
   if (status === 'loading' || isLoading) {
     return (
-      <SafeAreaView style={[styles.container,{backgroundColor:"rgba(255, 255, 255, 0.8)"}]}>
+      <SafeAreaView
+        style={[
+          styles.container,
+          {backgroundColor: 'rgba(255, 255, 255, 0.8)'},
+        ]}>
         <Header title="Categories" />
         <View style={styles.loadingContainer}>
           <ActivityIndicator size="large" color="#000" />
@@ -92,13 +100,9 @@ const CategoryScreen = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Header title="Categories"/>
+      <Header title="Categories" />
       <FlatList
-        data={categories.filter(
-          category =>
-            category.name.toLowerCase() !== 'uncategorized' &&
-            category.name.toLowerCase() !== 'box strap roll',
-        )}
+        data={categories.filter(category => category.count > 0)}
         renderItem={renderCategoryItem}
         keyExtractor={item => item.id.toString()}
         numColumns={2}

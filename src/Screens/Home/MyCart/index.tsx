@@ -13,10 +13,20 @@ import {
 import {useNavigation} from '@react-navigation/native';
 import {useSelector, useDispatch} from 'react-redux';
 import styles from './styles';
-import { BILLING_ADDRESS_FORM, CHECKOUT,  SHIPPING_ADDRESS_FORM, SHOP_SCREEN} from 'src/Navigation/home/routes';
-import { Header } from 'src/Components';
-import { BackIcon } from 'assets/icons';
-import { selectCartItems, selectCartTotal, updateQuantity, removeFromCart } from 'src/store/slices/cartSlice';
+import {
+  BILLING_ADDRESS_FORM,
+  CHECKOUT,
+  SHIPPING_ADDRESS_FORM,
+  SHOP_SCREEN,
+} from 'src/Navigation/home/routes';
+import {Header} from 'src/Components';
+import {BackIcon} from 'assets/icons';
+import {
+  selectCartItems,
+  selectCartTotal,
+  updateQuantity,
+  removeFromCart,
+} from 'src/store/slices/cartSlice';
 
 interface CartItem {
   id: number;
@@ -35,19 +45,18 @@ interface CartItem {
 const MyCart = () => {
   const navigation = useNavigation();
   const addresses = useSelector((state: any) => state.address);
-  
+
   const selectedShippingAddress = addresses.shippingAddresses.find(
-    (address: any) => address.id === addresses.selectedShippingAddressId
+    (address: any) => address.id === addresses.selectedShippingAddressId,
   );
   const selectedBillingAddress = addresses.billingAddresses.find(
-    (address: any) => address.id === addresses.selectedBillingAddressId
+    (address: any) => address.id === addresses.selectedBillingAddressId,
   );
   const dispatch = useDispatch();
   const cartItems = useSelector(selectCartItems);
   const cartTotal = useSelector(selectCartTotal);
 
-  console.log("cartItems",cartItems);
-  
+  console.log('cartItems', cartItems);
 
   const [promoCode, setPromoCode] = useState('');
   // const [discount, setDiscount] = useState(35);
@@ -62,13 +71,13 @@ const MyCart = () => {
   );
 
   // Calculate total
-  const total = subtotal + deliveryFee ;
+  const total = subtotal + deliveryFee;
 
   // Handle quantity increase
   const increaseQuantity = (id: number) => {
     const item = cartItems.find(item => item.id === id);
     if (item) {
-      dispatch(updateQuantity({ id, quantity: item.quantity + 1 }));
+      dispatch(updateQuantity({id, quantity: item.quantity + 1}));
     }
   };
 
@@ -76,7 +85,7 @@ const MyCart = () => {
   const decreaseQuantity = (id: number) => {
     const item = cartItems.find(item => item.id === id);
     if (item && item.quantity > 1) {
-      dispatch(updateQuantity({ id, quantity: item.quantity - 1 }));
+      dispatch(updateQuantity({id, quantity: item.quantity - 1}));
     }
   };
 
@@ -108,7 +117,7 @@ const MyCart = () => {
   // Render cart item
   const renderCartItem = ({item}: {item: CartItem}) => (
     <View style={styles.cartItemContainer}>
-      <Image source={{ uri: item.image }} style={styles.itemImage} />
+      <Image source={{uri: item.image}} style={styles.itemImage} />
       <View style={styles.itemDetails}>
         <Text style={styles.itemName}>{item.name}</Text>
         <Text style={styles.itemSize}>Size : {item.size}</Text>
@@ -139,7 +148,7 @@ const MyCart = () => {
     return (
       <SafeAreaView style={styles.container}>
         <StatusBar barStyle="dark-content" />
-        <Header icon1={BackIcon} title='My Cart' />
+        <Header icon1={BackIcon} title="My Cart" />
         <View style={styles.emptyCartContainer}>
           <Image
             source={require('assets/icons/Bags.svg')}
@@ -163,7 +172,7 @@ const MyCart = () => {
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="dark-content" />
 
-      <Header icon1={BackIcon} title='My Cart' />
+      <Header icon1={BackIcon} title="My Cart" />
 
       <FlatList
         data={cartItems}
@@ -213,14 +222,11 @@ const MyCart = () => {
       <TouchableOpacity
         style={styles.checkoutButton}
         onPress={() => {
-          
           if (!selectedBillingAddress) {
-            navigation.navigate(BILLING_ADDRESS_FORM);  
-          }
-          else if (!selectedShippingAddress) {
+            navigation.navigate(BILLING_ADDRESS_FORM);
+          } else if (!selectedShippingAddress) {
             navigation.navigate(SHIPPING_ADDRESS_FORM);
-          }
-          else{
+          } else {
             navigation.navigate(CHECKOUT);
           }
         }}>
@@ -235,7 +241,7 @@ const MyCart = () => {
             {selectedItem && (
               <View style={styles.modalItemContainer}>
                 <Image
-                  source={{ uri: selectedItem.image }}
+                  source={{uri: selectedItem.image}}
                   style={styles.modalItemImage}
                 />
                 <View style={styles.modalItemDetails}>
@@ -244,7 +250,10 @@ const MyCart = () => {
                     Size : {selectedItem.size}
                   </Text>
                   <Text style={styles.modalItemPrice}>
-                    ${typeof selectedItem.price === 'string' ? Number(selectedItem.price).toFixed(2) : selectedItem.price.toFixed(2)}
+                    $
+                    {typeof selectedItem.price === 'string'
+                      ? Number(selectedItem.price).toFixed(2)
+                      : selectedItem.price.toFixed(2)}
                   </Text>
                   <View style={styles.quantityControl}>
                     <TouchableOpacity
