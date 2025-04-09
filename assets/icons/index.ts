@@ -32,6 +32,8 @@ import Shop from './Shop.svg';
 import Location from './Location.svg';
 import Filter from './Filter.svg';
 import Category from './Category.svg';
+import RightArrow from './RightArrow.svg';
+import Edit from './Edit.svg';
 
 export {
   Buy,
@@ -68,4 +70,6 @@ export {
   Location,
   Filter,
   Category,
+  RightArrow,
+  Edit,
 };

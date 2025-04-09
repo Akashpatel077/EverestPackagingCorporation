@@ -178,6 +178,7 @@ const ProductDetails = ({route}) => {
               dispatch(addToWishlist(productDetails));
             }
           }}
+          icon2Color={isInWishlist ? '#CC5656' : '#FFF'}
         />
         <View style={styles.mainImageContainer}>
           <Image
@@ -297,6 +298,8 @@ const ProductDetails = ({route}) => {
         <View style={styles.priceContainer}>
           <Text style={styles.priceLabel}>Total Price</Text>
           <Text style={styles.price}>₹{salePrice}</Text>
+
+
         </View>
         <TouchableOpacity
           style={styles.addToCartButton}

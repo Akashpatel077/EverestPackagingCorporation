@@ -81,6 +81,10 @@ const HomeStack = () => {
       name: SEARCH_SCREEN,
       component: SearchScreen,
     },
+    {
+      name: PRODUCT_DETAILS,
+      component: ProductDetails,
+    },
   ];
   return (
     <Stack.Navigator screenOptions={{headerShown: false}}>

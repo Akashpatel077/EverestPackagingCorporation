@@ -16,19 +16,11 @@ interface Props {
   isInWishlist?: boolean;
   onWishlistPress?: () => void;
 }
-const Header: React.FC<Props> = ({
-  title,
-  onPressSecond,
-  icon1,
-  icon2,
-  icon2Color,
-  onPressFirst,
-  showWishlistIcon,
-  isInWishlist,
-  onWishlistPress,
-}) => {
-  const navigation = useNavigation();
+ const Header: React.FC<Props> = ({ title, onPressSecond ,icon1,icon2,icon2Color='#FFF',onPressFirst,isInWishlist,onWishlistPress,showWishlistIcon}) => {
+    const navigation = useNavigation();
 
+    console.log("icon2Color",icon2Color);
+    
   return (
     <View style={styles.header}>
       <View style={styles.headerContainer}>

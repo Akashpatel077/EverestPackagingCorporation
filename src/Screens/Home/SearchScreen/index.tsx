@@ -31,17 +31,7 @@ const SearchScreen = () => {
     error,
   } = useAppSelector(state => state.products);
   const wishlistItems = useAppSelector(state => state.wishlist.items);
-  const [recentSearches, setRecentSearches] = useState([
-    'Blue Shirt',
-    'CosmicChic Jacket',
-    'EnchantedElegance Dress',
-    'WhimsyWhirl Top',
-    'Fluffernova Coat',
-    'MirageMelody Cape',
-    'BlossomBreeze Overalls',
-    'EnchantedElegance Dress',
-    'Fluffernova Coat',
-  ]);
+  const [recentSearches, setRecentSearches] = useState([]);
 
   console.log('items', products);
 
@@ -149,7 +139,7 @@ const SearchScreen = () => {
             <TouchableOpacity
               style={styles.productCard}
               onPress={() =>
-                navigation.navigate(PRODUCT_DETAILS, {product: item})
+                navigation.navigate(PRODUCT_DETAILS, {productId: item.id})
               }>
               <View style={styles.productImageContainer}>
                 <Image

@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text, TouchableOpacity, Image} from 'react-native';
 import {Header, Icon} from 'src/Components';
-import {Profile as ProfileIcon, Paper, Buy, Heart, BackIcon} from 'assets/icons';
+import {Profile as ProfileIcon, Paper, Buy, Heart, BackIcon, RightArrow, Edit} from 'assets/icons';
 import {styles} from './styles';
 import {useNavigation} from '@react-navigation/native';
 import {
@@ -34,7 +34,7 @@ const ProfileScreen = () => {
         <Icon name={item.icon} width={24} height={24} />
         <Text style={styles.menuItemText}>{item.title}</Text>
       </View>
-      <Icon name={Heart} width={24} height={24} />
+      <Icon name={RightArrow} width={24} height={24} color={'#fff'}/>
     </TouchableOpacity>
   );
 
@@ -49,7 +49,7 @@ const ProfileScreen = () => {
             style={styles.avatar}
           />
           <TouchableOpacity style={styles.editButton}>
-            <Icon name={Heart} width={20} height={20} />
+            <Icon name={Edit} width={20} height={20} />
           </TouchableOpacity>
         </View>
         <Text style={styles.userName}>Esther Howard</Text>
