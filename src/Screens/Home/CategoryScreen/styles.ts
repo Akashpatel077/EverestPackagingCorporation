@@ -13,13 +13,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   categoriesContainer: {
-    paddingHorizontal: 16,
+    paddingLeft: 12,
     paddingVertical: 12,
   },
   categoryWrapper: {
-    width: (width - 48) / 2,
-    marginHorizontal: 8,
-    marginBottom: 16,
+    width: (width - 34) / 2,
+    margin: 5,
   },
   categoryCard: {
     backgroundColor: '#FFFFFF',
@@ -31,8 +30,8 @@ const styles = StyleSheet.create({
       height: 2,
     },
     shadowOpacity: 0.15,
-    shadowRadius: 4,
-    elevation: 3,
+    shadowRadius: 5,
+    elevation: 4,
     height: 180,
   },
   categoryImage: {

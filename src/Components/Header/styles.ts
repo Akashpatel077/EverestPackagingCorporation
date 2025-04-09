@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 16,
     borderBottomWidth: 1,
     borderBottomColor: '#e6e6e6',
-    backgroundColor: '#0088cc',
+    // backgroundColor: '#0088cc',
   },
   headerContainer: {
     flexDirection: 'row',

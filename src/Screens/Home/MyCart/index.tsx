@@ -15,9 +15,9 @@ import {useSelector, useDispatch} from 'react-redux';
 import styles from './styles';
 import {
   BILLING_ADDRESS_FORM,
+  CATEGORY_SCREEN,
   CHECKOUT,
   SHIPPING_ADDRESS_FORM,
-  SHOP_SCREEN,
 } from 'src/Navigation/home/routes';
 import {Header} from 'src/Components';
 import {BackIcon} from 'assets/icons';
@@ -147,7 +147,7 @@ const MyCart = () => {
   if (cartItems.length === 0) {
     return (
       <SafeAreaView style={styles.container}>
-        <Header icon1={BackIcon} title="My Cart" />
+        <Header title="My Cart" />
         <StatusBar barStyle="dark-content" />
         <View style={styles.emptyCartContainer}>
           <Image
@@ -160,7 +160,7 @@ const MyCart = () => {
           </Text>
           <TouchableOpacity
             style={styles.shopNowButton}
-            onPress={() => navigation.navigate(SHOP_SCREEN)}>
+            onPress={() => navigation.navigate(CATEGORY_SCREEN)}>
             <Text style={styles.shopNowButtonText}>Shop Now</Text>
           </TouchableOpacity>
         </View>
@@ -172,7 +172,7 @@ const MyCart = () => {
     <SafeAreaView style={styles.container}>
       <Header icon1={BackIcon} title="My Cart" />
 
-      <View style={{paddingHorizontal: 16,flex:1,paddingVertical:8}}>
+      <View style={{paddingHorizontal: 16, flex: 1, paddingVertical: 8}}>
         <FlatList
           data={cartItems}
           renderItem={renderCartItem}

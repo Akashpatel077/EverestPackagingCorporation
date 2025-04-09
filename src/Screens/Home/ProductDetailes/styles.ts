@@ -164,7 +164,7 @@ export const styles = StyleSheet.create({
   },
   selectedItem: {
     backgroundColor: '#0088cc',
-    borderColor: '#0088cc',
+    // borderColor: '#0088cc',
   },
   optionText: {
     fontSize: 14,

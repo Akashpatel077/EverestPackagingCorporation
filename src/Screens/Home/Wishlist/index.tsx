@@ -100,7 +100,7 @@ const WishlistScreen = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Header title="Wishlist" icon1={BackIcon} />
+      <Header title="Wishlist" />
       <View style={{paddingTop: 8}}>
         {filteredItems.length === 0 ? (
           <View style={styles.emptyContainer}>

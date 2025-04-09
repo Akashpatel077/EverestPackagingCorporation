@@ -207,6 +207,10 @@ const MyCartStack = () => {
       name: BILLING_ADDRESS_FORM,
       component: BillingAddressForm,
     },
+    {
+      name: CATEGORY_SCREEN,
+      component: CategoryStack,
+    },
   ];
   return (
     <Stack.Navigator
