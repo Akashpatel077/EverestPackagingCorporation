@@ -52,7 +52,7 @@ export const styles = StyleSheet.create({
     marginBottom: 16,
   },
   shopNowButton: {
-    backgroundColor: '#8B4513',
+    backgroundColor: '#0088cc',
     paddingHorizontal: 24,
     paddingVertical: 8,
     borderRadius: 20,
@@ -80,7 +80,7 @@ export const styles = StyleSheet.create({
   },
   seeAllButton: {
     fontSize: 14,
-    color: '#8B4513',
+    color: '#0088cc',
   },
   categoryList: {
     paddingHorizontal: 12,
@@ -194,7 +194,7 @@ export const styles = StyleSheet.create({
     backgroundColor: '#F5F5F5',
   },
   filterActive: {
-    backgroundColor: '#8B4513',
+    backgroundColor: '#0088cc',
   },
   filterText: {
     fontSize: 14,

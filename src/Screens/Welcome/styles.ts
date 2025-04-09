@@ -30,7 +30,7 @@ export const styles = StyleSheet.create({
     lineHeight: 40,
   },
   titleHighlight: {
-    color: '#8B4513',
+    color: '#0088cc',
   },
   subtitle: {
     fontSize: 16,
@@ -87,14 +87,14 @@ export const styles = StyleSheet.create({
     paddingVertical: 24,
   },
   button: {
-    backgroundColor: '#8B4513',
+    backgroundColor: '#0088cc',
     borderRadius: 12,
     width: '100%',
     padding: 16,
     alignItems: 'center',
     marginBottom: 16,
     elevation: 4,
-    shadowColor: '#8B4513',
+    shadowColor: '#0088cc',
     shadowOffset: {width: 0, height: 4},
     shadowOpacity: 0.2,
     shadowRadius: 8,
@@ -115,7 +115,7 @@ export const styles = StyleSheet.create({
     fontFamily: 'SchibstedGrotesk-Regular',
   },
   signInLink: {
-    color: '#8B4513',
+    color: '#0088cc',
     fontSize: 14,
     marginLeft: 4,
     fontFamily: 'SchibstedGrotesk-SemiBold',

@@ -54,7 +54,7 @@ export const styles = StyleSheet.create({
     marginBottom: 12,
   },
   reorderButton: {
-    backgroundColor: '#8B4513',
+    backgroundColor: '#0088cc',
     paddingHorizontal: 20,
     paddingVertical: 10,
     borderRadius: 25,
@@ -103,7 +103,7 @@ export const styles = StyleSheet.create({
   addPhotoText: {
     marginLeft: 8,
     fontSize: 16,
-    color: '#8B4513',
+    color: '#0088cc',
     fontWeight: '500',
   },
   buttonContainer: {
@@ -126,7 +126,7 @@ export const styles = StyleSheet.create({
   },
   submitButton: {
     flex: 1,
-    backgroundColor: '#8B4513',
+    backgroundColor: '#0088cc',
     paddingVertical: 16,
     borderRadius: 25,
     alignItems: 'center',

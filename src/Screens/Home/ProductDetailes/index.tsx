@@ -147,7 +147,7 @@ const ProductDetails = ({route}) => {
         style={[
           styles.thumbnailImage,
           currentImageIndex === index && {
-            borderColor: '#8B4513',
+            borderColor: '#0088cc',
             borderWidth: 2,
           },
         ]}

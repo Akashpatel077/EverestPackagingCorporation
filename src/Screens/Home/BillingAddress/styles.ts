@@ -65,15 +65,15 @@ const styles = StyleSheet.create({
     height: 20,
     borderRadius: 10,
     borderWidth: 2,
-    borderColor: '#8B4513',
+    borderColor: '#0088cc',
   },
   radioButtonSelected: {
-    backgroundColor: '#8B4513',
+    backgroundColor: '#0088cc',
   },
   addButton: {
     borderWidth: 1,
     borderStyle: 'dashed',
-    borderColor: '#8B4513',
+    borderColor: '#0088cc',
     borderRadius: 12,
     padding: 16,
     alignItems: 'center',
@@ -84,12 +84,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
   },
   addButtonText: {
-    color: '#8B4513',
+    color: '#0088cc',
     fontSize: 16,
     fontWeight: '600',
   },
   applyButton: {
-    backgroundColor: '#8B4513',
+    backgroundColor: '#0088cc',
     borderRadius: 12,
     padding: 16,
     alignItems: 'center',

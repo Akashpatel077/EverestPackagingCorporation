@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5F5F5',
   },
   categoryButtonActive: {
-    backgroundColor: '#8B4513',
+    backgroundColor: '#0088cc',
   },
   categoryText: {
     fontSize: 14,
@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
   salePrice: {
     fontSize: 18,
     fontFamily: 'SchibstedGrotesk-Bold',
-    color: '#8B4513',
+    color: '#0088cc',
     marginLeft: 4,
   },
   ratingContainer: {

@@ -43,7 +43,7 @@ export const styles = StyleSheet.create({
   },
   clearText: {
     fontSize: 14,
-    color: '#8B4513',
+    color: '#0088cc',
   },
   searchItem: {
     flexDirection: 'row',
@@ -114,7 +114,7 @@ export const styles = StyleSheet.create({
   },
   favoriteIcon: {
     fontSize: 20,
-    color: '#8B4513',
+    color: '#0088cc',
   },
   productInfo: {
     padding: 12,
@@ -133,7 +133,7 @@ export const styles = StyleSheet.create({
   productPrice: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#8B4513',
+    color: '#0088cc',
   },
   ratingContainer: {
     flexDirection: 'row',

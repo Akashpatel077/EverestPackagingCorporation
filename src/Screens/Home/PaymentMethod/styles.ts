@@ -49,7 +49,7 @@ export const styles = StyleSheet.create({
     color: '#000000',
   },
   linkText: {
-    color: '#8B4513',
+    color: '#0088cc',
     fontSize: 16,
     fontWeight: '500',
   },

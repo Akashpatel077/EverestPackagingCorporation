@@ -63,7 +63,7 @@ const ReviewScreen = () => {
       />
 
       <TouchableOpacity style={styles.addPhotoButton}>
-        <Icon name={Camera} width={24} height={24} color="#8B4513" />
+        <Icon name={Camera} width={24} height={24} color="#0088cc" />
         <Text style={styles.addPhotoText}>Add photo</Text>
       </TouchableOpacity>
 

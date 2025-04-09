@@ -88,7 +88,7 @@ const SearchScreen = () => {
       <TouchableOpacity
         style={styles.deleteButton}
         onPress={() => deleteSearch(item)}>
-        <Icon name={Close} width={20} height={20} color="#8B4513" />
+        <Icon name={Close} width={20} height={20} color="#0088cc" />
       </TouchableOpacity>
     </TouchableOpacity>
   );
@@ -117,7 +117,7 @@ const SearchScreen = () => {
 
       {loading ? (
         <View style={styles.loadingContainer}>
-          <ActivityIndicator size="large" color="#8B4513" />
+          <ActivityIndicator size="large" color="#0088cc" />
         </View>
       ) : error ? (
         <View style={styles.errorContainer}>

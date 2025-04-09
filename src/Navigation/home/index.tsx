@@ -325,7 +325,7 @@ const HomeContainer = () => {
           height: 60,
           paddingBottom: 8,
         },
-        tabBarActiveTintColor: '#8B4513',
+        tabBarActiveTintColor: '#0088cc',
         tabBarInactiveTintColor: '#999999',
       }}>
       {tabConfig.map(tab => (

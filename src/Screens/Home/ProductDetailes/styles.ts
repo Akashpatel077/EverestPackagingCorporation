@@ -137,7 +137,7 @@ export const styles = StyleSheet.create({
   },
   readMore: {
     fontSize: 14,
-    color: '#8B4513',
+    color: '#0088cc',
     marginBottom: 24,
   },
   sectionTitle: {
@@ -156,15 +156,15 @@ export const styles = StyleSheet.create({
     height: 40,
     borderRadius: 8,
     borderWidth: 1,
-    borderColor: '#8B4513',
+    borderColor: '#0088cc',
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 12,
     backgroundColor: '#FAF3EE',
   },
   selectedItem: {
-    backgroundColor: '#8B4513',
-    borderColor: '#8B4513',
+    backgroundColor: '#0088cc',
+    borderColor: '#0088cc',
   },
   optionText: {
     fontSize: 14,
@@ -218,7 +218,7 @@ export const styles = StyleSheet.create({
   },
   addToCartButton: {
     flex: 1,
-    backgroundColor: '#8B4513',
+    backgroundColor: '#0088cc',
     borderRadius: 25,
     paddingVertical: 12,
     marginLeft: 16,

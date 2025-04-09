@@ -40,7 +40,7 @@ export const styles = StyleSheet.create({
     position: 'absolute',
     right: 0,
     bottom: 0,
-    backgroundColor: '#8B4513',
+    backgroundColor: '#0088cc',
     borderRadius: 20,
     padding: 8,
   },

@@ -57,11 +57,11 @@ export const styles = StyleSheet.create({
   },
   forgotPasswordText: {
     fontSize: 14,
-    color: '#8B4513',
+    color: '#0088cc',
     textDecorationLine: 'underline',
   },
   button: {
-    backgroundColor: '#8B4513',
+    backgroundColor: '#0088cc',
     borderRadius: 25,
     paddingVertical: 14,
     marginTop: 'auto',

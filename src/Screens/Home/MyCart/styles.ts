@@ -88,7 +88,7 @@ export default StyleSheet.create({
     borderRadius: 15,
   },
   increaseButton: {
-    backgroundColor: '#8B4513',
+    backgroundColor: '#0088cc',
   },
   quantityButtonText: {
     fontSize: 18,
@@ -120,7 +120,7 @@ export default StyleSheet.create({
     color: '#999',
   },
   promoApplyButton: {
-    backgroundColor: '#8B4513',
+    backgroundColor: '#0088cc',
     borderRadius: 10,
     paddingHorizontal: 20,
     justifyContent: 'center',
@@ -157,10 +157,10 @@ export default StyleSheet.create({
   totalValue: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#8B4513',
+    color: '#0088cc',
   },
   checkoutButton: {
-    backgroundColor: '#8B4513',
+    backgroundColor: '#0088cc',
     borderRadius: 10,
     padding: 15,
     alignItems: 'center',
@@ -180,12 +180,12 @@ export default StyleSheet.create({
     width: 120,
     height: 120,
     marginBottom: 20,
-    tintColor: '#8B4513',
+    tintColor: '#0088cc',
   },
   emptyCartTitle: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#8B4513',
+    color: '#0088cc',
     marginBottom: 10,
     textAlign: 'center',
   },
@@ -196,7 +196,7 @@ export default StyleSheet.create({
     marginBottom: 30,
   },
   shopNowButton: {
-    backgroundColor: '#8B4513',
+    backgroundColor: '#0088cc',
     paddingHorizontal: 40,
     paddingVertical: 15,
     borderRadius: 25,

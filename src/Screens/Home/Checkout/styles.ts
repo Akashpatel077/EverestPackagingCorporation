@@ -58,7 +58,7 @@ export const styles = StyleSheet.create({
     color: '#666666',
   },
   changeButton: {
-    color: '#8B4513',
+    color: '#0088cc',
     fontSize: 14,
     fontWeight: '600',
   },
@@ -120,10 +120,10 @@ export const styles = StyleSheet.create({
   orderPrice: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#8B4513',
+    color: '#0088cc',
   },
   paymentButton: {
-    backgroundColor: '#8B4513',
+    backgroundColor: '#0088cc',
     padding: 16,
     borderRadius: 12,
     alignItems: 'center',

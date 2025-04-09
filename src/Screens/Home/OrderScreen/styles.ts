@@ -48,14 +48,14 @@ export default StyleSheet.create({
   },
   activeTab: {
     borderBottomWidth: 2,
-    borderBottomColor: '#8B4513',
+    borderBottomColor: '#0088cc',
   },
   tabText: {
     fontSize: 16,
     color: '#666666',
   },
   activeTabText: {
-    color: '#8B4513',
+    color: '#0088cc',
     fontWeight: '600',
   },
   ordersList: {
@@ -101,10 +101,10 @@ export default StyleSheet.create({
   itemPrice: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#8B4513',
+    color: '#0088cc',
   },
   actionButton: {
-    backgroundColor: '#8B4513',
+    backgroundColor: '#0088cc',
     paddingHorizontal: 16,
     paddingVertical: 8,
     borderRadius: 20,

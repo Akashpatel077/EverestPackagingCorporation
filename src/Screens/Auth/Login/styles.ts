@@ -58,11 +58,11 @@ export const styles = StyleSheet.create({
     marginBottom: 24,
   },
   forgotPasswordText: {
-    color: '#8B4513',
+    color: '#0088cc',
     fontSize: 14,
   },
   signInButton: {
-    backgroundColor: '#8B4513',
+    backgroundColor: '#0088cc',
     height: 48,
     borderRadius: 24,
     justifyContent: 'center',
@@ -112,7 +112,7 @@ export const styles = StyleSheet.create({
     fontSize: 14,
   },
   signUpLink: {
-    color: '#8B4513',
+    color: '#0088cc',
     fontSize: 14,
     marginLeft: 4,
   },

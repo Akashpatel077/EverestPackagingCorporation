@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, {useState, useMemo} from 'react';
 import {
   View,
   Text,
@@ -7,27 +7,36 @@ import {
   FlatList,
   SafeAreaView,
 } from 'react-native';
-import { styles } from './styles';
-import { BackIcon, Heart } from 'assets/icons';
-import { Header, Icon } from 'src/Components';
-import { useNavigation } from '@react-navigation/native';
-import { PRODUCT_DETAILS } from 'src/Navigation/home/routes';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectWishlistItems, removeFromWishlist } from 'src/store/slices/wishlistSlice';
+import {styles} from './styles';
+import {BackIcon, Heart} from 'assets/icons';
+import {Header, Icon} from 'src/Components';
+import {useNavigation} from '@react-navigation/native';
+import {PRODUCT_DETAILS} from 'src/Navigation/home/routes';
+import {useDispatch, useSelector} from 'react-redux';
+import {
+  selectWishlistItems,
+  removeFromWishlist,
+} from 'src/store/slices/wishlistSlice';
 
 const WishlistScreen = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const [selectedCategory, setSelectedCategory] = useState('All');
-  
+
   const wishlistItems = useSelector(selectWishlistItems) || [];
-  
+
   const categories = useMemo(() => {
     const uniqueCategories = new Set(['All']);
     if (Array.isArray(wishlistItems)) {
       wishlistItems.forEach(item => {
-        if (item?.categories && Array.isArray(item.categories) && item.categories.length > 0) {
-          item.categories.forEach(cat => cat?.name && uniqueCategories.add(cat.name));
+        if (
+          item?.categories &&
+          Array.isArray(item.categories) &&
+          item.categories.length > 0
+        ) {
+          item.categories.forEach(
+            cat => cat?.name && uniqueCategories.add(cat.name),
+          );
         }
       });
     }
@@ -36,8 +45,8 @@ const WishlistScreen = () => {
 
   const filteredItems = useMemo(() => {
     if (selectedCategory === 'All') return wishlistItems;
-    return wishlistItems.filter(item => 
-      item.categories?.some(cat => cat.name === selectedCategory)
+    return wishlistItems.filter(item =>
+      item.categories?.some(cat => cat.name === selectedCategory),
     );
   }, [selectedCategory, wishlistItems]);
 
@@ -45,25 +54,19 @@ const WishlistScreen = () => {
     dispatch(removeFromWishlist(productId));
   };
 
-  const renderWishlistItem = ({ item }:any) => (
-    <TouchableOpacity 
-      style={styles.productCard} 
-      onPress={() => navigation.navigate(PRODUCT_DETAILS, { product: item })}
-    >
+  const renderWishlistItem = ({item}: any) => (
+    <TouchableOpacity
+      style={styles.productCard}
+      onPress={() => navigation.navigate(PRODUCT_DETAILS, {product: item})}>
       <View style={styles.productImageContainer}>
-        <Image 
-          source={
-            item.images?.[0]?.src
-              ? {uri: item.images[0].src}
-              : require('../../../../assets/images/banner.png')
-          } 
-          style={styles.productImage} 
+        <Image
+          source={item.images?.[0]?.src && {uri: item.images[0].src}}
+          style={styles.productImage}
         />
-        <TouchableOpacity 
+        <TouchableOpacity
           style={styles.favoriteButton}
-          onPress={() => handleRemoveFromWishlist(item.id)}
-        >
-          <Icon name={Heart} width={20} height={20}  color="#CC5656" />
+          onPress={() => handleRemoveFromWishlist(item.id)}>
+          <Icon name={Heart} width={20} height={20} color="#CC5656" />
         </TouchableOpacity>
       </View>
       <View style={styles.productInfo}>
@@ -82,20 +85,22 @@ const WishlistScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
       <Header title="Wishlist" icon1={BackIcon} />
-      {filteredItems.length === 0 ? (
-        <View style={styles.emptyContainer}>
-          <Text style={styles.emptyText}>No items in wishlist</Text>
-        </View>
-      ) : (
-        <FlatList
-          data={filteredItems}
-          renderItem={renderWishlistItem}
-          numColumns={2}
-          showsVerticalScrollIndicator={false}
-          contentContainerStyle={styles.productGrid}
-          keyExtractor={item => item.id.toString()}
-        />
-      )}
+      <View style={{paddingTop: 8}}>
+        {filteredItems.length === 0 ? (
+          <View style={styles.emptyContainer}>
+            <Text style={styles.emptyText}>No items in wishlist</Text>
+          </View>
+        ) : (
+          <FlatList
+            data={filteredItems}
+            renderItem={renderWishlistItem}
+            numColumns={2}
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={styles.productGrid}
+            keyExtractor={item => item.id.toString()}
+          />
+        )}
+      </View>
     </SafeAreaView>
   );
 };

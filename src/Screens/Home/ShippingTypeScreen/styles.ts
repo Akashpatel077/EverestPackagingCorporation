@@ -57,11 +57,11 @@ export const styles = StyleSheet.create({
     marginLeft: 12,
   },
   radioButtonSelected: {
-    borderColor: '#8B4513',
-    backgroundColor: '#8B4513',
+    borderColor: '#0088cc',
+    backgroundColor: '#0088cc',
   },
   applyButton: {
-    backgroundColor: '#8B4513',
+    backgroundColor: '#0088cc',
     borderRadius: 25,
     paddingVertical: 16,
     alignItems: 'center',

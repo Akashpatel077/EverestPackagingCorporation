@@ -56,7 +56,7 @@ export const styles = StyleSheet.create({
     backgroundColor: '#F5F5F5',
   },
   categoryButtonActive: {
-    backgroundColor: '#8B4513',
+    backgroundColor: '#0088cc',
   },
   categoryText: {
     fontSize: 14,
@@ -116,7 +116,7 @@ export const styles = StyleSheet.create({
   },
   favoriteIcon: {
     fontSize: 18,
-    color: '#8B4513',
+    color: '#0088cc',
   },
   productInfo: {
     padding: 12,

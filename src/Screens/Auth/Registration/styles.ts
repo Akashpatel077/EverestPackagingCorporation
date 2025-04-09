@@ -61,23 +61,23 @@ export const styles = StyleSheet.create({
     width: 20,
     height: 20,
     borderWidth: 1,
-    borderColor: '#8B4513',
+    borderColor: '#0088cc',
     borderRadius: 4,
     marginRight: 8,
   },
   checkboxChecked: {
-    backgroundColor: '#8B4513',
+    backgroundColor: '#0088cc',
   },
   termsText: {
     fontSize: 14,
     color: '#666666',
   },
   termsLink: {
-    color: '#8B4513',
+    color: '#0088cc',
     textDecorationLine: 'underline',
   },
   signUpButton: {
-    backgroundColor: '#8B4513',
+    backgroundColor: '#0088cc',
     height: 48,
     borderRadius: 24,
     justifyContent: 'center',
@@ -130,7 +130,7 @@ export const styles = StyleSheet.create({
     fontSize: 14,
   },
   signInLink: {
-    color: '#8B4513',
+    color: '#0088cc',
     fontSize: 14,
     marginLeft: 4,
   },
