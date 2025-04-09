@@ -57,26 +57,27 @@ export const styles = StyleSheet.create({
   },
   mainImageContainer: {
     width: '100%',
-    height: width,
-    backgroundColor: '#F5F5F5',
+    height: width * 0.8,
+    backgroundColor: '#FFFFFF',
   },
   mainImage: {
     width: '100%',
     height: '100%',
-    resizeMode: 'cover',
+    resizeMode: 'contain',
   },
   thumbnailContainer: {
     marginTop: 16,
     paddingHorizontal: 16,
+    marginBottom: 16,
   },
   thumbnailList: {
-    gap: 8,
+    gap: 12,
   },
   thumbnailImage: {
-    width: 64,
-    height: 64,
+    width: 72,
+    height: 72,
     borderRadius: 8,
-    backgroundColor: '#F5F5F5',
+    backgroundColor: '#FFFFFF',
   },
   productInfo: {
     padding: 16,

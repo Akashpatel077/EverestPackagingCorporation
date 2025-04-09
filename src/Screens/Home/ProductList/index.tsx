@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   Image,
   ActivityIndicator,
+  Alert,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {useDispatch, useSelector} from 'react-redux';
@@ -23,6 +24,15 @@ import {
 import styles from './styles';
 import {useAppDispatch, useAppSelector} from 'src/store/hooks';
 import {fetchProducts} from 'src/store/slices/productsSlice';
+import {getProductVariations} from 'src/services/wooCommerceApi';
+
+function findVariation(variations, selectedAttributes) {
+  return variations.find(variation => {
+    return variation.attributes.every(
+      attr => selectedAttributes[attr.name] === attr.option,
+    );
+  });
+}
 
 const ProductList = ({route}) => {
   const navigation = useNavigation();
@@ -40,14 +50,7 @@ const ProductList = ({route}) => {
     products: [],
   };
   const wishlistItems = useSelector(state => state.wishlist.items);
-  const handleWishlistToggle = product => {
-    const isInWishlist = wishlistItems.some(item => item.id === product.id);
-    if (isInWishlist) {
-      dispatch(removeFromWishlist(product.id));
-    } else {
-      dispatch(addToWishlist(product));
-    }
-  };
+
   useEffect(() => {
     dispatch(fetchProducts({categoryId, currentPage}));
   }, [categoryId, currentPage]);
@@ -59,58 +62,7 @@ const ProductList = ({route}) => {
   };
 
   const renderProductItem = ({item}) => {
-    const isInWishlist = wishlistItems.some(
-      wishlistItem => wishlistItem.id === item.id,
-    );
-
-    return (
-      <TouchableOpacity
-        style={styles.productCard}
-        onPress={() =>
-          navigation.navigate(PRODUCT_DETAILS, {productId: item.id})
-        }>
-        <View style={styles.productImageContainer}>
-          <Image
-            source={item.images?.[0]?.src && {uri: item.images[0].src}}
-            style={styles.productImage}
-          />
-          <TouchableOpacity
-            style={styles.favoriteButton}
-            onPress={() => handleWishlistToggle(item)}>
-            <Icon
-              name={Heart}
-              width={25}
-              height={25}
-              color={isInWishlist ? '#CC5656' : '#ffffff'}
-            />
-          </TouchableOpacity>
-        </View>
-        <View style={styles.productInfo}>
-          <Text style={styles.productName}>{item.name}</Text>
-          <View style={styles.productDetails}>
-            <View
-              style={{
-                flexDirection: 'row',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-              {item.regular_price && (
-                <Text style={styles.regularPrice}>₹{item.regular_price}</Text>
-              )}
-              <Text style={styles.salePrice}>
-                {item.sale_price ? `₹${item.sale_price}` : `₹${item.price}`}
-              </Text>
-            </View>
-            <View style={styles.ratingContainer}>
-              <Text style={styles.ratingIcon}>⭐</Text>
-              <Text style={styles.ratingText}>
-                {item.average_rating || '0.0'}
-              </Text>
-            </View>
-          </View>
-        </View>
-      </TouchableOpacity>
-    );
+    return <ProductItemCard item={item} wishlistItems={wishlistItems} />;
   };
   if (productsLoading) {
     return (
@@ -143,3 +95,104 @@ const ProductList = ({route}) => {
 };
 
 export default ProductList;
+
+const ProductItemCard = React.memo(
+  ({item, wishlistItems}: {item: {}; wishlistItems: {}}) => {
+    const navigation = useNavigation();
+    const dispatch = useAppDispatch();
+    const [regularPrice, setRegularPrice] = useState(item.regular_price);
+    const [salePrice, setSalePrice] = useState(item.price);
+
+    const handleWishlistToggle = product => {
+      const isInWishlist = wishlistItems.some(item => item.id === product.id);
+      if (isInWishlist) {
+        dispatch(removeFromWishlist(product.id));
+      } else {
+        dispatch(addToWishlist(product));
+      }
+    };
+
+    const isInWishlist = wishlistItems.some(
+      wishlistItem => wishlistItem.id === item.id,
+    );
+
+    const getProductVariationList = async () => {
+      try {
+        let selectedAttributes = {};
+
+        item.attributes?.map(attr => {
+          selectedAttributes = {
+            ...selectedAttributes,
+            [attr.name]: attr.options[0],
+          };
+        });
+        const variationList = await getProductVariations(item.id);
+
+        if (variationList.length) {
+          const productVariation = findVariation(
+            variationList,
+            selectedAttributes,
+          );
+
+          if (productVariation) {
+            setRegularPrice(productVariation.regular_price);
+            setSalePrice(productVariation.sale_price);
+          }
+        }
+      } catch (e) {
+        Alert.alert('Error : ', e.message);
+      }
+    };
+
+    useEffect(() => {
+      if (item?.variations?.length) {
+        getProductVariationList();
+      }
+    }, [item]);
+
+    return (
+      <TouchableOpacity
+        style={styles.productCard}
+        onPress={() =>
+          navigation.navigate(PRODUCT_DETAILS, {productId: item.id})
+        }>
+        <View style={styles.productImageContainer}>
+          <Image
+            source={item.images?.[0]?.src && {uri: item.images[0].src}}
+            style={styles.productImage}
+          />
+          <TouchableOpacity
+            style={styles.favoriteButton}
+            onPress={() => handleWishlistToggle(item)}>
+            <Icon
+              name={Heart}
+              width={25}
+              height={25}
+              color={isInWishlist ? '#CC5656' : '#ffffff'}
+            />
+          </TouchableOpacity>
+        </View>
+        <View style={styles.productInfo}>
+          <Text style={styles.productName}>{item.name}</Text>
+          <View style={styles.productDetails}>
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+              <Text style={styles.regularPrice}>{regularPrice}</Text>
+              <Text style={styles.salePrice}>{salePrice}</Text>
+            </View>
+            <View style={styles.ratingContainer}>
+              <Text style={styles.ratingIcon}>⭐</Text>
+              <Text style={styles.ratingText}>
+                {item.average_rating || '0.0'}
+              </Text>
+            </View>
+          </View>
+        </View>
+      </TouchableOpacity>
+    );
+  },
+);
