@@ -90,7 +90,6 @@ const CategoryScreen = () => {
           styles.container,
           {backgroundColor: 'rgba(255, 255, 255, 0.8)'},
         ]}>
-        <Header title="Categories" />
         <View style={styles.loadingContainer}>
           <ActivityIndicator size="large" color="#000" />
         </View>
