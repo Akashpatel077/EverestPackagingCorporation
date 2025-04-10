@@ -80,7 +80,7 @@ const ProductList = ({route}) => {
             item.id?.toString() || index.toString()
           }
           showsVerticalScrollIndicator={false}
-          contentContainerStyle={styles.productGrid}
+          contentContainerStyle={styles.categoriesContainer}
           onEndReached={handleLoadMore}
           onEndReachedThreshold={0.5}
           ListFooterComponent={
@@ -181,8 +181,8 @@ const ProductItemCard = React.memo(
                 justifyContent: 'center',
                 alignItems: 'center',
               }}>
-              <Text style={styles.regularPrice}>{regularPrice}</Text>
-              <Text style={styles.salePrice}>{salePrice}</Text>
+              <Text style={styles.regularPrice}>₹{regularPrice}</Text>
+              <Text style={styles.salePrice}>₹{salePrice}</Text>
             </View>
             <View style={styles.ratingContainer}>
               <Text style={styles.ratingIcon}>⭐</Text>

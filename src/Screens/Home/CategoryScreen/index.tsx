@@ -73,9 +73,8 @@ const CategoryScreen = () => {
           style={styles.categoryImage}
           resizeMode="contain"
         />
-        <Text style={styles.categoryName} numberOfLines={2}>
-          {item.name}
-        </Text>
+        <Text style={styles.categoryName}>{item.name}</Text>
+        <Text style={styles.categoryCount}>{item.count} products</Text>
       </View>
     </TouchableOpacity>
   );

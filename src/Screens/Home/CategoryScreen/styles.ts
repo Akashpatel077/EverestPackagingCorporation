@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   categoriesContainer: {
-    padding: 16,
+    padding: 8,
   },
   categoryWrapper: {
     width: '48%',
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 8,
     elevation: 5,
-    height: 200,
+    height: 220,
     borderWidth: 1,
     borderColor: 'rgba(0, 0, 0, 0.05)',
   },
@@ -45,14 +45,20 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   categoryName: {
-    fontSize: 15,
-    fontFamily: 'SchibstedGrotesk-Medium',
+    fontSize: 16,
+    fontFamily: 'SchibstedGrotesk-Bold',
     color: '#1A1B1E',
     paddingHorizontal: 12,
-    paddingVertical: 10,
-    textAlign: 'center',
-    flex: 1,
-    lineHeight: 20,
+    paddingVertical: 4,
+    textAlign: 'left',
+  },
+  categoryCount: {
+    fontSize: 16,
+    fontFamily: 'SchibstedGrotesk-Regular',
+    color: '#666666',
+    paddingHorizontal: 12,
+    paddingBottom: 8,
+    textAlign: 'left',
   },
 });
 

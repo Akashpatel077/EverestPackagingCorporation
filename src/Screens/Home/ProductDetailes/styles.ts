@@ -225,6 +225,15 @@ export const styles = StyleSheet.create({
     borderTopColor: '#F0F0F0',
     paddingHorizontal: 20,
     paddingVertical: 5,
+    backgroundColor: '#FFFFFF',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: -2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
   },
   priceContainer: {
     flex: 1,

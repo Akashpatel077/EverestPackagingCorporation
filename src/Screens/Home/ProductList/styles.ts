@@ -8,6 +8,13 @@ const styles = StyleSheet.create({
   categoryContainer: {
     marginVertical: 10,
   },
+  categoriesContainer: {
+    padding: 6,
+  },
+  loadingContainer: {
+    flex: 1,
+    alignItems: 'center',
+  },
   categoryList: {
     paddingHorizontal: 15,
   },
@@ -35,8 +42,8 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   productCard: {
-    flex: 1,
-    margin: 5,
+    width: '48%',
+    margin: '1%',
     backgroundColor: '#FFFFFF',
     borderRadius: 12,
     shadowColor: '#000',

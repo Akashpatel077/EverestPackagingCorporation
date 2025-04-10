@@ -13,7 +13,7 @@ import {useSelector} from 'react-redux';
 import {Header} from 'src/Components';
 import {BackIcon} from 'assets/icons';
 import {PRODUCT_LIST} from 'src/Navigation/home/routes';
-import {styles} from './styles';
+import styles from './styles';
 import {RootState} from 'src/store';
 import {Category} from 'src/store/slices/categorySlice';
 import {getSubCategories} from 'src/services/wooCommerceApi';
@@ -49,7 +49,7 @@ const SubCategoryScreen = ({route}) => {
   }, [categoryId, category, navigation]);
 
   const renderSubCategoryItem = ({item}: {item: Category}) => {
-    const handleSubCategoryPress = async () => {
+    const handleSubCategoryPress = async (item: Category) => {
       navigation.navigate(PRODUCT_LIST, {
         category: item.name,
         categoryId: item.id,
@@ -58,17 +58,16 @@ const SubCategoryScreen = ({route}) => {
 
     return (
       <TouchableOpacity
-        style={styles.productCard}
-        onPress={handleSubCategoryPress}>
-        <View style={styles.productImageContainer}>
+        style={styles.categoryWrapper}
+        onPress={() => handleSubCategoryPress(item)}>
+        <View style={styles.categoryCard}>
           <Image
-            source={item.image && item.image.src && {uri: item.image.src}}
+            source={item.image?.src && {uri: item.image.src}}
+            style={styles.categoryImage}
             resizeMode="contain"
-            style={styles.productImage}
           />
-        </View>
-        <View style={styles.productInfo}>
-          <Text style={styles.productName}>{item.name}</Text>
+          <Text style={styles.categoryName}>{item.name}</Text>
+          <Text style={styles.categoryCount}>{item.count} products</Text>
         </View>
       </TouchableOpacity>
     );
@@ -77,20 +76,22 @@ const SubCategoryScreen = ({route}) => {
   return (
     <SafeAreaView style={styles.container}>
       <Header title={category} icon1={BackIcon} />
-      {isLoading ? (
-        <View style={styles.loadingContainer}>
-          <ActivityIndicator size="large" color="#0088cc" />
-        </View>
-      ) : (
-        <FlatList
-          data={subCategories}
-          renderItem={renderSubCategoryItem}
-          numColumns={2}
-          showsVerticalScrollIndicator={false}
-          contentContainerStyle={styles.productGrid}
-          keyExtractor={item => item.id.toString()}
-        />
-      )}
+      <View style={styles.contentContainer}>
+        {isLoading ? (
+          <View style={styles.loadingContainer}>
+            <ActivityIndicator size="large" color="#0088cc" />
+          </View>
+        ) : (
+          <FlatList
+            data={subCategories}
+            renderItem={renderSubCategoryItem}
+            numColumns={2}
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={styles.categoriesContainer}
+            keyExtractor={item => item.id.toString()}
+          />
+        )}
+      </View>
     </SafeAreaView>
   );
 };

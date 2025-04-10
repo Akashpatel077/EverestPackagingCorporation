@@ -219,8 +219,8 @@ const ProductDetails = ({route}) => {
                 </Text>
               </View>
               <View style={styles.priceRow}>
-                <Text style={styles.regularPrice}>{regularPrice}</Text>
-                <Text style={styles.salePrice}>{salePrice}</Text>
+                <Text style={styles.regularPrice}>₹{regularPrice}</Text>
+                <Text style={styles.salePrice}>₹{salePrice}</Text>
               </View>
 
               <View
