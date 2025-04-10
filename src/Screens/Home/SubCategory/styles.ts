@@ -7,7 +7,6 @@ export const styles = StyleSheet.create({
   },
   loadingContainer: {
     flex: 1,
-    justifyContent: 'center',
     alignItems: 'center',
   },
   productGrid: {
@@ -55,5 +54,4 @@ export const styles = StyleSheet.create({
     marginBottom: 8,
     color: '#333333',
   },
-
 });

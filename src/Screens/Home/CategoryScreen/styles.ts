@@ -7,9 +7,11 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#F5F6FA',
   },
+  contentContainer: {
+    flex: 1,
+  },
   loadingContainer: {
     flex: 1,
-    justifyContent: 'center',
     alignItems: 'center',
   },
   categoriesContainer: {

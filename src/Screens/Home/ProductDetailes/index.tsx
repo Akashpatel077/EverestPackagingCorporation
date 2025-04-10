@@ -155,175 +155,185 @@ const ProductDetails = ({route}) => {
     </TouchableOpacity>
   );
 
-  if (loading) {
-    return (
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <ActivityIndicator size={'large'} />
-      </View>
-    );
-  }
-
   return (
     <SafeAreaView style={styles.container}>
-        <Header
-          title="Product Details"
-          icon1={BackIcon}
-          showWishlistIcon
-          isInWishlist={isInWishlist}
-          onWishlistPress={() => {
-            if (isInWishlist) {
-              dispatch(removeFromWishlist(productId));
-            } else {
-              dispatch(addToWishlist(productDetails));
-            }
-          }}
-          icon2Color={isInWishlist ? '#CC5656' : '#FFF'}
-        />
-      <ScrollView showsVerticalScrollIndicator={false} style={{flex: 1}} contentContainerStyle={{paddingTop: 60}}>
-        <View style={styles.mainImageContainer}>
-          <Image
-            source={{
-              uri: images.length ? images[currentImageIndex].src : '',
-            }}
-            style={styles.mainImage}
-          />
+      <Header
+        title="Product Details"
+        icon1={BackIcon}
+        showWishlistIcon
+        isInWishlist={isInWishlist}
+        onWishlistPress={() => {
+          if (isInWishlist) {
+            dispatch(removeFromWishlist(productId));
+          } else {
+            dispatch(addToWishlist(productDetails));
+          }
+        }}
+        icon2Color={isInWishlist ? '#CC5656' : '#FFF'}
+      />
+      {loading ? (
+        <View style={styles.loadingContainer}>
+          <ActivityIndicator size={'large'} color="#0088cc" />
         </View>
-
-        <View style={styles.thumbnailContainer}>
-          <FlatList
-            data={images}
-            renderItem={renderImageItem}
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            contentContainerStyle={styles.thumbnailList}
-          />
-        </View>
-
-        <View style={styles.productInfo}>
-          <View style={styles.titleRow}>
-            <Text style={styles.title}>{productDetails.name}</Text>
-          </View>
-          <View style={styles.reviewContainer}>
-            <View style={styles.starContainer}>
-              {[1, 2, 3, 4, 5].map(star => (
-                <Text key={star} style={styles.starIcon}>
-                  {Number(productDetails.average_rating) >= star ? '★' : '☆'}
-                </Text>
-              ))}
+      ) : (
+        <View style={{flex: 1}}>
+          <ScrollView
+            showsVerticalScrollIndicator={false}
+            style={{flex: 1}}
+            contentContainerStyle={{paddingTop: 60}}>
+            <View style={styles.mainImageContainer}>
+              <Image
+                source={{
+                  uri: images.length ? images[currentImageIndex].src : '',
+                }}
+                style={styles.mainImage}
+              />
             </View>
-            <Text style={styles.reviewText}>( There are no reviews yet. )</Text>
-          </View>
-          <View style={styles.priceRow}>
-            <Text style={styles.regularPrice}>{regularPrice}</Text>
-            <Text style={styles.salePrice}>{salePrice}</Text>
-          </View>
 
-          <View
-            style={{maxHeight: isExpanded ? 'auto' : 92, overflow: 'hidden'}}>
-            <RenderHtml source={{html: productDetails.description}} />
-          </View>
-          <TouchableOpacity
-            onPress={() => setIsExpanded(prevValue => !prevValue)}>
-            <Text style={styles.readMore}>
-              {isExpanded ? 'Read less' : 'Read more'}
-            </Text>
-          </TouchableOpacity>
-
-          {productDetails.attributes.length > 0 &&
-            productDetails.attributes.map(
-              item =>
-                !(item.name === 'HSN Code') && (
-                  <RenderAttributes
-                    item={item}
-                    setSelectedAttributes={setSelectedAttributes}
-                  />
-                ),
-            )}
-
-          {colorOptions.length > 0 && (
-            <View style={styles.colorSection}>
-              <Text style={styles.sectionTitle}>
-                Select Color : {selectedColor}
-              </Text>
-              <ScrollView
+            <View style={styles.thumbnailContainer}>
+              <FlatList
+                data={images}
+                renderItem={renderImageItem}
                 horizontal
                 showsHorizontalScrollIndicator={false}
-                contentContainerStyle={styles.colorContainer}>
-                {colorOptions.map(({color, value}: any) => (
-                  <TouchableOpacity
-                    key={value}
-                    style={[
-                      styles.colorButton,
-                      {backgroundColor: color},
-                      selectedColor === value && styles.selectedColorButton,
-                    ]}
-                    onPress={() => setSelectedColor(value)}
+                contentContainerStyle={styles.thumbnailList}
+              />
+            </View>
+
+            <View style={styles.productInfo}>
+              <View style={styles.titleRow}>
+                <Text style={styles.title}>{productDetails.name}</Text>
+              </View>
+              <View style={styles.reviewContainer}>
+                <View style={styles.starContainer}>
+                  {[1, 2, 3, 4, 5].map(star => (
+                    <Text key={star} style={styles.starIcon}>
+                      {Number(productDetails.average_rating) >= star
+                        ? '★'
+                        : '☆'}
+                    </Text>
+                  ))}
+                </View>
+                <Text style={styles.reviewText}>
+                  ( There are no reviews yet. )
+                </Text>
+              </View>
+              <View style={styles.priceRow}>
+                <Text style={styles.regularPrice}>{regularPrice}</Text>
+                <Text style={styles.salePrice}>{salePrice}</Text>
+              </View>
+
+              <View
+                style={{
+                  maxHeight: isExpanded ? 'auto' : 92,
+                  overflow: 'hidden',
+                }}>
+                <RenderHtml source={{html: productDetails.description}} />
+              </View>
+              <TouchableOpacity
+                onPress={() => setIsExpanded(prevValue => !prevValue)}>
+                <Text style={styles.readMore}>
+                  {isExpanded ? 'Read less' : 'Read more'}
+                </Text>
+              </TouchableOpacity>
+
+              {productDetails.attributes.length > 0 &&
+                productDetails.attributes.map(
+                  item =>
+                    !(item.name === 'HSN Code') && (
+                      <RenderAttributes
+                        item={item}
+                        setSelectedAttributes={setSelectedAttributes}
+                      />
+                    ),
+                )}
+
+              {colorOptions.length > 0 && (
+                <View style={styles.colorSection}>
+                  <Text style={styles.sectionTitle}>
+                    Select Color : {selectedColor}
+                  </Text>
+                  <ScrollView
+                    horizontal
+                    showsHorizontalScrollIndicator={false}
+                    contentContainerStyle={styles.colorContainer}>
+                    {colorOptions.map(({color, value}: any) => (
+                      <TouchableOpacity
+                        key={value}
+                        style={[
+                          styles.colorButton,
+                          {backgroundColor: color},
+                          selectedColor === value && styles.selectedColorButton,
+                        ]}
+                        onPress={() => setSelectedColor(value)}
+                      />
+                    ))}
+                  </ScrollView>
+                </View>
+              )}
+
+              {productDetails?.wcpa_form_fields?.fields?.length > 0 &&
+                productDetails.wcpa_form_fields?.fields.map(item => (
+                  <RenderCustomExtraFields
+                    setSelectedCustomExtraFields={setSelectedCustomExtraFields}
+                    item={item}
                   />
                 ))}
-              </ScrollView>
+
+              {/* {productDetails.price_html && (
+                <View style={{paddingBottom: 10}}>
+                  <RenderHtml source={{html: productDetails.price_html}} />
+                </View>
+              )} */}
+
+              {Object.keys(filteredMetaData).length > 0 && (
+                <QuantitySelector
+                  filteredMetaData={filteredMetaData}
+                  quantity={quantity}
+                  setQuantity={setQuantity}
+                />
+              )}
+
+              {isVariationNotAvailable && (
+                <Text style={styles.alertLabel}>
+                  Sorry!, no products matched your selection. Please choose a
+                  different combination.
+                </Text>
+              )}
             </View>
-          )}
-
-          {productDetails?.wcpa_form_fields?.fields?.length > 0 &&
-            productDetails.wcpa_form_fields?.fields.map(item => (
-              <RenderCustomExtraFields
-                setSelectedCustomExtraFields={setSelectedCustomExtraFields}
-                item={item}
-              />
-            ))}
-
-          {/* {productDetails.price_html && (
-            <View style={{paddingBottom: 10}}>
-              <RenderHtml source={{html: productDetails.price_html}} />
+          </ScrollView>
+          <View style={styles.bottomContainer}>
+            <View style={styles.priceContainer}>
+              <Text style={styles.priceLabel}>Total Price</Text>
+              <Text style={styles.price}>₹{salePrice}</Text>
             </View>
-          )} */}
+            <TouchableOpacity
+              style={styles.addToCartButton}
+              onPress={() => {
+                const selectedAttributes =
+                  productDetails.attributes?.map(attr => ({
+                    name: attr.name,
+                    value: attr.options[0],
+                  })) || [];
 
-          {Object.keys(filteredMetaData).length > 0 && (
-            <QuantitySelector
-              filteredMetaData={filteredMetaData}
-              quantity={quantity}
-              setQuantity={setQuantity}
-            />
-          )}
-
-          {isVariationNotAvailable && (
-            <Text style={styles.alertLabel}>
-              Sorry!, no products matched your selection. Please choose a
-              different combination.
-            </Text>
-          )}
+                dispatch(
+                  addToCart({
+                    id: productDetails.id,
+                    quantity: 1,
+                    name: productDetails.name,
+                    price: productDetails.price,
+                    sale_price: productDetails.sale_price,
+                    color: selectedColor,
+                    attributes: selectedAttributes,
+                    image: productDetails.images?.[0]?.src,
+                  }),
+                );
+              }}>
+              <Text style={styles.addToCartText}>🛍 Add to Cart</Text>
+            </TouchableOpacity>
+          </View>
         </View>
-      </ScrollView>
-      <View style={styles.bottomContainer}>
-        <View style={styles.priceContainer}>
-          <Text style={styles.priceLabel}>Total Price</Text>
-          <Text style={styles.price}>₹{salePrice}</Text>
-        </View>
-        <TouchableOpacity
-          style={styles.addToCartButton}
-          onPress={() => {
-            const selectedAttributes =
-              productDetails.attributes?.map(attr => ({
-                name: attr.name,
-                value: attr.options[0], // Using first option as default if not selected
-              })) || [];
-
-            dispatch(
-              addToCart({
-                id: productDetails.id,
-                quantity: 1,
-                name: productDetails.name,
-                price: productDetails.price,
-                sale_price: productDetails.sale_price,
-                color: selectedColor,
-                attributes: selectedAttributes,
-                image: productDetails.images?.[0]?.src,
-              }),
-            );
-          }}>
-          <Text style={styles.addToCartText}>🛍 Add to Cart</Text>
-        </TouchableOpacity>
-      </View>
+      )}
     </SafeAreaView>
   );
 };

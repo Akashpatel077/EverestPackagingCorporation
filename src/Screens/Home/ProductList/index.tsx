@@ -69,14 +69,16 @@ const ProductList = ({route}) => {
       <Header title={`${category} Products`} icon1={BackIcon} />
       {productsLoading ? (
         <View style={styles.loadingContainer}>
-          <ActivityIndicator size="large" color="#000" />
+          <ActivityIndicator size="large" color="#0088cc" />
         </View>
       ) : (
         <FlatList
           data={products}
           renderItem={renderProductItem}
           numColumns={2}
-          keyExtractor={(item, index) => item.id?.toString() || index.toString()}
+          keyExtractor={(item, index) =>
+            item.id?.toString() || index.toString()
+          }
           showsVerticalScrollIndicator={false}
           contentContainerStyle={styles.productGrid}
           onEndReached={handleLoadMore}

@@ -16,6 +16,7 @@ import {PRODUCT_LIST} from 'src/Navigation/home/routes';
 import {styles} from './styles';
 import {RootState} from 'src/store';
 import {Category} from 'src/store/slices/categorySlice';
+import {getSubCategories} from 'src/services/wooCommerceApi';
 
 const SubCategoryScreen = ({route}) => {
   const navigation = useNavigation();
@@ -78,7 +79,7 @@ const SubCategoryScreen = ({route}) => {
       <Header title={category} icon1={BackIcon} />
       {isLoading ? (
         <View style={styles.loadingContainer}>
-          <ActivityIndicator size="large" color="#000" />
+          <ActivityIndicator size="large" color="#0088cc" />
         </View>
       ) : (
         <FlatList
