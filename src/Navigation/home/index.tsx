@@ -57,6 +57,7 @@ import CheckoutScreen from 'src/Screens/Home/Checkout';
 import AddCardScreen from 'src/Screens/Home/AddCardScreen';
 import PaymentSuccessScreen from 'src/Screens/Home/PaymentSuccessScreen';
 import SearchScreen from 'src/Screens/Home/SearchScreen';
+import {getFocusedRouteNameFromRoute} from '@react-navigation/native';
 
 const Tab = createBottomTabNavigator();
 
@@ -318,6 +319,24 @@ const tabConfig: TabConfig[] = [
   },
 ];
 
+const getTabBarStyle = (route: any) => {
+  const routeName = getFocusedRouteNameFromRoute(route) ?? '';
+
+  const hiddenRoutes = [PRODUCT_DETAILS, SUB_CATEGORY_SCREEN, PRODUCT_LIST];
+
+  if (hiddenRoutes.includes(routeName)) {
+    return {display: 'none'};
+  }
+
+  return {
+    backgroundColor: '#FFFFFF',
+    borderTopWidth: 1,
+    borderTopColor: '#E5E5E5',
+    height: 60,
+    paddingBottom: 8,
+  };
+};
+
 const HomeContainer = () => {
   const getTabBarIcon = (name: React.FC<TabIconProps>, tabName: string) => {
     console.log('tabName', tabName);
@@ -348,10 +367,11 @@ const HomeContainer = () => {
           key={tab.name}
           name={tab.name}
           component={tab.component}
-          options={{
+          options={({route}) => ({
             tabBarLabel: tab.label,
             tabBarIcon: () => getTabBarIcon(tab.icon, tab.label),
-          }}
+            tabBarStyle: getTabBarStyle(route),
+          })}
         />
       ))}
     </Tab.Navigator>

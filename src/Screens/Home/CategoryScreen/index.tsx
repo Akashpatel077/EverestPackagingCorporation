@@ -40,25 +40,11 @@ const CategoryScreen = () => {
     dispatch(fetchSubCategories(214));
   }, [dispatch]);
 
-  const handleCategoryPress = async (category: any) => {
-    try {
-      setIsLoading(true);
-      const subCategoryResponse = await getSubCategories(category.id);
-      if (subCategoryResponse && subCategoryResponse.length > 0) {
-        navigation.navigate(SUB_CATEGORY_SCREEN, {
-          category: category.name,
-          categoryId: category.id,
-          subCategories: subCategoryResponse,
-        });
-      } else {
-        navigation.navigate(PRODUCT_LIST, {
-          category: category.name,
-          categoryId: category.id,
-        });
-      }
-    } catch (error) {
-      console.error('Error fetching category data:', error);
-    }
+  const handleCategoryPress = (category: any) => {
+    navigation.navigate(SUB_CATEGORY_SCREEN, {
+      category: category.name,
+      categoryId: category.id,
+    })
   };
 
   const renderCategoryItem = ({item}: any) => (
@@ -78,31 +64,23 @@ const CategoryScreen = () => {
     </TouchableOpacity>
   );
 
-  if (status === 'loading' || isLoading) {
-    return (
-      <SafeAreaView
-        style={[
-          styles.container,
-          {backgroundColor: 'rgba(255, 255, 255, 0.8)'},
-        ]}>
-        <View style={styles.loadingContainer}>
-          <ActivityIndicator size="large" color="#000" />
-        </View>
-      </SafeAreaView>
-    );
-  }
-
   return (
     <SafeAreaView style={styles.container}>
       <Header title="Categories" />
-      <FlatList
-        data={categories.filter(category => category.count > 0)}
-        renderItem={renderCategoryItem}
-        keyExtractor={item => item.id.toString()}
-        numColumns={2}
-        contentContainerStyle={styles.categoriesContainer}
-        showsVerticalScrollIndicator={false}
-      />
+      {(status === 'loading' || isLoading) ? (
+        <View style={styles.loadingContainer}>
+          <ActivityIndicator size="large" color="#000" />
+        </View>
+      ) : (
+        <FlatList
+          data={categories.filter(category => category.count > 0)}
+          renderItem={renderCategoryItem}
+          keyExtractor={item => item.id.toString()}
+          numColumns={2}
+          contentContainerStyle={styles.categoriesContainer}
+          showsVerticalScrollIndicator={false}
+        />
+      )}
     </SafeAreaView>
   );
 };

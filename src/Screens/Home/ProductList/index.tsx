@@ -64,32 +64,30 @@ const ProductList = ({route}) => {
   const renderProductItem = ({item}) => {
     return <ProductItemCard item={item} wishlistItems={wishlistItems} />;
   };
-  if (productsLoading) {
-    return (
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <ActivityIndicator size={'large'} />
-      </View>
-    );
-  }
-
   return (
     <SafeAreaView style={styles.container}>
       <Header title={`${category} Products`} icon1={BackIcon} />
-      <FlatList
-        data={products}
-        renderItem={renderProductItem}
-        numColumns={2}
-        keyExtractor={(item, index) => item.id?.toString() || index.toString()}
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={styles.productGrid}
-        onEndReached={handleLoadMore}
-        onEndReachedThreshold={0.5}
-        ListFooterComponent={
-          paginationLoading ? (
-            <ActivityIndicator size="small" style={{marginVertical: 10}} />
-          ) : null
-        }
-      />
+      {productsLoading ? (
+        <View style={styles.loadingContainer}>
+          <ActivityIndicator size="large" color="#000" />
+        </View>
+      ) : (
+        <FlatList
+          data={products}
+          renderItem={renderProductItem}
+          numColumns={2}
+          keyExtractor={(item, index) => item.id?.toString() || index.toString()}
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={styles.productGrid}
+          onEndReached={handleLoadMore}
+          onEndReachedThreshold={0.5}
+          ListFooterComponent={
+            paginationLoading ? (
+              <ActivityIndicator size="small" style={{marginVertical: 10}} />
+            ) : null
+          }
+        />
+      )}
     </SafeAreaView>
   );
 };

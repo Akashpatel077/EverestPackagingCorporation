@@ -19,8 +19,33 @@ import {Category} from 'src/store/slices/categorySlice';
 
 const SubCategoryScreen = ({route}) => {
   const navigation = useNavigation();
-  const {category, subCategories} = route.params;
-  const {status} = useSelector((state: RootState) => state.categories);
+  const {category, categoryId} = route.params;
+  const [subCategories, setSubCategories] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchSubCategories = async () => {
+      try {
+        const response = await getSubCategories(categoryId);
+        setSubCategories(response);
+        if (!response || response.length === 0) {
+          navigation.replace(PRODUCT_LIST, {
+            category,
+            categoryId,
+          });
+        }
+      } catch (error) {
+        console.error('Error fetching subcategories:', error);
+        navigation.replace(PRODUCT_LIST, {
+          category,
+          categoryId,
+        });
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchSubCategories();
+  }, [categoryId, category, navigation]);
 
   const renderSubCategoryItem = ({item}: {item: Category}) => {
     const handleSubCategoryPress = async () => {
@@ -48,30 +73,23 @@ const SubCategoryScreen = ({route}) => {
     );
   };
 
-  if (status === 'loading') {
-    return (
-      <SafeAreaView style={styles.container}>
-        <Header title={category} icon1={BackIcon} />
-        <View style={styles.loadingContainer}>
-          <ActivityIndicator size="large" color="#000" />
-        </View>
-      </SafeAreaView>
-    );
-  }
-
-  console.log('subCategories', subCategories);
-
   return (
     <SafeAreaView style={styles.container}>
       <Header title={category} icon1={BackIcon} />
-      <FlatList
-        data={subCategories}
-        renderItem={renderSubCategoryItem}
-        numColumns={2}
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={styles.productGrid}
-        keyExtractor={item => item.id.toString()}
-      />
+      {isLoading ? (
+        <View style={styles.loadingContainer}>
+          <ActivityIndicator size="large" color="#000" />
+        </View>
+      ) : (
+        <FlatList
+          data={subCategories}
+          renderItem={renderSubCategoryItem}
+          numColumns={2}
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={styles.productGrid}
+          keyExtractor={item => item.id.toString()}
+        />
+      )}
     </SafeAreaView>
   );
 };
