@@ -41,7 +41,7 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#F5F6FA',
-    paddingHorizontal: 16,
+    // paddingHorizontal: 16,
   },
   header: {
     flexDirection: 'row',
@@ -62,7 +62,8 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: '#F8F8F8',
+    backgroundColor: '#FFFFFF',
+    marginTop: 12,
     padding: 16,
     borderRadius: 12,
     marginBottom: 12,

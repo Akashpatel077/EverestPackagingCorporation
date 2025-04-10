@@ -1,6 +1,7 @@
-import { StyleSheet } from 'react-native';
+import {StyleSheet} from 'react-native';
+import {colors} from 'src/theme';
 
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
   emptyContainer: {
     flex: 1,
     alignItems: 'center',
@@ -11,24 +12,58 @@ const styles = StyleSheet.create({
   emptyText: {
     fontSize: 18,
     fontWeight: '600',
-    color: '#000000',
+    color: colors.textPrimary,
     marginBottom: 8,
   },
   emptySubText: {
     fontSize: 14,
-    color: '#666666',
+    color: colors.textSecondary,
     textAlign: 'center',
+  },
+  disabledButton: {
+    opacity: 0.5,
+  },
+  applyButton: {
+    backgroundColor: '#0088cc',
+    borderRadius: 12,
+    padding: 16,
+    alignItems: 'center',
+    position: 'absolute',
+    bottom: 24,
+    left: 16,
+    right: 16,
+  },
+  applyButtonText: {
+    color: '#FFFFFF',
+    fontSize: 16,
+    fontWeight: '600',
   },
   container: {
     flex: 1,
     backgroundColor: '#F5F6FA',
-    paddingHorizontal: 16,
+    // paddingHorizontal: 16,
+  },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: 16,
+    marginBottom: 16,
+  },
+  backButton: {
+    padding: 8,
+    marginRight: 16,
+  },
+  headerTitle: {
+    fontSize: 20,
+    fontWeight: '600',
+    color: '#000000',
   },
   addressContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: '#F8F8F8',
+    backgroundColor: '#FFFFFF',
+    marginTop: 12,
     padding: 16,
     borderRadius: 12,
     marginBottom: 12,
@@ -88,24 +123,4 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '600',
   },
-  applyButton: {
-    backgroundColor: '#0088cc',
-    borderRadius: 12,
-    padding: 16,
-    alignItems: 'center',
-    position: 'absolute',
-    bottom: 24,
-    left: 16,
-    right: 16,
-  },
-  disabledButton: {
-    opacity: 0.5,
-  },
-  applyButtonText: {
-    color: '#FFFFFF',
-    fontSize: 16,
-    fontWeight: '600',
-  },
 });
-
-export default styles;

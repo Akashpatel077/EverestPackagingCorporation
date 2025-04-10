@@ -54,52 +54,52 @@ const WishlistScreen = () => {
     dispatch(removeFromWishlist(productId));
   };
 
-  const renderWishlistItem = ({item}: any) => (
-    <TouchableOpacity
-      style={styles.productCard}
-      onPress={() =>
-        navigation.navigate(PRODUCT_DETAILS, {productId: item.id})
-      }>
-      <View style={styles.productImageContainer}>
-        <Image
-          source={item.images?.[0]?.src && {uri: item.images[0].src}}
-          style={styles.productImage}
-        />
-        <TouchableOpacity
-          style={styles.favoriteButton}
-          onPress={() => handleRemoveFromWishlist(item.id)}>
-          <Icon name={Heart} width={20} height={20} color="#CC5656" />
-        </TouchableOpacity>
-      </View>
-      <View style={styles.productInfo}>
-        <Text style={styles.productName}>{item.name}</Text>
-        <View style={styles.productDetails}>
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}>
-            {item.regular_price && (
-              <Text style={styles.regularPrice}>₹{item.regular_price}</Text>
-            )}
-            <Text style={styles.salePrice}>
-              {item.sale_price ? `₹${item.sale_price}` : `₹${item.price}`}
-            </Text>
-          </View>
-          <View style={styles.ratingContainer}>
-            <Text style={styles.ratingIcon}>⭐</Text>
-            <Text style={styles.ratingText}>
-              {item.average_rating || '0.0'}
-            </Text>
+  const renderWishlistItem = ({item, index}: any) => {
+    const isLastItem = index === filteredItems.length - 1;
+    return (
+      <TouchableOpacity
+        style={[styles.productCard, isLastItem && {marginBottom: 40}]}>
+        <View style={styles.productImageContainer}>
+          <Image
+            source={item.images?.[0]?.src && {uri: item.images[0].src}}
+            style={styles.productImage}
+          />
+          <TouchableOpacity
+            style={styles.favoriteButton}
+            onPress={() => handleRemoveFromWishlist(item.id)}>
+            <Icon name={Heart} width={20} height={20} color="#CC5656" />
+          </TouchableOpacity>
+        </View>
+        <View style={styles.productInfo}>
+          <Text style={styles.productName}>{item.name}</Text>
+          <View style={styles.productDetails}>
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+              {item.regular_price && (
+                <Text style={styles.regularPrice}>₹{item.regular_price}</Text>
+              )}
+              <Text style={styles.salePrice}>
+                {item.sale_price ? `₹${item.sale_price}` : `₹${item.price}`}
+              </Text>
+            </View>
+            <View style={styles.ratingContainer}>
+              <Text style={styles.ratingIcon}>⭐</Text>
+              <Text style={styles.ratingText}>
+                {item.average_rating || '0.0'}
+              </Text>
+            </View>
           </View>
         </View>
-      </View>
-    </TouchableOpacity>
-  );
+      </TouchableOpacity>
+    );
+  };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={[styles.container, {paddingBottom: 30}]}>
       <Header title="My Wishlist" />
       <View style={{paddingTop: 8}}>
         {filteredItems.length === 0 ? (

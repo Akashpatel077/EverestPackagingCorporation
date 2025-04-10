@@ -55,6 +55,7 @@ export const styles = StyleSheet.create({
     width: '48%',
     // flex: 1,
     marginHorizontal: 5,
+    // marginBottom: 40,
     backgroundColor: '#FFFFFF',
     borderRadius: 12,
     shadowColor: '#000',

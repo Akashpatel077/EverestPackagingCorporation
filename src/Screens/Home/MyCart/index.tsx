@@ -121,7 +121,7 @@ const MyCart = () => {
       <View style={styles.itemDetails}>
         <Text style={styles.itemName}>{item.name}</Text>
         <Text style={styles.itemSize}>Size : {item.size}</Text>
-        <Text style={styles.itemPrice}>${Number(item.price).toFixed(2)}</Text>
+        <Text style={styles.itemPrice}>₹{Number(item.price).toFixed(2)}</Text>
         <View style={styles.quantityControl}>
           <TouchableOpacity
             style={styles.quantityButton}
@@ -201,11 +201,11 @@ const MyCart = () => {
         <View style={styles.summaryContainer}>
           <View style={styles.summaryRow}>
             <Text style={styles.summaryLabel}>Sub-Total</Text>
-            <Text style={styles.summaryValue}>${subtotal.toFixed(2)}</Text>
+            <Text style={styles.summaryValue}>₹{subtotal.toFixed(2)}</Text>
           </View>
           <View style={styles.summaryRow}>
             <Text style={styles.summaryLabel}>Delivery Fee</Text>
-            <Text style={styles.summaryValue}>${deliveryFee.toFixed(2)}</Text>
+            <Text style={styles.summaryValue}>₹{deliveryFee.toFixed(2)}</Text>
           </View>
           {/* <View style={styles.summaryRow}>
           <Text style={styles.summaryLabel}>Discount</Text>
@@ -213,7 +213,7 @@ const MyCart = () => {
         </View> */}
           <View style={[styles.summaryRow, styles.totalRow]}>
             <Text style={styles.totalLabel}>Total Cost</Text>
-            <Text style={styles.totalValue}>${total.toFixed(2)}</Text>
+            <Text style={styles.totalValue}>₹{total.toFixed(2)}</Text>
           </View>
         </View>
 
@@ -254,7 +254,7 @@ const MyCart = () => {
                       Size : {selectedItem.size}
                     </Text>
                     <Text style={styles.modalItemPrice}>
-                      $
+                      ₹
                       {typeof selectedItem.price === 'string'
                         ? Number(selectedItem.price).toFixed(2)
                         : selectedItem.price.toFixed(2)}
