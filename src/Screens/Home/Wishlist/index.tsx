@@ -55,11 +55,19 @@ const WishlistScreen = () => {
   };
 
   const renderWishlistItem = ({item, index}: any) => {
-    const isLastOrSecondLast =
-      index === filteredItems.length - 1 || index === filteredItems.length - 2;
+    const isLastItem = index === filteredItems.length - 1;
+    const isInLastRow =
+      Math.floor(index / 2) === Math.floor((filteredItems.length - 1) / 2);
+    const needsExtraMargin = isLastItem && filteredItems.length % 2 === 1;
     return (
       <TouchableOpacity
-        style={[styles.productCard, isLastOrSecondLast && {marginBottom: 70}]}>
+        style={[
+          styles.productCard,
+          (isInLastRow || needsExtraMargin) && {marginBottom: 70},
+        ]}
+        onPress={() =>
+          navigation.navigate(PRODUCT_DETAILS, {productId: item.id})
+        }>
         <View style={styles.productImageContainer}>
           <Image
             source={item.images?.[0]?.src && {uri: item.images[0].src}}
