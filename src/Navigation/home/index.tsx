@@ -58,6 +58,8 @@ import AddCardScreen from 'src/Screens/Home/AddCardScreen';
 import PaymentSuccessScreen from 'src/Screens/Home/PaymentSuccessScreen';
 import SearchScreen from 'src/Screens/Home/SearchScreen';
 import {getFocusedRouteNameFromRoute} from '@react-navigation/native';
+import {useSelector} from 'react-redux';
+import {selectCartItems} from 'src/store/slices/cartSlice';
 
 const Tab = createBottomTabNavigator();
 
@@ -338,6 +340,12 @@ const getTabBarStyle = (route: any) => {
 };
 
 const HomeContainer = () => {
+  const cartItems = useSelector(selectCartItems);
+  const cartItemsCount = cartItems.reduce(
+    (total, item) => total + item.quantity,
+    0,
+  );
+
   const getTabBarIcon = (name: React.FC<TabIconProps>, tabName: string) => {
     console.log('tabName', tabName);
 
@@ -371,6 +379,12 @@ const HomeContainer = () => {
             tabBarLabel: tab.label,
             tabBarIcon: () => getTabBarIcon(tab.icon, tab.label),
             tabBarStyle: getTabBarStyle(route),
+            tabBarBadge: tab.name === 'Cart' ? cartItemsCount : undefined,
+            tabBarBadgeStyle: {
+              backgroundColor: '#0088cc',
+              color: '#FFFFFF',
+              fontSize: 12,
+            },
           })}
         />
       ))}

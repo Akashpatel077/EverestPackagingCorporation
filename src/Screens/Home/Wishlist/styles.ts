@@ -14,26 +14,6 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 12,
   },
-  backButton: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: '#FFFFFF',
-    justifyContent: 'center',
-    alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
-  },
-  backIcon: {
-    fontSize: 24,
-    color: '#000000',
-  },
   headerTitle: {
     fontSize: 20,
     fontWeight: '600',
@@ -67,13 +47,14 @@ export const styles = StyleSheet.create({
     fontWeight: '500',
   },
   productGrid: {
-    paddingHorizontal: 12,
-    paddingBottom: 20,
+    paddingHorizontal: 6,
+    marginBottom: 20,
     gap: 10,
   },
   productCard: {
-    flex: 1,
-    margin: 5,
+    width: '48%',
+    // flex: 1,
+    marginHorizontal: 5,
     backgroundColor: '#FFFFFF',
     borderRadius: 12,
     shadowColor: '#000',
@@ -86,7 +67,7 @@ export const styles = StyleSheet.create({
     elevation: 4,
   },
   productImageContainer: {
-    position: 'relative',
+    // position: 'relative',
     width: '100%',
     height: 180,
     borderTopLeftRadius: 12,
@@ -96,7 +77,7 @@ export const styles = StyleSheet.create({
   productImage: {
     width: '100%',
     height: '100%',
-    resizeMode: 'cover',
+    resizeMode: 'contain',
   },
   favoriteButton: {
     position: 'absolute',
