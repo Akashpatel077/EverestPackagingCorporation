@@ -55,10 +55,11 @@ const WishlistScreen = () => {
   };
 
   const renderWishlistItem = ({item, index}: any) => {
-    const isLastItem = index === filteredItems.length - 1;
+    const isLastOrSecondLast =
+      index === filteredItems.length - 1 || index === filteredItems.length - 2;
     return (
       <TouchableOpacity
-        style={[styles.productCard, isLastItem && {marginBottom: 40}]}>
+        style={[styles.productCard, isLastOrSecondLast && {marginBottom: 70}]}>
         <View style={styles.productImageContainer}>
           <Image
             source={item.images?.[0]?.src && {uri: item.images[0].src}}
@@ -99,7 +100,7 @@ const WishlistScreen = () => {
   };
 
   return (
-    <SafeAreaView style={[styles.container, {paddingBottom: 30}]}>
+    <SafeAreaView style={[styles.container, {}]}>
       <Header title="My Wishlist" />
       <View style={{paddingTop: 8}}>
         {filteredItems.length === 0 ? (

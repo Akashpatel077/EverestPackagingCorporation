@@ -4,7 +4,7 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#F5F6FA',
-    padding: 16,
+    // padding: 16,
   },
   header: {
     flexDirection: 'row',
@@ -20,7 +20,9 @@ export const styles = StyleSheet.create({
     marginLeft: 12,
   },
   cardPreview: {
-    backgroundColor: '#8B6B4D',
+    width: '100%',
+    height: 200,
+    backgroundColor: '#0088cc',
     borderRadius: 16,
     padding: 24,
     marginBottom: 32,
@@ -32,6 +34,7 @@ export const styles = StyleSheet.create({
     marginBottom: 24,
   },
   cardDetails: {
+    marginTop: 50,
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
@@ -79,18 +82,18 @@ export const styles = StyleSheet.create({
     width: 20,
     height: 20,
     borderWidth: 2,
-    borderColor: '#8B6B4D',
+    borderColor: '#0088cc',
     borderRadius: 4,
     marginRight: 8,
   },
   checkboxChecked: {
-    backgroundColor: '#8B6B4D',
+    backgroundColor: '#0088cc',
   },
   saveCardText: {
     fontSize: 14,
   },
   addButton: {
-    backgroundColor: '#8B6B4D',
+    backgroundColor: '#0088cc',
     borderRadius: 25,
     padding: 16,
     alignItems: 'center',

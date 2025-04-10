@@ -49,12 +49,12 @@ export const styles = StyleSheet.create({
   productGrid: {
     paddingHorizontal: 6,
     marginBottom: 20,
-    gap: 10,
+    gap: 8,
   },
   productCard: {
     width: '48%',
     // flex: 1,
-    marginHorizontal: 5,
+    marginHorizontal: 4,
     // marginBottom: 40,
     backgroundColor: '#FFFFFF',
     borderRadius: 12,
