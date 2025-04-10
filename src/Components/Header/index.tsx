@@ -23,16 +23,15 @@ interface Props {
     
   return (
     <View style={styles.header}>
-      <View style={styles.headerContainer}>
+      <View style={[styles.headerContainer]}>
         <TouchableOpacity
           style={icon1 ? styles.backButton : undefined}
           onPress={() => (onPressFirst ? onPressFirst() : navigation.goBack())}>
           {icon1 && <Icon name={icon1} width={24} height={24} color="#FFF" />}
         </TouchableOpacity>
-        <Text style={[styles.headerTitle, {marginLeft: icon1 ? 16 : 0}]}>
+        <Text style={[styles.headerTitle, {marginLeft: icon1 ? 16 : 0}]} numberOfLines={1}>
           {title}
         </Text>
-      </View>
       {showWishlistIcon ? (
         <TouchableOpacity style={styles.RightButton} onPress={onWishlistPress}>
           <Icon
@@ -51,6 +50,7 @@ interface Props {
           )}
         </TouchableOpacity>
       )}
+      </View>
     </View>
   );
 };

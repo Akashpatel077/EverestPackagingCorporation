@@ -170,7 +170,7 @@ const MyCart = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Header icon1={BackIcon} title="My Cart" />
+      <Header title="My Cart" />
 
       <View style={{paddingHorizontal: 16, flex: 1, paddingVertical: 8}}>
         <FlatList

@@ -6,7 +6,7 @@ const cardWidth = (width - 48) / 2; // 2 cards per row with 16px padding on each
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#F5F6FA',
   },
   heroSection: {
     paddingHorizontal: 24,

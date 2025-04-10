@@ -40,7 +40,7 @@ const ProfileScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Header title='Profile' icon1={BackIcon}/>
+      <Header title='Profile' />
 
       <View style={styles.profileSection}>
         <View style={styles.avatarContainer}>

@@ -40,7 +40,7 @@ export const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#F5F6FA',
     paddingHorizontal: 16,
   },
   header: {

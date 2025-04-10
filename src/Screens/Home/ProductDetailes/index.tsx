@@ -165,7 +165,6 @@ const ProductDetails = ({route}) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView showsVerticalScrollIndicator={false} style={{flex: 1}}>
         <Header
           title="Product Details"
           icon1={BackIcon}
@@ -180,6 +179,7 @@ const ProductDetails = ({route}) => {
           }}
           icon2Color={isInWishlist ? '#CC5656' : '#FFF'}
         />
+      <ScrollView showsVerticalScrollIndicator={false} style={{flex: 1}} contentContainerStyle={{paddingTop: 60}}>
         <View style={styles.mainImageContainer}>
           <Image
             source={{
