@@ -25,6 +25,7 @@ import styles from './styles';
 import {useAppDispatch, useAppSelector} from 'src/store/hooks';
 import {fetchProducts} from 'src/store/slices/productsSlice';
 import {getProductVariations} from 'src/services/wooCommerceApi';
+import LoadingLogo from 'src/Components/LoadingLogo';
 
 function findVariation(variations, selectedAttributes) {
   return variations.find(variation => {
@@ -69,7 +70,7 @@ const ProductList = ({route}) => {
       <Header title={`${category} Products`} icon1={BackIcon} />
       {productsLoading ? (
         <View style={styles.loadingContainer}>
-          <ActivityIndicator size="large" color="#0088cc" />
+          <LoadingLogo size={120} />
         </View>
       ) : (
         <FlatList

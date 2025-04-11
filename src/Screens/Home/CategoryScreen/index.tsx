@@ -6,8 +6,8 @@ import {
   Text,
   Image,
   SafeAreaView,
-  ActivityIndicator,
 } from 'react-native';
+import LoadingLogo from '../../../Components/LoadingLogo';
 import {useIsFocused, useNavigation} from '@react-navigation/native';
 import {useDispatch, useSelector} from 'react-redux';
 import {
@@ -85,7 +85,7 @@ const CategoryScreen = () => {
       <View style={styles.contentContainer}>
         {status === 'loading' || isLoading ? (
           <View style={styles.loadingContainer}>
-            <ActivityIndicator size="large" color="#0088cc" />
+            <LoadingLogo  />
           </View>
         ) : (
           <FlatList

@@ -17,6 +17,7 @@ import styles from './styles';
 import {RootState} from 'src/store';
 import {Category} from 'src/store/slices/categorySlice';
 import {getSubCategories} from 'src/services/wooCommerceApi';
+import LoadingLogo from 'src/Components/LoadingLogo';
 
 const SubCategoryScreen = ({route}) => {
   const navigation = useNavigation();
@@ -79,7 +80,8 @@ const SubCategoryScreen = ({route}) => {
       <View style={styles.contentContainer}>
         {isLoading ? (
           <View style={styles.loadingContainer}>
-            <ActivityIndicator size="large" color="#0088cc" />
+            {/* <ActivityIndicator size="large" color="#0088cc" /> */}
+            <LoadingLogo size={120} />
           </View>
         ) : (
           <FlatList

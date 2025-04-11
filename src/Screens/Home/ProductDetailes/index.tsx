@@ -25,6 +25,7 @@ import RenderHtml from 'react-native-render-html';
 import {getProductVariations} from 'src/services/wooCommerceApi';
 import RNPickerSelect from 'react-native-picker-select';
 import {FilePicker} from '../../../Components';
+import LoadingLogo from 'src/Components/LoadingLogo';
 
 function findVariation(variations, selectedAttributes) {
   return variations.find(variation => {
@@ -173,7 +174,7 @@ const ProductDetails = ({route}) => {
       />
       {loading ? (
         <View style={styles.loadingContainer}>
-          <ActivityIndicator size={'large'} color="#0088cc" />
+          <LoadingLogo/>
         </View>
       ) : (
         <View style={{flex: 1}}>
