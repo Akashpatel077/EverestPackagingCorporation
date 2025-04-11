@@ -21,11 +21,8 @@ const styles = StyleSheet.create({
   categoryWrapper: {
     width: '48%',
     margin: '1%',
-  },
-  categoryCard: {
     backgroundColor: '#FFFFFF',
     borderRadius: 16,
-    overflow: 'hidden',
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -37,6 +34,11 @@ const styles = StyleSheet.create({
     height: 220,
     borderWidth: 1,
     borderColor: 'rgba(0, 0, 0, 0.05)',
+  },
+  categoryCard: {
+    flex: 1,
+    overflow: 'hidden',
+    borderRadius: 16,
   },
   categoryImage: {
     width: '100%',
