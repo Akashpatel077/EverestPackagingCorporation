@@ -224,20 +224,6 @@ const ProductDetails = ({route}) => {
                 <Text style={styles.salePrice}>₹{salePrice}</Text>
               </View>
 
-              <View
-                style={{
-                  maxHeight: isExpanded ? 'auto' : 92,
-                  overflow: 'hidden',
-                }}>
-                <RenderHtml source={{html: productDetails.description}} />
-              </View>
-              <TouchableOpacity
-                onPress={() => setIsExpanded(prevValue => !prevValue)}>
-                <Text style={styles.readMore}>
-                  {isExpanded ? 'Read less' : 'Read more'}
-                </Text>
-              </TouchableOpacity>
-
               {productDetails.attributes.length > 0 &&
                 productDetails.attributes.map(
                   item =>
@@ -252,7 +238,12 @@ const ProductDetails = ({route}) => {
               {colorOptions.length > 0 && (
                 <View style={styles.colorSection}>
                   <Text style={styles.sectionTitle}>
-                    Select Color : {selectedColor}
+                    Select Color
+                    {selectedColor && (
+                      <Text style={[styles.sectionTitle, {color: '#0088cc'}]}>
+                        {` : ${selectedColor}`}
+                      </Text>
+                    )}
                   </Text>
                   <ScrollView
                     horizontal
@@ -301,6 +292,19 @@ const ProductDetails = ({route}) => {
                   different combination.
                 </Text>
               )}
+              <View
+                style={{
+                  maxHeight: isExpanded ? 'auto' : 92,
+                  overflow: 'hidden',
+                }}>
+                <RenderHtml source={{html: productDetails.description}} />
+              </View>
+              <TouchableOpacity
+                onPress={() => setIsExpanded(prevValue => !prevValue)}>
+                <Text style={styles.readMore}>
+                  {isExpanded ? 'Read less' : 'Read more'}
+                </Text>
+              </TouchableOpacity>
             </View>
           </ScrollView>
           <View style={styles.bottomContainer}>
@@ -368,7 +372,11 @@ const RenderAttributes = ({
     <>
       <Text style={styles.sectionTitle}>
         {item.name}
-        {selectedItem ? ` : ${selectedItem}` : ''}
+        {selectedItem && (
+          <Text style={[styles.sectionTitle, {color: '#0088cc'}]}>
+            {` : ${selectedItem}`}
+          </Text>
+        )}
       </Text>
       <ScrollView
         showsHorizontalScrollIndicator={false}

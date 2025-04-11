@@ -211,9 +211,11 @@ export const styles = StyleSheet.create({
     borderRadius: 25,
     padding: 4,
     marginHorizontal: 6,
+    borderWidth: 1,
+    borderColor: '#CCCCCC',
   },
   selectedColorButton: {
-    borderColor: '#000000',
+    borderColor: '#0088cc',
     borderWidth: 2,
     transform: [{scale: 1.1}],
   },
@@ -240,7 +242,7 @@ export const styles = StyleSheet.create({
   },
   priceLabel: {
     fontSize: 12,
-    color: '#666666',
+    color: '#0088cc',
     marginBottom: 0,
   },
   price: {

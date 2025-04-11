@@ -89,7 +89,9 @@ const CategoryScreen = () => {
           </View>
         ) : (
           <FlatList
-            data={categories.filter(category => category.count > 0)}
+            data={categories
+              .filter(category => category.count > 0)
+              .sort((a, b) => (a.menu_order || 0) - (b.menu_order || 0))}
             renderItem={renderCategoryItem}
             keyExtractor={item => item.id.toString()}
             numColumns={2}

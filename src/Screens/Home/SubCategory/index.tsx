@@ -85,7 +85,9 @@ const SubCategoryScreen = ({route}) => {
           </View>
         ) : (
           <FlatList
-            data={subCategories}
+            data={subCategories
+              .filter(category => category.count > 0)
+              .sort((a, b) => (a.menu_order || 0) - (b.menu_order || 0))}
             renderItem={renderSubCategoryItem}
             numColumns={2}
             showsVerticalScrollIndicator={false}

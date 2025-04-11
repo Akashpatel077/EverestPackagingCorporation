@@ -1,14 +1,21 @@
-import React, { useEffect } from 'react';
-import { View, Text, StyleSheet, Animated, Dimensions, Image } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { ic_Boxes, ic_Tapes, ic_Bags } from '../../../assets/icons';
+import React, {useEffect} from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Animated,
+  Dimensions,
+  Image,
+} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+import {ic_Boxes, ic_Tapes, ic_Bags} from '../../../assets/icons';
 import Logo from '../../../assets/images/Logo.png';
-import { Icon } from 'src/Components';
-import { WELCOME, HOMESCREEN } from 'src/Navigation/home/routes';
-import { useSelector } from 'react-redux';
-import { RootState } from 'src/store';
+import {Icon} from 'src/Components';
+import {WELCOME, HOMESCREEN} from 'src/Navigation/home/routes';
+import {useSelector} from 'react-redux';
+import {RootState} from 'src/store';
 
-const { width, height } = Dimensions.get('window');
+const {width, height} = Dimensions.get('window');
 
 const SplashScreen = () => {
   const navigation = useNavigation();
@@ -20,7 +27,7 @@ const SplashScreen = () => {
   const iconBubbles = [
     new Animated.Value(0),
     new Animated.Value(0),
-    new Animated.Value(0)
+    new Animated.Value(0),
   ];
 
   useEffect(() => {
@@ -63,10 +70,10 @@ const SplashScreen = () => {
               tension: 40,
               friction: 6,
               useNativeDriver: true,
-            })
-          ])
-        )
-      ])
+            }),
+          ]),
+        ),
+      ]),
     ]).start();
 
     // Navigate based on startKey after animations
@@ -80,32 +87,32 @@ const SplashScreen = () => {
   return (
     <View style={styles.container}>
       <Animated.View
-        style={[styles.logoContainer, { transform: [{ scale: logoScale }] }]}>
+        style={[styles.logoContainer, {transform: [{scale: logoScale}]}]}>
         <Image source={Logo} style={styles.logoImage} resizeMode="contain" />
       </Animated.View>
 
-      <Animated.Text style={[styles.title, { opacity: fadeAnim }]}>
+      {/* <Animated.Text style={[styles.title, { opacity: fadeAnim }]}>
         Everest Packaging Corporation
-      </Animated.Text>
+      </Animated.Text> */}
 
       <Animated.View
-        style={[styles.iconContainer, { 
-          transform: [
-            { translateY: iconPosition },
-            { scale: iconScale }
-          ] 
-        }]}>
+        style={[
+          styles.iconContainer,
+          {
+            transform: [{translateY: iconPosition}, {scale: iconScale}],
+          },
+        ]}>
         {[ic_Boxes, ic_Bags, ic_Tapes].map((icon, index) => (
           <Animated.View
             key={index}
             style={{
-              transform: [{ scale: iconBubbles[index] }],
+              transform: [{scale: iconBubbles[index]}],
               backgroundColor: ['#2196F3', '#4CAF50', '#FF9800'][index],
               borderRadius: 30,
               padding: 12,
               marginHorizontal: 8,
               shadowColor: '#000',
-              shadowOffset: { width: 0, height: 2 },
+              shadowOffset: {width: 0, height: 2},
               shadowOpacity: 0.25,
               shadowRadius: 3.84,
               elevation: 5,
@@ -115,7 +122,7 @@ const SplashScreen = () => {
         ))}
       </Animated.View>
 
-      <Animated.Text style={[styles.tagline, { opacity: fadeAnim }]}>
+      <Animated.Text style={[styles.tagline, {opacity: fadeAnim}]}>
         Your Complete Packaging Solution
       </Animated.Text>
     </View>
@@ -157,7 +164,7 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     padding: 20,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
+    shadowOffset: {width: 0, height: 4},
     shadowOpacity: 0.2,
     shadowRadius: 12,
     elevation: 8,
