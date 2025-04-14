@@ -65,6 +65,7 @@ const ProductList = ({route}) => {
   const renderProductItem = ({item}) => {
     return <ProductItemCard item={item} wishlistItems={wishlistItems} />;
   };
+
   return (
     <SafeAreaView style={styles.container}>
       <Header title={`${category} Products`} icon1={BackIcon} />
@@ -103,6 +104,7 @@ const ProductItemCard = React.memo(
     const dispatch = useAppDispatch();
     const [regularPrice, setRegularPrice] = useState(item.regular_price);
     const [salePrice, setSalePrice] = useState(item.price);
+    const isOutOfStock = item.stock_status === 'outofstock';
 
     const handleWishlistToggle = product => {
       const isInWishlist = wishlistItems.some(item => item.id === product.id);
@@ -153,7 +155,7 @@ const ProductItemCard = React.memo(
 
     return (
       <TouchableOpacity
-        style={styles.productCard}
+        style={[styles.productCard, {opacity: isOutOfStock ? 0.7 : 1}]}
         onPress={() =>
           navigation.navigate(PRODUCT_DETAILS, {productId: item.id})
         }>
@@ -162,6 +164,11 @@ const ProductItemCard = React.memo(
             source={item.images?.[0]?.src && {uri: item.images[0].src}}
             style={styles.productImage}
           />
+          {isOutOfStock && (
+            <View style={styles.outOfStockOverlay}>
+              <Text style={styles.outOfStockText}>Out of Stock</Text>
+            </View>
+          )}
           <TouchableOpacity
             style={styles.favoriteButton}
             onPress={() => handleWishlistToggle(item)}>

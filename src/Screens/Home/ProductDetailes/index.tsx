@@ -42,15 +42,19 @@ const keysToExtract = [
   'product_step',
 ];
 
+const variationNotAvailableText =
+  'Sorry!, no products matched your selection. Please choose a different combination.';
+
 const ProductDetails = ({route}) => {
   const {productId} = route.params;
   const [selectedColor, setSelectedColor] = useState('');
   const [isExpanded, setIsExpanded] = useState(false);
   const [selectedAttributes, setSelectedAttributes] = useState({});
   const [productVariations, setProductVariations] = useState([]);
+  const [productVariationData, setProductVariationData] = useState({});
   const [isVariationNotAvailable, setIsVariationNotAvailable] = useState(false);
   const [filteredMetaData, setFilteredMetaData] = useState({});
-  const [quantity, setQuantity] = useState(0);
+  const [quantity, setQuantity] = useState(1);
   const [selectedCustomExtraFields, setSelectedCustomExtraFields] = useState(
     {},
   );
@@ -58,25 +62,27 @@ const ProductDetails = ({route}) => {
     isProductInWishlist(state, productId),
   );
 
-  console.log('selectedCustomExtraFields  : ', selectedAttributes);
-
   const dispatch = useAppDispatch();
   const {loading, productDetails, error} = useAppSelector(
     state => state.productDetails,
   );
-  const [regularPrice, setRegularPrice] = useState('');
-  const [salePrice, setSalePrice] = useState('');
+  const [regularPrice, setRegularPrice] = useState(0);
+  const [salePrice, setSalePrice] = useState(0);
+  const totalPrice = quantity * Number(salePrice);
+  const isOutOfStock = productDetails.stock_status === 'outofstock';
 
   const getProductVariationList = async () => {
     try {
       const variationList = await getProductVariations(productId);
+      console.log('variationList : ', variationList);
+
       setProductVariations([...variationList]);
     } catch (e) {
       Alert.alert('Error : ', e.message);
     }
   };
 
-  console.log('products : ', productDetails);
+  console.log('productss : ', productDetails, totalPrice, productVariationData);
 
   useEffect(() => {
     setSalePrice(productDetails.price);
@@ -109,9 +115,12 @@ const ProductDetails = ({route}) => {
         selectedAttributes,
       );
 
+      console.log('productVariation : ', productVariation);
+
       if (productVariation) {
+        setProductVariationData(productVariation);
         setRegularPrice(productVariation.regular_price);
-        setSalePrice(productVariation.sale_price);
+        setSalePrice(productVariation.sale_price ?? productVariation.price);
         setIsVariationNotAvailable(false);
       } else {
         setIsVariationNotAvailable(true);
@@ -174,7 +183,7 @@ const ProductDetails = ({route}) => {
       />
       {loading ? (
         <View style={styles.loadingContainer}>
-          <LoadingLogo/>
+          <LoadingLogo />
         </View>
       ) : (
         <View style={{flex: 1}}>
@@ -224,7 +233,22 @@ const ProductDetails = ({route}) => {
                 <Text style={styles.salePrice}>₹{salePrice}</Text>
               </View>
 
-              {productDetails.attributes.length > 0 &&
+              {/* <View
+                style={{
+                  maxHeight: isExpanded ? 'auto' : 92,
+                  overflow: 'hidden',
+                }}>
+                <RenderHtml source={{html: productDetails.description}} />
+              </View>
+              <TouchableOpacity
+                onPress={() => setIsExpanded(prevValue => !prevValue)}>
+                <Text style={styles.readMore}>
+                  {isExpanded ? 'Read less' : 'Read more'}
+                </Text>
+              </TouchableOpacity> */}
+
+              {productDetails.type === 'variable' &&
+                productDetails.attributes.length > 0 &&
                 productDetails.attributes.map(
                   item =>
                     !(item.name === 'HSN Code') && (
@@ -288,8 +312,7 @@ const ProductDetails = ({route}) => {
 
               {isVariationNotAvailable && (
                 <Text style={styles.alertLabel}>
-                  Sorry!, no products matched your selection. Please choose a
-                  different combination.
+                  {variationNotAvailableText}
                 </Text>
               )}
               <View
@@ -310,31 +333,39 @@ const ProductDetails = ({route}) => {
           <View style={styles.bottomContainer}>
             <View style={styles.priceContainer}>
               <Text style={styles.priceLabel}>Total Price</Text>
-              <Text style={styles.price}>₹{salePrice}</Text>
+              <Text style={styles.price}>₹{totalPrice.toFixed(2)}</Text>
             </View>
             <TouchableOpacity
-              style={styles.addToCartButton}
+              style={[
+                styles.addToCartButton,
+                {opacity: isOutOfStock ? 0.8 : 1},
+              ]}
               onPress={() => {
-                const selectedAttributes =
-                  productDetails.attributes?.map(attr => ({
-                    name: attr.name,
-                    value: attr.options[0],
-                  })) || [];
-
-                dispatch(
-                  addToCart({
-                    id: productDetails.id,
-                    quantity: 1,
-                    name: productDetails.name,
-                    price: productDetails.price,
-                    sale_price: productDetails.sale_price,
-                    color: selectedColor,
-                    attributes: selectedAttributes,
-                    image: productDetails.images?.[0]?.src,
-                  }),
-                );
+                if (isOutOfStock) {
+                } else if (isVariationNotAvailable) {
+                  Alert.alert('', variationNotAvailableText);
+                } else {
+                  dispatch(
+                    addToCart({
+                      id: productVariationData.id ?? productDetails.id,
+                      quantity: quantity,
+                      name: productDetails.name,
+                      price: productDetails.price,
+                      sale_price: salePrice,
+                      totalPrice: totalPrice,
+                      color: selectedColor,
+                      attributes: selectedAttributes,
+                      image: productDetails.images?.[0]?.src,
+                      product_step: filteredMetaData.product_step ?? 1,
+                      min_quantity: filteredMetaData.min_quantity ?? 1,
+                      max_quantity: filteredMetaData.max_quantity ?? 100000,
+                    }),
+                  );
+                }
               }}>
-              <Text style={styles.addToCartText}>🛍 Add to Cart</Text>
+              <Text style={styles.addToCartText}>
+                {isOutOfStock ? 'Out of Stock' : '🛍 Add to Cart'}
+              </Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -485,6 +516,11 @@ const RenderCustomExtraFields = ({
       <Text style={[styles.sectionTitle, {marginBottom: 0}]}>{item.label}</Text>
       <RNPickerSelect
         value={selectedValue}
+        pickerProps={{dropdownIconRippleColor: 0}}
+        style={{
+          viewContainer: {borderWidth: 1},
+        }}
+        textInputProps={{}}
         itemKey={selectedValue}
         onValueChange={(value: string) => {
           setSelectedCustomExtraFields(prevValue => ({

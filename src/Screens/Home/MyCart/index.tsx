@@ -40,6 +40,7 @@ interface CartItem {
     value: string;
   }>;
   image?: string;
+  totalPrice: string;
 }
 
 const MyCart = () => {
@@ -60,13 +61,13 @@ const MyCart = () => {
 
   const [promoCode, setPromoCode] = useState('');
   // const [discount, setDiscount] = useState(35);
-  const [deliveryFee, setDeliveryFee] = useState(25);
+  const [deliveryFee, setDeliveryFee] = useState(0);
   const [showRemoveModal, setShowRemoveModal] = useState(false);
   const [selectedItem, setSelectedItem] = useState<CartItem | null>(null);
 
   // Calculate subtotal
   const subtotal = cartItems.reduce(
-    (sum, item) => sum + item.price * item.quantity,
+    (sum, item) => sum + item.sale_price * item.quantity,
     0,
   );
 
@@ -76,16 +77,32 @@ const MyCart = () => {
   // Handle quantity increase
   const increaseQuantity = (id: number) => {
     const item = cartItems.find(item => item.id === id);
-    if (item) {
-      dispatch(updateQuantity({id, quantity: item.quantity + 1}));
+
+    if (item && item.quantity < item.max_quantity) {
+      const affectedQuantity = item.quantity + Number(item.product_step);
+
+      dispatch(
+        updateQuantity({
+          id,
+          quantity: affectedQuantity,
+          totalPrice: affectedQuantity * item.sale_price,
+        }),
+      );
     }
   };
 
   // Handle quantity decrease
   const decreaseQuantity = (id: number) => {
     const item = cartItems.find(item => item.id === id);
-    if (item && item.quantity > 1) {
-      dispatch(updateQuantity({id, quantity: item.quantity - 1}));
+    if (item && item.quantity > item.min_quantity) {
+      const affectedQuantity = item.quantity - Number(item.product_step);
+      dispatch(
+        updateQuantity({
+          id,
+          quantity: affectedQuantity,
+          totalPrice: affectedQuantity * item.sale_price,
+        }),
+      );
     }
   };
 
@@ -121,7 +138,9 @@ const MyCart = () => {
       <View style={styles.itemDetails}>
         <Text style={styles.itemName}>{item.name}</Text>
         <Text style={styles.itemSize}>Size : {item.size}</Text>
-        <Text style={styles.itemPrice}>₹{Number(item.price).toFixed(2)}</Text>
+        <Text style={styles.itemPrice}>
+          ₹{Number(item.totalPrice).toFixed(2)}
+        </Text>
         <View style={styles.quantityControl}>
           <TouchableOpacity
             style={styles.quantityButton}
@@ -203,10 +222,10 @@ const MyCart = () => {
             <Text style={styles.summaryLabel}>Sub-Total</Text>
             <Text style={styles.summaryValue}>₹{subtotal.toFixed(2)}</Text>
           </View>
-          <View style={styles.summaryRow}>
+          {/* <View style={styles.summaryRow}>
             <Text style={styles.summaryLabel}>Delivery Fee</Text>
             <Text style={styles.summaryValue}>₹{deliveryFee.toFixed(2)}</Text>
-          </View>
+          </View> */}
           {/* <View style={styles.summaryRow}>
           <Text style={styles.summaryLabel}>Discount</Text>
           <Text style={styles.summaryValue}>-${discount.toFixed(2)}</Text>
