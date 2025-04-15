@@ -6,6 +6,7 @@ import {
   Text,
   Image,
   SafeAreaView,
+  Alert,
 } from 'react-native';
 import LoadingLogo from '../../../Components/LoadingLogo';
 import {useIsFocused, useNavigation} from '@react-navigation/native';
@@ -29,6 +30,7 @@ const CategoryScreen = () => {
   );
   const [isLoading, setIsLoading] = useState(false);
   const isFocus = useIsFocused();
+  const [subCategoriesList, setSubCategoriesList] = useState([]);
   useEffect(() => {
     if (isFocus) {
       setIsLoading(false);
@@ -40,10 +42,22 @@ const CategoryScreen = () => {
     dispatch(fetchSubCategories(214));
   }, [dispatch]);
 
+  useEffect(() => {
+    const fetchSubCategoriesAction = async () => {
+      try {
+        const subCategories = await getSubCategories();
+        setSubCategoriesList(subCategories);
+      } catch (error) {
+        Alert.alert('', error.message);
+      }
+    };
+
+    fetchSubCategoriesAction();
+  }, []);
+
   const handleCategoryPress = async (category: any) => {
     try {
-      const subCategories = await getSubCategories(category.id);
-      if (!subCategories || subCategories.length === 0) {
+      if (!subCategoriesList || subCategoriesList.length === 0) {
         navigation.navigate(PRODUCT_LIST, {
           category: category.name,
           categoryId: category.id,
@@ -52,6 +66,7 @@ const CategoryScreen = () => {
         navigation.navigate(SUB_CATEGORY_SCREEN, {
           category: category.name,
           categoryId: category.id,
+          subCategoriesList,
         });
       }
     } catch (error) {
@@ -85,7 +100,7 @@ const CategoryScreen = () => {
       <View style={styles.contentContainer}>
         {status === 'loading' || isLoading ? (
           <View style={styles.loadingContainer}>
-            <LoadingLogo  />
+            <LoadingLogo />
           </View>
         ) : (
           <FlatList

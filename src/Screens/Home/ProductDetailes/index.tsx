@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import {styles} from './styles';
 import {BackIcon, Heart} from 'assets/icons';
-import {Header, Icon} from 'src/Components';
+import {CDropdown, Header, Icon} from 'src/Components';
 import {useAppDispatch, useAppSelector} from 'src/store/hooks';
 import {fetchProductDetails} from '../../../store/slices/productDetailsSlice';
 import {
@@ -23,7 +23,6 @@ import {
 import {addToCart} from '../../../store/slices/cartSlice';
 import RenderHtml from 'react-native-render-html';
 import {getProductVariations} from 'src/services/wooCommerceApi';
-import RNPickerSelect from 'react-native-picker-select';
 import {FilePicker} from '../../../Components';
 import LoadingLogo from 'src/Components/LoadingLogo';
 
@@ -115,8 +114,6 @@ const ProductDetails = ({route}) => {
         productVariations,
         selectedAttributes,
       );
-
-      console.log('productVariation : ', productVariation);
 
       if (productVariation) {
         setProductVariationData(productVariation);
@@ -515,34 +512,33 @@ const RenderCustomExtraFields = ({
   item: CustomExtraFieldsTypes;
   setSelectedCustomExtraFields: (val: any) => void;
 }) => {
-  const [selectedValue, setSelectedValue] = useState('');
+  const [selectedValue, setSelectedValue] = useState({
+    label: '',
+    value: '',
+    selected: false,
+  });
 
   useEffect(() => {
     if (item.values?.length) {
       const selectedItemIndex = item.values?.findIndex(item => item.selected);
-      const selectedItem = item.values[selectedItemIndex].value;
-      setSelectedValue(selectedItem);
+      const selectedItem = item.values[selectedItemIndex];
+      setSelectedValue({...selectedItem});
     }
   }, []);
 
   return item.type === 'select' ? (
     <>
       <Text style={[styles.sectionTitle, {marginBottom: 0}]}>{item.label}</Text>
-      <RNPickerSelect
-        value={selectedValue}
-        pickerProps={{
-          dropdownIconRippleColor: 0,
-        }}
-        placeholder={{}}
-        itemKey={selectedValue}
-        onValueChange={(value: string) => {
+      <CDropdown
+        data={item.values}
+        selectedItem={selectedValue}
+        onSelect={(itemObject: any) => {
           setSelectedCustomExtraFields(prevValue => ({
             ...prevValue,
-            [item.label]: value,
+            [item.label]: itemObject.value,
           }));
-          setSelectedValue(value);
+          setSelectedValue(itemObject);
         }}
-        items={item.values}
       />
     </>
   ) : item.type === 'file' ? (

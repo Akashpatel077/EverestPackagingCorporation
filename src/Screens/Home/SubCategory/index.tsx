@@ -16,19 +16,20 @@ import {PRODUCT_LIST} from 'src/Navigation/home/routes';
 import styles from './styles';
 import {RootState} from 'src/store';
 import {Category} from 'src/store/slices/categorySlice';
-import {getSubCategories} from 'src/services/wooCommerceApi';
 import LoadingLogo from 'src/Components/LoadingLogo';
 
 const SubCategoryScreen = ({route}) => {
   const navigation = useNavigation();
-  const {category, categoryId} = route.params;
+  const {category, categoryId, subCategoriesList} = route.params;
   const [subCategories, setSubCategories] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchSubCategories = async () => {
       try {
-        const response = await getSubCategories(categoryId);
+        const response = subCategoriesList.filter(
+          item => item.parent === categoryId,
+        );
         setSubCategories(response);
         if (!response || response.length === 0) {
           navigation.replace(PRODUCT_LIST, {

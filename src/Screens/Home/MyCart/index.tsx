@@ -47,6 +47,8 @@ interface CartItem {
   tax_class: string;
 }
 
+const COD_CHARGE = 50;
+
 const calculateTax = (
   cartItems: CartItem[],
   allTaxes,
@@ -121,6 +123,7 @@ const MyCart = () => {
   const [selectedItem, setSelectedItem] = useState<CartItem | null>(null);
   const [totalTax, setTotalTax] = useState(0);
   const [taxBreakdown, setTaxBreakdown] = useState({});
+  const [isCOD, setIsCOD] = useState(false);
 
   const getAllTaxesAction = async () => {
     try {
@@ -299,7 +302,7 @@ const MyCart = () => {
             <Text style={styles.summaryLabel}>Sub-Total</Text>
             <Text style={styles.summaryValue}>₹{subtotal.toFixed(2)}</Text>
           </View>
-          {/* <View style={styles.summaryRow}>
+          <View style={styles.summaryRow}>
             <Text
               style={[
                 styles.summaryLabel,
@@ -310,7 +313,19 @@ const MyCart = () => {
             <Text style={styles.summaryValue}>
               ₹{shippingcharge.toFixed(2)}
             </Text>
-          </View> */}
+          </View>
+          {isCOD && (
+            <View style={styles.summaryRow}>
+              <Text
+                style={[
+                  styles.summaryLabel,
+                  {color: '#555555', fontWeight: '900'},
+                ]}>
+                Cash On Delivery
+              </Text>
+              <Text style={styles.summaryValue}>₹{COD_CHARGE.toFixed(2)}</Text>
+            </View>
+          )}
 
           {Object.entries(taxBreakdown).map(([label, value], index) => (
             <View key={index} style={styles.summaryRow}>

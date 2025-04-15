@@ -116,7 +116,7 @@ export const getCategories = async (params?: {
   }
 };
 
-export const getSubCategories = async (parentId: number) => {
+export const getSubCategories = async (parentId?: number) => {
   try {
     const isConnected = await isNetworkConnected();
     if (!isConnected) {
