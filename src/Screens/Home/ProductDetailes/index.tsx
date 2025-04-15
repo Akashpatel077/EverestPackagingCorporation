@@ -74,7 +74,6 @@ const ProductDetails = ({route}) => {
   const getProductVariationList = async () => {
     try {
       const variationList = await getProductVariations(productId);
-      console.log('variationList : ', variationList);
 
       setProductVariations([...variationList]);
     } catch (e) {
@@ -82,7 +81,9 @@ const ProductDetails = ({route}) => {
     }
   };
 
-  console.log('productss : ', productDetails, totalPrice, productVariationData);
+  const cleanedHTML =
+    productDetails.description &&
+    productDetails.description.replace(/<h3>Product Description:<\/h3>/i, '');
 
   useEffect(() => {
     setSalePrice(productDetails.price);
@@ -315,19 +316,30 @@ const ProductDetails = ({route}) => {
                   {variationNotAvailableText}
                 </Text>
               )}
-              <View
-                style={{
-                  maxHeight: isExpanded ? 'auto' : 92,
-                  overflow: 'hidden',
-                }}>
-                <RenderHtml source={{html: productDetails.description}} />
-              </View>
-              <TouchableOpacity
-                onPress={() => setIsExpanded(prevValue => !prevValue)}>
-                <Text style={styles.readMore}>
-                  {isExpanded ? 'Read less' : 'Read more'}
-                </Text>
-              </TouchableOpacity>
+              {cleanedHTML && (
+                <>
+                  <Text
+                    style={[
+                      styles.sectionTitle,
+                      {marginBottom: 5, marginTop: 10},
+                    ]}>
+                    Product Description:
+                  </Text>
+                  <View
+                    style={{
+                      maxHeight: isExpanded ? 'auto' : 92,
+                      overflow: 'hidden',
+                    }}>
+                    <RenderHtml source={{html: cleanedHTML}} />
+                  </View>
+                  <TouchableOpacity
+                    onPress={() => setIsExpanded(prevValue => !prevValue)}>
+                    <Text style={styles.readMore}>
+                      {isExpanded ? 'Read less' : 'Read more'}
+                    </Text>
+                  </TouchableOpacity>
+                </>
+              )}
             </View>
           </ScrollView>
           <View style={styles.bottomContainer}>
@@ -359,6 +371,8 @@ const ProductDetails = ({route}) => {
                       product_step: filteredMetaData.product_step ?? 1,
                       min_quantity: filteredMetaData.min_quantity ?? 1,
                       max_quantity: filteredMetaData.max_quantity ?? 100000,
+                      tax_status: productDetails.tax_status,
+                      tax_class: productDetails.tax_class,
                     }),
                   );
                 }
@@ -516,11 +530,10 @@ const RenderCustomExtraFields = ({
       <Text style={[styles.sectionTitle, {marginBottom: 0}]}>{item.label}</Text>
       <RNPickerSelect
         value={selectedValue}
-        pickerProps={{dropdownIconRippleColor: 0}}
-        style={{
-          viewContainer: {borderWidth: 1},
+        pickerProps={{
+          dropdownIconRippleColor: 0,
         }}
-        textInputProps={{}}
+        placeholder={{}}
         itemKey={selectedValue}
         onValueChange={(value: string) => {
           setSelectedCustomExtraFields(prevValue => ({

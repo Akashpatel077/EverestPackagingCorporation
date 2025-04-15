@@ -190,6 +190,22 @@ export const getProductVariations = async (productId: number) => {
   }
 };
 
+export const getAllTaxes = async () => {
+  try {
+    const isConnected = await isNetworkConnected();
+    if (!isConnected) {
+      throw new Error(
+        'No internet connection. Please check your network settings.',
+      );
+    }
+
+    const response = await wooCommerceApi.get(`/taxes`);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export default {
   getProducts,
   getAllProducts,
@@ -198,4 +214,5 @@ export default {
   getCategories,
   getProductDetails,
   getProductVariations,
+  getAllTaxes,
 };

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -9,6 +9,7 @@ import {
   Modal,
   SafeAreaView,
   StatusBar,
+  Alert,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {useSelector, useDispatch} from 'react-redux';
@@ -27,6 +28,7 @@ import {
   updateQuantity,
   removeFromCart,
 } from 'src/store/slices/cartSlice';
+import {getAllTaxes} from 'src/services/wooCommerceApi';
 
 interface CartItem {
   id: number;
@@ -41,11 +43,64 @@ interface CartItem {
   }>;
   image?: string;
   totalPrice: string;
+  tax_status: string;
+  tax_class: string;
 }
+
+const calculateTax = (
+  cartItems: CartItem[],
+  allTaxes,
+  customerState: string,
+  storeState = 'GJ',
+) => {
+  let totalTax = 0;
+  const taxBreakdown = {};
+
+  cartItems.forEach(product => {
+    const {price, quantity, tax_status, tax_class} = product;
+
+    if (tax_status !== 'taxable') return;
+
+    const taxClass = tax_class || 'standard';
+    const isSameState = customerState === storeState;
+
+    const matchedTaxes = allTaxes.filter(
+      tax =>
+        tax.class === taxClass &&
+        (isSameState ? tax.state === storeState : tax.state === ''),
+    );
+
+    matchedTaxes.forEach(tax => {
+      const taxRate = parseFloat(tax.rate);
+      const label = tax.name.trim(); // e.g., "9% CGST"
+      const subtotal = price * quantity;
+      const taxAmount = (subtotal * taxRate) / 100;
+
+      totalTax += taxAmount;
+
+      if (taxBreakdown[label]) {
+        taxBreakdown[label] += taxAmount;
+      } else {
+        taxBreakdown[label] = taxAmount;
+      }
+    });
+  });
+
+  // Round each breakdown value
+  Object.keys(taxBreakdown).forEach(label => {
+    taxBreakdown[label] = parseFloat(taxBreakdown[label].toFixed(2));
+  });
+
+  return {
+    totalTax: parseFloat(totalTax.toFixed(2)),
+    breakdown: taxBreakdown,
+  };
+};
 
 const MyCart = () => {
   const navigation = useNavigation();
   const addresses = useSelector((state: any) => state.address);
+  const customerState = 'GJ';
 
   const selectedShippingAddress = addresses.shippingAddresses.find(
     (address: any) => address.id === addresses.selectedShippingAddressId,
@@ -61,9 +116,31 @@ const MyCart = () => {
 
   const [promoCode, setPromoCode] = useState('');
   // const [discount, setDiscount] = useState(35);
-  const [deliveryFee, setDeliveryFee] = useState(0);
+  const [shippingcharge, setShippingCharge] = useState(0);
   const [showRemoveModal, setShowRemoveModal] = useState(false);
   const [selectedItem, setSelectedItem] = useState<CartItem | null>(null);
+  const [totalTax, setTotalTax] = useState(0);
+  const [taxBreakdown, setTaxBreakdown] = useState({});
+
+  const getAllTaxesAction = async () => {
+    try {
+      const allTaxes = await getAllTaxes();
+
+      const {totalTax, breakdown} = calculateTax(
+        cartItems,
+        allTaxes,
+        customerState,
+      );
+      setTaxBreakdown({...breakdown});
+      setTotalTax(totalTax);
+    } catch (e) {
+      Alert.alert('Error : ', e.message);
+    }
+  };
+
+  useEffect(() => {
+    getAllTaxesAction();
+  }, [cartItems]);
 
   // Calculate subtotal
   const subtotal = cartItems.reduce(
@@ -72,7 +149,7 @@ const MyCart = () => {
   );
 
   // Calculate total
-  const total = subtotal + deliveryFee;
+  const total = subtotal + shippingcharge + totalTax;
 
   // Handle quantity increase
   const increaseQuantity = (id: number) => {
@@ -223,13 +300,30 @@ const MyCart = () => {
             <Text style={styles.summaryValue}>₹{subtotal.toFixed(2)}</Text>
           </View>
           {/* <View style={styles.summaryRow}>
-            <Text style={styles.summaryLabel}>Delivery Fee</Text>
-            <Text style={styles.summaryValue}>₹{deliveryFee.toFixed(2)}</Text>
+            <Text
+              style={[
+                styles.summaryLabel,
+                {color: '#555555', fontWeight: '900'},
+              ]}>
+              Shipping
+            </Text>
+            <Text style={styles.summaryValue}>
+              ₹{shippingcharge.toFixed(2)}
+            </Text>
           </View> */}
-          {/* <View style={styles.summaryRow}>
-          <Text style={styles.summaryLabel}>Discount</Text>
-          <Text style={styles.summaryValue}>-${discount.toFixed(2)}</Text>
-        </View> */}
+
+          {Object.entries(taxBreakdown).map(([label, value], index) => (
+            <View key={index} style={styles.summaryRow}>
+              <Text
+                style={[
+                  styles.summaryLabel,
+                  {color: '#555555', fontWeight: '900'},
+                ]}>
+                {label}
+              </Text>
+              <Text style={styles.summaryValue}>₹{value.toFixed(2)}</Text>
+            </View>
+          ))}
           <View style={[styles.summaryRow, styles.totalRow]}>
             <Text style={styles.totalLabel}>Total Cost</Text>
             <Text style={styles.totalValue}>₹{total.toFixed(2)}</Text>

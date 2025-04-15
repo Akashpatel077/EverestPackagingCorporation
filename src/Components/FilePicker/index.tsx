@@ -55,9 +55,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   buttonText: {
-    backgroundColor: 'lightblue',
+    backgroundColor: '#0088cc',
     paddingVertical: 5,
     padding: 10,
+    color: '#FFFFFF',
   },
   fileNamecontainer: {
     flex: 1,
