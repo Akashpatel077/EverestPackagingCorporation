@@ -11,8 +11,7 @@ const PaymentMethodScreen = () => {
 
   return (
     <View style={styles.container}>
-      
-      <Header title="Payment Methods" icon1={BackIcon}/>
+      <Header title="Payment Methods" icon1={BackIcon} />
 
       <Text style={styles.sectionTitle}>Credit & Debit Card</Text>
       <TouchableOpacity
@@ -21,7 +20,7 @@ const PaymentMethodScreen = () => {
           navigation.navigate(ADD_CARD_SCREEN);
         }}>
         <View style={styles.paymentOptionLeft}>
-          <Icon name={CreditCard} width={24} height={24} />
+          <Icon name={CreditCard} width={24} height={24} color="#FFF" />
           <Text style={styles.paymentOptionText}>Add New Card</Text>
         </View>
         <Text style={styles.linkText}>Link</Text>
@@ -30,7 +29,7 @@ const PaymentMethodScreen = () => {
       <Text style={styles.sectionTitle}>More Payment Options</Text>
       <TouchableOpacity style={styles.paymentOption}>
         <View style={styles.paymentOptionLeft}>
-          <Icon name={PayPal} width={24} height={24} />
+          <Icon name={PayPal} width={24} height={24} color="#FFF" />
           <Text style={styles.paymentOptionText}>Paypal</Text>
         </View>
         <Text style={styles.linkText}>Link</Text>
@@ -38,7 +37,7 @@ const PaymentMethodScreen = () => {
 
       <TouchableOpacity style={styles.paymentOption}>
         <View style={styles.paymentOptionLeft}>
-          <Icon name={ApplePay} width={24} height={24} />
+          <Icon name={ApplePay} width={24} height={24} color="#FFF" />
           <Text style={styles.paymentOptionText}>Apple Pay</Text>
         </View>
         <Text style={styles.linkText}>Link</Text>

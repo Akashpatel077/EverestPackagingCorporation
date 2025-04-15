@@ -99,13 +99,14 @@ const CheckoutScreen = ({route}) => {
                 />
                 <View style={styles.orderDetails}>
                   <Text style={styles.orderTitle}>{item.name}</Text>
-                  {item.attributes
-                    ?.filter(attr => attr.name !== 'HSN Code')
-                    .map(attr => (
-                      <Text key={attr.name} style={styles.orderSize}>
-                        {attr.name}: {attr.value}
-                      </Text>
-                    ))}
+                  {Array.isArray(item.attributes) &&
+                    item.attributes
+                      .filter(attr => attr.name !== 'HSN Code')
+                      .map(attr => (
+                        <Text key={attr.name} style={styles.orderSize}>
+                          {attr.name}: {attr.value}
+                        </Text>
+                      ))}
                   <Text style={styles.orderPrice}>
                     ₹{item.sale_price || item.price}
                   </Text>

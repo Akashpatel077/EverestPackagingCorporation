@@ -13,6 +13,7 @@ import {addShippingAddress} from 'src/store/slices/addressSlice';
 import styles from './styles';
 import {Header} from 'src/Components';
 import {BackIcon} from 'assets/icons';
+import {CHECKOUT} from 'src/Navigation/home/routes';
 
 const ShippingAddressForm: React.FC = () => {
   const navigation = useNavigation();
@@ -73,7 +74,7 @@ const ShippingAddressForm: React.FC = () => {
     };
 
     dispatch(addShippingAddress(addressData));
-    navigation.goBack();
+    navigation.navigate(CHECKOUT);
   };
 
   return (

@@ -13,6 +13,7 @@ import {addBillingAddress} from 'src/store/slices/addressSlice';
 import styles from './styles';
 import {Header} from 'src/Components';
 import {BackIcon} from 'assets/icons';
+import {SHIPPING_ADDRESS_FORM} from 'src/Navigation/home/routes';
 
 const BillingAddressForm: React.FC = () => {
   const navigation = useNavigation();
@@ -73,7 +74,7 @@ const BillingAddressForm: React.FC = () => {
     };
 
     dispatch(addBillingAddress(addressData));
-    navigation.goBack();
+    navigation.navigate(SHIPPING_ADDRESS_FORM);
   };
 
   return (
