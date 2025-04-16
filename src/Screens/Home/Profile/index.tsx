@@ -1,26 +1,31 @@
 import React from 'react';
 import {View, Text, TouchableOpacity, Image} from 'react-native';
 import {Header, Icon} from 'src/Components';
-import {Profile as ProfileIcon, Paper, Buy, Heart, BackIcon, RightArrow, Edit} from 'assets/icons';
+import {Profile as ProfileIcon, Paper, Buy, Heart, BackIcon, RightArrow, Edit, Dashboard, Orders, Invoices, Addresses, AccountDetails, Communication, Logout, BulkOrder} from 'assets/icons';
 import {styles} from './styles';
 import {useNavigation} from '@react-navigation/native';
 import {
+  ACCOUNTDETAILS,
+  ADDRESSES,
+  COMMUNICATION,
+  DASHBOARD,
   ORDER_SCREEN,
   PAYMENT_METHOD,
   SETTING_SCREEN,
+  WELCOME,
 } from 'src/Navigation/home/routes';
 
 const ProfileScreen = () => {
   const navigation = useNavigation();
   const menuItems = [
-    {id: 1, title: 'Your profile', icon: ProfileIcon, screen: ''},
-    {id: 2, title: 'Payment Methods', icon: Buy, screen: PAYMENT_METHOD},
-    {id: 3, title: 'My Orders', icon: Paper, screen: ORDER_SCREEN},
-    {id: 4, title: 'Settings', icon: ProfileIcon, screen: SETTING_SCREEN},
-    {id: 5, title: 'Help Center', icon: Paper, screen: ''},
-    {id: 6, title: 'Privacy Policy', icon: Paper, screen: ''},
-    {id: 7, title: 'Invites Friends', icon: ProfileIcon, screen: ''},
-    {id: 8, title: 'Log out', icon: ProfileIcon, screen: ''},
+    {id: 1, title: 'Dashboard', icon: Dashboard, screen: DASHBOARD},
+    {id: 2, title: 'Bulk Order', icon: BulkOrder, screen: DASHBOARD},
+    {id: 2, title: 'Orders', icon: Orders, screen: ORDER_SCREEN},
+    {id: 3, title: 'Your Invoices', icon: Invoices, screen: ''},
+    {id: 4, title: 'Addresses', icon: Addresses, screen: ADDRESSES},
+    {id: 5, title: 'Account details', icon: AccountDetails, screen: ACCOUNTDETAILS},
+    {id: 6, title: 'Communication', icon: Communication, screen: COMMUNICATION},
+    {id: 7, title: 'Log out', icon: Logout, screen: WELCOME}
   ];
 
   const renderMenuItem = (item: any) => (
@@ -31,7 +36,7 @@ const ProfileScreen = () => {
         navigation.navigate(item.screen);
       }}>
       <View style={styles.menuItemLeft}>
-        <Icon name={item.icon} width={24} height={24} />
+        <Icon name={item.icon} width={28} height={28} color='white'/>
         <Text style={styles.menuItemText}>{item.title}</Text>
       </View>
       <Icon name={RightArrow} width={24} height={24} color={'#fff'}/>

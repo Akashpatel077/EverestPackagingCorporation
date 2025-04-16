@@ -66,7 +66,7 @@ export const styles = StyleSheet.create({
   },
   menuItemText: {
     marginLeft: 12,
-    fontSize: 16,
+    fontSize: 20,
     color: '#000000',
   },
 });

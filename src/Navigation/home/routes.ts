@@ -24,3 +24,7 @@ export const BILLING_ADDRESS = `${homePrefix}/BILLING_ADDRESS`;
 export const SHIPPING_ADDRESS_FORM = `${homePrefix}/SHIPPING_ADDRESS_FORM`;
 export const BILLING_ADDRESS_FORM = `${homePrefix}/BILLING_ADDRESS_FORM`;
 export const WELCOME = `${homePrefix}/WELCOME`;
+export const DASHBOARD = `${homePrefix}/DASHBOARD`;
+export const ADDRESSES = `${homePrefix}/ADDRESSES`;
+export const ACCOUNTDETAILS = `${homePrefix}/ACCOUNTDETAILS`;
+export const COMMUNICATION = `${homePrefix}/COMMUNICATION`;

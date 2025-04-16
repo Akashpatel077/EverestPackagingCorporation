@@ -34,6 +34,14 @@ import Filter from './Filter.svg';
 import Category from './Category.svg';
 import RightArrow from './RightArrow.svg';
 import Edit from './Edit.svg';
+import Dashboard from './Dashboard.svg';
+import Orders from './Orders.svg';
+import Invoices from './Invoices.svg';
+import Addresses from './Addresses.svg';
+import AccountDetails from './AccountDetails.svg';
+import Communication from './Communication.svg';
+import Logout from './Logout.svg';
+import BulkOrder from './BulkOrder.svg';
 
 export {
   Buy,
@@ -72,4 +80,12 @@ export {
   Category,
   RightArrow,
   Edit,
+  Dashboard,
+Orders,
+Invoices,
+Addresses,
+AccountDetails,
+Communication,
+Logout,
+BulkOrder,
 };

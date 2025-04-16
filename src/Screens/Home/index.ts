@@ -18,6 +18,10 @@ import ShippingAddressForm from './ShippingAddressForm';
 import BillingAddressForm from './BillingAddressForm';
 import CategoryScreen from './CategoryScreen';
 import SubCategoryScreen from './SubCategory';
+import DashBoard from './DashBoard';
+import Addresses from './Addresses';
+import AccountDetails from './AccountDetails';
+import CommunicationScreen from './Communication';
 
 
 export {
@@ -41,4 +45,8 @@ export {
   BillingAddressForm,
   CategoryScreen,
   SubCategoryScreen,
+  DashBoard,
+  Addresses,
+  AccountDetails,
+  CommunicationScreen
 };

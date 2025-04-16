@@ -20,6 +20,10 @@ import {
   BillingAddressForm,
   CategoryScreen,
   SubCategoryScreen,
+  DashBoard,
+  Addresses,
+  AccountDetails,
+  CommunicationScreen,
 } from 'src/Screens/Home';
 import {
   ADD_CARD_SCREEN,
@@ -47,6 +51,10 @@ import {
   WELCOME,
   CATEGORY_SCREEN,
   SUB_CATEGORY_SCREEN,
+  DASHBOARD,
+  ADDRESSES,
+  ACCOUNTDETAILS,
+  COMMUNICATION,
 } from './routes';
 import {SvgProps} from 'react-native-svg';
 import {Home, Buy, Heart, Paper, Profile, Shop, Category} from 'assets/icons';
@@ -60,6 +68,7 @@ import SearchScreen from 'src/Screens/Home/SearchScreen';
 import {getFocusedRouteNameFromRoute} from '@react-navigation/native';
 import {useSelector} from 'react-redux';
 import {selectCartItems} from 'src/store/slices/cartSlice';
+import Welcome from 'src/Screens/Welcome';
 
 const Tab = createBottomTabNavigator();
 
@@ -239,29 +248,22 @@ const ProfileStack = () => {
       component: ProfileScreen,
     },
     {
-      name: SETTING_SCREEN,
-      component: SettingScreen,
+      name: DASHBOARD,
+      component: DashBoard,
     },
     {
-      name: PAYMENT_METHOD,
-      component: PaymentMethodScreen,
+      name: ADDRESSES,
+      component: Addresses,
     },
     {
-      name: ORDER_SCREEN,
-      component: OrderScreen,
+      name: ACCOUNTDETAILS,
+      component: AccountDetails,
     },
     {
-      name: REVIEW_SCREEN,
-      component: ReviewScreen,
+      name: COMMUNICATION,
+      component: CommunicationScreen,
     },
-    {
-      name: TRACK_ORDER_SCREEN,
-      component: TrackOrderScreen,
-    },
-    {
-      name: PASSWORD_MANAGER,
-      component: PasswordManager,
-    },
+    
   ];
   return (
     <Stack.Navigator screenOptions={{headerShown: false}}>
