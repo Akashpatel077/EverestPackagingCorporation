@@ -6,6 +6,7 @@ import wishlistReducer from './slices/wishlistSlice';
 import addressReducer from './slices/addressSlice';
 import cartReducer from './slices/cartSlice';
 import startKeyReducer from './slices/startKeySlice';
+import authReducer from './slices/authSlice';
 import { persistStore } from 'redux-persist';
 import { createPersistedReducer } from './persistConfig';
 import { combineReducers } from '@reduxjs/toolkit';
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
   address: addressReducer,
   cart: cartReducer,
   startKey: startKeyReducer,
+  auth: authReducer,
 });
 
 const persistedReducer = createPersistedReducer(rootReducer);

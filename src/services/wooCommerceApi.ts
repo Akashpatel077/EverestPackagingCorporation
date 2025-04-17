@@ -2,6 +2,68 @@ import axios from 'axios';
 import {Platform} from 'react-native';
 import Config from 'react-native-config';
 
+const AUTH_BASE_URL = 'https://everestpackaging.co.in';  // Removed trailing slash
+
+export const loginUserApi = async (username: string, password: string) => {
+  try {
+    const response = await axios.post(
+      `${AUTH_BASE_URL}/wp-json/jwt-auth/v1/token`,
+      { username, password },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      },
+    );
+    return response.data;
+  } catch (error) {
+    console.log("Login Error:",error);
+    
+    throw error;
+  }
+};
+
+export const fetchUserProfileApi = async (token: string) => {
+  try {
+    const response = await axios.get(
+      `${AUTH_BASE_URL}/wp-json/wp/v2/users/me`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      },
+    );
+
+    console.log("User Profile Response:", response.data);
+    
+    return response.data;
+  } catch (error) {
+    console.log("Fetch USer Profile Error:",error);
+    
+    throw error;
+  }
+};
+
+export const registerUserApi = async (username: string, email: string, password: string) => {
+  try {
+    const response = await axios.post(
+      `${AUTH_BASE_URL}/wp-json/custom/v1/register`,
+      { username, email, password },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      },
+    );
+
+    console.log("Registration Response:", response);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
 const BASE_URL = Config.WOO_COMMERCE_BASE_URL;
 const CONSUMER_KEY = Config.WOO_COMMERCE_CONSUMER_KEY;
 const CONSUMER_SECRET = Config.WOO_COMMERCE_CONSUMER_SECRET;

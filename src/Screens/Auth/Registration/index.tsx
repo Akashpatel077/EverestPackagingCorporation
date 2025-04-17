@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { SafeAreaView, Text, View, TextInput, TouchableOpacity } from 'react-native';
+import { SafeAreaView, Text, View, TextInput, TouchableOpacity, ActivityIndicator, Alert } from 'react-native';
 import { styles } from './styles';
 import { useTranslation } from 'react-i18next';
 import { Icon } from '../../../Components';
@@ -7,6 +7,7 @@ import { ic_Apple, ic_Facebook, ic_Google } from '../../../../assets/icons';
 import { loginWithGoogle } from 'src/services/firebase-services';
 import { useNavigation } from '@react-navigation/native';
 import { LOGIN } from 'src/Navigation/auth/routes';
+import { registerUserApi } from 'src/services/wooCommerceApi';
 
 const Registration = () => {
     const [name, setName] = useState('');
@@ -14,8 +15,32 @@ const Registration = () => {
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
     const [agreeToTerms, setAgreeToTerms] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
     const { t } = useTranslation();
     const navigation = useNavigation();
+
+    const handleSignUp = async () => {
+        if (!name || !email || !password) {
+            Alert.alert('Error', 'Please fill all fields');
+            return;
+        }
+        if (!agreeToTerms) {
+            Alert.alert('Error', 'Please agree to terms and conditions');
+            return;
+        }
+
+        try {
+            setIsLoading(true);
+            await registerUserApi(name, email, password);
+            Alert.alert('Success', 'Registration successful', [
+                { text: 'OK', onPress: () => navigation.navigate(LOGIN) }
+            ]);
+        } catch (error) {
+            Alert.alert('Error', error.response?.data?.message || 'Registration failed');
+        } finally {
+            setIsLoading(false);
+        }
+    };
 
     return (
         <SafeAreaView style={styles.container}>
@@ -76,10 +101,15 @@ const Registration = () => {
             </TouchableOpacity>
 
             <TouchableOpacity 
-                style={[styles.signUpButton, !agreeToTerms && styles.signUpButtonDisabled]} 
-                disabled={!agreeToTerms}
+                style={[styles.signUpButton, (!agreeToTerms || isLoading) && styles.signUpButtonDisabled]} 
+                disabled={!agreeToTerms || isLoading}
+                onPress={handleSignUp}
             >
-                <Text style={styles.signUpButtonText}>{t("common.signUp") || "Sign Up"}</Text>
+                {isLoading ? (
+                    <ActivityIndicator color="white" />
+                ) : (
+                    <Text style={styles.signUpButtonText}>{t("common.signUp") || "Sign Up"}</Text>
+                )}
             </TouchableOpacity>
 
             <View style={styles.dividerContainer}>

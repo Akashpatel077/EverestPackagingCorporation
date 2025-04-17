@@ -20,6 +20,7 @@ const MainContainer = () => {
     <NavigationContainer>
       <MainStack.Navigator screenOptions={{headerShown: false}} initialRouteName={hasStarted ? "Home" : "Splash"}>
         <MainStack.Screen name="Splash" component={SplashScreen} />
+        <MainStack.Screen name="Auth" component={AuthContainer} />
         <MainStack.Screen name="Welcome" component={Welcome} />
         <MainStack.Screen name="Home" component={HomeContainer} />
       </MainStack.Navigator>

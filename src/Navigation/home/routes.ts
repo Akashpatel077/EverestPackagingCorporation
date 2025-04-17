@@ -28,3 +28,4 @@ export const DASHBOARD = `${homePrefix}/DASHBOARD`;
 export const ADDRESSES = `${homePrefix}/ADDRESSES`;
 export const ACCOUNTDETAILS = `${homePrefix}/ACCOUNTDETAILS`;
 export const COMMUNICATION = `${homePrefix}/COMMUNICATION`;
+export const BULKORDERS = `${homePrefix}/BULKORDERS`;

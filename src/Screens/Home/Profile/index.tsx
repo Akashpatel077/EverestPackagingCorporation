@@ -7,6 +7,7 @@ import {useNavigation} from '@react-navigation/native';
 import {
   ACCOUNTDETAILS,
   ADDRESSES,
+  BULKORDERS,
   COMMUNICATION,
   DASHBOARD,
   ORDER_SCREEN,
@@ -19,13 +20,13 @@ const ProfileScreen = () => {
   const navigation = useNavigation();
   const menuItems = [
     {id: 1, title: 'Dashboard', icon: Dashboard, screen: DASHBOARD},
-    {id: 2, title: 'Bulk Order', icon: BulkOrder, screen: DASHBOARD},
-    {id: 2, title: 'Orders', icon: Orders, screen: ORDER_SCREEN},
-    {id: 3, title: 'Your Invoices', icon: Invoices, screen: ''},
-    {id: 4, title: 'Addresses', icon: Addresses, screen: ADDRESSES},
-    {id: 5, title: 'Account details', icon: AccountDetails, screen: ACCOUNTDETAILS},
-    {id: 6, title: 'Communication', icon: Communication, screen: COMMUNICATION},
-    {id: 7, title: 'Log out', icon: Logout, screen: WELCOME}
+    {id: 2, title: 'Bulk Order', icon: BulkOrder, screen: BULKORDERS},
+    {id: 3, title: 'Orders', icon: Orders, screen: ORDER_SCREEN},
+    {id: 4, title: 'Your Invoices', icon: Invoices, screen: ''},
+    {id: 5, title: 'Addresses', icon: Addresses, screen: ADDRESSES},
+    {id: 6, title: 'Account details', icon: AccountDetails, screen: ACCOUNTDETAILS},
+    {id: 7, title: 'Communication', icon: Communication, screen: COMMUNICATION},
+    {id: 8, title: 'Log out', icon: Logout, screen: WELCOME}
   ];
 
   const renderMenuItem = (item: any) => (

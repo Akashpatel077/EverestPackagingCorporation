@@ -22,6 +22,7 @@ import DashBoard from './DashBoard';
 import Addresses from './Addresses';
 import AccountDetails from './AccountDetails';
 import CommunicationScreen from './Communication';
+import BulkOrder from './BulkOrder';
 
 
 export {
@@ -48,5 +49,6 @@ export {
   DashBoard,
   Addresses,
   AccountDetails,
-  CommunicationScreen
+  CommunicationScreen,
+  BulkOrder
 };

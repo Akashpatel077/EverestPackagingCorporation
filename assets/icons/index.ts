@@ -42,6 +42,7 @@ import AccountDetails from './AccountDetails.svg';
 import Communication from './Communication.svg';
 import Logout from './Logout.svg';
 import BulkOrder from './BulkOrder.svg';
+import SendMessage from './SendMessage.svg';
 
 export {
   Buy,
@@ -88,4 +89,5 @@ AccountDetails,
 Communication,
 Logout,
 BulkOrder,
+SendMessage,
 };

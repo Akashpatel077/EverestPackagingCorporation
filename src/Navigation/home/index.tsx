@@ -24,6 +24,7 @@ import {
   Addresses,
   AccountDetails,
   CommunicationScreen,
+  BulkOrder,
 } from 'src/Screens/Home';
 import {
   ADD_CARD_SCREEN,
@@ -55,6 +56,7 @@ import {
   ADDRESSES,
   ACCOUNTDETAILS,
   COMMUNICATION,
+  BULKORDERS,
 } from './routes';
 import {SvgProps} from 'react-native-svg';
 import {Home, Buy, Heart, Paper, Profile, Shop, Category} from 'assets/icons';
@@ -263,7 +265,10 @@ const ProfileStack = () => {
       name: COMMUNICATION,
       component: CommunicationScreen,
     },
-    
+    {
+      name: BULKORDERS,
+      component: BulkOrder,
+    },
   ];
   return (
     <Stack.Navigator screenOptions={{headerShown: false}}>
@@ -326,7 +331,7 @@ const tabConfig: TabConfig[] = [
 const getTabBarStyle = (route: any) => {
   const routeName = getFocusedRouteNameFromRoute(route) ?? '';
 
-  const hiddenRoutes = [PRODUCT_DETAILS, SUB_CATEGORY_SCREEN, PRODUCT_LIST];
+  const hiddenRoutes = [PRODUCT_DETAILS, SUB_CATEGORY_SCREEN, PRODUCT_LIST,BULKORDERS];
 
   if (hiddenRoutes.includes(routeName)) {
     return {display: 'none'};
