@@ -1,5 +1,6 @@
-import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {RootState} from '../index';
+import {addToCartProducts, removeFromCart} from 'src/services/wooCommerceApi';
 
 interface CartItem {
   id: number;
@@ -16,55 +17,79 @@ interface CartItem {
 
 interface CartState {
   items: CartItem[];
+  loading: boolean;
+  error: string | null;
+  isSuccess: boolean;
 }
 
 const initialState: CartState = {
   items: [],
+  loading: false,
+  error: null,
+  isSuccess: false,
 };
 
-export const cartSlice = createSlice({
+export const addToCartAction = createAsyncThunk(
+  'products/addToCartAction',
+  async ({
+    productId,
+    quantity,
+    variation,
+  }: {
+    productId: number;
+    quantity: number;
+    variation: {};
+  }) => {
+    const cart = await addToCartProducts(productId, quantity, variation);
+    return cart;
+  },
+);
+
+export const removeFromCartAction = createAsyncThunk(
+  'products/removeFromCartAction',
+  async ({productKey}: {productKey: string}) => {
+    const cart = await removeFromCart(productKey);
+    return cart;
+  },
+);
+
+const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    addToCart: (state, action: PayloadAction<CartItem>) => {
-      const existingIndex = state.items.findIndex(
-        item => item.id === action.payload.id,
-      );
-
-      if (existingIndex !== -1) {
-        state.items[existingIndex] = {
-          ...action.payload,
-          totalPrice:
-            Number(state.items[existingIndex].totalPrice) +
-            Number(action.payload.totalPrice),
-          quantity:
-            state.items[existingIndex].quantity + action.payload.quantity,
-        };
-      } else {
-        state.items.push({...action.payload});
-      }
-    },
-    updateQuantity: (
-      state,
-      action: PayloadAction<{id: number; quantity: number; totalPrice: number}>,
-    ) => {
-      const item = state.items.find(item => item.id === action.payload.id);
-      if (item) {
-        item.quantity = action.payload.quantity;
-        item.totalPrice = action.payload.totalPrice;
-      }
-    },
-    removeFromCart: (state, action: PayloadAction<number>) => {
-      state.items = state.items.filter(item => item.id !== action.payload);
-    },
-    clearCart: state => {
-      state.items = [];
+    resetFlags: state => {
+      state.isSuccess = false;
     },
   },
+  extraReducers: builder => {
+    builder
+      .addCase(addToCartAction.pending, state => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(addToCartAction.fulfilled, (state, action) => {
+        state.loading = false;
+        state.items = {...action.payload};
+      })
+      .addCase(addToCartAction.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message || 'Failed to fetch products';
+      })
+      .addCase(removeFromCartAction.pending, state => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(removeFromCartAction.fulfilled, (state, action) => {
+        state.loading = false;
+        state.items = {...action.payload};
+        state.isSuccess = true;
+      })
+      .addCase(removeFromCartAction.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message || 'Failed to fetch products';
+      });
+  },
 });
-
-export const {addToCart, updateQuantity, removeFromCart, clearCart} =
-  cartSlice.actions;
 
 export const selectCartItems = (state: RootState) => state.cart.items;
 export const selectCartTotal = (state: RootState) =>
@@ -72,5 +97,7 @@ export const selectCartTotal = (state: RootState) =>
     const price = item.sale_price || item.price;
     return total + Number(price) * item.quantity;
   }, 0);
+
+export const {resetFlags} = cartSlice.actions;
 
 export default cartSlice.reducer;

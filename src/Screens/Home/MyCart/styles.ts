@@ -285,4 +285,9 @@ export default StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
   },
+  subShippingText: {
+    fontSize: 16,
+    fontFamily: 'SchibstedGrotesk-Regular',
+    color: '#888888',
+  },
 });

@@ -348,10 +348,12 @@ const getTabBarStyle = (route: any) => {
 
 const HomeContainer = () => {
   const cartItems = useSelector(selectCartItems);
-  const cartItemsCount = cartItems.reduce(
-    (total, item) => total + item.quantity,
-    0,
-  );
+  // const cartItemsCount = cartItems.reduce(
+  //   (total, item) => total + item.quantity,
+  //   0,
+  // );
+
+  const cartItemsCount = 0;
 
   const getTabBarIcon = (name: React.FC<TabIconProps>, tabName: string) => {
     console.log('tabName', tabName);

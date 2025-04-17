@@ -20,11 +20,12 @@ import {
   removeFromWishlist,
   isProductInWishlist,
 } from '../../../store/slices/wishlistSlice';
-import {addToCart} from '../../../store/slices/cartSlice';
+import {addToCartAction} from '../../../store/slices/cartSlice';
 import RenderHtml from 'react-native-render-html';
-import {getProductVariations} from 'src/services/wooCommerceApi';
+import {getCartItems, getProductVariations} from 'src/services/wooCommerceApi';
 import {FilePicker} from '../../../Components';
 import LoadingLogo from 'src/Components/LoadingLogo';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function findVariation(variations, selectedAttributes) {
   return variations.find(variation => {
@@ -69,6 +70,18 @@ const ProductDetails = ({route}) => {
   const [salePrice, setSalePrice] = useState(0);
   const totalPrice = quantity * Number(salePrice);
   const isOutOfStock = productDetails.stock_status === 'outofstock';
+  const [finalVariation, setFinalVariation] = useState([]);
+
+  useEffect(() => {
+    const variation = Object.entries(selectedAttributes).map(
+      ([key, value]) => ({
+        attribute: key,
+        value: value,
+      }),
+    );
+
+    setFinalVariation(variation);
+  }, [selectedAttributes]);
 
   const getProductVariationList = async () => {
     try {
@@ -83,6 +96,31 @@ const ProductDetails = ({route}) => {
   const cleanedHTML =
     productDetails.description &&
     productDetails.description.replace(/<h3>Product Description:<\/h3>/i, '');
+
+  const storeToken = async (token: string) => {
+    try {
+      await AsyncStorage.setItem('userToken', token);
+      console.log('Token saved!', token);
+    } catch (error) {
+      console.error('Error saving token:', error);
+    }
+  };
+
+  useEffect(() => {
+    const fetchNonceToken = async () => {
+      try {
+        const cartItemsObject = await getCartItems();
+        if (cartItemsObject.status === 200 && cartItemsObject.headers.nonce) {
+          storeToken(cartItemsObject.headers.nonce);
+          console.log(cartItemsObject.headers.nonce);
+        }
+      } catch (error) {
+        Alert.alert('', error.message);
+      }
+    };
+
+    fetchNonceToken();
+  }, []);
 
   useEffect(() => {
     setSalePrice(productDetails.price);
@@ -355,21 +393,10 @@ const ProductDetails = ({route}) => {
                   Alert.alert('', variationNotAvailableText);
                 } else {
                   dispatch(
-                    addToCart({
-                      id: productVariationData.id ?? productDetails.id,
-                      quantity: quantity,
-                      name: productDetails.name,
-                      price: productDetails.price,
-                      sale_price: salePrice,
-                      totalPrice: totalPrice,
-                      color: selectedColor,
-                      attributes: selectedAttributes,
-                      image: productDetails.images?.[0]?.src,
-                      product_step: filteredMetaData.product_step ?? 1,
-                      min_quantity: filteredMetaData.min_quantity ?? 1,
-                      max_quantity: filteredMetaData.max_quantity ?? 100000,
-                      tax_status: productDetails.tax_status,
-                      tax_class: productDetails.tax_class,
+                    addToCartAction({
+                      productId,
+                      quantity,
+                      variation: finalVariation,
                     }),
                   );
                 }

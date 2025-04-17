@@ -21,16 +21,17 @@ import {
   SHIPPING_ADDRESS_FORM,
 } from 'src/Navigation/home/routes';
 import {Header} from 'src/Components';
-import {BackIcon} from 'assets/icons';
-import {
-  selectCartItems,
-  selectCartTotal,
-  updateQuantity,
-  removeFromCart,
-} from 'src/store/slices/cartSlice';
-import {getAllTaxes} from 'src/services/wooCommerceApi';
+import {decode} from 'he';
+import {removeFromCartAction, resetFlags} from 'src/store/slices/cartSlice';
+
+const encodedName = '4x3x1  inch Brown Tuck in Mailer Boxes &#8211; 3 ply';
+const decodedName = decode(encodedName);
+
+console.log(decodedName);
+// Output: "4x3x1  inch Brown Tuck in Mailer Boxes – 3 ply"
 
 interface CartItem {
+  key: string;
   id: number;
   name: string;
   price: string;
@@ -49,60 +50,17 @@ interface CartItem {
 
 const COD_CHARGE = 50;
 
-const calculateTax = (
-  cartItems: CartItem[],
-  allTaxes,
-  customerState: string,
-  storeState = 'GJ',
-) => {
-  let totalTax = 0;
-  const taxBreakdown = {};
+const getFormattedPrice = (price: string, currencyMinorUnit: number) => {
+  const formattedPrice = (
+    parseInt(price, 10) / Math.pow(10, currencyMinorUnit)
+  ).toFixed(currencyMinorUnit);
 
-  cartItems.forEach(product => {
-    const {price, quantity, tax_status, tax_class} = product;
-
-    if (tax_status !== 'taxable') return;
-
-    const taxClass = tax_class || 'standard';
-    const isSameState = customerState === storeState;
-
-    const matchedTaxes = allTaxes.filter(
-      tax =>
-        tax.class === taxClass &&
-        (isSameState ? tax.state === storeState : tax.state === ''),
-    );
-
-    matchedTaxes.forEach(tax => {
-      const taxRate = parseFloat(tax.rate);
-      const label = tax.name.trim(); // e.g., "9% CGST"
-      const subtotal = price * quantity;
-      const taxAmount = (subtotal * taxRate) / 100;
-
-      totalTax += taxAmount;
-
-      if (taxBreakdown[label]) {
-        taxBreakdown[label] += taxAmount;
-      } else {
-        taxBreakdown[label] = taxAmount;
-      }
-    });
-  });
-
-  // Round each breakdown value
-  Object.keys(taxBreakdown).forEach(label => {
-    taxBreakdown[label] = parseFloat(taxBreakdown[label].toFixed(2));
-  });
-
-  return {
-    totalTax: parseFloat(totalTax.toFixed(2)),
-    breakdown: taxBreakdown,
-  };
+  return formattedPrice;
 };
 
 const MyCart = () => {
   const navigation = useNavigation();
   const addresses = useSelector((state: any) => state.address);
-  const customerState = 'GJ';
 
   const selectedShippingAddress = addresses.shippingAddresses.find(
     (address: any) => address.id === addresses.selectedShippingAddressId,
@@ -111,48 +69,31 @@ const MyCart = () => {
     (address: any) => address.id === addresses.selectedBillingAddressId,
   );
   const dispatch = useDispatch();
-  const cartItems = useSelector(selectCartItems);
-  const cartTotal = useSelector(selectCartTotal);
 
-  console.log('cartItems', cartItems);
+  const {
+    items: cartDetails,
+    loading,
+    isSuccess,
+  } = useSelector(item => item.cart);
+  const {items: cartItems} = cartDetails;
+
+  const {totals, shipping_rates} = cartDetails;
+  const {tax_lines} = totals;
 
   const [promoCode, setPromoCode] = useState('');
-  // const [discount, setDiscount] = useState(35);
-  const [shippingcharge, setShippingCharge] = useState(0);
   const [showRemoveModal, setShowRemoveModal] = useState(false);
   const [selectedItem, setSelectedItem] = useState<CartItem | null>(null);
-  const [totalTax, setTotalTax] = useState(0);
-  const [taxBreakdown, setTaxBreakdown] = useState({});
   const [isCOD, setIsCOD] = useState(false);
 
-  const getAllTaxesAction = async () => {
-    try {
-      const allTaxes = await getAllTaxes();
-
-      const {totalTax, breakdown} = calculateTax(
-        cartItems,
-        allTaxes,
-        customerState,
-      );
-      setTaxBreakdown({...breakdown});
-      setTotalTax(totalTax);
-    } catch (e) {
-      Alert.alert('Error : ', e.message);
-    }
-  };
-
   useEffect(() => {
-    getAllTaxesAction();
-  }, [cartItems]);
+    if (isSuccess) {
+      setShowRemoveModal(false);
+      setSelectedItem(null);
+      dispatch(resetFlags());
+    }
+  }, [isSuccess]);
 
-  // Calculate subtotal
-  const subtotal = cartItems.reduce(
-    (sum, item) => sum + item.sale_price * item.quantity,
-    0,
-  );
-
-  // Calculate total
-  const total = subtotal + shippingcharge + totalTax;
+  const subtotal = 0;
 
   // Handle quantity increase
   const increaseQuantity = (id: number) => {
@@ -189,9 +130,8 @@ const MyCart = () => {
   // Handle remove item
   const handleRemoveItem = () => {
     if (selectedItem) {
-      dispatch(removeFromCart(selectedItem.id));
-      setShowRemoveModal(false);
-      setSelectedItem(null);
+      // dispatch(removeFromCart(selectedItem.id));
+      dispatch(removeFromCartAction({productKey: selectedItem.key}));
     }
   };
 
@@ -212,36 +152,46 @@ const MyCart = () => {
   };
 
   // Render cart item
-  const renderCartItem = ({item}: {item: CartItem}) => (
-    <View style={styles.cartItemContainer}>
-      <Image source={{uri: item.image}} style={styles.itemImage} />
-      <View style={styles.itemDetails}>
-        <Text style={styles.itemName}>{item.name}</Text>
-        <Text style={styles.itemSize}>Size : {item.size}</Text>
-        <Text style={styles.itemPrice}>
-          ₹{Number(item.totalPrice).toFixed(2)}
-        </Text>
-        <View style={styles.quantityControl}>
-          <TouchableOpacity
-            style={styles.quantityButton}
-            onPress={() => decreaseQuantity(item.id)}>
-            <Text style={styles.quantityButtonText}>-</Text>
-          </TouchableOpacity>
-          <Text style={styles.quantityText}>{item.quantity}</Text>
-          <TouchableOpacity
-            style={[styles.quantityButton, styles.increaseButton]}
-            onPress={() => increaseQuantity(item.id)}>
-            <Text style={styles.quantityButtonText}>+</Text>
-          </TouchableOpacity>
+  const renderCartItem = ({item}: {item: CartItem}) => {
+    const decodedName = decode(item.name);
+
+    return (
+      <View style={styles.cartItemContainer}>
+        <Image source={{uri: item.images[0].src}} style={styles.itemImage} />
+        <View style={styles.itemDetails}>
+          <Text style={styles.itemName}>{decodedName}</Text>
+          <Text style={styles.itemSize}>Size : {item.size}</Text>
+          <Text style={styles.itemPrice}>
+            ₹
+            {(
+              getFormattedPrice(
+                item.prices.sale_price,
+                item.prices.currency_minor_unit,
+              ) * item.quantity
+            ).toFixed(2)}
+          </Text>
+          <View style={styles.quantityControl}>
+            <TouchableOpacity
+              style={styles.quantityButton}
+              onPress={() => decreaseQuantity(item.id)}>
+              <Text style={styles.quantityButtonText}>-</Text>
+            </TouchableOpacity>
+            <Text style={styles.quantityText}>{item.quantity}</Text>
+            <TouchableOpacity
+              style={[styles.quantityButton, styles.increaseButton]}
+              onPress={() => increaseQuantity(item.id)}>
+              <Text style={styles.quantityButtonText}>+</Text>
+            </TouchableOpacity>
+          </View>
         </View>
+        <TouchableOpacity
+          style={styles.removeButton}
+          onPress={() => showRemoveConfirmation(item)}>
+          <Text style={styles.removeButtonText}>🗑️</Text>
+        </TouchableOpacity>
       </View>
-      <TouchableOpacity
-        style={styles.removeButton}
-        onPress={() => showRemoveConfirmation(item)}>
-        <Text style={styles.removeButtonText}>🗑️</Text>
-      </TouchableOpacity>
-    </View>
-  );
+    );
+  };
 
   if (cartItems.length === 0) {
     return (
@@ -275,7 +225,7 @@ const MyCart = () => {
         <FlatList
           data={cartItems}
           renderItem={renderCartItem}
-          keyExtractor={item => item.id}
+          keyExtractor={item => item.id.toString()}
           style={styles.cartItemsList}
           showsVerticalScrollIndicator={false}
         />
@@ -300,7 +250,13 @@ const MyCart = () => {
         <View style={styles.summaryContainer}>
           <View style={styles.summaryRow}>
             <Text style={styles.summaryLabel}>Sub-Total</Text>
-            <Text style={styles.summaryValue}>₹{subtotal.toFixed(2)}</Text>
+            <Text style={styles.summaryValue}>
+              ₹
+              {getFormattedPrice(
+                totals.total_items,
+                totals.currency_minor_unit,
+              )}
+            </Text>
           </View>
           <View style={styles.summaryRow}>
             <Text
@@ -309,9 +265,20 @@ const MyCart = () => {
                 {color: '#555555', fontWeight: '900'},
               ]}>
               Shipping
+              <Text style={styles.subShippingText}>
+                (
+                {shipping_rates[0].shipping_rates[0].name
+                  ? shipping_rates[0].shipping_rates[0].name
+                  : ''}
+                )
+              </Text>
             </Text>
             <Text style={styles.summaryValue}>
-              ₹{shippingcharge.toFixed(2)}
+              ₹
+              {getFormattedPrice(
+                totals.total_shipping,
+                totals.currency_minor_unit,
+              )}
             </Text>
           </View>
           {isCOD && (
@@ -327,21 +294,31 @@ const MyCart = () => {
             </View>
           )}
 
-          {Object.entries(taxBreakdown).map(([label, value], index) => (
-            <View key={index} style={styles.summaryRow}>
-              <Text
-                style={[
-                  styles.summaryLabel,
-                  {color: '#555555', fontWeight: '900'},
-                ]}>
-                {label}
-              </Text>
-              <Text style={styles.summaryValue}>₹{value.toFixed(2)}</Text>
-            </View>
-          ))}
+          {tax_lines.map((item, index) => {
+            return (
+              <View key={index} style={styles.summaryRow}>
+                <Text
+                  style={[
+                    styles.summaryLabel,
+                    {color: '#555555', fontWeight: '900'},
+                  ]}>
+                  {item.name}
+                </Text>
+                <Text style={styles.summaryValue}>
+                  ₹{getFormattedPrice(item.price, totals.currency_minor_unit)}
+                </Text>
+              </View>
+            );
+          })}
           <View style={[styles.summaryRow, styles.totalRow]}>
             <Text style={styles.totalLabel}>Total Cost</Text>
-            <Text style={styles.totalValue}>₹{total.toFixed(2)}</Text>
+            <Text style={styles.totalValue}>
+              ₹
+              {getFormattedPrice(
+                totals.total_price,
+                totals.currency_minor_unit,
+              )}
+            </Text>
           </View>
         </View>
 
@@ -371,7 +348,7 @@ const MyCart = () => {
               {selectedItem && (
                 <View style={styles.modalItemContainer}>
                   <Image
-                    source={{uri: selectedItem.image}}
+                    source={{uri: selectedItem.images[0].src}}
                     style={styles.modalItemImage}
                   />
                   <View style={styles.modalItemDetails}>
@@ -383,9 +360,12 @@ const MyCart = () => {
                     </Text>
                     <Text style={styles.modalItemPrice}>
                       ₹
-                      {typeof selectedItem.price === 'string'
-                        ? Number(selectedItem.price).toFixed(2)
-                        : selectedItem.price.toFixed(2)}
+                      {(
+                        getFormattedPrice(
+                          selectedItem.prices.sale_price,
+                          selectedItem.prices.currency_minor_unit,
+                        ) * selectedItem.quantity
+                      ).toFixed(2)}
                     </Text>
                     <View style={styles.quantityControl}>
                       <TouchableOpacity
@@ -407,12 +387,20 @@ const MyCart = () => {
               )}
               <View style={styles.modalButtonsContainer}>
                 <TouchableOpacity
-                  style={styles.modalCancelButton}
+                  style={[
+                    styles.modalCancelButton,
+                    {opacity: loading ? 0.5 : 1},
+                  ]}
+                  disabled={loading}
                   onPress={() => setShowRemoveModal(false)}>
                   <Text style={styles.modalCancelButtonText}>Cancel</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                  style={styles.modalRemoveButton}
+                  style={[
+                    styles.modalRemoveButton,
+                    {opacity: loading ? 0.5 : 1},
+                  ]}
+                  disabled={loading}
                   onPress={handleRemoveItem}>
                   <Text style={styles.modalRemoveButtonText}>Yes, Remove</Text>
                 </TouchableOpacity>

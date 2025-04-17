@@ -1,3 +1,4 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import {Platform} from 'react-native';
 import Config from 'react-native-config';
@@ -268,6 +269,89 @@ export const getAllTaxes = async () => {
   }
 };
 
+const getToken = async () => {
+  try {
+    const token = await AsyncStorage.getItem('userToken');
+    if (token !== null) {
+      console.log('Retrieved token:', token);
+      return token;
+    }
+  } catch (error) {
+    console.error('Error retrieving token:', error);
+  }
+};
+
+export const addToCartProducts = async (
+  productId: number,
+  quantity: number,
+  variation: {},
+) => {
+  try {
+    const isConnected = await isNetworkConnected();
+    if (!isConnected) {
+      throw new Error(
+        'No internet connection. Please check your network settings.',
+      );
+    }
+
+    const nonceToken = await getToken();
+
+    const response = await wooCommerceApi.post(
+      `https://everestpackaging.co.in/wp-json/wc/store/cart/add-item`,
+      {
+        id: productId,
+        quantity,
+        variation,
+      },
+      {headers: {nonce: nonceToken}},
+    );
+
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const getCartItems = async () => {
+  try {
+    const isConnected = await isNetworkConnected();
+    if (!isConnected) {
+      throw new Error(
+        'No internet connection. Please check your network settings.',
+      );
+    }
+
+    const response = await wooCommerceApi.get(
+      `https://everestpackaging.co.in/wp-json/wc/store/cart`,
+    );
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const removeFromCart = async (productKey: string) => {
+  try {
+    const isConnected = await isNetworkConnected();
+    if (!isConnected) {
+      throw new Error(
+        'No internet connection. Please check your network settings.',
+      );
+    }
+
+    const nonceToken = await getToken();
+
+    const response = await wooCommerceApi.post(
+      `https://everestpackaging.co.in/wp-json/wc/store/cart/remove-item?key=${productKey}`,
+      {},
+      {headers: {nonce: nonceToken}},
+    );
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export default {
   getProducts,
   getAllProducts,
@@ -277,4 +361,7 @@ export default {
   getProductDetails,
   getProductVariations,
   getAllTaxes,
+  addToCartProducts,
+  getCartItems,
+  removeFromCart,
 };
