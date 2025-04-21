@@ -258,6 +258,14 @@ const ProfileStack = () => {
       component: Addresses,
     },
     {
+      name: ORDER_SCREEN,
+      component: OrderScreen,
+    },
+    {
+      name: REVIEW_SCREEN,
+      component: ReviewScreen,
+    },
+    {
       name: ACCOUNTDETAILS,
       component: AccountDetails,
     },
@@ -331,7 +339,12 @@ const tabConfig: TabConfig[] = [
 const getTabBarStyle = (route: any) => {
   const routeName = getFocusedRouteNameFromRoute(route) ?? '';
 
-  const hiddenRoutes = [PRODUCT_DETAILS, SUB_CATEGORY_SCREEN, PRODUCT_LIST,BULKORDERS];
+  const hiddenRoutes = [
+    PRODUCT_DETAILS,
+    SUB_CATEGORY_SCREEN,
+    PRODUCT_LIST,
+    BULKORDERS,
+  ];
 
   if (hiddenRoutes.includes(routeName)) {
     return {display: 'none'};
@@ -347,13 +360,11 @@ const getTabBarStyle = (route: any) => {
 };
 
 const HomeContainer = () => {
-  const cartItems = useSelector(selectCartItems);
-  // const cartItemsCount = cartItems.reduce(
-  //   (total, item) => total + item.quantity,
-  //   0,
-  // );
+  const {items} = useSelector(selectCartItems);
 
-  const cartItemsCount = 0;
+  const cartItemsCount = items
+    ? items.reduce((total, item) => total + item.quantity, 0)
+    : 0;
 
   const getTabBarIcon = (name: React.FC<TabIconProps>, tabName: string) => {
     console.log('tabName', tabName);

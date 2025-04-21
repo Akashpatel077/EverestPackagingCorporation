@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import {createSlice} from '@reduxjs/toolkit';
 
 interface StartKeyState {
   hasStarted: boolean;
@@ -7,7 +7,7 @@ interface StartKeyState {
 
 const initialState: StartKeyState = {
   hasStarted: false,
-  whitelist: ['admin', 'user', 'guest']
+  whitelist: ['admin', 'user', 'guest'],
 };
 
 const startKeySlice = createSlice({
@@ -20,8 +20,11 @@ const startKeySlice = createSlice({
         state.hasStarted = true;
       }
     },
+    resetStartKey: state => {
+      state.hasStarted = false;
+    },
   },
 });
 
-export const { setStartKey } = startKeySlice.actions;
+export const {setStartKey, resetStartKey} = startKeySlice.actions;
 export default startKeySlice.reducer;

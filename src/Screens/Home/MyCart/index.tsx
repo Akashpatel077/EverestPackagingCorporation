@@ -22,7 +22,11 @@ import {
 } from 'src/Navigation/home/routes';
 import {Header} from 'src/Components';
 import {decode} from 'he';
-import {removeFromCartAction, resetFlags} from 'src/store/slices/cartSlice';
+import {
+  removeFromCartAction,
+  resetFlags,
+  updateProductInCartAction,
+} from 'src/store/slices/cartSlice';
 
 const encodedName = '4x3x1  inch Brown Tuck in Mailer Boxes &#8211; 3 ply';
 const decodedName = decode(encodedName);
@@ -75,15 +79,19 @@ const MyCart = () => {
     loading,
     isSuccess,
   } = useSelector(item => item.cart);
-  const {items: cartItems} = cartDetails;
 
-  const {totals, shipping_rates} = cartDetails;
-  const {tax_lines} = totals;
+  const {totals, shipping_rates, items: cartItems} = cartDetails || {};
+  const {
+    tax_lines,
+    total_items,
+    currency_minor_unit,
+    total_shipping,
+    total_price,
+  } = totals || {};
 
   const [promoCode, setPromoCode] = useState('');
   const [showRemoveModal, setShowRemoveModal] = useState(false);
   const [selectedItem, setSelectedItem] = useState<CartItem | null>(null);
-  const [isCOD, setIsCOD] = useState(false);
 
   useEffect(() => {
     if (isSuccess) {
@@ -93,44 +101,30 @@ const MyCart = () => {
     }
   }, [isSuccess]);
 
-  const subtotal = 0;
-
   // Handle quantity increase
   const increaseQuantity = (id: number) => {
     const item = cartItems.find(item => item.id === id);
 
-    if (item && item.quantity < item.max_quantity) {
-      const affectedQuantity = item.quantity + Number(item.product_step);
+    if (item && item.quantity < item.quantity_limits.maximum) {
+      const quantity = item.quantity + Number(item.quantity_limits.multiple_of);
 
-      dispatch(
-        updateQuantity({
-          id,
-          quantity: affectedQuantity,
-          totalPrice: affectedQuantity * item.sale_price,
-        }),
-      );
+      dispatch(updateProductInCartAction({productKey: item.key, quantity}));
     }
   };
 
   // Handle quantity decrease
   const decreaseQuantity = (id: number) => {
     const item = cartItems.find(item => item.id === id);
-    if (item && item.quantity > item.min_quantity) {
-      const affectedQuantity = item.quantity - Number(item.product_step);
-      dispatch(
-        updateQuantity({
-          id,
-          quantity: affectedQuantity,
-          totalPrice: affectedQuantity * item.sale_price,
-        }),
-      );
+    if (item && item.quantity > item.quantity_limits.minimum) {
+      const quantity = item.quantity - Number(item.quantity_limits.multiple_of);
+
+      dispatch(updateProductInCartAction({productKey: item.key, quantity}));
     }
   };
 
   // Handle remove item
   const handleRemoveItem = () => {
     if (selectedItem) {
-      // dispatch(removeFromCart(selectedItem.id));
       dispatch(removeFromCartAction({productKey: selectedItem.key}));
     }
   };
@@ -193,7 +187,7 @@ const MyCart = () => {
     );
   };
 
-  if (cartItems.length === 0) {
+  if (!cartItems || cartItems.length === 0) {
     return (
       <SafeAreaView style={styles.container}>
         <Header title="My Cart" />
@@ -251,11 +245,7 @@ const MyCart = () => {
           <View style={styles.summaryRow}>
             <Text style={styles.summaryLabel}>Sub-Total</Text>
             <Text style={styles.summaryValue}>
-              ₹
-              {getFormattedPrice(
-                totals.total_items,
-                totals.currency_minor_unit,
-              )}
+              ₹{getFormattedPrice(total_items, currency_minor_unit)}
             </Text>
           </View>
           <View style={styles.summaryRow}>
@@ -266,58 +256,35 @@ const MyCart = () => {
               ]}>
               Shipping
               <Text style={styles.subShippingText}>
-                (
-                {shipping_rates[0].shipping_rates[0].name
-                  ? shipping_rates[0].shipping_rates[0].name
-                  : ''}
-                )
+                ({shipping_rates?.[0]?.shipping_rates?.[0]?.name ?? ''})
               </Text>
             </Text>
             <Text style={styles.summaryValue}>
-              ₹
-              {getFormattedPrice(
-                totals.total_shipping,
-                totals.currency_minor_unit,
-              )}
+              ₹{getFormattedPrice(total_shipping, currency_minor_unit)}
             </Text>
           </View>
-          {isCOD && (
-            <View style={styles.summaryRow}>
-              <Text
-                style={[
-                  styles.summaryLabel,
-                  {color: '#555555', fontWeight: '900'},
-                ]}>
-                Cash On Delivery
-              </Text>
-              <Text style={styles.summaryValue}>₹{COD_CHARGE.toFixed(2)}</Text>
-            </View>
-          )}
 
-          {tax_lines.map((item, index) => {
-            return (
-              <View key={index} style={styles.summaryRow}>
-                <Text
-                  style={[
-                    styles.summaryLabel,
-                    {color: '#555555', fontWeight: '900'},
-                  ]}>
-                  {item.name}
-                </Text>
-                <Text style={styles.summaryValue}>
-                  ₹{getFormattedPrice(item.price, totals.currency_minor_unit)}
-                </Text>
-              </View>
-            );
-          })}
+          {tax_lines?.length > 0 &&
+            tax_lines.map((item, index) => {
+              return (
+                <View key={index} style={styles.summaryRow}>
+                  <Text
+                    style={[
+                      styles.summaryLabel,
+                      {color: '#555555', fontWeight: '900'},
+                    ]}>
+                    {item.name}
+                  </Text>
+                  <Text style={styles.summaryValue}>
+                    ₹{getFormattedPrice(item.price, currency_minor_unit)}
+                  </Text>
+                </View>
+              );
+            })}
           <View style={[styles.summaryRow, styles.totalRow]}>
             <Text style={styles.totalLabel}>Total Cost</Text>
             <Text style={styles.totalValue}>
-              ₹
-              {getFormattedPrice(
-                totals.total_price,
-                totals.currency_minor_unit,
-              )}
+              ₹{getFormattedPrice(total_price, currency_minor_unit)}
             </Text>
           </View>
         </View>

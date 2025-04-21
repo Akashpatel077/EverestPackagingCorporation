@@ -13,6 +13,14 @@ import {
 import {selectCartItems} from 'src/store/slices/cartSlice';
 import {RootState} from 'src/store';
 
+const getFormattedPrice = (price: string, currencyMinorUnit: number) => {
+  const formattedPrice = (
+    parseInt(price, 10) / Math.pow(10, currencyMinorUnit)
+  ).toFixed(currencyMinorUnit);
+
+  return formattedPrice;
+};
+
 const CheckoutScreen = ({route}) => {
   const navigation = useNavigation();
   const selectedShippingType = route.params?.selectedShipping;
@@ -28,6 +36,8 @@ const CheckoutScreen = ({route}) => {
   const selectedAddress = shippingAddresses.find(
     address => address.id === selectedShippingAddressId,
   );
+
+  const {items: cartItems} = useSelector(selectCartItems);
 
   return (
     <View style={styles.container}>
@@ -91,10 +101,10 @@ const CheckoutScreen = ({route}) => {
               alignItems: 'center',
               // width: '100%',
             }}>
-            {useSelector(selectCartItems).map(item => (
+            {cartItems.map(item => (
               <View key={item.id} style={[styles.orderItem, {marginRight: 12}]}>
                 <Image
-                  source={item.image && {uri: item.image}}
+                  source={item.images[0] && {uri: item.images[0].src}}
                   style={styles.orderImage}
                 />
                 <View style={styles.orderDetails}>
@@ -108,7 +118,13 @@ const CheckoutScreen = ({route}) => {
                         </Text>
                       ))}
                   <Text style={styles.orderPrice}>
-                    ₹{item.sale_price || item.price}
+                    ₹
+                    {(
+                      getFormattedPrice(
+                        item.prices.sale_price,
+                        item.prices.currency_minor_unit,
+                      ) * item.quantity
+                    ).toFixed(2)}
                   </Text>
                   <Text style={styles.quantity}>Quantity: {item.quantity}</Text>
                 </View>

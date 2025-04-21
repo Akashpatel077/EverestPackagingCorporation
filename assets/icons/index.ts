@@ -43,6 +43,8 @@ import Communication from './Communication.svg';
 import Logout from './Logout.svg';
 import BulkOrder from './BulkOrder.svg';
 import SendMessage from './SendMessage.svg';
+import CheckSquare from './CheckSquare.svg';
+import UncheckSquareNew from './UncheckSquare.svg';
 
 export {
   Buy,
@@ -82,12 +84,14 @@ export {
   RightArrow,
   Edit,
   Dashboard,
-Orders,
-Invoices,
-Addresses,
-AccountDetails,
-Communication,
-Logout,
-BulkOrder,
-SendMessage,
+  Orders,
+  Invoices,
+  Addresses,
+  AccountDetails,
+  Communication,
+  Logout,
+  BulkOrder,
+  SendMessage,
+  CheckSquare,
+  UncheckSquareNew,
 };

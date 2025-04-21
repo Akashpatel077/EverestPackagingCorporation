@@ -21,14 +21,12 @@ export const loginUser = createAsyncThunk(
     try {
       const data = await loginUserApi(username, password);
       // After successful login, fetch user profile
-      const userProfile = fetchUserProfile(data.token);
+      const userProfile = await fetchUserProfileApi(data.token);
+      console.log('userProfile', userProfile);
 
-      console.log("userProfile",userProfile);
-      
-      
-      return { token: data.token, user: userProfile };
+      return {token: data.token, user: userProfile};
     } catch (error: any) {
-      throw error.response?.data?.message || 'Login failed';
+      throw error.response?.data || 'Login failed';
     }
   },
 );
@@ -71,7 +69,7 @@ const authSlice = createSlice({
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message || 'Login failed';
+        state.error = action.error || 'Login failed';
       })
       .addCase(fetchUserProfile.pending, state => {
         state.loading = true;

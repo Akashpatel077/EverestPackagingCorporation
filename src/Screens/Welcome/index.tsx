@@ -117,16 +117,14 @@ const Welcome = () => {
 
         <TouchableOpacity
           style={styles.button}
-          onPress={() => {
-            dispatch(setStartKey('user'));
-            navigation.navigate('Home', {screen: HOMESCREEN});
-          }}>
+          onPress={() => dispatch(setStartKey('user'))}>
           <Text style={styles.buttonText}>Let's Get Started</Text>
         </TouchableOpacity>
 
         <View style={styles.signInContainer}>
           <Text style={styles.signInText}>Already have an account? </Text>
-          <TouchableOpacity onPress={() => navigation.navigate('Auth', {screen: LOGIN})}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('Auth', {screen: LOGIN})}>
             <Text style={styles.signInLink}>Sign In</Text>
           </TouchableOpacity>
         </View>

@@ -1,6 +1,10 @@
 import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {RootState} from '../index';
-import {addToCartProducts, removeFromCart} from 'src/services/wooCommerceApi';
+import {
+  addToCartProducts,
+  removeFromCart,
+  updateProductInCart,
+} from 'src/services/wooCommerceApi';
 
 interface CartItem {
   id: number;
@@ -53,6 +57,14 @@ export const removeFromCartAction = createAsyncThunk(
   },
 );
 
+export const updateProductInCartAction = createAsyncThunk(
+  'products/updateProductInCartAction',
+  async ({productKey, quantity}: {productKey: string; quantity: number}) => {
+    const cart = await updateProductInCart(productKey, quantity);
+    return cart;
+  },
+);
+
 const cartSlice = createSlice({
   name: 'cart',
   initialState,
@@ -70,6 +82,7 @@ const cartSlice = createSlice({
       .addCase(addToCartAction.fulfilled, (state, action) => {
         state.loading = false;
         state.items = {...action.payload};
+        state.isSuccess = true;
       })
       .addCase(addToCartAction.rejected, (state, action) => {
         state.loading = false;
@@ -85,6 +98,19 @@ const cartSlice = createSlice({
         state.isSuccess = true;
       })
       .addCase(removeFromCartAction.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message || 'Failed to fetch products';
+      })
+      .addCase(updateProductInCartAction.pending, state => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(updateProductInCartAction.fulfilled, (state, action) => {
+        state.loading = false;
+        state.items = {...action.payload};
+        state.isSuccess = true;
+      })
+      .addCase(updateProductInCartAction.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message || 'Failed to fetch products';
       });

@@ -3,13 +3,13 @@ import axios from 'axios';
 import {Platform} from 'react-native';
 import Config from 'react-native-config';
 
-const AUTH_BASE_URL = 'https://everestpackaging.co.in';  // Removed trailing slash
+const AUTH_BASE_URL = 'https://everestpackaging.co.in'; // Removed trailing slash
 
 export const loginUserApi = async (username: string, password: string) => {
   try {
     const response = await axios.post(
       `${AUTH_BASE_URL}/wp-json/jwt-auth/v1/token`,
-      { username, password },
+      {username, password},
       {
         headers: {
           'Content-Type': 'application/json',
@@ -18,8 +18,8 @@ export const loginUserApi = async (username: string, password: string) => {
     );
     return response.data;
   } catch (error) {
-    console.log("Login Error:",error);
-    
+    console.log('Login Error:', error);
+
     throw error;
   }
 };
@@ -36,21 +36,25 @@ export const fetchUserProfileApi = async (token: string) => {
       },
     );
 
-    console.log("User Profile Response:", response.data);
-    
+    console.log('User Profile Response:', response.data);
+
     return response.data;
   } catch (error) {
-    console.log("Fetch USer Profile Error:",error);
-    
+    console.log('Fetch USer Profile Error:', error);
+
     throw error;
   }
 };
 
-export const registerUserApi = async (username: string, email: string, password: string) => {
+export const registerUserApi = async (
+  username: string,
+  email: string,
+  password: string,
+) => {
   try {
     const response = await axios.post(
       `${AUTH_BASE_URL}/wp-json/custom/v1/register`,
-      { username, email, password },
+      {username, email, password},
       {
         headers: {
           'Content-Type': 'application/json',
@@ -58,7 +62,7 @@ export const registerUserApi = async (username: string, email: string, password:
       },
     );
 
-    console.log("Registration Response:", response);
+    console.log('Registration Response:', response);
     return response.data;
   } catch (error) {
     throw error;
@@ -297,7 +301,7 @@ export const addToCartProducts = async (
     const nonceToken = await getToken();
 
     const response = await wooCommerceApi.post(
-      `https://everestpackaging.co.in/wp-json/wc/store/cart/add-item`,
+      `https://everestpackaging.co.in/wp-json/wc/store/v1/cart/add-item`,
       {
         id: productId,
         quantity,
@@ -322,7 +326,7 @@ export const getCartItems = async () => {
     }
 
     const response = await wooCommerceApi.get(
-      `https://everestpackaging.co.in/wp-json/wc/store/cart`,
+      `https://everestpackaging.co.in/wp-json/wc/store/v1/cart`,
     );
     return response;
   } catch (error) {
@@ -352,6 +356,31 @@ export const removeFromCart = async (productKey: string) => {
   }
 };
 
+export const updateProductInCart = async (
+  productKey: string,
+  quantity: number,
+) => {
+  try {
+    const isConnected = await isNetworkConnected();
+    if (!isConnected) {
+      throw new Error(
+        'No internet connection. Please check your network settings.',
+      );
+    }
+
+    const nonceToken = await getToken();
+
+    const response = await wooCommerceApi.post(
+      `https://everestpackaging.co.in/wp-json/wc/store/cart/update-item?key=${productKey}&quantity=${quantity}`,
+      {},
+      {headers: {nonce: nonceToken}},
+    );
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export default {
   getProducts,
   getAllProducts,
@@ -364,4 +393,5 @@ export default {
   addToCartProducts,
   getCartItems,
   removeFromCart,
+  updateProductInCart,
 };
