@@ -328,6 +328,7 @@ export const getCartItems = async () => {
     const response = await wooCommerceApi.get(
       `https://everestpackaging.co.in/wp-json/wc/store/v1/cart`,
     );
+
     return response;
   } catch (error) {
     throw error;
@@ -381,6 +382,62 @@ export const updateProductInCart = async (
   }
 };
 
+type checkoutRequestDataType = {
+  billing_address: {
+    first_name: string;
+    last_name: string;
+    company: string;
+    address_1: string;
+    address_2: string;
+    city: string;
+    state: string;
+    postcode: string;
+    country: string;
+    email: string;
+    phone: string;
+  };
+  shipping_address: {
+    first_name: string;
+    last_name: string;
+    company: string;
+    address_1: string;
+    address_2: string;
+    city: string;
+    state: string;
+    postcode: string;
+    country: string;
+  };
+  customer_note: string;
+  create_account: boolean;
+  payment_method: string;
+  payment_data: [];
+  extensions: {};
+};
+
+export const cartCheckout = async (
+  checkoutRequestData: checkoutRequestDataType,
+) => {
+  try {
+    const isConnected = await isNetworkConnected();
+    if (!isConnected) {
+      throw new Error(
+        'No internet connection. Please check your network settings.',
+      );
+    }
+
+    const nonceToken = await getToken();
+
+    const response = await wooCommerceApi.post(
+      `https://everestpackaging.co.in/wp-json/wc/store/v1/checkout`,
+      checkoutRequestData,
+      {headers: {nonce: nonceToken}},
+    );
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export default {
   getProducts,
   getAllProducts,
@@ -394,4 +451,5 @@ export default {
   getCartItems,
   removeFromCart,
   updateProductInCart,
+  cartCheckout,
 };

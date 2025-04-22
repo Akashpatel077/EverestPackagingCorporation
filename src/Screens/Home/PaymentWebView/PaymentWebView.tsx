@@ -1,0 +1,66 @@
+import React, {useEffect, useRef} from 'react';
+import {BackHandler, View} from 'react-native';
+import {WebView} from 'react-native-webview';
+import {useDispatch} from 'react-redux';
+import {getCartListAction} from 'src/store/slices/cartSlice';
+
+const PaymentWebView = ({navigation, route}) => {
+  const {redirectUrl, orderId} = route.params;
+  const webViewRef = useRef(null);
+  const dispatch = useDispatch();
+
+  const handleNavigationStateChange = navState => {
+    const {url, canGoBack} = navState;
+
+    if (canGoBack) {
+      dispatch(getCartListAction());
+      navigation.goBack();
+    }
+
+    // Razorpay Success URL (can vary, inspect actual return URLs)
+    if (
+      url.includes('order-received') &&
+      url.includes('everestpackaging.co.in')
+    ) {
+      // Order completed successfully
+      console.log('Payment Successful');
+      // Optionally extract order ID from the URL
+      const orderId = url.split('order-received/')[1]?.split('/')[0];
+      // Navigate or show success
+      navigation.goBack();
+    }
+
+    // Razorpay Failure URL or cancelled (based on your WooCommerce settings)
+    else if (
+      url.includes('order-cancelled') ||
+      url.includes('cancel_order=true')
+    ) {
+      console.log('Payment Cancelled or Failed');
+      navigation.goBack();
+    }
+  };
+
+  useEffect(() => {
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      () => {
+        return true;
+      },
+    );
+
+    return () => backHandler.remove();
+  }, []);
+
+  return (
+    <View style={{flex: 1}}>
+      <WebView
+        ref={webViewRef}
+        source={{uri: redirectUrl}}
+        onNavigationStateChange={handleNavigationStateChange}
+        startInLoadingState={true}
+      />
+    </View>
+  );
+};
+
+export default PaymentWebView;

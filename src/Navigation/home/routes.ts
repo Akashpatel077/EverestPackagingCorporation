@@ -29,3 +29,4 @@ export const ADDRESSES = `${homePrefix}/ADDRESSES`;
 export const ACCOUNTDETAILS = `${homePrefix}/ACCOUNTDETAILS`;
 export const COMMUNICATION = `${homePrefix}/COMMUNICATION`;
 export const BULKORDERS = `${homePrefix}/BULKORDERS`;
+export const PAYMENT_WEBVIEW = `${homePrefix}/PAYMENT_WEBVIEW`;

@@ -31,9 +31,6 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
   paymentOption: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
     paddingVertical: 16,
     paddingHorizontal: 16,
     borderBottomWidth: 1,
@@ -52,5 +49,36 @@ export const styles = StyleSheet.create({
     color: '#0088cc',
     fontSize: 16,
     fontWeight: '500',
+  },
+  razorPayTitle: {
+    fontSize: 16,
+    fontWeight: '500',
+  },
+  razorPaySubTitle: {
+    color: '#555555',
+  },
+  razorPayIconContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+  },
+  razorPayTextContainer: {
+    paddingLeft: 10,
+  },
+  paymentButton: {
+    backgroundColor: '#0088cc',
+    padding: 15,
+    borderRadius: 10,
+    alignItems: 'center',
+    position: 'absolute',
+    bottom: 8,
+    left: 16,
+    right: 16,
+  },
+  paymentButtonText: {
+    color: '#FFFFFF',
+    fontSize: 16,
+    fontWeight: '600',
   },
 });

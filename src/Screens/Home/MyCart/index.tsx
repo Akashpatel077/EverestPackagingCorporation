@@ -9,7 +9,6 @@ import {
   Modal,
   SafeAreaView,
   StatusBar,
-  Alert,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {useSelector, useDispatch} from 'react-redux';
@@ -80,7 +79,7 @@ const MyCart = () => {
     isSuccess,
   } = useSelector(item => item.cart);
 
-  const {totals, shipping_rates, items: cartItems} = cartDetails || {};
+  const {totals, shipping_rates, items: cartItems, coupons} = cartDetails || {};
   const {
     tax_lines,
     total_items,
@@ -248,6 +247,33 @@ const MyCart = () => {
               ₹{getFormattedPrice(total_items, currency_minor_unit)}
             </Text>
           </View>
+          {Array.isArray(coupons) && coupons.length > 0 && (
+            <View
+              style={[
+                styles.summaryRow,
+                {
+                  borderTopWidth: 1,
+                  borderBottomWidth: 1,
+                  borderColor: '#E0E0E0',
+                  paddingVertical: 5,
+                },
+              ]}>
+              <Text
+                style={[
+                  styles.summaryLabel,
+                  {color: '#555555', fontWeight: '900'},
+                ]}>
+                Bulk Discount
+              </Text>
+              <Text style={styles.summaryValue}>
+                - ₹
+                {getFormattedPrice(
+                  coupons[0].totals.total_discount,
+                  coupons[0].totals.currency_minor_unit,
+                )}
+              </Text>
+            </View>
+          )}
           <View style={styles.summaryRow}>
             <Text
               style={[

@@ -72,6 +72,16 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
   },
+  makeThisAsShippingAddress: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    alignSelf: 'flex-start',
+  },
+  shippingCheckBoxText: {
+    fontSize: 14,
+    paddingLeft: 5,
+    color: '#555555',
+  },
 });
 
 export default styles;

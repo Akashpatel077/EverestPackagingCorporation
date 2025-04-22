@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -9,11 +9,16 @@ import {
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {useDispatch} from 'react-redux';
-import {addBillingAddress} from 'src/store/slices/addressSlice';
+import {
+  addBillingAddress,
+  addShippingAddress,
+} from 'src/store/slices/addressSlice';
 import styles from './styles';
 import {Header} from 'src/Components';
 import {BackIcon} from 'assets/icons';
-import {SHIPPING_ADDRESS_FORM} from 'src/Navigation/home/routes';
+import {CHECKOUT, SHIPPING_ADDRESS_FORM} from 'src/Navigation/home/routes';
+import {Icon} from '../../../Components';
+import {CheckSquare, UncheckSquareNew} from '../../../../assets/icons';
 
 const BillingAddressForm: React.FC = () => {
   const navigation = useNavigation();
@@ -29,6 +34,7 @@ const BillingAddressForm: React.FC = () => {
     countryRegion: 'India',
     addressType: 'Home',
   });
+  const [isShippingAddressSame, SetIsShippingAddressSame] = useState(false);
 
   const handleChange = (name, value) => {
     setFormData(prevData => ({
@@ -61,20 +67,31 @@ const BillingAddressForm: React.FC = () => {
 
     const addressData = {
       id: Date.now().toString(),
+      first_name: formData.firstName,
+      last_name: formData.lastName,
+      company: formData.companyName,
       name: `${formData.firstName} ${formData.lastName}`,
       street:
         formData.streetAddress +
         (formData.apartment ? `, ${formData.apartment}` : ''),
+      address_1:
+        formData.streetAddress +
+        (formData.apartment ? `, ${formData.apartment}` : ''),
       city: formData.townCity,
       state: formData.stateCounty,
-      zipCode: formData.postcode,
+      postcode: formData.postcode,
       country: formData.countryRegion,
       type: formData.addressType,
-      phone: '',
     };
 
-    dispatch(addBillingAddress(addressData));
-    navigation.navigate(SHIPPING_ADDRESS_FORM);
+    if (isShippingAddressSame) {
+      dispatch(addBillingAddress(addressData));
+      dispatch(addShippingAddress(addressData));
+      navigation.navigate(CHECKOUT);
+    } else {
+      dispatch(addBillingAddress(addressData));
+      navigation.navigate(SHIPPING_ADDRESS_FORM);
+    }
   };
 
   return (
@@ -204,6 +221,20 @@ const BillingAddressForm: React.FC = () => {
             placeholder="Select address type"
           />
         </View>
+
+        <TouchableOpacity
+          activeOpacity={0.7}
+          style={styles.makeThisAsShippingAddress}
+          onPress={() => SetIsShippingAddressSame(prevValue => !prevValue)}>
+          {isShippingAddressSame ? (
+            <Icon name={CheckSquare} height={30} width={30} />
+          ) : (
+            <Icon name={UncheckSquareNew} height={30} width={30} />
+          )}
+          <Text style={styles.shippingCheckBoxText}>
+            Make This as Shipping Address
+          </Text>
+        </TouchableOpacity>
 
         <TouchableOpacity style={styles.button} onPress={handleSubmit}>
           <Text style={styles.buttonText}>SAVE ADDRESS</Text>

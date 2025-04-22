@@ -45,6 +45,8 @@ import BulkOrder from './BulkOrder.svg';
 import SendMessage from './SendMessage.svg';
 import CheckSquare from './CheckSquare.svg';
 import UncheckSquareNew from './UncheckSquare.svg';
+import SelectedRadioButton from './SelectedRadioButton.svg';
+import NotSelectedRadioButton from './NotSelectedRadioButton.svg';
 
 export {
   Buy,
@@ -94,4 +96,6 @@ export {
   SendMessage,
   CheckSquare,
   UncheckSquareNew,
+  SelectedRadioButton,
+  NotSelectedRadioButton,
 };

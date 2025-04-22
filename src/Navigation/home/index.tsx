@@ -57,6 +57,7 @@ import {
   ACCOUNTDETAILS,
   COMMUNICATION,
   BULKORDERS,
+  PAYMENT_WEBVIEW,
 } from './routes';
 import {SvgProps} from 'react-native-svg';
 import {Home, Buy, Heart, Paper, Profile, Shop, Category} from 'assets/icons';
@@ -71,6 +72,7 @@ import {getFocusedRouteNameFromRoute} from '@react-navigation/native';
 import {useSelector} from 'react-redux';
 import {selectCartItems} from 'src/store/slices/cartSlice';
 import Welcome from 'src/Screens/Welcome';
+import PaymentWebView from 'src/Screens/Home/PaymentWebView/PaymentWebView';
 
 const Tab = createBottomTabNavigator();
 
@@ -196,6 +198,10 @@ const MyCartStack = () => {
     {
       name: PAYMENT_METHOD,
       component: PaymentMethodScreen,
+    },
+    {
+      name: PAYMENT_WEBVIEW,
+      component: PaymentWebView,
     },
     {
       name: ADD_CARD_SCREEN,

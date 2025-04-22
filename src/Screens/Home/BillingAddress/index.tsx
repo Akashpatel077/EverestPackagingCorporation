@@ -67,7 +67,7 @@ const BillingAddress = () => {
                     <Text
                       style={
                         styles.addressText
-                      }>{`${address.street}, ${address.city}, ${address.state} ${address.zipCode}`}</Text>
+                      }>{`${address.street}, ${address.city}, ${address.state} ${address.postcode}`}</Text>
                   </View>
                 </View>
                 <View style={styles.addressRight}>

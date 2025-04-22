@@ -54,7 +54,7 @@ const CheckoutScreen = ({route}) => {
                 </Text>
                 <Text style={styles.addressText}>
                   {selectedBillingAddress &&
-                    `${selectedBillingAddress.street}, ${selectedBillingAddress.city}, ${selectedBillingAddress.state} ${selectedBillingAddress.zipCode}, ${selectedBillingAddress.country}`}
+                    `${selectedBillingAddress.street}, ${selectedBillingAddress.city}, ${selectedBillingAddress.state} ${selectedBillingAddress.postcode}, ${selectedBillingAddress.country}`}
                 </Text>
               </View>
             </View>
@@ -78,7 +78,7 @@ const CheckoutScreen = ({route}) => {
                 </Text>
                 <Text style={styles.addressText}>
                   {selectedAddress &&
-                    `${selectedAddress.street}, ${selectedAddress.city}, ${selectedAddress.state} ${selectedAddress.zipCode}`}
+                    `${selectedAddress.street}, ${selectedAddress.city}, ${selectedAddress.state} ${selectedAddress.postcode}`}
                 </Text>
               </View>
             </View>

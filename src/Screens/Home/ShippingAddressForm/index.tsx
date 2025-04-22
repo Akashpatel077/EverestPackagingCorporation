@@ -61,16 +61,21 @@ const ShippingAddressForm: React.FC = () => {
 
     const addressData = {
       id: Date.now().toString(),
+      first_name: formData.firstName,
+      last_name: formData.lastName,
+      company: formData.companyName,
       name: `${formData.firstName} ${formData.lastName}`,
       street:
         formData.streetAddress +
         (formData.apartment ? `, ${formData.apartment}` : ''),
+      address_1:
+        formData.streetAddress +
+        (formData.apartment ? `, ${formData.apartment}` : ''),
       city: formData.townCity,
       state: formData.stateCounty,
-      zipCode: formData.postcode,
+      postcode: formData.postcode,
       country: formData.countryRegion,
       type: formData.addressType,
-      phone: '',
     };
 
     dispatch(addShippingAddress(addressData));

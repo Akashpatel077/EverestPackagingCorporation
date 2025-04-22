@@ -6,7 +6,7 @@ export interface Address {
   street: string;
   city: string;
   state: string;
-  zipCode: string;
+  postcode: string;
   country: string;
   phone: string;
   isDefault?: boolean;
@@ -32,8 +32,8 @@ const addressSlice = createSlice({
   reducers: {
     addBillingAddress: (state, action: PayloadAction<Address>) => {
       if (state.billingAddresses.length === 0) {
-        console.log("state",state);
-        
+        console.log('state', state);
+
         action.payload.isDefault = true;
         state.selectedBillingAddressId = action.payload.id;
       }
@@ -75,7 +75,8 @@ const addressSlice = createSlice({
         address => address.id !== action.payload,
       );
       if (state.selectedShippingAddressId === action.payload) {
-        state.selectedShippingAddressId = state.shippingAddresses[0]?.id || null;
+        state.selectedShippingAddressId =
+          state.shippingAddresses[0]?.id || null;
       }
     },
     setSelectedBillingAddress: (state, action: PayloadAction<string>) => {
