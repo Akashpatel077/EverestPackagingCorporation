@@ -35,11 +35,12 @@ import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '@reduxjs/toolkit/query';
 import {logout} from 'src/store/slices/authSlice';
 import {resetStartKey} from 'src/store/slices/startKeySlice';
+import {clearCart} from 'src/store/slices/cartSlice';
 
 const ProfileScreen = () => {
   const navigation = useNavigation();
   const {user} = useSelector((state: RootState) => state.auth);
-  const {name, avatar_urls} = user || {};
+  const {username, avatar_urls} = user || {};
   const dispatch = useDispatch();
 
   const menuItems = [
@@ -74,6 +75,7 @@ const ProfileScreen = () => {
             onPress: () => {
               dispatch(logout());
               dispatch(resetStartKey());
+              dispatch(clearCart());
             },
           },
         ],
@@ -115,7 +117,7 @@ const ProfileScreen = () => {
             <Icon name={Edit} width={20} height={20} />
           </TouchableOpacity>
         </View>
-        <Text style={styles.userName}>{name ?? 'Guest'}</Text>
+        <Text style={styles.userName}>{username ?? 'Guest'}</Text>
       </View>
 
       <View style={styles.menuContainer}>{menuItems.map(renderMenuItem)}</View>

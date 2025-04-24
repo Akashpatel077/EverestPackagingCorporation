@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -11,9 +11,10 @@ import {useNavigation} from '@react-navigation/native';
 import {useDispatch} from 'react-redux';
 import {addShippingAddress} from 'src/store/slices/addressSlice';
 import styles from './styles';
-import {Header} from 'src/Components';
+import {CDropdown, Header} from 'src/Components';
 import {BackIcon} from 'assets/icons';
 import {CHECKOUT} from 'src/Navigation/home/routes';
+import {getStates} from 'src/services/wooCommerceApi';
 
 const ShippingAddressForm: React.FC = () => {
   const navigation = useNavigation();
@@ -29,6 +30,11 @@ const ShippingAddressForm: React.FC = () => {
     countryRegion: 'India',
     addressType: 'Home',
   });
+  const [states, setStates] = useState([]);
+  const [selectedState, setSelectedState] = useState<{
+    label: string;
+    value: string;
+  }>();
 
   const handleChange = (name, value) => {
     setFormData(prevData => ({
@@ -55,6 +61,22 @@ const ShippingAddressForm: React.FC = () => {
     }
     return true;
   };
+
+  useEffect(() => {
+    const fetchStates = async () => {
+      const statesResponse = await getStates();
+      if (statesResponse && statesResponse.states) {
+        const updatedStates = statesResponse.states.map(
+          ({code, name}: {code: string; name: string}) => ({
+            value: code,
+            label: name,
+          }),
+        );
+        setStates(updatedStates);
+      }
+    };
+    fetchStates();
+  }, []);
 
   const handleSubmit = () => {
     if (!validateForm()) return;
@@ -178,11 +200,17 @@ const ShippingAddressForm: React.FC = () => {
           <Text style={styles.label}>
             State / County <Text style={styles.required}>*</Text>
           </Text>
-          <TextInput
-            style={styles.input}
-            value={formData.stateCounty}
-            onChangeText={value => handleChange('stateCounty', value)}
-            placeholder="State / County"
+          <CDropdown
+            data={states}
+            title="State / County"
+            selectedItem={selectedState}
+            onSelect={(itemObject: any) => {
+              setSelectedState(itemObject);
+              setFormData(prevData => ({
+                ...prevData,
+                stateCounty: itemObject.value,
+              }));
+            }}
           />
         </View>
 

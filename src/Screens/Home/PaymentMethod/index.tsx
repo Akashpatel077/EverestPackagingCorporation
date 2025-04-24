@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, Text, TouchableOpacity} from 'react-native';
+import {View, Text, TouchableOpacity, Alert} from 'react-native';
 import {Header, Icon} from 'src/Components';
 import {
   Heart,
@@ -24,8 +24,10 @@ const PaymentMethodScreen = () => {
     selectedShippingAddressId,
     selectedBillingAddressId,
   } = useSelector(item => item.address);
+  const {user} = useSelector(item => item.auth);
 
   const [isRazorPay, setIsRazorPay] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const onPlaceOrder = async () => {
     const selectedBillingAddress = billingAddresses.filter(
@@ -40,18 +42,17 @@ const PaymentMethodScreen = () => {
       selectedShippingAddress.length > 0
     ) {
       try {
+        setLoading(true);
         const checkoutData = {
           billing_address: {
             ...selectedBillingAddress[0],
             country: 'IN',
-            state: 'WB',
-            email: 'ravithakor.meritorious@gmail.com',
+            email: user.email ?? '',
             phone: '4668888888',
           },
           shipping_address: {
             ...selectedShippingAddress[0],
             country: 'IN',
-            state: 'WB',
           },
           customer_note: '',
           create_account: false,
@@ -75,7 +76,10 @@ const PaymentMethodScreen = () => {
           });
         }
       } catch (error) {
-        console.log('error : ', error);
+        console.log('error : ', error.response.data.message);
+        Alert.alert('Attention!', error.response.data.message ?? error.message);
+      } finally {
+        setLoading(false);
       }
     }
   };
@@ -131,10 +135,7 @@ const PaymentMethodScreen = () => {
       <TouchableOpacity
         activeOpacity={0.7}
         style={styles.paymentOption}
-        onPress={() => {
-          // navigation.navigate(ADD_CARD_SCREEN);
-          setIsRazorPay(false);
-        }}>
+        onPress={() => setIsRazorPay(false)}>
         <View style={styles.paymentOptionLeft}>
           <Icon
             name={isRazorPay ? NotSelectedRadioButton : SelectedRadioButton}
@@ -190,7 +191,10 @@ const PaymentMethodScreen = () => {
         <Text style={styles.linkText}>Link</Text>
       </TouchableOpacity> */}
 
-      <TouchableOpacity style={styles.paymentButton} onPress={onPlaceOrder}>
+      <TouchableOpacity
+        style={[styles.paymentButton, {opacity: loading ? 0.7 : 1}]}
+        disabled={loading}
+        onPress={onPlaceOrder}>
         <Text style={styles.paymentButtonText}>Place Order</Text>
       </TouchableOpacity>
     </View>

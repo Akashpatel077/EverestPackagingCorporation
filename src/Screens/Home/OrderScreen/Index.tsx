@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -8,11 +8,13 @@ import {
   SafeAreaView,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import {Icon} from 'src/Components/Icons';
 import {BackIcon, Heart} from 'assets/icons';
 import styles from './styles';
 import {REVIEW_SCREEN, TRACK_ORDER_SCREEN} from 'src/Navigation/home/routes';
-import { Header } from 'src/Components';
+import {Header} from 'src/Components';
+import {useDispatch, useSelector} from 'react-redux';
+import {fetchOrders} from 'src/store/slices/ordersSlice';
+import {AppDispatch} from '@store';
 
 interface OrderItem {
   id: string;
@@ -26,9 +28,18 @@ interface OrderItem {
 
 const OrderScreen = () => {
   const navigation = useNavigation();
+  const dispatch = useDispatch<AppDispatch>();
+  const {user} = useSelector(state => state.auth);
+
   const [activeTab, setActiveTab] = useState<
     'active' | 'completed' | 'cancelled'
   >('active');
+
+  useEffect(() => {
+    if (user.id) {
+      dispatch(fetchOrders({id: user.id}));
+    }
+  }, []);
 
   const [orders] = useState<OrderItem[]>([
     {
@@ -88,7 +99,7 @@ const OrderScreen = () => {
           <TouchableOpacity
             style={styles.actionButton}
             onPress={() => {
-              navigation.navigate(REVIEW_SCREEN, { orderItem: item });
+              navigation.navigate(REVIEW_SCREEN, {orderItem: item});
             }}>
             <Text style={styles.actionButtonText}>Leave Review</Text>
           </TouchableOpacity>

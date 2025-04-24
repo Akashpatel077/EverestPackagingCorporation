@@ -299,7 +299,7 @@ const MyCart = () => {
                       styles.summaryLabel,
                       {color: '#555555', fontWeight: '900'},
                     ]}>
-                    {item.name}
+                    {item.name && item.name?.trim()}
                   </Text>
                   <Text style={styles.summaryValue}>
                     ₹{getFormattedPrice(item.price, currency_minor_unit)}

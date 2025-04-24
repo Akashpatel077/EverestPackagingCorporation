@@ -25,6 +25,7 @@ interface CartState {
   loading: boolean;
   error: string | null;
   isSuccess: boolean;
+  isAddSuccess: boolean;
 }
 
 const initialState: CartState = {
@@ -32,6 +33,7 @@ const initialState: CartState = {
   loading: false,
   error: null,
   isSuccess: false,
+  isAddSuccess: false,
 };
 
 export const addToCartAction = createAsyncThunk(
@@ -46,6 +48,9 @@ export const addToCartAction = createAsyncThunk(
     variation: {};
   }) => {
     const cart = await addToCartProducts(productId, quantity, variation);
+
+    console.log('cart : ', cart);
+
     return cart;
   },
 );
@@ -80,6 +85,10 @@ const cartSlice = createSlice({
   reducers: {
     resetFlags: state => {
       state.isSuccess = false;
+      state.isAddSuccess = false;
+    },
+    clearCart: state => {
+      state.items = [];
     },
   },
   extraReducers: builder => {
@@ -91,7 +100,7 @@ const cartSlice = createSlice({
       .addCase(addToCartAction.fulfilled, (state, action) => {
         state.loading = false;
         state.items = {...action.payload};
-        state.isSuccess = true;
+        state.isAddSuccess = true;
       })
       .addCase(addToCartAction.rejected, (state, action) => {
         state.loading = false;
@@ -146,6 +155,6 @@ export const selectCartTotal = (state: RootState) =>
     return total + Number(price) * item.quantity;
   }, 0);
 
-export const {resetFlags} = cartSlice.actions;
+export const {resetFlags, clearCart} = cartSlice.actions;
 
 export default cartSlice.reducer;

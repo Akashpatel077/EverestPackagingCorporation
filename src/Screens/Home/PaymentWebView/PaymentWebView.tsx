@@ -14,7 +14,7 @@ const PaymentWebView = ({navigation, route}) => {
 
     if (canGoBack) {
       dispatch(getCartListAction());
-      navigation.goBack();
+      navigation.pop(3);
     }
 
     // Razorpay Success URL (can vary, inspect actual return URLs)

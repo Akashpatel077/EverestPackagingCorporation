@@ -42,7 +42,7 @@ export default StyleSheet.create({
     width: 40,
   },
   cartItemsList: {
-    marginBottom: 20,
+    marginBottom: 10,
   },
   cartItemContainer: {
     flexDirection: 'row',

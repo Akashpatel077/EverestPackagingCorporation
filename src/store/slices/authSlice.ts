@@ -1,5 +1,9 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
-import {loginUserApi, fetchUserProfileApi} from '../../services/wooCommerceApi';
+import {
+  loginUserApi,
+  fetchUserProfileApi,
+  fetchUserDetails,
+} from '../../services/wooCommerceApi';
 
 interface AuthState {
   token: string | null;
@@ -23,8 +27,9 @@ export const loginUser = createAsyncThunk(
       // After successful login, fetch user profile
       const userProfile = await fetchUserProfileApi(data.token);
       console.log('userProfile', userProfile);
+      const userDetails = await fetchUserDetails(userProfile.id, data.token);
 
-      return {token: data.token, user: userProfile};
+      return {token: data.token, user: userDetails};
     } catch (error: any) {
       throw error.response?.data || 'Login failed';
     }

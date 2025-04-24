@@ -18,12 +18,14 @@ interface CDropdownProps {
   data: DropdownItem[];
   onSelect: (item: DropdownItem) => void;
   selectedItem?: DropdownItem | null;
+  title: string;
 }
 
 const CDropdown: React.FC<CDropdownProps> = ({
   data,
   onSelect,
   selectedItem,
+  title,
 }) => {
   const [visible, setVisible] = useState<boolean>(false);
 
@@ -39,7 +41,7 @@ const CDropdown: React.FC<CDropdownProps> = ({
         style={styles.dropdown}
         onPress={() => setVisible(true)}>
         <Text style={styles.selectedText}>
-          {selectedItem?.label || 'Select an option'}
+          {selectedItem?.label || title || 'Select an option'}
         </Text>
       </TouchableOpacity>
 
@@ -91,9 +93,9 @@ const styles = StyleSheet.create({
   },
   modalContent: {
     width: '80%',
+    maxHeight: '70%',
     backgroundColor: '#fff',
     borderRadius: 10,
-    // paddingVertical: 20,
     paddingHorizontal: 15,
     elevation: 5,
   },

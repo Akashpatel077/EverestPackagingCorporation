@@ -20,12 +20,14 @@ import {
   removeFromWishlist,
   isProductInWishlist,
 } from '../../../store/slices/wishlistSlice';
-import {addToCartAction} from '../../../store/slices/cartSlice';
+import {addToCartAction, resetFlags} from '../../../store/slices/cartSlice';
 import RenderHtml from 'react-native-render-html';
 import {getCartItems, getProductVariations} from 'src/services/wooCommerceApi';
 import {FilePicker} from '../../../Components';
 import LoadingLogo from 'src/Components/LoadingLogo';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {MYCART} from 'src/Navigation/home/routes';
+import {CommonActions} from '@react-navigation/native';
 
 function findVariation(variations, selectedAttributes) {
   return variations.find(variation => {
@@ -45,7 +47,7 @@ const keysToExtract = [
 const variationNotAvailableText =
   'Sorry!, no products matched your selection. Please choose a different combination.';
 
-const ProductDetails = ({route}) => {
+const ProductDetails = ({navigation, route}) => {
   const {productId} = route.params;
   const [selectedColor, setSelectedColor] = useState('');
   const [isExpanded, setIsExpanded] = useState(false);
@@ -66,11 +68,36 @@ const ProductDetails = ({route}) => {
   const {loading, productDetails, error} = useAppSelector(
     state => state.productDetails,
   );
+  const {isAddSuccess, loading: isLoading} = useAppSelector(
+    state => state.cart,
+  );
   const [regularPrice, setRegularPrice] = useState(0);
   const [salePrice, setSalePrice] = useState(0);
   const totalPrice = quantity * Number(salePrice);
   const isOutOfStock = productDetails.stock_status === 'outofstock';
   const [finalVariation, setFinalVariation] = useState([]);
+
+  console.log('isLoading : ', isLoading);
+
+  useEffect(() => {
+    if (isAddSuccess) {
+      navigation.dispatch(
+        CommonActions.reset({
+          index: 0,
+          routes: [
+            {
+              name: 'Cart',
+              state: {
+                routes: [{name: MYCART}],
+              },
+            },
+          ],
+        }),
+      );
+
+      dispatch(resetFlags());
+    }
+  }, [isAddSuccess]);
 
   useEffect(() => {
     const variation = Object.entries(selectedAttributes).map(
@@ -269,20 +296,6 @@ const ProductDetails = ({route}) => {
                 <Text style={styles.salePrice}>₹{salePrice}</Text>
               </View>
 
-              {/* <View
-                style={{
-                  maxHeight: isExpanded ? 'auto' : 92,
-                  overflow: 'hidden',
-                }}>
-                <RenderHtml source={{html: productDetails.description}} />
-              </View>
-              <TouchableOpacity
-                onPress={() => setIsExpanded(prevValue => !prevValue)}>
-                <Text style={styles.readMore}>
-                  {isExpanded ? 'Read less' : 'Read more'}
-                </Text>
-              </TouchableOpacity> */}
-
               {productDetails.type === 'variable' &&
                 productDetails.attributes.length > 0 &&
                 productDetails.attributes.map(
@@ -332,12 +345,6 @@ const ProductDetails = ({route}) => {
                   />
                 ))}
 
-              {/* {productDetails.price_html && (
-                <View style={{paddingBottom: 10}}>
-                  <RenderHtml source={{html: productDetails.price_html}} />
-                </View>
-              )} */}
-
               {Object.keys(filteredMetaData).length > 0 && (
                 <QuantitySelector
                   filteredMetaData={filteredMetaData}
@@ -385,8 +392,9 @@ const ProductDetails = ({route}) => {
             <TouchableOpacity
               style={[
                 styles.addToCartButton,
-                {opacity: isOutOfStock ? 0.8 : 1},
+                {opacity: isOutOfStock || isLoading ? 0.8 : 1},
               ]}
+              disabled={isLoading}
               onPress={() => {
                 if (isOutOfStock) {
                 } else if (isVariationNotAvailable) {

@@ -46,6 +46,27 @@ export const fetchUserProfileApi = async (token: string) => {
   }
 };
 
+export const fetchUserDetails = async (id: number, token: string) => {
+  try {
+    console.log('token : ', token, id);
+
+    const response = await wooCommerceApi.get(`/customers/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+    });
+
+    console.log('User Profile Response:', response.data);
+
+    return response.data;
+  } catch (error) {
+    console.log('Fetch USer Profile Error:', error);
+
+    throw error;
+  }
+};
+
 export const registerUserApi = async (
   username: string,
   email: string,
@@ -134,7 +155,7 @@ export const getProducts = async (categoryId: number, currentPage: number) => {
   }
 };
 
-export const getOrders = async () => {
+export const getOrders = async (id: number) => {
   try {
     const isConnected = await isNetworkConnected();
     if (!isConnected) {
@@ -142,7 +163,8 @@ export const getOrders = async () => {
         'No internet connection. Please check your network settings.',
       );
     }
-    const response = await wooCommerceApi.get('/orders');
+    const response = await wooCommerceApi.get(`/orders?customer=${id}`);
+
     return response.data;
   } catch (error) {
     throw error;
@@ -330,6 +352,23 @@ export const getCartItems = async () => {
     );
 
     return response;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const getStates = async () => {
+  try {
+    const isConnected = await isNetworkConnected();
+    if (!isConnected) {
+      throw new Error(
+        'No internet connection. Please check your network settings.',
+      );
+    }
+
+    const response = await wooCommerceApi.get(`/data/countries/IN`);
+
+    return response.data;
   } catch (error) {
     throw error;
   }

@@ -28,10 +28,10 @@ const Login = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const {loading, error} = useSelector((state: RootState) => state.auth);
-  const isButtonDisabled = !email || !password;
+  const isButtonDisabled = !email || !password || loading;
 
   useEffect(() => {
-    if (error && error.code.includes('authentication_failed')) {
+    if (error && error.code && error.code.includes('authentication_failed')) {
       Alert.alert(
         'Everest Packaging',
         'Username or Password is incorrect!',

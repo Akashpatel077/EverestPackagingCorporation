@@ -1,4 +1,4 @@
-import { configureStore } from '@reduxjs/toolkit';
+import {configureStore} from '@reduxjs/toolkit';
 import productsReducer from './slices/productsSlice';
 import categoryReducer from './slices/categorySlice';
 import productDetailsReducer from './slices/productDetailsSlice';
@@ -7,9 +7,10 @@ import addressReducer from './slices/addressSlice';
 import cartReducer from './slices/cartSlice';
 import startKeyReducer from './slices/startKeySlice';
 import authReducer from './slices/authSlice';
-import { persistStore } from 'redux-persist';
-import { createPersistedReducer } from './persistConfig';
-import { combineReducers } from '@reduxjs/toolkit';
+import ordersReducer from './slices/ordersSlice';
+import {persistStore} from 'redux-persist';
+import {createPersistedReducer} from './persistConfig';
+import {combineReducers} from '@reduxjs/toolkit';
 
 const rootReducer = combineReducers({
   products: productsReducer,
@@ -20,13 +21,14 @@ const rootReducer = combineReducers({
   cart: cartReducer,
   startKey: startKeyReducer,
   auth: authReducer,
+  orders: ordersReducer,
 });
 
 const persistedReducer = createPersistedReducer(rootReducer);
 
 const store = configureStore({
   reducer: persistedReducer,
-  middleware: (getDefaultMiddleware) =>
+  middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
       serializableCheck: false,
     }),

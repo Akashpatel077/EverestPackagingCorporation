@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -14,11 +14,12 @@ import {
   addShippingAddress,
 } from 'src/store/slices/addressSlice';
 import styles from './styles';
-import {Header} from 'src/Components';
+import {CDropdown, Header} from 'src/Components';
 import {BackIcon} from 'assets/icons';
 import {CHECKOUT, SHIPPING_ADDRESS_FORM} from 'src/Navigation/home/routes';
 import {Icon} from '../../../Components';
 import {CheckSquare, UncheckSquareNew} from '../../../../assets/icons';
+import {getStates} from 'src/services/wooCommerceApi';
 
 const BillingAddressForm: React.FC = () => {
   const navigation = useNavigation();
@@ -35,6 +36,11 @@ const BillingAddressForm: React.FC = () => {
     addressType: 'Home',
   });
   const [isShippingAddressSame, SetIsShippingAddressSame] = useState(false);
+  const [states, setStates] = useState([]);
+  const [selectedState, setSelectedState] = useState<{
+    label: string;
+    value: string;
+  }>();
 
   const handleChange = (name, value) => {
     setFormData(prevData => ({
@@ -43,6 +49,22 @@ const BillingAddressForm: React.FC = () => {
     }));
   };
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    const fetchStates = async () => {
+      const statesResponse = await getStates();
+      if (statesResponse && statesResponse.states) {
+        const updatedStates = statesResponse.states.map(
+          ({code, name}: {code: string; name: string}) => ({
+            value: code,
+            label: name,
+          }),
+        );
+        setStates(updatedStates);
+      }
+    };
+    fetchStates();
+  }, []);
 
   const validateForm = () => {
     const requiredFields = [
@@ -190,11 +212,17 @@ const BillingAddressForm: React.FC = () => {
           <Text style={styles.label}>
             State / County <Text style={styles.required}>*</Text>
           </Text>
-          <TextInput
-            style={styles.input}
-            value={formData.stateCounty}
-            onChangeText={value => handleChange('stateCounty', value)}
-            placeholder="State / County"
+          <CDropdown
+            data={states}
+            title="State / County"
+            selectedItem={selectedState}
+            onSelect={(itemObject: any) => {
+              setSelectedState(itemObject);
+              setFormData(prevData => ({
+                ...prevData,
+                stateCounty: itemObject.value,
+              }));
+            }}
           />
         </View>
 
