@@ -72,7 +72,6 @@ import {getFocusedRouteNameFromRoute} from '@react-navigation/native';
 import {useSelector} from 'react-redux';
 import {selectCartItems} from 'src/store/slices/cartSlice';
 import Welcome from 'src/Screens/Welcome';
-import PaymentWebView from 'src/Screens/Home/PaymentWebView/PaymentWebView';
 
 const Tab = createBottomTabNavigator();
 
@@ -188,22 +187,6 @@ const MyCartStack = () => {
       component: MyCart,
     },
     {
-      name: CHECKOUT,
-      component: CheckoutScreen,
-    },
-    {
-      name: SHIPPING_ADDRESS,
-      component: ShippingAddressScreen,
-    },
-    {
-      name: PAYMENT_METHOD,
-      component: PaymentMethodScreen,
-    },
-    {
-      name: PAYMENT_WEBVIEW,
-      component: PaymentWebView,
-    },
-    {
       name: ADD_CARD_SCREEN,
       component: AddCardScreen,
     },
@@ -218,14 +201,6 @@ const MyCartStack = () => {
     {
       name: BILLING_ADDRESS,
       component: BillingAddress,
-    },
-    {
-      name: SHIPPING_ADDRESS_FORM,
-      component: ShippingAddressForm,
-    },
-    {
-      name: BILLING_ADDRESS_FORM,
-      component: BillingAddressForm,
     },
     {
       name: CATEGORY_SCREEN,
@@ -360,8 +335,8 @@ const getTabBarStyle = (route: any) => {
     backgroundColor: '#FFFFFF',
     borderTopWidth: 1,
     borderTopColor: '#E5E5E5',
-    height: 60,
-    paddingBottom: 8,
+    // height: 60,
+    // paddingBottom: 8,
   };
 };
 

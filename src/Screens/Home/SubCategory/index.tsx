@@ -1,13 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {
-  View,
-  Text,
-  SafeAreaView,
-  FlatList,
-  TouchableOpacity,
-  Image,
-  ActivityIndicator,
-} from 'react-native';
+import {View, Text, FlatList, TouchableOpacity, Image} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {useSelector} from 'react-redux';
 import {Header} from 'src/Components';
@@ -17,6 +9,7 @@ import styles from './styles';
 import {RootState} from 'src/store';
 import {Category} from 'src/store/slices/categorySlice';
 import LoadingLogo from 'src/Components/LoadingLogo';
+import CSafeAreaView from 'src/Components/CSafeAreaView';
 
 const SubCategoryScreen = ({route}) => {
   const navigation = useNavigation();
@@ -76,28 +69,29 @@ const SubCategoryScreen = ({route}) => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <Header title={category} icon1={BackIcon} />
-      <View style={styles.contentContainer}>
-        {isLoading ? (
-          <View style={styles.loadingContainer}>
-            {/* <ActivityIndicator size="large" color="#0088cc" /> */}
-            <LoadingLogo size={120} />
-          </View>
-        ) : (
-          <FlatList
-            data={subCategories
-              .filter(category => category.count > 0)
-              .sort((a, b) => (a.menu_order || 0) - (b.menu_order || 0))}
-            renderItem={renderSubCategoryItem}
-            numColumns={2}
-            showsVerticalScrollIndicator={false}
-            contentContainerStyle={styles.categoriesContainer}
-            keyExtractor={item => item.id.toString()}
-          />
-        )}
+    <CSafeAreaView removeBottomSafeArea>
+      <View style={styles.container}>
+        <Header title={category} icon1={BackIcon} />
+        <View style={styles.contentContainer}>
+          {isLoading ? (
+            <View style={styles.loadingContainer}>
+              <LoadingLogo size={120} />
+            </View>
+          ) : (
+            <FlatList
+              data={subCategories
+                .filter(category => category.count > 0)
+                .sort((a, b) => (a.menu_order || 0) - (b.menu_order || 0))}
+              renderItem={renderSubCategoryItem}
+              numColumns={2}
+              showsVerticalScrollIndicator={false}
+              contentContainerStyle={styles.categoriesContainer}
+              keyExtractor={item => item.id.toString()}
+            />
+          )}
+        </View>
       </View>
-    </SafeAreaView>
+    </CSafeAreaView>
   );
 };
 

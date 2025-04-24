@@ -28,21 +28,9 @@ export const styles = StyleSheet.create({
     alignItems: 'flex-start',
     marginBottom: 16,
   },
-  checkbox: {
-    width: 20,
-    height: 20,
-    borderWidth: 2,
-    borderColor: '#CCCCCC',
-    borderRadius: 4,
-    marginRight: 12,
-    marginTop: 2,
-  },
-  checkboxChecked: {
-    backgroundColor: '#0088CC',
-    borderColor: '#0088CC',
-  },
   labelContainer: {
     flex: 1,
+    paddingLeft: 12,
   },
   checkboxLabel: {
     fontSize: 16,

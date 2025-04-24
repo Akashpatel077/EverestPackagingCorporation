@@ -7,6 +7,24 @@ import SplashScreen from '../Screens/SplashScreen';
 import Welcome from '../Screens/Welcome';
 import {useSelector} from 'react-redux';
 import {RootState} from '../store';
+import {
+  BILLING_ADDRESS,
+  BILLING_ADDRESS_FORM,
+  CHECKOUT,
+  PAYMENT_METHOD,
+  PAYMENT_WEBVIEW,
+  SHIPPING_ADDRESS,
+  SHIPPING_ADDRESS_FORM,
+} from './home/routes';
+import PaymentWebView from 'src/Screens/Home/PaymentWebView/PaymentWebView';
+import {
+  BillingAddress,
+  BillingAddressForm,
+  ShippingAddressForm,
+  ShippingAddressScreen,
+} from 'src/Screens/Home';
+import CheckoutScreen from 'src/Screens/Home/Checkout';
+import PaymentMethodScreen from 'src/Screens/Home/PaymentMethod';
 
 const MainStack = createNativeStackNavigator();
 
@@ -22,7 +40,34 @@ const MainContainer = () => {
     <NavigationContainer>
       <MainStack.Navigator screenOptions={{headerShown: false}}>
         {isLoggedIn || hasStarted ? (
-          <MainStack.Screen name="Home" component={HomeContainer} />
+          <>
+            <MainStack.Screen name="Home" component={HomeContainer} />
+            <MainStack.Screen
+              name={PAYMENT_WEBVIEW}
+              component={PaymentWebView}
+            />
+            <MainStack.Screen
+              name={BILLING_ADDRESS_FORM}
+              component={BillingAddressForm}
+            />
+            <MainStack.Screen
+              name={SHIPPING_ADDRESS_FORM}
+              component={ShippingAddressForm}
+            />
+            <MainStack.Screen name={CHECKOUT} component={CheckoutScreen} />
+            <MainStack.Screen
+              name={BILLING_ADDRESS}
+              component={BillingAddress}
+            />
+            <MainStack.Screen
+              name={SHIPPING_ADDRESS}
+              component={ShippingAddressScreen}
+            />
+            <MainStack.Screen
+              name={PAYMENT_METHOD}
+              component={PaymentMethodScreen}
+            />
+          </>
         ) : (
           <>
             <MainStack.Screen name="Splash" component={SplashScreen} />

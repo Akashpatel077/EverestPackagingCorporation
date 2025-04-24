@@ -36,6 +36,7 @@ import {RootState} from '@reduxjs/toolkit/query';
 import {logout} from 'src/store/slices/authSlice';
 import {resetStartKey} from 'src/store/slices/startKeySlice';
 import {clearCart} from 'src/store/slices/cartSlice';
+import CSafeAreaView from 'src/Components/CSafeAreaView';
 
 const ProfileScreen = () => {
   const navigation = useNavigation();
@@ -100,28 +101,32 @@ const ProfileScreen = () => {
   );
 
   return (
-    <View style={styles.container}>
-      <Header title="Profile" />
+    <CSafeAreaView removeBottomSafeArea>
+      <View style={styles.container}>
+        <Header title="Profile" />
 
-      <View style={styles.profileSection}>
-        <View style={styles.avatarContainer}>
-          <Image
-            source={
-              avatar_urls
-                ? {uri: avatar_urls && avatar_urls[96]}
-                : require('assets/images/user.png')
-            }
-            style={styles.avatar}
-          />
-          <TouchableOpacity style={styles.editButton}>
-            <Icon name={Edit} width={20} height={20} />
-          </TouchableOpacity>
+        <View style={styles.profileSection}>
+          <View style={styles.avatarContainer}>
+            <Image
+              source={
+                avatar_urls
+                  ? {uri: avatar_urls && avatar_urls[96]}
+                  : require('assets/images/user.png')
+              }
+              style={styles.avatar}
+            />
+            <TouchableOpacity style={styles.editButton}>
+              <Icon name={Edit} width={20} height={20} />
+            </TouchableOpacity>
+          </View>
+          <Text style={styles.userName}>{username ?? 'Guest'}</Text>
         </View>
-        <Text style={styles.userName}>{username ?? 'Guest'}</Text>
-      </View>
 
-      <View style={styles.menuContainer}>{menuItems.map(renderMenuItem)}</View>
-    </View>
+        <View style={styles.menuContainer}>
+          {menuItems.map(renderMenuItem)}
+        </View>
+      </View>
+    </CSafeAreaView>
   );
 };
 

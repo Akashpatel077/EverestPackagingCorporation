@@ -15,6 +15,7 @@ import {Header} from 'src/Components';
 import {useDispatch, useSelector} from 'react-redux';
 import {fetchOrders} from 'src/store/slices/ordersSlice';
 import {AppDispatch} from '@store';
+import CSafeAreaView from 'src/Components/CSafeAreaView';
 
 interface OrderItem {
   id: string;
@@ -130,52 +131,54 @@ const OrderScreen = () => {
   );
 
   return (
-    <SafeAreaView style={styles.container}>
-      <Header title="My Orders" icon1={BackIcon} />
-      <View style={styles.tabContainer}>
-        <TouchableOpacity
-          style={[styles.tab, activeTab === 'active' && styles.activeTab]}
-          onPress={() => setActiveTab('active')}>
-          <Text
-            style={[
-              styles.tabText,
-              activeTab === 'active' && styles.activeTabText,
-            ]}>
-            Active
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[styles.tab, activeTab === 'completed' && styles.activeTab]}
-          onPress={() => setActiveTab('completed')}>
-          <Text
-            style={[
-              styles.tabText,
-              activeTab === 'completed' && styles.activeTabText,
-            ]}>
-            Completed
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[styles.tab, activeTab === 'cancelled' && styles.activeTab]}
-          onPress={() => setActiveTab('cancelled')}>
-          <Text
-            style={[
-              styles.tabText,
-              activeTab === 'cancelled' && styles.activeTabText,
-            ]}>
-            Cancelled
-          </Text>
-        </TouchableOpacity>
-      </View>
+    <CSafeAreaView removeBottomSafeArea>
+      <View style={styles.container}>
+        <Header title="My Orders" icon1={BackIcon} />
+        <View style={styles.tabContainer}>
+          <TouchableOpacity
+            style={[styles.tab, activeTab === 'active' && styles.activeTab]}
+            onPress={() => setActiveTab('active')}>
+            <Text
+              style={[
+                styles.tabText,
+                activeTab === 'active' && styles.activeTabText,
+              ]}>
+              Active
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[styles.tab, activeTab === 'completed' && styles.activeTab]}
+            onPress={() => setActiveTab('completed')}>
+            <Text
+              style={[
+                styles.tabText,
+                activeTab === 'completed' && styles.activeTabText,
+              ]}>
+              Completed
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[styles.tab, activeTab === 'cancelled' && styles.activeTab]}
+            onPress={() => setActiveTab('cancelled')}>
+            <Text
+              style={[
+                styles.tabText,
+                activeTab === 'cancelled' && styles.activeTabText,
+              ]}>
+              Cancelled
+            </Text>
+          </TouchableOpacity>
+        </View>
 
-      <FlatList
-        data={filteredOrders}
-        renderItem={renderOrderItem}
-        keyExtractor={item => item.id}
-        contentContainerStyle={styles.ordersList}
-        showsVerticalScrollIndicator={false}
-      />
-    </SafeAreaView>
+        <FlatList
+          data={filteredOrders}
+          renderItem={renderOrderItem}
+          keyExtractor={item => item.id}
+          contentContainerStyle={styles.ordersList}
+          showsVerticalScrollIndicator={false}
+        />
+      </View>
+    </CSafeAreaView>
   );
 };
 

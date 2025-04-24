@@ -12,6 +12,7 @@ import {
 } from 'src/store/slices/addressSlice';
 import {RootState} from 'src/store';
 import type {Address} from 'src/store/slices/addressSlice';
+import CSafeAreaView from 'src/Components/CSafeAreaView';
 
 const BillingAddress = () => {
   const navigation = useNavigation();
@@ -34,106 +35,110 @@ const BillingAddress = () => {
   );
 
   return (
-    <View style={styles.container}>
-      <Header
-        title="Billing Address"
-        icon1={BackIcon}
-        onPressFirst={() => {
-          if (billingAddresses.length === 0) {
-            Alert.alert('No Address', 'Please add a billing address first');
-            return;
-          }
-          if (!selectedBillingAddressId) {
-            Alert.alert('No Selection', 'Please select a billing address');
-            return;
-          }
-          navigation.goBack();
-        }}
-      />
-      <ScrollView
-        showsHorizontalScrollIndicator={false}
-        contentContainerStyle={{padding: 16, flex: 1}}
-        showsVerticalScrollIndicator={false}>
-        {billingAddresses.length > 0
-          ? billingAddresses.map((address: Address) => (
-              <TouchableOpacity
-                key={address.id}
-                style={styles.addressContainer}
-                onPress={() => dispatch(setSelectedBillingAddress(address.id))}>
-                <View style={styles.addressLeft}>
-                  <Icon name={Home} width={24} height={24} />
-                  <View style={styles.addressDetails}>
-                    <Text style={styles.addressType}>{address.name}</Text>
-                    <Text
-                      style={
-                        styles.addressText
-                      }>{`${address.street}, ${address.city}, ${address.state} ${address.postcode}`}</Text>
-                  </View>
-                </View>
-                <View style={styles.addressRight}>
-                  <TouchableOpacity
-                    style={styles.deleteButton}
-                    onPress={() => {
-                      Alert.alert(
-                        'Delete Address',
-                        'Are you sure you want to delete this address?',
-                        [
-                          {text: 'Cancel', style: 'cancel'},
-                          {
-                            text: 'Delete',
-                            style: 'destructive',
-                            onPress: () =>
-                              dispatch(removeBillingAddress(address.id)),
-                          },
-                        ],
-                      );
-                    }}>
-                    <Icon name={Close} width={20} height={20} />
-                  </TouchableOpacity>
-                  <View
-                    style={[
-                      styles.radioButton,
-                      selectedBillingAddressId === address.id &&
-                        styles.radioButtonSelected,
-                    ]}
-                  />
-                </View>
-              </TouchableOpacity>
-            ))
-          : renderEmptyState()}
-
-        <TouchableOpacity
-          style={[
-            styles.addButton,
-            !billingAddresses.length && {marginTop: 20},
-          ]}
-          onPress={() => {
-            navigation.navigate(BILLING_ADDRESS_FORM);
-          }}>
-          <Text style={styles.addButtonText}>Add New Billing Address</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={[
-            styles.applyButton,
-            !selectedAddressData && styles.disabledButton,
-          ]}
-          disabled={!selectedAddressData}
-          onPress={() => {
+    <CSafeAreaView removeBottomSafeArea>
+      <View style={styles.container}>
+        <Header
+          title="Billing Address"
+          icon1={BackIcon}
+          onPressFirst={() => {
             if (billingAddresses.length === 0) {
               Alert.alert('No Address', 'Please add a billing address first');
               return;
             }
-            if (!selectedAddressData) {
+            if (!selectedBillingAddressId) {
               Alert.alert('No Selection', 'Please select a billing address');
               return;
             }
             navigation.goBack();
-          }}>
-          <Text style={styles.applyButtonText}>Apply</Text>
-        </TouchableOpacity>
-      </ScrollView>
-    </View>
+          }}
+        />
+        <ScrollView
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={{padding: 16, flex: 1}}
+          showsVerticalScrollIndicator={false}>
+          {billingAddresses.length > 0
+            ? billingAddresses.map((address: Address) => (
+                <TouchableOpacity
+                  key={address.id}
+                  style={styles.addressContainer}
+                  onPress={() =>
+                    dispatch(setSelectedBillingAddress(address.id))
+                  }>
+                  <View style={styles.addressLeft}>
+                    <Icon name={Home} width={24} height={24} />
+                    <View style={styles.addressDetails}>
+                      <Text style={styles.addressType}>{address.name}</Text>
+                      <Text
+                        style={
+                          styles.addressText
+                        }>{`${address.street}, ${address.city}, ${address.state} ${address.postcode}`}</Text>
+                    </View>
+                  </View>
+                  <View style={styles.addressRight}>
+                    <TouchableOpacity
+                      style={styles.deleteButton}
+                      onPress={() => {
+                        Alert.alert(
+                          'Delete Address',
+                          'Are you sure you want to delete this address?',
+                          [
+                            {text: 'Cancel', style: 'cancel'},
+                            {
+                              text: 'Delete',
+                              style: 'destructive',
+                              onPress: () =>
+                                dispatch(removeBillingAddress(address.id)),
+                            },
+                          ],
+                        );
+                      }}>
+                      <Icon name={Close} width={20} height={20} />
+                    </TouchableOpacity>
+                    <View
+                      style={[
+                        styles.radioButton,
+                        selectedBillingAddressId === address.id &&
+                          styles.radioButtonSelected,
+                      ]}
+                    />
+                  </View>
+                </TouchableOpacity>
+              ))
+            : renderEmptyState()}
+
+          <TouchableOpacity
+            style={[
+              styles.addButton,
+              !billingAddresses.length && {marginTop: 20},
+            ]}
+            onPress={() => {
+              navigation.navigate(BILLING_ADDRESS_FORM);
+            }}>
+            <Text style={styles.addButtonText}>Add New Billing Address</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={[
+              styles.applyButton,
+              !selectedAddressData && styles.disabledButton,
+            ]}
+            disabled={!selectedAddressData}
+            onPress={() => {
+              if (billingAddresses.length === 0) {
+                Alert.alert('No Address', 'Please add a billing address first');
+                return;
+              }
+              if (!selectedAddressData) {
+                Alert.alert('No Selection', 'Please select a billing address');
+                return;
+              }
+              navigation.goBack();
+            }}>
+            <Text style={styles.applyButtonText}>Apply</Text>
+          </TouchableOpacity>
+        </ScrollView>
+      </View>
+    </CSafeAreaView>
   );
 };
 

@@ -17,6 +17,7 @@ import {
   selectWishlistItems,
   removeFromWishlist,
 } from 'src/store/slices/wishlistSlice';
+import CSafeAreaView from 'src/Components/CSafeAreaView';
 
 const WishlistScreen = () => {
   const navigation = useNavigation();
@@ -108,25 +109,27 @@ const WishlistScreen = () => {
   };
 
   return (
-    <SafeAreaView style={[styles.container, {}]}>
-      <Header title="My Wishlist" />
-      <View style={{paddingTop: 8}}>
-        {filteredItems.length === 0 ? (
-          <View style={styles.emptyContainer}>
-            <Text style={styles.emptyText}>No items in wishlist</Text>
-          </View>
-        ) : (
-          <FlatList
-            data={filteredItems}
-            renderItem={renderWishlistItem}
-            numColumns={2}
-            showsVerticalScrollIndicator={false}
-            contentContainerStyle={styles.productGrid}
-            keyExtractor={item => item.id.toString()}
-          />
-        )}
+    <CSafeAreaView removeBottomSafeArea>
+      <View style={[styles.container, {}]}>
+        <Header title="My Wishlist" />
+        <View style={{paddingTop: 8}}>
+          {filteredItems.length === 0 ? (
+            <View style={styles.emptyContainer}>
+              <Text style={styles.emptyText}>No items in wishlist</Text>
+            </View>
+          ) : (
+            <FlatList
+              data={filteredItems}
+              renderItem={renderWishlistItem}
+              numColumns={2}
+              showsVerticalScrollIndicator={false}
+              contentContainerStyle={styles.productGrid}
+              keyExtractor={item => item.id.toString()}
+            />
+          )}
+        </View>
       </View>
-    </SafeAreaView>
+    </CSafeAreaView>
   );
 };
 

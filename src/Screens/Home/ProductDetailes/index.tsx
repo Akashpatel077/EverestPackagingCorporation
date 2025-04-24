@@ -28,6 +28,7 @@ import LoadingLogo from 'src/Components/LoadingLogo';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {MYCART} from 'src/Navigation/home/routes';
 import {CommonActions} from '@react-navigation/native';
+import CSafeAreaView from 'src/Components/CSafeAreaView';
 
 function findVariation(variations, selectedAttributes) {
   return variations.find(variation => {
@@ -229,194 +230,199 @@ const ProductDetails = ({navigation, route}) => {
   );
 
   return (
-    <SafeAreaView style={styles.container}>
-      <Header
-        title="Product Details"
-        icon1={BackIcon}
-        showWishlistIcon
-        isInWishlist={isInWishlist}
-        onWishlistPress={() => {
-          if (isInWishlist) {
-            dispatch(removeFromWishlist(productId));
-          } else {
-            dispatch(addToWishlist(productDetails));
-          }
-        }}
-        icon2Color={isInWishlist ? '#CC5656' : '#FFF'}
-      />
-      {loading ? (
-        <View style={styles.loadingContainer}>
-          <LoadingLogo />
-        </View>
-      ) : (
-        <View style={{flex: 1}}>
-          <ScrollView
-            showsVerticalScrollIndicator={false}
-            style={{flex: 1}}
-            contentContainerStyle={{paddingTop: 60}}>
-            <View style={styles.mainImageContainer}>
-              <Image
-                source={{
-                  uri: images.length ? images[currentImageIndex].src : '',
-                }}
-                style={styles.mainImage}
-              />
-            </View>
-
-            <View style={styles.thumbnailContainer}>
-              <FlatList
-                data={images}
-                renderItem={renderImageItem}
-                horizontal
-                showsHorizontalScrollIndicator={false}
-                contentContainerStyle={styles.thumbnailList}
-              />
-            </View>
-
-            <View style={styles.productInfo}>
-              <View style={styles.titleRow}>
-                <Text style={styles.title}>{productDetails.name}</Text>
+    <CSafeAreaView>
+      <View style={styles.container}>
+        <Header
+          title="Product Details"
+          icon1={BackIcon}
+          showWishlistIcon
+          isInWishlist={isInWishlist}
+          onWishlistPress={() => {
+            if (isInWishlist) {
+              dispatch(removeFromWishlist(productId));
+            } else {
+              dispatch(addToWishlist(productDetails));
+            }
+          }}
+          icon2Color={isInWishlist ? '#CC5656' : '#FFF'}
+        />
+        {loading ? (
+          <View style={styles.loadingContainer}>
+            <LoadingLogo />
+          </View>
+        ) : (
+          <View style={{flex: 1}}>
+            <ScrollView
+              showsVerticalScrollIndicator={false}
+              style={{flex: 1}}
+              contentContainerStyle={{paddingTop: 60}}>
+              <View style={styles.mainImageContainer}>
+                <Image
+                  source={{
+                    uri: images.length ? images[currentImageIndex].src : '',
+                  }}
+                  style={styles.mainImage}
+                />
               </View>
-              <View style={styles.reviewContainer}>
-                <View style={styles.starContainer}>
-                  {[1, 2, 3, 4, 5].map(star => (
-                    <Text key={star} style={styles.starIcon}>
-                      {Number(productDetails.average_rating) >= star
-                        ? '★'
-                        : '☆'}
-                    </Text>
-                  ))}
+
+              <View style={styles.thumbnailContainer}>
+                <FlatList
+                  data={images}
+                  renderItem={renderImageItem}
+                  horizontal
+                  showsHorizontalScrollIndicator={false}
+                  contentContainerStyle={styles.thumbnailList}
+                />
+              </View>
+
+              <View style={styles.productInfo}>
+                <View style={styles.titleRow}>
+                  <Text style={styles.title}>{productDetails.name}</Text>
                 </View>
-                <Text style={styles.reviewText}>
-                  ( There are no reviews yet. )
-                </Text>
-              </View>
-              <View style={styles.priceRow}>
-                <Text style={styles.regularPrice}>₹{regularPrice}</Text>
-                <Text style={styles.salePrice}>₹{salePrice}</Text>
-              </View>
+                <View style={styles.reviewContainer}>
+                  <View style={styles.starContainer}>
+                    {[1, 2, 3, 4, 5].map(star => (
+                      <Text key={star} style={styles.starIcon}>
+                        {Number(productDetails.average_rating) >= star
+                          ? '★'
+                          : '☆'}
+                      </Text>
+                    ))}
+                  </View>
+                  <Text style={styles.reviewText}>
+                    ( There are no reviews yet. )
+                  </Text>
+                </View>
+                <View style={styles.priceRow}>
+                  <Text style={styles.regularPrice}>₹{regularPrice}</Text>
+                  <Text style={styles.salePrice}>₹{salePrice}</Text>
+                </View>
 
-              {productDetails.type === 'variable' &&
-                productDetails.attributes.length > 0 &&
-                productDetails.attributes.map(
-                  item =>
-                    !(item.name === 'HSN Code') && (
-                      <RenderAttributes
-                        item={item}
-                        setSelectedAttributes={setSelectedAttributes}
-                      />
-                    ),
+                {productDetails.type === 'variable' &&
+                  productDetails.attributes.length > 0 &&
+                  productDetails.attributes.map(
+                    item =>
+                      !(item.name === 'HSN Code') && (
+                        <RenderAttributes
+                          item={item}
+                          setSelectedAttributes={setSelectedAttributes}
+                        />
+                      ),
+                  )}
+
+                {colorOptions.length > 0 && (
+                  <View style={styles.colorSection}>
+                    <Text style={styles.sectionTitle}>
+                      Select Color
+                      {selectedColor && (
+                        <Text style={[styles.sectionTitle, {color: '#0088cc'}]}>
+                          {` : ${selectedColor}`}
+                        </Text>
+                      )}
+                    </Text>
+                    <ScrollView
+                      horizontal
+                      showsHorizontalScrollIndicator={false}
+                      contentContainerStyle={styles.colorContainer}>
+                      {colorOptions.map(({color, value}: any) => (
+                        <TouchableOpacity
+                          key={value}
+                          style={[
+                            styles.colorButton,
+                            {backgroundColor: color},
+                            selectedColor === value &&
+                              styles.selectedColorButton,
+                          ]}
+                          onPress={() => setSelectedColor(value)}
+                        />
+                      ))}
+                    </ScrollView>
+                  </View>
                 )}
 
-              {colorOptions.length > 0 && (
-                <View style={styles.colorSection}>
-                  <Text style={styles.sectionTitle}>
-                    Select Color
-                    {selectedColor && (
-                      <Text style={[styles.sectionTitle, {color: '#0088cc'}]}>
-                        {` : ${selectedColor}`}
-                      </Text>
-                    )}
-                  </Text>
-                  <ScrollView
-                    horizontal
-                    showsHorizontalScrollIndicator={false}
-                    contentContainerStyle={styles.colorContainer}>
-                    {colorOptions.map(({color, value}: any) => (
-                      <TouchableOpacity
-                        key={value}
-                        style={[
-                          styles.colorButton,
-                          {backgroundColor: color},
-                          selectedColor === value && styles.selectedColorButton,
-                        ]}
-                        onPress={() => setSelectedColor(value)}
-                      />
-                    ))}
-                  </ScrollView>
-                </View>
-              )}
+                {productDetails?.wcpa_form_fields?.fields?.length > 0 &&
+                  productDetails.wcpa_form_fields?.fields.map(item => (
+                    <RenderCustomExtraFields
+                      setSelectedCustomExtraFields={
+                        setSelectedCustomExtraFields
+                      }
+                      item={item}
+                    />
+                  ))}
 
-              {productDetails?.wcpa_form_fields?.fields?.length > 0 &&
-                productDetails.wcpa_form_fields?.fields.map(item => (
-                  <RenderCustomExtraFields
-                    setSelectedCustomExtraFields={setSelectedCustomExtraFields}
-                    item={item}
+                {Object.keys(filteredMetaData).length > 0 && (
+                  <QuantitySelector
+                    filteredMetaData={filteredMetaData}
+                    quantity={quantity}
+                    setQuantity={setQuantity}
                   />
-                ))}
+                )}
 
-              {Object.keys(filteredMetaData).length > 0 && (
-                <QuantitySelector
-                  filteredMetaData={filteredMetaData}
-                  quantity={quantity}
-                  setQuantity={setQuantity}
-                />
-              )}
-
-              {isVariationNotAvailable && (
-                <Text style={styles.alertLabel}>
-                  {variationNotAvailableText}
-                </Text>
-              )}
-              {cleanedHTML && (
-                <>
-                  <Text
-                    style={[
-                      styles.sectionTitle,
-                      {marginBottom: 5, marginTop: 10},
-                    ]}>
-                    Product Description:
+                {isVariationNotAvailable && (
+                  <Text style={styles.alertLabel}>
+                    {variationNotAvailableText}
                   </Text>
-                  <View
-                    style={{
-                      maxHeight: isExpanded ? 'auto' : 92,
-                      overflow: 'hidden',
-                    }}>
-                    <RenderHtml source={{html: cleanedHTML}} />
-                  </View>
-                  <TouchableOpacity
-                    onPress={() => setIsExpanded(prevValue => !prevValue)}>
-                    <Text style={styles.readMore}>
-                      {isExpanded ? 'Read less' : 'Read more'}
+                )}
+                {cleanedHTML && (
+                  <>
+                    <Text
+                      style={[
+                        styles.sectionTitle,
+                        {marginBottom: 5, marginTop: 10},
+                      ]}>
+                      Product Description:
                     </Text>
-                  </TouchableOpacity>
-                </>
-              )}
+                    <View
+                      style={{
+                        maxHeight: isExpanded ? 'auto' : 92,
+                        overflow: 'hidden',
+                      }}>
+                      <RenderHtml source={{html: cleanedHTML}} />
+                    </View>
+                    <TouchableOpacity
+                      onPress={() => setIsExpanded(prevValue => !prevValue)}>
+                      <Text style={styles.readMore}>
+                        {isExpanded ? 'Read less' : 'Read more'}
+                      </Text>
+                    </TouchableOpacity>
+                  </>
+                )}
+              </View>
+            </ScrollView>
+            <View style={styles.bottomContainer}>
+              <View style={styles.priceContainer}>
+                <Text style={styles.priceLabel}>Total Price</Text>
+                <Text style={styles.price}>₹{totalPrice.toFixed(2)}</Text>
+              </View>
+              <TouchableOpacity
+                style={[
+                  styles.addToCartButton,
+                  {opacity: isOutOfStock || isLoading ? 0.8 : 1},
+                ]}
+                disabled={isLoading}
+                onPress={() => {
+                  if (isOutOfStock) {
+                  } else if (isVariationNotAvailable) {
+                    Alert.alert('', variationNotAvailableText);
+                  } else {
+                    dispatch(
+                      addToCartAction({
+                        productId,
+                        quantity,
+                        variation: finalVariation,
+                      }),
+                    );
+                  }
+                }}>
+                <Text style={styles.addToCartText}>
+                  {isOutOfStock ? 'Out of Stock' : '🛍 Add to Cart'}
+                </Text>
+              </TouchableOpacity>
             </View>
-          </ScrollView>
-          <View style={styles.bottomContainer}>
-            <View style={styles.priceContainer}>
-              <Text style={styles.priceLabel}>Total Price</Text>
-              <Text style={styles.price}>₹{totalPrice.toFixed(2)}</Text>
-            </View>
-            <TouchableOpacity
-              style={[
-                styles.addToCartButton,
-                {opacity: isOutOfStock || isLoading ? 0.8 : 1},
-              ]}
-              disabled={isLoading}
-              onPress={() => {
-                if (isOutOfStock) {
-                } else if (isVariationNotAvailable) {
-                  Alert.alert('', variationNotAvailableText);
-                } else {
-                  dispatch(
-                    addToCartAction({
-                      productId,
-                      quantity,
-                      variation: finalVariation,
-                    }),
-                  );
-                }
-              }}>
-              <Text style={styles.addToCartText}>
-                {isOutOfStock ? 'Out of Stock' : '🛍 Add to Cart'}
-              </Text>
-            </TouchableOpacity>
           </View>
-        </View>
-      )}
-    </SafeAreaView>
+        )}
+      </View>
+    </CSafeAreaView>
   );
 };
 

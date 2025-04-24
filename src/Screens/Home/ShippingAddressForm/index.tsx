@@ -15,6 +15,7 @@ import {CDropdown, Header} from 'src/Components';
 import {BackIcon} from 'assets/icons';
 import {CHECKOUT} from 'src/Navigation/home/routes';
 import {getStates} from 'src/services/wooCommerceApi';
+import CSafeAreaView from 'src/Components/CSafeAreaView';
 
 const ShippingAddressForm: React.FC = () => {
   const navigation = useNavigation();
@@ -105,144 +106,146 @@ const ShippingAddressForm: React.FC = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <Header title="Shipping Address" icon1={BackIcon} />
-      <ScrollView
-        showsHorizontalScrollIndicator={false}
-        contentContainerStyle={{padding: 16}}
-        showsVerticalScrollIndicator={false}>
-        <View style={styles.row}>
-          <View style={styles.halfField}>
+    <CSafeAreaView removeBottomSafeArea>
+      <View style={styles.container}>
+        <Header title="Shipping Address" icon1={BackIcon} />
+        <ScrollView
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={{padding: 16, paddingBottom: 30}}
+          showsVerticalScrollIndicator={false}>
+          <View style={styles.row}>
+            <View style={styles.halfField}>
+              <Text style={styles.label}>
+                First name <Text style={styles.required}>*</Text>
+              </Text>
+              <TextInput
+                style={styles.input}
+                value={formData.firstName}
+                onChangeText={value => handleChange('firstName', value)}
+                placeholder="First name"
+              />
+            </View>
+            <View style={styles.halfField}>
+              <Text style={styles.label}>
+                Last name <Text style={styles.required}>*</Text>
+              </Text>
+              <TextInput
+                style={styles.input}
+                value={formData.lastName}
+                onChangeText={value => handleChange('lastName', value)}
+                placeholder="Last name"
+              />
+            </View>
+          </View>
+
+          <View style={styles.field}>
+            <Text style={styles.label}>Company name (optional)</Text>
+            <TextInput
+              style={styles.input}
+              value={formData.companyName}
+              onChangeText={value => handleChange('companyName', value)}
+              placeholder="Company name"
+            />
+          </View>
+
+          <View style={styles.field}>
             <Text style={styles.label}>
-              First name <Text style={styles.required}>*</Text>
+              Country / Region <Text style={styles.required}>*</Text>
             </Text>
             <TextInput
               style={styles.input}
-              value={formData.firstName}
-              onChangeText={value => handleChange('firstName', value)}
-              placeholder="First name"
+              value={formData.countryRegion}
+              onChangeText={value => handleChange('countryRegion', value)}
+              placeholder="Country / Region"
+              readOnly={true}
+              editable={false}
             />
           </View>
-          <View style={styles.halfField}>
+
+          <View style={styles.field}>
             <Text style={styles.label}>
-              Last name <Text style={styles.required}>*</Text>
+              Street address <Text style={styles.required}>*</Text>
             </Text>
             <TextInput
               style={styles.input}
-              value={formData.lastName}
-              onChangeText={value => handleChange('lastName', value)}
-              placeholder="Last name"
+              value={formData.streetAddress}
+              onChangeText={value => handleChange('streetAddress', value)}
+              placeholder="House number and street name"
             />
           </View>
-        </View>
 
-        <View style={styles.field}>
-          <Text style={styles.label}>Company name (optional)</Text>
-          <TextInput
-            style={styles.input}
-            value={formData.companyName}
-            onChangeText={value => handleChange('companyName', value)}
-            placeholder="Company name"
-          />
-        </View>
+          <View style={styles.field}>
+            <Text style={styles.label}>
+              Apartment, suite, unit, etc. (optional)
+            </Text>
+            <TextInput
+              style={styles.input}
+              value={formData.apartment}
+              onChangeText={value => handleChange('apartment', value)}
+              placeholder="Apartment, suite, unit, etc."
+            />
+          </View>
 
-        <View style={styles.field}>
-          <Text style={styles.label}>
-            Country / Region <Text style={styles.required}>*</Text>
-          </Text>
-          <TextInput
-            style={styles.input}
-            value={formData.countryRegion}
-            onChangeText={value => handleChange('countryRegion', value)}
-            placeholder="Country / Region"
-            readOnly={true}
-            editable={false}
-          />
-        </View>
+          <View style={styles.field}>
+            <Text style={styles.label}>
+              Town / City <Text style={styles.required}>*</Text>
+            </Text>
+            <TextInput
+              style={styles.input}
+              value={formData.townCity}
+              onChangeText={value => handleChange('townCity', value)}
+              placeholder="Town / City"
+            />
+          </View>
 
-        <View style={styles.field}>
-          <Text style={styles.label}>
-            Street address <Text style={styles.required}>*</Text>
-          </Text>
-          <TextInput
-            style={styles.input}
-            value={formData.streetAddress}
-            onChangeText={value => handleChange('streetAddress', value)}
-            placeholder="House number and street name"
-          />
-        </View>
+          <View style={styles.field}>
+            <Text style={styles.label}>
+              State / County <Text style={styles.required}>*</Text>
+            </Text>
+            <CDropdown
+              data={states}
+              title="State / County"
+              selectedItem={selectedState}
+              onSelect={(itemObject: any) => {
+                setSelectedState(itemObject);
+                setFormData(prevData => ({
+                  ...prevData,
+                  stateCounty: itemObject.value,
+                }));
+              }}
+            />
+          </View>
 
-        <View style={styles.field}>
-          <Text style={styles.label}>
-            Apartment, suite, unit, etc. (optional)
-          </Text>
-          <TextInput
-            style={styles.input}
-            value={formData.apartment}
-            onChangeText={value => handleChange('apartment', value)}
-            placeholder="Apartment, suite, unit, etc."
-          />
-        </View>
+          <View style={styles.field}>
+            <Text style={styles.label}>
+              Postcode / ZIP <Text style={styles.required}>*</Text>
+            </Text>
+            <TextInput
+              style={styles.input}
+              value={formData.postcode}
+              onChangeText={value => handleChange('postcode', value)}
+              placeholder="Postcode / ZIP"
+            />
+          </View>
 
-        <View style={styles.field}>
-          <Text style={styles.label}>
-            Town / City <Text style={styles.required}>*</Text>
-          </Text>
-          <TextInput
-            style={styles.input}
-            value={formData.townCity}
-            onChangeText={value => handleChange('townCity', value)}
-            placeholder="Town / City"
-          />
-        </View>
+          <View style={styles.field}>
+            <Text style={styles.label}>
+              Address Type <Text style={styles.required}>*</Text>
+            </Text>
+            <TextInput
+              style={styles.input}
+              value={formData.addressType}
+              onChangeText={value => handleChange('addressType', value)}
+              placeholder="Select address type"
+            />
+          </View>
 
-        <View style={styles.field}>
-          <Text style={styles.label}>
-            State / County <Text style={styles.required}>*</Text>
-          </Text>
-          <CDropdown
-            data={states}
-            title="State / County"
-            selectedItem={selectedState}
-            onSelect={(itemObject: any) => {
-              setSelectedState(itemObject);
-              setFormData(prevData => ({
-                ...prevData,
-                stateCounty: itemObject.value,
-              }));
-            }}
-          />
-        </View>
-
-        <View style={styles.field}>
-          <Text style={styles.label}>
-            Postcode / ZIP <Text style={styles.required}>*</Text>
-          </Text>
-          <TextInput
-            style={styles.input}
-            value={formData.postcode}
-            onChangeText={value => handleChange('postcode', value)}
-            placeholder="Postcode / ZIP"
-          />
-        </View>
-
-        <View style={styles.field}>
-          <Text style={styles.label}>
-            Address Type <Text style={styles.required}>*</Text>
-          </Text>
-          <TextInput
-            style={styles.input}
-            value={formData.addressType}
-            onChangeText={value => handleChange('addressType', value)}
-            placeholder="Select address type"
-          />
-        </View>
-
-        <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-          <Text style={styles.buttonText}>SAVE ADDRESS</Text>
-        </TouchableOpacity>
-      </ScrollView>
-    </View>
+          <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+            <Text style={styles.buttonText}>SAVE ADDRESS</Text>
+          </TouchableOpacity>
+        </ScrollView>
+      </View>
+    </CSafeAreaView>
   );
 };
 

@@ -17,6 +17,7 @@ const styles = StyleSheet.create({
   },
   categoriesContainer: {
     padding: 8,
+    paddingBottom: 30,
   },
   categoryWrapper: {
     width: '48%',

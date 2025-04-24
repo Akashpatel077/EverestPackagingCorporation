@@ -15,6 +15,7 @@ import {useNavigation} from '@react-navigation/native';
 import {useSelector} from 'react-redux';
 import {cartCheckout} from 'src/services/wooCommerceApi';
 import {PAYMENT_WEBVIEW} from 'src/Navigation/home/routes';
+import CSafeAreaView from 'src/Components/CSafeAreaView';
 
 const PaymentMethodScreen = () => {
   const navigation = useNavigation();
@@ -85,84 +86,85 @@ const PaymentMethodScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <Header title="Payment Methods" icon1={BackIcon} />
+    <CSafeAreaView>
+      <View style={styles.container}>
+        <Header title="Payment Methods" icon1={BackIcon} />
 
-      <TouchableOpacity
-        style={styles.paymentOption}
-        activeOpacity={0.7}
-        onPress={() => {
-          // navigation.navigate(ADD_CARD_SCREEN);
-          setIsRazorPay(true);
-        }}>
-        <View style={styles.paymentOptionLeft}>
-          <Icon
-            name={isRazorPay ? SelectedRadioButton : NotSelectedRadioButton}
-            width={24}
-            height={24}
-          />
-          <View>
-            <Text style={[styles.paymentOptionText, {fontSize: 18}]}>
-              Credit Card/Debit Card/NetBanking
-            </Text>
-            <View style={styles.razorPayIconContainer}>
-              <Icon name={CreditCard} width={24} height={24} color="#FFF" />
-              <View style={styles.razorPayTextContainer}>
-                <Text style={styles.razorPayTitle}>Pay by Razorpay</Text>
-                <Text style={styles.razorPaySubTitle}>
-                  Cards, Netbanking, Wallet & UPI
-                </Text>
+        <TouchableOpacity
+          style={styles.paymentOption}
+          activeOpacity={0.7}
+          onPress={() => {
+            // navigation.navigate(ADD_CARD_SCREEN);
+            setIsRazorPay(true);
+          }}>
+          <View style={styles.paymentOptionLeft}>
+            <Icon
+              name={isRazorPay ? SelectedRadioButton : NotSelectedRadioButton}
+              width={24}
+              height={24}
+            />
+            <View>
+              <Text style={[styles.paymentOptionText, {fontSize: 18}]}>
+                Credit Card/Debit Card/NetBanking
+              </Text>
+              <View style={styles.razorPayIconContainer}>
+                <Icon name={CreditCard} width={24} height={24} color="#FFF" />
+                <View style={styles.razorPayTextContainer}>
+                  <Text style={styles.razorPayTitle}>Pay by Razorpay</Text>
+                  <Text style={styles.razorPaySubTitle}>
+                    Cards, Netbanking, Wallet & UPI
+                  </Text>
+                </View>
               </View>
             </View>
           </View>
-        </View>
-        {isRazorPay && (
-          <Text
-            style={[
-              styles.paymentOptionText,
-              {
-                fontSize: 17,
-                marginLeft: 0,
-                fontWeight: '500',
-                color: '#666666',
-              },
-            ]}>
-            Pay securely by Credit or Debit card or Internet Banking through
-            Razorpay.
-          </Text>
-        )}
-      </TouchableOpacity>
-      <TouchableOpacity
-        activeOpacity={0.7}
-        style={styles.paymentOption}
-        onPress={() => setIsRazorPay(false)}>
-        <View style={styles.paymentOptionLeft}>
-          <Icon
-            name={isRazorPay ? NotSelectedRadioButton : SelectedRadioButton}
-            width={24}
-            height={24}
-          />
-          <View>
-            <Text style={styles.paymentOptionText}>Cash on delivery</Text>
+          {isRazorPay && (
+            <Text
+              style={[
+                styles.paymentOptionText,
+                {
+                  fontSize: 17,
+                  marginLeft: 0,
+                  fontWeight: '500',
+                  color: '#666666',
+                },
+              ]}>
+              Pay securely by Credit or Debit card or Internet Banking through
+              Razorpay.
+            </Text>
+          )}
+        </TouchableOpacity>
+        <TouchableOpacity
+          activeOpacity={0.7}
+          style={styles.paymentOption}
+          onPress={() => setIsRazorPay(false)}>
+          <View style={styles.paymentOptionLeft}>
+            <Icon
+              name={isRazorPay ? NotSelectedRadioButton : SelectedRadioButton}
+              width={24}
+              height={24}
+            />
+            <View>
+              <Text style={styles.paymentOptionText}>Cash on delivery</Text>
+            </View>
           </View>
-        </View>
-        {!isRazorPay && (
-          <Text
-            style={[
-              styles.paymentOptionText,
-              {
-                fontSize: 17,
-                marginLeft: 0,
-                fontWeight: '500',
-                color: '#666666',
-              },
-            ]}>
-            Pay with cash upon delivery.
-          </Text>
-        )}
-      </TouchableOpacity>
+          {!isRazorPay && (
+            <Text
+              style={[
+                styles.paymentOptionText,
+                {
+                  fontSize: 17,
+                  marginLeft: 0,
+                  fontWeight: '500',
+                  color: '#666666',
+                },
+              ]}>
+              Pay with cash upon delivery.
+            </Text>
+          )}
+        </TouchableOpacity>
 
-      {/* <TouchableOpacity
+        {/* <TouchableOpacity
         style={styles.paymentOption}
         onPress={() => {
           navigation.navigate(ADD_CARD_SCREEN);
@@ -191,13 +193,14 @@ const PaymentMethodScreen = () => {
         <Text style={styles.linkText}>Link</Text>
       </TouchableOpacity> */}
 
-      <TouchableOpacity
-        style={[styles.paymentButton, {opacity: loading ? 0.7 : 1}]}
-        disabled={loading}
-        onPress={onPlaceOrder}>
-        <Text style={styles.paymentButtonText}>Place Order</Text>
-      </TouchableOpacity>
-    </View>
+        <TouchableOpacity
+          style={[styles.paymentButton, {opacity: loading ? 0.7 : 1}]}
+          disabled={loading}
+          onPress={onPlaceOrder}>
+          <Text style={styles.paymentButtonText}>Place Order</Text>
+        </TouchableOpacity>
+      </View>
+    </CSafeAreaView>
   );
 };
 

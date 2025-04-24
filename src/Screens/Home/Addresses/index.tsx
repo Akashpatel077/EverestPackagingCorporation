@@ -10,6 +10,7 @@ import {
   SHIPPING_ADDRESS_FORM,
 } from 'src/Navigation/home/routes';
 import {RootState} from 'src/store';
+import CSafeAreaView from 'src/Components/CSafeAreaView';
 
 const Addresses = () => {
   const navigation = useNavigation();
@@ -57,27 +58,29 @@ const Addresses = () => {
   );
 
   return (
-    <View style={styles.container}>
-      <Header
-        title="Addresses"
-        icon1={BackIcon}
-        onPressFirst={() => navigation.goBack()}
-      />
-      <ScrollView
-        style={styles.contentContainer}
-        showsVerticalScrollIndicator={false}>
-        {renderAddressSection(
-          'Billing Address',
-          billingAddresses,
-          BILLING_ADDRESS_FORM,
-        )}
-        {renderAddressSection(
-          'Shipping Address',
-          shippingAddresses,
-          SHIPPING_ADDRESS_FORM,
-        )}
-      </ScrollView>
-    </View>
+    <CSafeAreaView removeBottomSafeArea>
+      <View style={styles.container}>
+        <Header
+          title="Addresses"
+          icon1={BackIcon}
+          onPressFirst={() => navigation.goBack()}
+        />
+        <ScrollView
+          style={styles.contentContainer}
+          showsVerticalScrollIndicator={false}>
+          {renderAddressSection(
+            'Billing Address',
+            billingAddresses,
+            BILLING_ADDRESS_FORM,
+          )}
+          {renderAddressSection(
+            'Shipping Address',
+            shippingAddresses,
+            SHIPPING_ADDRESS_FORM,
+          )}
+        </ScrollView>
+      </View>
+    </CSafeAreaView>
   );
 };
 

@@ -9,14 +9,6 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 16,
     borderBottomWidth: 1,
     borderBottomColor: '#e6e6e6',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 8,
-    elevation: 5,
     backgroundColor: '#FFFFFF',
     height: 60,
     position: 'relative',
@@ -64,7 +56,7 @@ export const styles = StyleSheet.create({
     color: '#000000',
   },
   headerTitle: {
-    flex:1,
+    flex: 1,
     fontSize: 20,
     fontWeight: '600',
     color: '#000000',

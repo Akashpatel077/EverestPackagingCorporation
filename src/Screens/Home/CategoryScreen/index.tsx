@@ -5,7 +5,6 @@ import {
   TouchableOpacity,
   Text,
   Image,
-  SafeAreaView,
   Alert,
 } from 'react-native';
 import LoadingLogo from '../../../Components/LoadingLogo';
@@ -21,6 +20,7 @@ import styles from './styles';
 import {BackIcon} from 'assets/icons';
 import {PRODUCT_LIST, SUB_CATEGORY_SCREEN} from 'src/Navigation/home/routes';
 import {getSubCategories} from 'src/services/wooCommerceApi';
+import CSafeAreaView from 'src/Components/CSafeAreaView';
 
 const CategoryScreen = () => {
   const navigation = useNavigation();
@@ -95,27 +95,29 @@ const CategoryScreen = () => {
   );
 
   return (
-    <SafeAreaView style={styles.container}>
-      <Header title="Categories" />
-      <View style={styles.contentContainer}>
-        {status === 'loading' || isLoading ? (
-          <View style={styles.loadingContainer}>
-            <LoadingLogo />
-          </View>
-        ) : (
-          <FlatList
-            data={categories
-              .filter(category => category.count > 0)
-              .sort((a, b) => (a.menu_order || 0) - (b.menu_order || 0))}
-            renderItem={renderCategoryItem}
-            keyExtractor={item => item.id.toString()}
-            numColumns={2}
-            contentContainerStyle={styles.categoriesContainer}
-            showsVerticalScrollIndicator={false}
-          />
-        )}
+    <CSafeAreaView removeBottomSafeArea>
+      <View style={styles.container}>
+        <Header title="Categories" />
+        <View style={styles.contentContainer}>
+          {status === 'loading' || isLoading ? (
+            <View style={styles.loadingContainer}>
+              <LoadingLogo />
+            </View>
+          ) : (
+            <FlatList
+              data={categories
+                .filter(category => category.count > 0)
+                .sort((a, b) => (a.menu_order || 0) - (b.menu_order || 0))}
+              renderItem={renderCategoryItem}
+              keyExtractor={item => item.id.toString()}
+              numColumns={2}
+              contentContainerStyle={styles.categoriesContainer}
+              showsVerticalScrollIndicator={false}
+            />
+          )}
+        </View>
       </View>
-    </SafeAreaView>
+    </CSafeAreaView>
   );
 };
 

@@ -2,6 +2,7 @@ import React, {useEffect, useRef} from 'react';
 import {BackHandler, View} from 'react-native';
 import {WebView} from 'react-native-webview';
 import {useDispatch} from 'react-redux';
+import CSafeAreaView from 'src/Components/CSafeAreaView';
 import {getCartListAction} from 'src/store/slices/cartSlice';
 
 const PaymentWebView = ({navigation, route}) => {
@@ -52,14 +53,14 @@ const PaymentWebView = ({navigation, route}) => {
   }, []);
 
   return (
-    <View style={{flex: 1}}>
+    <CSafeAreaView>
       <WebView
         ref={webViewRef}
         source={{uri: redirectUrl}}
         onNavigationStateChange={handleNavigationStateChange}
         startInLoadingState={true}
       />
-    </View>
+    </CSafeAreaView>
   );
 };
 

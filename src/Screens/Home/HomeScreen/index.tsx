@@ -6,6 +6,7 @@ import {Header} from 'src/Components';
 import {Filter, Search} from 'assets/icons';
 import {useNavigation, useIsFocused} from '@react-navigation/native';
 import {SEARCH_SCREEN} from 'src/Navigation/home/routes';
+import CSafeAreaView from 'src/Components/CSafeAreaView';
 
 const HomeScreen = () => {
   const navigation = useNavigation();
@@ -19,31 +20,33 @@ const HomeScreen = () => {
   }, [isFocused]);
 
   return (
-    <View style={styles.container}>
-      <Header
-        icon1={Search}
-        onPressFirst={() => navigation.navigate(SEARCH_SCREEN)}
-        icon2={Filter}
-        icon2Color="#FFF"
-        onPressSecond={() => {
-          console.log('Filter pressed');
-        }}
-        title={'Everest Packaging'}
-      />
-      <View style={styles.videoContainer}>
-        <Video
-          ref={videoRef}
-          source={{
-            uri: 'https://everestpackaging.co.in/wp-content/uploads/2022/04/Compressed-Video-For-Insta-Fb.mp4#t=5',
+    <CSafeAreaView removeBottomSafeArea>
+      <View style={styles.container}>
+        <Header
+          icon1={Search}
+          onPressFirst={() => navigation.navigate(SEARCH_SCREEN)}
+          icon2={Filter}
+          icon2Color="#FFF"
+          onPressSecond={() => {
+            console.log('Filter pressed');
           }}
-          style={styles.video}
-          resizeMode="contain"
-          repeat
-          controls
-          paused={!isFocused}
+          title={'Everest Packaging'}
         />
+        <View style={styles.videoContainer}>
+          <Video
+            ref={videoRef}
+            source={{
+              uri: 'https://everestpackaging.co.in/wp-content/uploads/2022/04/Compressed-Video-For-Insta-Fb.mp4#t=5',
+            }}
+            style={styles.video}
+            resizeMode="contain"
+            repeat
+            controls
+            paused={!isFocused}
+          />
+        </View>
       </View>
-    </View>
+    </CSafeAreaView>
   );
 };
 

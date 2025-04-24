@@ -10,6 +10,7 @@ const styles = StyleSheet.create({
   },
   categoriesContainer: {
     padding: 6,
+    paddingBottom: 30,
   },
   loadingContainer: {
     flex: 1,

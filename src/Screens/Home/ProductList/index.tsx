@@ -26,6 +26,7 @@ import {useAppDispatch, useAppSelector} from 'src/store/hooks';
 import {fetchProducts} from 'src/store/slices/productsSlice';
 import {getProductVariations} from 'src/services/wooCommerceApi';
 import LoadingLogo from 'src/Components/LoadingLogo';
+import CSafeAreaView from 'src/Components/CSafeAreaView';
 
 function findVariation(variations, selectedAttributes) {
   return variations.find(variation => {
@@ -67,32 +68,34 @@ const ProductList = ({route}) => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <Header title={`${category} Products`} icon1={BackIcon} />
-      {productsLoading ? (
-        <View style={styles.loadingContainer}>
-          <LoadingLogo size={120} />
-        </View>
-      ) : (
-        <FlatList
-          data={products}
-          renderItem={renderProductItem}
-          numColumns={2}
-          keyExtractor={(item, index) =>
-            item.id?.toString() || index.toString()
-          }
-          showsVerticalScrollIndicator={false}
-          contentContainerStyle={styles.categoriesContainer}
-          onEndReached={handleLoadMore}
-          onEndReachedThreshold={0.5}
-          ListFooterComponent={
-            paginationLoading ? (
-              <ActivityIndicator size="small" style={{marginVertical: 10}} />
-            ) : null
-          }
-        />
-      )}
-    </SafeAreaView>
+    <CSafeAreaView removeBottomSafeArea>
+      <View style={styles.container}>
+        <Header title={`${category} Products`} icon1={BackIcon} />
+        {productsLoading ? (
+          <View style={styles.loadingContainer}>
+            <LoadingLogo size={120} />
+          </View>
+        ) : (
+          <FlatList
+            data={products}
+            renderItem={renderProductItem}
+            numColumns={2}
+            keyExtractor={(item, index) =>
+              item.id?.toString() || index.toString()
+            }
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={styles.categoriesContainer}
+            onEndReached={handleLoadMore}
+            onEndReachedThreshold={0.5}
+            ListFooterComponent={() =>
+              paginationLoading ? (
+                <ActivityIndicator size="small" style={{marginVertical: 10}} />
+              ) : null
+            }
+          />
+        )}
+      </View>
+    </CSafeAreaView>
   );
 };
 
