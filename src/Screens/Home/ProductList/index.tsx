@@ -105,8 +105,12 @@ const ProductItemCard = React.memo(
   ({item, wishlistItems}: {item: {}; wishlistItems: {}}) => {
     const navigation = useNavigation();
     const dispatch = useAppDispatch();
-    const [regularPrice, setRegularPrice] = useState(item.regular_price);
-    const [salePrice, setSalePrice] = useState(item.price);
+    const [regularPrice, setRegularPrice] = useState(
+      item.regular_price ? parseFloat(item.regular_price).toFixed(2) : '0.00',
+    );
+    const [salePrice, setSalePrice] = useState(
+      item.price ? parseFloat(item.price).toFixed(2) : '0.00',
+    );
     const isOutOfStock = item.stock_status === 'outofstock';
 
     const handleWishlistToggle = product => {
@@ -141,8 +145,16 @@ const ProductItemCard = React.memo(
           );
 
           if (productVariation) {
-            setRegularPrice(productVariation.regular_price);
-            setSalePrice(productVariation.sale_price);
+            setRegularPrice(
+              productVariation.regular_price
+                ? (parseFloat(productVariation.regular_price) / 100).toFixed(2)
+                : '0.00',
+            );
+            setSalePrice(
+              productVariation.sale_price
+                ? (parseFloat(productVariation.sale_price) / 100).toFixed(2)
+                : '0.00',
+            );
           }
         }
       } catch (e) {

@@ -2,22 +2,14 @@ import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {
   HomeScreen,
-  ProductDetails,
   WishlistScreen,
   MyCart,
   ProfileScreen,
-  SettingScreen,
-  ShippingAddressScreen,
   OrderScreen,
   ReviewScreen,
-  TrackOrderScreen,
-  PasswordManager,
   ShippingTypeScreen,
-  ShopScreen,
   ProductList,
   BillingAddress,
-  ShippingAddressForm,
-  BillingAddressForm,
   CategoryScreen,
   SubCategoryScreen,
   DashBoard,
@@ -28,28 +20,18 @@ import {
 } from 'src/Screens/Home';
 import {
   ADD_CARD_SCREEN,
-  CHECKOUT,
   HOMESCREEN,
   MYCART,
   ORDER_SCREEN,
-  PASSWORD_MANAGER,
-  PAYMENT_METHOD,
   PAYMENT_SUCCESS_SCREEN,
   PRODUCT_DETAILS,
   PROFILE,
   REVIEW_SCREEN,
   SEARCH_SCREEN,
-  SETTING_SCREEN,
-  SHIPPING_ADDRESS,
   SHIPPING_TYPE_SCREEN,
-  TRACK_ORDER_SCREEN,
   WISHLIST,
-  SHOP_SCREEN,
   PRODUCT_LIST,
   BILLING_ADDRESS,
-  SHIPPING_ADDRESS_FORM,
-  BILLING_ADDRESS_FORM,
-  WELCOME,
   CATEGORY_SCREEN,
   SUB_CATEGORY_SCREEN,
   DASHBOARD,
@@ -57,21 +39,17 @@ import {
   ACCOUNTDETAILS,
   COMMUNICATION,
   BULKORDERS,
-  PAYMENT_WEBVIEW,
 } from './routes';
 import {SvgProps} from 'react-native-svg';
 import {Home, Buy, Heart, Paper, Profile, Shop, Category} from 'assets/icons';
 import {Icon} from 'src/Components';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import PaymentMethodScreen from 'src/Screens/Home/PaymentMethod';
-import CheckoutScreen from 'src/Screens/Home/Checkout';
 import AddCardScreen from 'src/Screens/Home/AddCardScreen';
 import PaymentSuccessScreen from 'src/Screens/Home/PaymentSuccessScreen';
 import SearchScreen from 'src/Screens/Home/SearchScreen';
 import {getFocusedRouteNameFromRoute} from '@react-navigation/native';
 import {useSelector} from 'react-redux';
 import {selectCartItems} from 'src/store/slices/cartSlice';
-import Welcome from 'src/Screens/Welcome';
 
 const Tab = createBottomTabNavigator();
 
@@ -96,10 +74,6 @@ const HomeStack = () => {
       name: SEARCH_SCREEN,
       component: SearchScreen,
     },
-    {
-      name: PRODUCT_DETAILS,
-      component: ProductDetails,
-    },
   ];
   return (
     <Stack.Navigator screenOptions={{headerShown: false}}>
@@ -121,10 +95,6 @@ const WishlistStack = () => {
     {
       name: WISHLIST,
       component: WishlistScreen,
-    },
-    {
-      name: PRODUCT_DETAILS,
-      component: ProductDetails,
     },
   ];
   return (
@@ -155,10 +125,6 @@ const CategoryStack = () => {
     {
       name: PRODUCT_LIST,
       component: ProductList,
-    },
-    {
-      name: PRODUCT_DETAILS,
-      component: ProductDetails,
     },
     {
       name: SEARCH_SCREEN,
@@ -342,6 +308,7 @@ const getTabBarStyle = (route: any) => {
 
 const HomeContainer = () => {
   const {items} = useSelector(selectCartItems);
+  const {hasStarted} = useSelector((state: RootState) => state.startKey);
 
   const cartItemsCount = items
     ? items.reduce((total, item) => total + item.quantity, 0)

@@ -45,11 +45,12 @@ const PaymentMethodScreen = () => {
       try {
         setLoading(true);
         const checkoutData = {
+          // customer_id: user.id,
           billing_address: {
             ...selectedBillingAddress[0],
             country: 'IN',
             email: user.email ?? '',
-            phone: '4668888888',
+            phone: user.billing.phone ?? '',
           },
           shipping_address: {
             ...selectedShippingAddress[0],
@@ -62,10 +63,7 @@ const PaymentMethodScreen = () => {
           extensions: {},
         };
 
-        console.log('checkoutData : ', checkoutData);
-
         const checkoutResponse = await cartCheckout(checkoutData);
-
         console.log('checkoutResponse : ', checkoutResponse);
 
         if (

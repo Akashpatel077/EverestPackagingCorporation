@@ -284,4 +284,33 @@ export const styles = StyleSheet.create({
     width: 25,
     textAlign: 'center',
   },
+  bulkDiscountTableHeader: {
+    flexDirection: 'row',
+  },
+  bulkDiscountTitleText: {
+    fontSize: 18,
+    fontWeight: '800',
+  },
+  bulkDiscountTitleContainer: {
+    borderWidth: 1,
+    borderColor: '#CCCCCC',
+    backgroundColor: '#EFEFEF',
+    paddingHorizontal: 20,
+    margin: 2,
+    paddingVertical: 5,
+  },
+  bulkDiscountTableRow: {
+    flexDirection: 'row',
+  },
+  bulkDiscountRowText: {
+    fontSize: 16,
+    fontWeight: '400',
+  },
+  bulkDiscountRowContainer: {
+    borderWidth: 1,
+    margin: 2,
+    borderColor: '#CCCCCC',
+    paddingHorizontal: 20,
+    paddingVertical: 5,
+  },
 });

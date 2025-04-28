@@ -2079,6 +2079,13 @@
     prompts "^2.4.2"
     semver "^7.5.2"
 
+"@react-native-cookies/cookies@^6.2.1":
+  version "6.2.1"
+  resolved "https://registry.npmjs.org/@react-native-cookies/cookies/-/cookies-6.2.1.tgz"
+  integrity sha512-D17wCA0DXJkGJIxkL74Qs9sZ3sA+c+kCoGmXVknW7bVw/W+Vv1m/7mWTNi9DLBZSRddhzYw8SU0aJapIaM/g5w==
+  dependencies:
+    invariant "^2.2.4"
+
 "@react-native-documents/picker@^10.1.2":
   version "10.1.2"
   resolved "https://registry.npmjs.org/@react-native-documents/picker/-/picker-10.1.2.tgz"
@@ -7213,7 +7220,7 @@ react-native-webview@^13.13.5:
     escape-string-regexp "^4.0.0"
     invariant "2.2.4"
 
-react-native@*, react-native@^*, "react-native@^0.0.0-0 || >=0.65 <1.0", react-native@>=0.42.0, react-native@>=0.46, react-native@>=0.59.0, react-native@>=0.61.0, react-native@0.78.1:
+react-native@*, react-native@^*, "react-native@^0.0.0-0 || >=0.65 <1.0", "react-native@>= 0.60.2", react-native@>=0.42.0, react-native@>=0.46, react-native@>=0.59.0, react-native@>=0.61.0, react-native@0.78.1:
   version "0.78.1"
   resolved "https://registry.npmjs.org/react-native/-/react-native-0.78.1.tgz"
   integrity sha512-3CK/xxX02GeeVFyrXbsHvREZFVaXwHW43Km/EdYITn5G32cccWTGaqY9QdPddEBLw5O3BPip3LHbR1SywE0cpA==

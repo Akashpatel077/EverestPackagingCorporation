@@ -1,5 +1,5 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootState } from '../index';
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {RootState} from '../index';
 
 interface WishlistState {
   items: any[];
@@ -19,10 +19,14 @@ const wishlistSlice = createSlice({
     removeFromWishlist: (state, action: PayloadAction<number>) => {
       state.items = state.items.filter(item => item.id !== action.payload);
     },
+    resetWishList: state => {
+      state.items = [];
+    },
   },
 });
 
-export const { addToWishlist, removeFromWishlist } = wishlistSlice.actions;
+export const {addToWishlist, removeFromWishlist, resetWishList} =
+  wishlistSlice.actions;
 
 export const selectWishlistItems = (state: RootState) => state.wishlist.items;
 export const isProductInWishlist = (state: RootState, productId: number) =>

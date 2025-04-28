@@ -56,6 +56,8 @@ const WishlistScreen = () => {
   };
 
   const renderWishlistItem = ({item, index}: any) => {
+    const isOutOfStock = item.stock_status === 'outofstock';
+
     const isLastItem = index === filteredItems.length - 1;
     const isInLastRow =
       Math.floor(index / 2) === Math.floor((filteredItems.length - 1) / 2);
@@ -65,6 +67,7 @@ const WishlistScreen = () => {
         style={[
           styles.productCard,
           (isInLastRow || needsExtraMargin) && {marginBottom: 70},
+          {opacity: isOutOfStock ? 0.7 : 1},
         ]}
         onPress={() =>
           navigation.navigate(PRODUCT_DETAILS, {productId: item.id})
@@ -74,6 +77,11 @@ const WishlistScreen = () => {
             source={item.images?.[0]?.src && {uri: item.images[0].src}}
             style={styles.productImage}
           />
+          {isOutOfStock && (
+            <View style={styles.outOfStockOverlay}>
+              <Text style={styles.outOfStockText}>Out of Stock</Text>
+            </View>
+          )}
           <TouchableOpacity
             style={styles.favoriteButton}
             onPress={() => handleRemoveFromWishlist(item.id)}>

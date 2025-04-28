@@ -222,6 +222,7 @@ const ShippingAddressForm: React.FC = () => {
             </Text>
             <TextInput
               style={styles.input}
+              keyboardType="numeric"
               value={formData.postcode}
               onChangeText={value => handleChange('postcode', value)}
               placeholder="Postcode / ZIP"

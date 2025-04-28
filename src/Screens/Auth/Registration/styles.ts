@@ -1,10 +1,9 @@
-import { StyleSheet } from 'react-native';
+import {StyleSheet} from 'react-native';
 
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#FFFFFF',
-    padding:15
   },
   logo: {
     fontSize: 32,
@@ -71,6 +70,7 @@ export const styles = StyleSheet.create({
   termsText: {
     fontSize: 14,
     color: '#666666',
+    paddingLeft: 5,
   },
   termsLink: {
     color: '#0088cc',

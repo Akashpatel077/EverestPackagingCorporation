@@ -22,6 +22,7 @@ import {
 import {Header} from 'src/Components';
 import {decode} from 'he';
 import {
+  getCartListAction,
   removeFromCartAction,
   resetFlags,
   updateProductInCartAction,
@@ -134,6 +135,10 @@ const MyCart = () => {
     setSelectedItem(item);
     setShowRemoveModal(true);
   };
+
+  useEffect(() => {
+    dispatch(getCartListAction());
+  }, []);
 
   // Apply promo code
   const applyPromoCode = () => {
@@ -338,6 +343,7 @@ const MyCart = () => {
           <Modal
             visible={showRemoveModal}
             transparent={true}
+            statusBarTranslucent
             animationType="fade">
             <View style={styles.modalOverlay}>
               <View style={styles.modalContainer}>
@@ -350,7 +356,7 @@ const MyCart = () => {
                     />
                     <View style={styles.modalItemDetails}>
                       <Text style={styles.modalItemName}>
-                        {selectedItem.name}
+                        {decode(selectedItem.name)}
                       </Text>
                       <Text style={styles.modalItemSize}>
                         Size : {selectedItem.size}

@@ -1,21 +1,47 @@
+import {CommonActions} from '@react-navigation/native';
 import React, {useEffect, useRef} from 'react';
 import {BackHandler, View} from 'react-native';
 import {WebView} from 'react-native-webview';
 import {useDispatch} from 'react-redux';
 import CSafeAreaView from 'src/Components/CSafeAreaView';
+import {MYCART} from 'src/Navigation/home/routes';
 import {getCartListAction} from 'src/store/slices/cartSlice';
 
 const PaymentWebView = ({navigation, route}) => {
   const {redirectUrl, orderId} = route.params;
   const webViewRef = useRef(null);
   const dispatch = useDispatch();
-
   const handleNavigationStateChange = navState => {
     const {url, canGoBack} = navState;
 
+    console.log('url : ', url);
+
     if (canGoBack) {
-      dispatch(getCartListAction());
-      navigation.pop(3);
+      setTimeout(() => {
+        dispatch(getCartListAction());
+      }, 2000);
+      navigation.dispatch(
+        CommonActions.reset({
+          index: 0,
+          routes: [
+            {
+              name: 'Home',
+              state: {
+                index: 0,
+                routes: [
+                  {
+                    name: 'Cart',
+                    state: {
+                      index: 0,
+                      routes: [{name: MYCART}],
+                    },
+                  },
+                ],
+              },
+            },
+          ],
+        }),
+      );
     }
 
     // Razorpay Success URL (can vary, inspect actual return URLs)

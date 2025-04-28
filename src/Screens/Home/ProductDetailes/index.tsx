@@ -69,16 +69,37 @@ const ProductDetails = ({navigation, route}) => {
   const {loading, productDetails, error} = useAppSelector(
     state => state.productDetails,
   );
-  const {isAddSuccess, loading: isLoading} = useAppSelector(
-    state => state.cart,
-  );
+  const {
+    isAddSuccess,
+    loading: isLoading,
+    error: addToCartError,
+  } = useAppSelector(state => state.cart);
   const [regularPrice, setRegularPrice] = useState(0);
   const [salePrice, setSalePrice] = useState(0);
   const totalPrice = quantity * Number(salePrice);
   const isOutOfStock = productDetails.stock_status === 'outofstock';
   const [finalVariation, setFinalVariation] = useState([]);
+  const {ranges} = productDetails.bulk_adjustments || {};
 
-  console.log('isLoading : ', isLoading);
+  useEffect(() => {
+    if (addToCartError) {
+      Alert.alert('Attention!', addToCartError);
+      Alert.alert(
+        'Attention!',
+        addToCartError,
+        [
+          {
+            text: 'OK',
+            style: 'default',
+            onPress: async () => {
+              dispatch(resetFlags());
+            },
+          },
+        ],
+        {cancelable: true},
+      );
+    }
+  }, [addToCartError]);
 
   useEffect(() => {
     if (isAddSuccess) {
@@ -87,9 +108,18 @@ const ProductDetails = ({navigation, route}) => {
           index: 0,
           routes: [
             {
-              name: 'Cart',
+              name: 'Home',
               state: {
-                routes: [{name: MYCART}],
+                index: 0,
+                routes: [
+                  {
+                    name: 'Cart',
+                    state: {
+                      index: 0,
+                      routes: [{name: MYCART}],
+                    },
+                  },
+                ],
               },
             },
           ],
@@ -128,7 +158,6 @@ const ProductDetails = ({navigation, route}) => {
   const storeToken = async (token: string) => {
     try {
       await AsyncStorage.setItem('userToken', token);
-      console.log('Token saved!', token);
     } catch (error) {
       console.error('Error saving token:', error);
     }
@@ -138,9 +167,11 @@ const ProductDetails = ({navigation, route}) => {
     const fetchNonceToken = async () => {
       try {
         const cartItemsObject = await getCartItems();
-        if (cartItemsObject.status === 200 && cartItemsObject.headers.nonce) {
-          storeToken(cartItemsObject.headers.nonce);
-          console.log(cartItemsObject.headers.nonce);
+        if (
+          cartItemsObject.status === 200 &&
+          cartItemsObject.headers['cart-token']
+        ) {
+          storeToken(cartItemsObject.headers['cart-token']);
         }
       } catch (error) {
         Alert.alert('', error.message);
@@ -297,6 +328,55 @@ const ProductDetails = ({navigation, route}) => {
                   <Text style={styles.regularPrice}>₹{regularPrice}</Text>
                   <Text style={styles.salePrice}>₹{salePrice}</Text>
                 </View>
+
+                {ranges && (
+                  <View style={styles.bulkDiscountTableHeader}>
+                    <View
+                      style={[
+                        styles.bulkDiscountTitleContainer,
+                        {width: '40%'},
+                      ]}>
+                      <Text style={styles.bulkDiscountTitleText}>Qty(pcs)</Text>
+                    </View>
+                    <View
+                      style={[styles.bulkDiscountTitleContainer, {flex: 1}]}>
+                      <Text style={styles.bulkDiscountTitleText}>
+                        Per Piece Price
+                      </Text>
+                    </View>
+                  </View>
+                )}
+                {ranges &&
+                  Object.values(ranges).map(item => {
+                    const {from, value} = item;
+                    const priceAfterDiscount = (
+                      salePrice -
+                      (salePrice * value) / 100
+                    ).toFixed(2);
+                    return (
+                      <View style={styles.bulkDiscountTableRow}>
+                        <View
+                          style={[
+                            styles.bulkDiscountRowContainer,
+                            {width: '40%'},
+                          ]}>
+                          <Text style={styles.bulkDiscountRowText}>
+                            Buy {from}
+                          </Text>
+                        </View>
+                        <View
+                          style={[styles.bulkDiscountRowContainer, {flex: 1}]}>
+                          <Text
+                            style={[
+                              styles.bulkDiscountRowText,
+                              {color: 'red'},
+                            ]}>
+                            ₹{priceAfterDiscount}
+                          </Text>
+                        </View>
+                      </View>
+                    );
+                  })}
 
                 {productDetails.type === 'variable' &&
                   productDetails.attributes.length > 0 &&

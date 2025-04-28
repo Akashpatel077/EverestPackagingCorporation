@@ -24,7 +24,6 @@ import AccountDetails from './AccountDetails';
 import CommunicationScreen from './Communication';
 import BulkOrder from './BulkOrder';
 
-
 export {
   HomeScreen,
   ProductDetails,
@@ -50,5 +49,5 @@ export {
   Addresses,
   AccountDetails,
   CommunicationScreen,
-  BulkOrder
+  BulkOrder,
 };

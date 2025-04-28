@@ -235,6 +235,7 @@ const BillingAddressForm: React.FC = () => {
             <TextInput
               style={styles.input}
               value={formData.postcode}
+              keyboardType="numeric"
               onChangeText={value => handleChange('postcode', value)}
               placeholder="Postcode / ZIP"
             />

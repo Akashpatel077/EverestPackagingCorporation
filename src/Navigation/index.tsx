@@ -13,6 +13,7 @@ import {
   CHECKOUT,
   PAYMENT_METHOD,
   PAYMENT_WEBVIEW,
+  PRODUCT_DETAILS,
   SHIPPING_ADDRESS,
   SHIPPING_ADDRESS_FORM,
 } from './home/routes';
@@ -20,6 +21,7 @@ import PaymentWebView from 'src/Screens/Home/PaymentWebView/PaymentWebView';
 import {
   BillingAddress,
   BillingAddressForm,
+  ProductDetails,
   ShippingAddressForm,
   ShippingAddressScreen,
 } from 'src/Screens/Home';
@@ -66,6 +68,10 @@ const MainContainer = () => {
             <MainStack.Screen
               name={PAYMENT_METHOD}
               component={PaymentMethodScreen}
+            />
+            <MainStack.Screen
+              name={PRODUCT_DETAILS}
+              component={ProductDetails}
             />
           </>
         ) : (

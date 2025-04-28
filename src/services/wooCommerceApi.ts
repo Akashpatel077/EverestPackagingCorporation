@@ -2,8 +2,27 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import {Platform} from 'react-native';
 import Config from 'react-native-config';
+import CookieManager from '@react-native-cookies/cookies';
 
 const AUTH_BASE_URL = 'https://everestpackaging.co.in'; // Removed trailing slash
+
+const getCookiesHeader = async () => {
+  const cookies = await CookieManager.get(AUTH_BASE_URL);
+  const cookieString = Object.entries(cookies)
+    .map(([name, cookie]) => `${name}=${cookie.value}`)
+    .join('; ');
+
+  return cookieString;
+};
+
+export const clearCookies = async () => {
+  try {
+    await CookieManager.clearAll();
+    console.log('Cookies cleared successfully!');
+  } catch (error) {
+    console.error('Error clearing cookies:', error);
+  }
+};
 
 export const loginUserApi = async (username: string, password: string) => {
   try {
@@ -14,12 +33,12 @@ export const loginUserApi = async (username: string, password: string) => {
         headers: {
           'Content-Type': 'application/json',
         },
+        withCredentials: true,
       },
     );
+
     return response.data;
   } catch (error) {
-    console.log('Login Error:', error);
-
     throw error;
   }
 };
@@ -36,20 +55,14 @@ export const fetchUserProfileApi = async (token: string) => {
       },
     );
 
-    console.log('User Profile Response:', response.data);
-
     return response.data;
   } catch (error) {
-    console.log('Fetch USer Profile Error:', error);
-
     throw error;
   }
 };
 
 export const fetchUserDetails = async (id: number, token: string) => {
   try {
-    console.log('token : ', token, id);
-
     const response = await wooCommerceApi.get(`/customers/${id}`, {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -57,17 +70,15 @@ export const fetchUserDetails = async (id: number, token: string) => {
       },
     });
 
-    console.log('User Profile Response:', response.data);
-
     return response.data;
   } catch (error) {
-    console.log('Fetch USer Profile Error:', error);
-
     throw error;
   }
 };
 
 export const registerUserApi = async (
+  firstName: string,
+  lastName: string,
   username: string,
   email: string,
   password: string,
@@ -75,7 +86,7 @@ export const registerUserApi = async (
   try {
     const response = await axios.post(
       `${AUTH_BASE_URL}/wp-json/custom/v1/register`,
-      {username, email, password},
+      {first_name: firstName, last_name: lastName, username, email, password},
       {
         headers: {
           'Content-Type': 'application/json',
@@ -83,7 +94,6 @@ export const registerUserApi = async (
       },
     );
 
-    console.log('Registration Response:', response);
     return response.data;
   } catch (error) {
     throw error;
@@ -307,6 +317,33 @@ const getToken = async () => {
   }
 };
 
+export const getCartItems = async () => {
+  try {
+    const isConnected = await isNetworkConnected();
+    if (!isConnected) {
+      throw new Error(
+        'No internet connection. Please check your network settings.',
+      );
+    }
+
+    const cookieHeader = await getCookiesHeader();
+
+    const response = await axios.get(
+      `https://everestpackaging.co.in/wp-json/wc/store/v1/cart`,
+      {
+        headers: {
+          Cookie: cookieHeader,
+        },
+        withCredentials: true,
+      },
+    );
+
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export const addToCartProducts = async (
   productId: number,
   quantity: number,
@@ -320,53 +357,24 @@ export const addToCartProducts = async (
       );
     }
 
-    const nonceToken = await getToken();
+    const cartToken = await getToken();
+    const cookieHeader = await getCookiesHeader();
 
-    const response = await wooCommerceApi.post(
+    const response = await axios.post(
       `https://everestpackaging.co.in/wp-json/wc/store/v1/cart/add-item`,
       {
         id: productId,
         quantity,
         variation,
       },
-      {headers: {nonce: nonceToken}},
+      {
+        headers: {
+          ['Cart-Token']: cartToken,
+          Cookie: cookieHeader,
+        },
+        withCredentials: true,
+      },
     );
-
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
-};
-
-export const getCartItems = async () => {
-  try {
-    const isConnected = await isNetworkConnected();
-    if (!isConnected) {
-      throw new Error(
-        'No internet connection. Please check your network settings.',
-      );
-    }
-
-    const response = await wooCommerceApi.get(
-      `https://everestpackaging.co.in/wp-json/wc/store/v1/cart`,
-    );
-
-    return response;
-  } catch (error) {
-    throw error;
-  }
-};
-
-export const getStates = async () => {
-  try {
-    const isConnected = await isNetworkConnected();
-    if (!isConnected) {
-      throw new Error(
-        'No internet connection. Please check your network settings.',
-      );
-    }
-
-    const response = await wooCommerceApi.get(`/data/countries/IN`);
 
     return response.data;
   } catch (error) {
@@ -383,12 +391,13 @@ export const removeFromCart = async (productKey: string) => {
       );
     }
 
-    const nonceToken = await getToken();
+    const cartToken = await getToken();
+    const cookieHeader = await getCookiesHeader();
 
-    const response = await wooCommerceApi.post(
-      `https://everestpackaging.co.in/wp-json/wc/store/cart/remove-item?key=${productKey}`,
+    const response = await axios.post(
+      `https://everestpackaging.co.in/wp-json/wc/store/v1/cart/remove-item?key=${productKey}`,
       {},
-      {headers: {nonce: nonceToken}},
+      {headers: {['Cart-Token']: cartToken, Cookie: cookieHeader}},
     );
     return response.data;
   } catch (error) {
@@ -408,13 +417,62 @@ export const updateProductInCart = async (
       );
     }
 
-    const nonceToken = await getToken();
+    const cartToken = await getToken();
+    const cookieHeader = await getCookiesHeader();
 
-    const response = await wooCommerceApi.post(
-      `https://everestpackaging.co.in/wp-json/wc/store/cart/update-item?key=${productKey}&quantity=${quantity}`,
+    const response = await axios.post(
+      `https://everestpackaging.co.in/wp-json/wc/store/v1/cart/update-item?key=${productKey}&quantity=${quantity}`,
       {},
-      {headers: {nonce: nonceToken}},
+      {headers: {['Cart-Token']: cartToken, Cookie: cookieHeader}},
     );
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const cartCheckout = async (
+  checkoutRequestData: checkoutRequestDataType,
+) => {
+  try {
+    const isConnected = await isNetworkConnected();
+    if (!isConnected) {
+      throw new Error(
+        'No internet connection. Please check your network settings.',
+      );
+    }
+
+    const cartToken = await getToken();
+    const cookieHeader = await getCookiesHeader();
+
+    const response = await axios.post(
+      `https://everestpackaging.co.in/wp-json/wc/store/v1/checkout`,
+      checkoutRequestData,
+      {
+        headers: {
+          ['Cart-Token']: cartToken,
+          'User-ID': checkoutRequestData.customer_id,
+          Cookie: cookieHeader,
+        },
+      },
+    );
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const getStates = async () => {
+  try {
+    const isConnected = await isNetworkConnected();
+    if (!isConnected) {
+      throw new Error(
+        'No internet connection. Please check your network settings.',
+      );
+    }
+
+    const response = await wooCommerceApi.get(`/data/countries/IN`);
+
     return response.data;
   } catch (error) {
     throw error;
@@ -451,30 +509,6 @@ type checkoutRequestDataType = {
   payment_method: string;
   payment_data: [];
   extensions: {};
-};
-
-export const cartCheckout = async (
-  checkoutRequestData: checkoutRequestDataType,
-) => {
-  try {
-    const isConnected = await isNetworkConnected();
-    if (!isConnected) {
-      throw new Error(
-        'No internet connection. Please check your network settings.',
-      );
-    }
-
-    const nonceToken = await getToken();
-
-    const response = await wooCommerceApi.post(
-      `https://everestpackaging.co.in/wp-json/wc/store/v1/checkout`,
-      checkoutRequestData,
-      {headers: {nonce: nonceToken}},
-    );
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
 };
 
 export default {

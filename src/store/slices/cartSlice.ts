@@ -49,8 +49,6 @@ export const addToCartAction = createAsyncThunk(
   }) => {
     const cart = await addToCartProducts(productId, quantity, variation);
 
-    console.log('cart : ', cart);
-
     return cart;
   },
 );
@@ -86,6 +84,7 @@ const cartSlice = createSlice({
     resetFlags: state => {
       state.isSuccess = false;
       state.isAddSuccess = false;
+      state.error = null;
     },
     clearCart: state => {
       state.items = [];
@@ -104,7 +103,7 @@ const cartSlice = createSlice({
       })
       .addCase(addToCartAction.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message || 'Failed to fetch products';
+        state.error = action.error.message || 'Something went wrong!';
       })
       .addCase(removeFromCartAction.pending, state => {
         state.loading = true;
