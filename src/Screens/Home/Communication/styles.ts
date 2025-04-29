@@ -14,11 +14,13 @@ export const styles = StyleSheet.create({
     color: '#333333',
     marginBottom: 24,
     lineHeight: 24,
+    fontFamily: 'Poppins-Regular',
   },
   emailText: {
     fontSize: 14,
     color: '#666666',
     marginBottom: 32,
+    fontFamily: 'Poppins-Regular',
   },
   preferencesContainer: {
     marginBottom: 32,
@@ -36,11 +38,13 @@ export const styles = StyleSheet.create({
     fontSize: 16,
     color: '#333333',
     marginBottom: 4,
+    fontFamily: 'Poppins-Regular',
   },
   checkboxDescription: {
     fontSize: 14,
     color: '#666666',
     lineHeight: 20,
+    fontFamily: 'Poppins-Regular',
   },
   saveButton: {
     backgroundColor: '#0088CC',
@@ -52,6 +56,6 @@ export const styles = StyleSheet.create({
   saveButtonText: {
     color: '#FFFFFF',
     fontSize: 16,
-    fontWeight: '600',
+    fontFamily: 'Poppins-SemiBold',
   },
 });

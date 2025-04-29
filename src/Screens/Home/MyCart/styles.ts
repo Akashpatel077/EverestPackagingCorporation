@@ -63,15 +63,16 @@ export default StyleSheet.create({
   },
   itemName: {
     fontSize: 16,
-    fontWeight: 'bold',
+    fontFamily: 'Poppins-SemiBold',
   },
   itemSize: {
     fontSize: 14,
+    fontFamily: 'Poppins-Regular',
     color: '#666',
   },
   itemPrice: {
     fontSize: 16,
-    fontWeight: 'bold',
+    fontFamily: 'Poppins-Bold',
     color: '#333',
   },
   quantityControl: {
@@ -97,6 +98,7 @@ export default StyleSheet.create({
   quantityText: {
     marginHorizontal: 10,
     fontSize: 16,
+    fontFamily: 'Poppins-SemiBold',
   },
   removeButton: {
     padding: 10,
@@ -127,7 +129,7 @@ export default StyleSheet.create({
   },
   promoApplyText: {
     color: 'white',
-    fontWeight: 'bold',
+    fontFamily: 'Poppins-Bold',
   },
   summaryContainer: {
     marginBottom: 20,
@@ -140,10 +142,11 @@ export default StyleSheet.create({
   summaryLabel: {
     fontSize: 16,
     color: '#666',
+    fontFamily: 'Poppins-SemiBold',
   },
   summaryValue: {
     fontSize: 16,
-    fontWeight: 'bold',
+    fontFamily: 'Poppins-Bold',
   },
   totalRow: {
     borderTopWidth: 1,
@@ -152,11 +155,11 @@ export default StyleSheet.create({
   },
   totalLabel: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontFamily: 'Poppins-Bold',
   },
   totalValue: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontFamily: 'Poppins-Bold',
     color: '#0088cc',
   },
   checkoutButton: {
@@ -168,7 +171,7 @@ export default StyleSheet.create({
   checkoutButtonText: {
     color: 'white',
     fontSize: 18,
-    fontWeight: 'bold',
+    fontFamily: 'Poppins-Bold',
   },
   emptyCartContainer: {
     flex: 1,
@@ -184,7 +187,7 @@ export default StyleSheet.create({
   },
   emptyCartTitle: {
     fontSize: 24,
-    fontWeight: 'bold',
+    fontFamily: 'Poppins-Bold',
     color: '#0088cc',
     marginBottom: 10,
     textAlign: 'center',
@@ -193,6 +196,7 @@ export default StyleSheet.create({
     fontSize: 16,
     color: '#666',
     textAlign: 'center',
+    fontFamily: 'Poppins-Regular',
     marginBottom: 30,
   },
   shopNowButton: {
@@ -204,7 +208,7 @@ export default StyleSheet.create({
   shopNowButtonText: {
     color: 'white',
     fontSize: 16,
-    fontWeight: 'bold',
+    fontFamily: 'Poppins-Bold',
   },
   modalOverlay: {
     flex: 1,
@@ -221,7 +225,7 @@ export default StyleSheet.create({
   },
   modalTitle: {
     fontSize: 20,
-    fontWeight: 'bold',
+    fontFamily: 'Poppins-Bold',
     textAlign: 'center',
     marginBottom: 20,
   },
@@ -244,15 +248,16 @@ export default StyleSheet.create({
   },
   modalItemName: {
     fontSize: 16,
-    fontWeight: 'bold',
+    fontFamily: 'Poppins-Bold',
   },
   modalItemSize: {
     fontSize: 14,
     color: '#666',
+    fontFamily: 'Poppins-Regular',
   },
   modalItemPrice: {
     fontSize: 16,
-    fontWeight: 'bold',
+    fontFamily: 'Poppins-Bold',
     color: '#333',
   },
   modalButtonsContainer: {
@@ -270,7 +275,7 @@ export default StyleSheet.create({
   modalCancelButtonText: {
     color: '#333',
     fontSize: 16,
-    fontWeight: 'bold',
+    fontFamily: 'Poppins-Bold',
     textAlign: 'center',
   },
   modalRemoveButton: {
@@ -282,12 +287,12 @@ export default StyleSheet.create({
   modalRemoveButtonText: {
     color: 'white',
     fontSize: 16,
-    fontWeight: 'bold',
+    fontFamily: 'Poppins-Bold',
     textAlign: 'center',
   },
   subShippingText: {
     fontSize: 16,
-    fontFamily: 'SchibstedGrotesk-Regular',
+    fontFamily: 'Poppins-Regular',
     color: '#888888',
   },
 });

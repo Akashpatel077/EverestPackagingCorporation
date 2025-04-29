@@ -164,7 +164,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 32,
-    fontWeight: '600',
+    fontFamily: 'Poppins-SemiBold',
     color: '#000000',
     textAlign: 'center',
     marginBottom: 8,
@@ -177,12 +177,14 @@ const styles = StyleSheet.create({
     color: '#000000',
     marginBottom: 16,
     textAlign: 'center',
+    fontFamily: 'Poppins-Medium',
   },
   description: {
     fontSize: 16,
     color: '#666666',
     textAlign: 'center',
     marginBottom: 32,
+    fontFamily: 'Poppins-Regular',
   },
   button: {
     backgroundColor: '#0088cc',
@@ -206,11 +208,12 @@ const styles = StyleSheet.create({
   signInText: {
     fontSize: 16,
     color: '#666666',
+    fontFamily: 'Poppins-Regular',
   },
   signInLink: {
     fontSize: 16,
     color: '#0088cc',
-    fontWeight: '600',
+    fontFamily: 'Poppins-SemiBold',
   },
 });
 

@@ -100,7 +100,7 @@ export const styles = StyleSheet.create({
   },
   productName: {
     fontSize: 14,
-    fontFamily: 'SchibstedGrotesk-Medium',
+    fontFamily: 'Poppins-SemiBold',
     color: '#333333',
     marginBottom: 8,
     height: 40,
@@ -112,13 +112,13 @@ export const styles = StyleSheet.create({
   },
   regularPrice: {
     fontSize: 16,
-    fontFamily: 'SchibstedGrotesk-Medium',
+    fontFamily: 'Poppins-SemiBold',
     color: '#666666',
     textDecorationLine: 'line-through',
   },
   salePrice: {
     fontSize: 18,
-    fontFamily: 'SchibstedGrotesk-Bold',
+    fontFamily: 'Poppins-SemiBold',
     color: '#0088cc',
     marginLeft: 4,
   },
@@ -150,10 +150,19 @@ export const styles = StyleSheet.create({
   outOfStockText: {
     color: '#FFFFFF',
     fontSize: 16,
-    fontWeight: 'bold',
+    fontFamily: 'Poppins-SemiBold',
     textTransform: 'uppercase',
     textShadowColor: 'rgba(0, 0, 0, 0.75)',
     textShadowOffset: {width: 1, height: 1},
     textShadowRadius: 2,
+  },
+  emptyContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  emptyText: {
+    fontFamily: 'Poppins-SemiBold',
+    fontSize: 18,
   },
 });

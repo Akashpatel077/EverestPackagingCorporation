@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
   categoryText: {
     fontSize: 14,
     color: '#666666',
-    fontFamily: 'SchibstedGrotesk-Medium',
+    fontFamily: 'Poppins-SemiBold',
   },
   categoryTextActive: {
     color: '#FFFFFF',
@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
   },
   productName: {
     fontSize: 14,
-    fontFamily: 'SchibstedGrotesk-Medium',
+    fontFamily: 'Poppins-SemiBold',
     color: '#333333',
     marginBottom: 8,
     height: 40,
@@ -97,13 +97,13 @@ const styles = StyleSheet.create({
   },
   regularPrice: {
     fontSize: 16,
-    fontFamily: 'SchibstedGrotesk-Medium',
+    fontFamily: 'Poppins-SemiBold',
     color: '#666666',
     textDecorationLine: 'line-through',
   },
   salePrice: {
     fontSize: 18,
-    fontFamily: 'SchibstedGrotesk-Bold',
+    fontFamily: 'Poppins-SemiBold',
     color: '#0088cc',
     marginLeft: 4,
   },

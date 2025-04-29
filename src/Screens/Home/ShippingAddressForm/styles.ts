@@ -26,6 +26,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     marginBottom: 8,
     color: '#333',
+    fontFamily: 'Poppins-Regular',
   },
   required: {
     color: 'red',
@@ -39,6 +40,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#f5f5f5',
     flexDirection: 'row',
     gap: 12,
+    fontFamily: 'Poppins-Regular',
   },
   typeButton: {
     flex: 1,
@@ -70,7 +72,7 @@ const styles = StyleSheet.create({
   buttonText: {
     color: '#fff',
     fontSize: 16,
-    fontWeight: 'bold',
+    fontFamily: 'Poppins-Bold',
   },
 });
 

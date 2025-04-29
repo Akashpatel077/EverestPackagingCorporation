@@ -175,7 +175,7 @@ const styles = StyleSheet.create({
     bottom: 50,
     fontSize: 16,
     color: '#666666',
-    fontFamily: 'SchibstedGrotesk-Medium',
+    fontFamily: 'Poppins-SemiBold',
   },
 });
 

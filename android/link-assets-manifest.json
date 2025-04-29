@@ -2,6 +2,38 @@
   "migIndex": 1,
   "data": [
     {
+      "path": "assets/fonts/Poppins/Poppins-Black.ttf",
+      "sha1": "645e04c53c6b5b35bce654a811ebce16af8aa721"
+    },
+    {
+      "path": "assets/fonts/Poppins/Poppins-Bold.ttf",
+      "sha1": "875cf0cecd647bcf22e79d633d868c1b1ec98dfa"
+    },
+    {
+      "path": "assets/fonts/Poppins/Poppins-ExtraBold.ttf",
+      "sha1": "4b5c0750f073abd576413a0898d3b95adaf199c8"
+    },
+    {
+      "path": "assets/fonts/Poppins/Poppins-Light.ttf",
+      "sha1": "e247a92158e112f8bf7b638c8d95381d66b00dbb"
+    },
+    {
+      "path": "assets/fonts/Poppins/Poppins-Medium.ttf",
+      "sha1": "283f21b44efbdbf276ba802be2d949a36bbc4233"
+    },
+    {
+      "path": "assets/fonts/Poppins/Poppins-Regular.ttf",
+      "sha1": "fdd3002e7d814ee47c1c1b8487c72c6bbb3a2d00"
+    },
+    {
+      "path": "assets/fonts/Poppins/Poppins-SemiBold.ttf",
+      "sha1": "8a4ace9392d06bcb7f8ea2f5169b07e4c383a90d"
+    },
+    {
+      "path": "assets/fonts/Poppins/Poppins-Thin.ttf",
+      "sha1": "09ba4dcd5509c8085bf88c665dcc51cbdfced27b"
+    },
+    {
       "path": "assets/fonts/SchibstedGrotesk-Black.ttf",
       "sha1": "21d61960217e23c355f97fa7e56456e8db96ea25"
     },
@@ -38,12 +70,28 @@
       "sha1": "af75d673d9130e16e6dc57ebb4fe3c4742714189"
     },
     {
+      "path": "assets/images/logo.png",
+      "sha1": "1dbe80e848cb5d7ee45c3b075a2964a348b923c3"
+    },
+    {
+      "path": "assets/images/placeholder.png",
+      "sha1": "da39a3ee5e6b4b0d3255bfef95601890afd80709"
+    },
+    {
       "path": "assets/images/search.png",
       "sha1": "fc3d9114728be2dbceca9592f36b04a5752195cb"
     },
     {
       "path": "assets/images/user.png",
       "sha1": "9bf636cf8915757d93729c9a1e753fa4e5f0cc67"
+    },
+    {
+      "path": "assets/icons/AccountDetails.svg",
+      "sha1": "2c6ed426e1363d09cfe7eeb196deee051b2cc443"
+    },
+    {
+      "path": "assets/icons/Addresses.svg",
+      "sha1": "d73262dee7d0beee3936745074980b926eef2a2a"
     },
     {
       "path": "assets/icons/Apple.svg",
@@ -66,6 +114,10 @@
       "sha1": "6098045090d6c0f2472f9f2229c0690999deeae8"
     },
     {
+      "path": "assets/icons/BulkOrder.svg",
+      "sha1": "e57d51678a553a310d0d13c4b13998a832a8d42a"
+    },
+    {
       "path": "assets/icons/Buy.svg",
       "sha1": "3b21b85dfd7676d8cdd27589fc71b18276a079a5"
     },
@@ -78,12 +130,28 @@
       "sha1": "262fa51f7bdf2b2b82408b59bb98ac4cd9f71ea0"
     },
     {
+      "path": "assets/icons/Category.svg",
+      "sha1": "1057592bcd9932b4d90526deaec6abd28ab014b4"
+    },
+    {
+      "path": "assets/icons/CheckSquare.svg",
+      "sha1": "d682812e9e3820d5a80063fcba2b960029fa6e59"
+    },
+    {
       "path": "assets/icons/Close.svg",
       "sha1": "267c30c16278ade2078bd83bf69e36f20c92a4ea"
     },
     {
+      "path": "assets/icons/Communication.svg",
+      "sha1": "c504857aff28416b70f3963fb136eae9635f6bfa"
+    },
+    {
       "path": "assets/icons/CreditCard.svg",
       "sha1": "6cad81e19203e2ba97095d22ad31edaaf9db5da5"
+    },
+    {
+      "path": "assets/icons/Dashboard.svg",
+      "sha1": "2e484530cb476d2c46d693cfc87a3c151f4f1bd9"
     },
     {
       "path": "assets/icons/Delivered.svg",
@@ -92,6 +160,10 @@
     {
       "path": "assets/icons/Economy.svg",
       "sha1": "8c362be419986f89864609e77d90c327798b1f68"
+    },
+    {
+      "path": "assets/icons/Edit.svg",
+      "sha1": "549d178b6e5db08cbef50f35f6eb3a48a2ec7ab8"
     },
     {
       "path": "assets/icons/Eye.svg",
@@ -106,6 +178,10 @@
       "sha1": "5df747f4afcb9126326a0311706480dd8d9769cd"
     },
     {
+      "path": "assets/icons/Filter.svg",
+      "sha1": "92e5e3eb01e3caaa364fe37a08176bb4a26cca32"
+    },
+    {
       "path": "assets/icons/FriendsHouse.svg",
       "sha1": "3436f63f487b904a4a2ace737bb249fc27fc27ed"
     },
@@ -115,15 +191,31 @@
     },
     {
       "path": "assets/icons/Heart.svg",
-      "sha1": "aea3620f213af72c1fb6fd8c3c0ccf0f60b3d10e"
+      "sha1": "cf1eaa36b4505fbce01bed0392d0edb5160e9ba1"
     },
     {
       "path": "assets/icons/Home.svg",
-      "sha1": "264ed7fc2b86e9ce86b9d1923e1ca70727a7f816"
+      "sha1": "1249794badc2f9755e8d19e512088927e98cf7ae"
     },
     {
       "path": "assets/icons/InProgress.svg",
       "sha1": "c02ec6007249e31ea7a01c8089cf8ded5d7b699a"
+    },
+    {
+      "path": "assets/icons/Invoices.svg",
+      "sha1": "181a156993fb6474a6f3e7f30f6e340c1bd0d4fe"
+    },
+    {
+      "path": "assets/icons/Location.svg",
+      "sha1": "b2b29c19935c9980e34b180dd88156c6454bfb84"
+    },
+    {
+      "path": "assets/icons/Logout.svg",
+      "sha1": "6681252688f1982d28ad769556c933fc852f92c7"
+    },
+    {
+      "path": "assets/icons/NotSelectedRadioButton.svg",
+      "sha1": "e3a0369f0f0ea5411c0198af0a6216fe28b0ea94"
     },
     {
       "path": "assets/icons/Notification.svg",
@@ -132,6 +224,10 @@
     {
       "path": "assets/icons/OrderPlaced.svg",
       "sha1": "1e458d2cc2d438bada67a4d8ab78076b9932b9df"
+    },
+    {
+      "path": "assets/icons/Orders.svg",
+      "sha1": "c3be4c77b6434a7ecc75653eaf46bf294ffcf392"
     },
     {
       "path": "assets/icons/Paper.svg",
@@ -147,19 +243,35 @@
     },
     {
       "path": "assets/icons/Profile.svg",
-      "sha1": "83be5c0a7e8271cb89427448d73c5f86347461ef"
+      "sha1": "0bea83078b36cb173517b35b14557786efa22e53"
     },
     {
       "path": "assets/icons/Regular.svg",
       "sha1": "7e1fbab0de3dff2a4890436f28daa75d7571e280"
     },
     {
+      "path": "assets/icons/RightArrow.svg",
+      "sha1": "ac6fc204611e59cf2d51b2287d7bbc9e32eca42b"
+    },
+    {
       "path": "assets/icons/Search.svg",
       "sha1": "f0228867d6da0702c08e32c4964a7feef1684d1b"
     },
     {
+      "path": "assets/icons/SelectedRadioButton.svg",
+      "sha1": "df41bb7006f86a61e9a22a8218fdd11aa50fa24a"
+    },
+    {
+      "path": "assets/icons/SendMessage.svg",
+      "sha1": "744432038f55f4b609e5b37fd7df5c5337cb3b1d"
+    },
+    {
       "path": "assets/icons/Shipped.svg",
       "sha1": "1cdcf0edd99daf56ab121835ba3c5f6dc9a03ed8"
+    },
+    {
+      "path": "assets/icons/Shop.svg",
+      "sha1": "7bcf44b2e033a16af733744dbbaec66ade5f6c0f"
     },
     {
       "path": "assets/icons/Star.svg",
@@ -174,8 +286,12 @@
       "sha1": "f5af4ce9a7297a06eabb1ddf8e36843caa9e95f7"
     },
     {
+      "path": "assets/icons/UncheckSquare.svg",
+      "sha1": "78c2978477804ed303113e475ed574b3dea8b362"
+    },
+    {
       "path": "assets/icons/index.ts",
-      "sha1": "ba953a0dbd98711fea5042924cc957d58799967b"
+      "sha1": "3406b04a150886f5cae90e3c8a9b04edffe17889"
     }
   ]
 }

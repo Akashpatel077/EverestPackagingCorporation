@@ -28,6 +28,25 @@ import FriendsHouse from './FriendsHouse.svg';
 import Economy from './Economy.svg';
 import Regular from './Regular.svg';
 import BackIcon from './BackIcon.svg';
+import Shop from './Shop.svg';
+import Location from './Location.svg';
+import Filter from './Filter.svg';
+import Category from './Category.svg';
+import RightArrow from './RightArrow.svg';
+import Edit from './Edit.svg';
+import Dashboard from './Dashboard.svg';
+import Orders from './Orders.svg';
+import Invoices from './Invoices.svg';
+import Addresses from './Addresses.svg';
+import AccountDetails from './AccountDetails.svg';
+import Communication from './Communication.svg';
+import Logout from './Logout.svg';
+import BulkOrder from './BulkOrder.svg';
+import SendMessage from './SendMessage.svg';
+import CheckSquare from './CheckSquare.svg';
+import UncheckSquareNew from './UncheckSquare.svg';
+import SelectedRadioButton from './SelectedRadioButton.svg';
+import NotSelectedRadioButton from './NotSelectedRadioButton.svg';
 
 export {
   Buy,
@@ -60,4 +79,23 @@ export {
   Economy,
   Regular,
   BackIcon,
+  Shop,
+  Location,
+  Filter,
+  Category,
+  RightArrow,
+  Edit,
+  Dashboard,
+  Orders,
+  Invoices,
+  Addresses,
+  AccountDetails,
+  Communication,
+  Logout,
+  BulkOrder,
+  SendMessage,
+  CheckSquare,
+  UncheckSquareNew,
+  SelectedRadioButton,
+  NotSelectedRadioButton,
 };

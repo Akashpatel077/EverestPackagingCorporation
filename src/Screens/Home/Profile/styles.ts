@@ -50,7 +50,7 @@ export const styles = StyleSheet.create({
   },
   userName: {
     fontSize: 24,
-    fontWeight: '600',
+    fontFamily: 'Poppins-SemiBold',
     color: '#000000',
   },
   menuContainer: {
@@ -72,5 +72,6 @@ export const styles = StyleSheet.create({
     marginLeft: 12,
     fontSize: 20,
     color: '#000000',
+    fontFamily: 'Poppins-Regular',
   },
 });

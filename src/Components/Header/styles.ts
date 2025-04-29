@@ -57,6 +57,8 @@ export const styles = StyleSheet.create({
   },
   headerTitle: {
     flex: 1,
+    fontFamily: 'Poppins-SemiBold',
+
     fontSize: 20,
     fontWeight: '600',
     color: '#000000',

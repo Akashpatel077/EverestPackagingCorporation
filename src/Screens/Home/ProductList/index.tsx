@@ -36,10 +36,15 @@ function findVariation(variations, selectedAttributes) {
   });
 }
 
+type ProductItem = {
+  status: 'publish' | 'private';
+};
+
 const ProductList = ({route}) => {
   const navigation = useNavigation();
   const dispatch = useAppDispatch();
   const [currentPage, setCurrentPage] = useState(1);
+  const [filteredProducts, setFilteredProducts] = useState([]);
   const {
     items: products,
     loading: productsLoading,
@@ -56,6 +61,15 @@ const ProductList = ({route}) => {
   useEffect(() => {
     dispatch(fetchProducts({categoryId, currentPage}));
   }, [categoryId, currentPage]);
+
+  useEffect(() => {
+    if (products) {
+      const filteredProductsData = products.filter(
+        (item: ProductItem) => item.status === 'publish',
+      );
+      setFilteredProducts([...filteredProductsData]);
+    }
+  }, [products]);
 
   const handleLoadMore = () => {
     if (!paginationLoading && hasMore) {
@@ -77,7 +91,7 @@ const ProductList = ({route}) => {
           </View>
         ) : (
           <FlatList
-            data={products}
+            data={filteredProducts}
             renderItem={renderProductItem}
             numColumns={2}
             keyExtractor={(item, index) =>

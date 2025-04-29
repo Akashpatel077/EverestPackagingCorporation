@@ -25,11 +25,8 @@
 		92AA3BE991F14452AE30E595 /* user.png in Resources */ = {isa = PBXBuildFile; fileRef = F44C28F0F92B4530836EBB28 /* user.png */; };
 		A7DAF7BFC7324B9285926527 /* Apple.svg in Resources */ = {isa = PBXBuildFile; fileRef = C3963CAA8B4E4A9FAEC9AFA0 /* Apple.svg */; };
 		49D710F95C6A4079A44F556B /* Buy.svg in Resources */ = {isa = PBXBuildFile; fileRef = 06A8BB918CC043358C4EE6C3 /* Buy.svg */; };
-		81097CD7295D4707A750EBB6 /* Heart.svg in Resources */ = {isa = PBXBuildFile; fileRef = 86661D897F554CD4B0B4AE44 /* Heart.svg */; };
-		55868BF766514DD2B592C28A /* Home.svg in Resources */ = {isa = PBXBuildFile; fileRef = 8D0BF31BC955492283D8BB28 /* Home.svg */; };
 		9B3BC6E26AA243BE9B590E9C /* Notification.svg in Resources */ = {isa = PBXBuildFile; fileRef = C5EDBDC7F97140D383D16BB7 /* Notification.svg */; };
 		CB6C63DEB9B44BFD97FB38B3 /* Paper.svg in Resources */ = {isa = PBXBuildFile; fileRef = E3A51F1DFC0E40BA97B0975B /* Paper.svg */; };
-		24DAB08262C547F7A6D29C4C /* Profile.svg in Resources */ = {isa = PBXBuildFile; fileRef = 869E6E48052E40D2B2996567 /* Profile.svg */; };
 		A9A1AB43A60145DD8B363AB7 /* ApplePay.svg in Resources */ = {isa = PBXBuildFile; fileRef = 2DBC1E411A2C4836930E4125 /* ApplePay.svg */; };
 		25D97DD9B4B04C618B44F3F2 /* BackIcon.svg in Resources */ = {isa = PBXBuildFile; fileRef = E37C90FC622D4ACE98206C06 /* BackIcon.svg */; };
 		2F2BAAA0E43A47D993557607 /* Bags.svg in Resources */ = {isa = PBXBuildFile; fileRef = A2B045A335534166ACF94863 /* Bags.svg */; };
@@ -55,7 +52,39 @@
 		7CEA0038D6E848DE9EF0CB87 /* Star.svg in Resources */ = {isa = PBXBuildFile; fileRef = 0C6543BB7C1A46D9AE284635 /* Star.svg */; };
 		17F0EDD7FBF04758A5729073 /* TShirt.svg in Resources */ = {isa = PBXBuildFile; fileRef = 28AC09197CE548B08270A59D /* TShirt.svg */; };
 		F3F47F8C33464536964CAEB2 /* Tapes.svg in Resources */ = {isa = PBXBuildFile; fileRef = 1D4AC02CC8D540F0A0AA98DD /* Tapes.svg */; };
-		65313D64B89A4069BE830716 /* index.ts in Resources */ = {isa = PBXBuildFile; fileRef = 2A3E8C33092A497B929CD0A4 /* index.ts */; };
+		A3E23CC4D6FA40D0ADDC4E56 /* Poppins-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A4B737B2E4504121B4A81467 /* Poppins-Black.ttf */; };
+		C72038EEFC0442868288C128 /* Poppins-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 125E599295EB40F4B891D598 /* Poppins-Bold.ttf */; };
+		CE24302E54A1408F89F07325 /* Poppins-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 518B92F02D124FFBA03744D7 /* Poppins-ExtraBold.ttf */; };
+		469CB4DD738F4671A5BDF3B8 /* Poppins-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1EED967F8900498C8EEF810C /* Poppins-Light.ttf */; };
+		533296C6E10E424488B67098 /* Poppins-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 50F1FD9BAFF746CAAEA3B2C1 /* Poppins-Medium.ttf */; };
+		3F858EF9BB7145F4AEB034B7 /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 661EBB52B2EA4452983DC286 /* Poppins-Regular.ttf */; };
+		9C22CCED0FC9400987E46C8D /* Poppins-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DEF7A58B41194BD3B90AFABE /* Poppins-SemiBold.ttf */; };
+		8A5FF2BB82A1482CAE9DB391 /* Poppins-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D1D00C7286BE4EF4ADCA9AC1 /* Poppins-Thin.ttf */; };
+		F238C1E47ECE46D4BC45574E /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 8826308B3B494DA9A069A93E /* placeholder.png */; };
+		C6AC586B97FA40F19A89F533 /* AccountDetails.svg in Resources */ = {isa = PBXBuildFile; fileRef = D38FDB23ADD54C60A5171DA4 /* AccountDetails.svg */; };
+		37E5E7B398FA4AA4A2106D2B /* Addresses.svg in Resources */ = {isa = PBXBuildFile; fileRef = 23464F519C0D4E2894FDD16A /* Addresses.svg */; };
+		588BFF47FDA249EB8504835C /* BulkOrder.svg in Resources */ = {isa = PBXBuildFile; fileRef = 4CE3292B88114FB9B7C2354C /* BulkOrder.svg */; };
+		A66B753AC2C74960A0363BB1 /* Category.svg in Resources */ = {isa = PBXBuildFile; fileRef = 9558C4D9FB03409CB3FFEBA4 /* Category.svg */; };
+		18AB594F80294A09B242E07C /* CheckSquare.svg in Resources */ = {isa = PBXBuildFile; fileRef = B50F01FD070341FD96B28838 /* CheckSquare.svg */; };
+		478FF5BA2F3F4B8984CFA9BC /* Communication.svg in Resources */ = {isa = PBXBuildFile; fileRef = CAF23FC2C0B248CE8754B004 /* Communication.svg */; };
+		AD00B33858294230A1D3C3A4 /* Dashboard.svg in Resources */ = {isa = PBXBuildFile; fileRef = 69A89EE803A840DBB578C91D /* Dashboard.svg */; };
+		9812710876E24E1DB04D7038 /* Edit.svg in Resources */ = {isa = PBXBuildFile; fileRef = 7DFDC13262E04AE6886B6663 /* Edit.svg */; };
+		B882A43D6DA943C380BC5BFC /* Filter.svg in Resources */ = {isa = PBXBuildFile; fileRef = C38F6C2B0A814D78B9FA13FD /* Filter.svg */; };
+		EB4C9B66ABC44E98BB376B71 /* Heart.svg in Resources */ = {isa = PBXBuildFile; fileRef = B54D23F9ED084B35A0F0480D /* Heart.svg */; };
+		C654B5AE23F549078E8D0CC0 /* Home.svg in Resources */ = {isa = PBXBuildFile; fileRef = C259C556DB3E477693C35AF5 /* Home.svg */; };
+		38FF7A29F63E46BDBAC7E650 /* Invoices.svg in Resources */ = {isa = PBXBuildFile; fileRef = 59C2303B6FA9493CB7A5C8E5 /* Invoices.svg */; };
+		39EFBE49E10A488D96FAA153 /* Location.svg in Resources */ = {isa = PBXBuildFile; fileRef = F4E1483ADDB64C7C99739E39 /* Location.svg */; };
+		7B3E378CA8B64C53B1CCDA80 /* Logout.svg in Resources */ = {isa = PBXBuildFile; fileRef = E841174AC6B844A6949857E1 /* Logout.svg */; };
+		B33B648DE02C422CB239BB45 /* NotSelectedRadioButton.svg in Resources */ = {isa = PBXBuildFile; fileRef = 2B977DC96DB5443FBD178C62 /* NotSelectedRadioButton.svg */; };
+		C5E11E4C66F3427DAF22F82A /* Orders.svg in Resources */ = {isa = PBXBuildFile; fileRef = E806748FB6F3491F9AE4C9BC /* Orders.svg */; };
+		5953253A36834A539D5C7690 /* Profile.svg in Resources */ = {isa = PBXBuildFile; fileRef = A9333EE00AC446778C7F8F93 /* Profile.svg */; };
+		8DF4636A26CC4A8CB48B0DBE /* RightArrow.svg in Resources */ = {isa = PBXBuildFile; fileRef = 2BA25BA664D841D19A8E42FB /* RightArrow.svg */; };
+		59A997FD2AAF43EBA9F8B305 /* SelectedRadioButton.svg in Resources */ = {isa = PBXBuildFile; fileRef = 08D29304745B4159B70D4E5C /* SelectedRadioButton.svg */; };
+		F9A59DAA13794FB990665BC9 /* SendMessage.svg in Resources */ = {isa = PBXBuildFile; fileRef = 28D2045C119A4531A22AE857 /* SendMessage.svg */; };
+		1F56A5E883F7484A9FD257FB /* Shop.svg in Resources */ = {isa = PBXBuildFile; fileRef = A36A4222A52A4B848AB94A70 /* Shop.svg */; };
+		09DB868BCFF84EEDBA22C8BF /* UncheckSquare.svg in Resources */ = {isa = PBXBuildFile; fileRef = 47EFAF1EEB164E53AB212888 /* UncheckSquare.svg */; };
+		7DDA2BCEE39D455D81541765 /* index.ts in Resources */ = {isa = PBXBuildFile; fileRef = 964DC5239C484A7FBF3D1BEC /* index.ts */; };
+		59F8C500BB994D6EBFA1BA4E /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E327FEB521746779F6C56C9 /* logo.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -82,11 +111,8 @@
 		F44C28F0F92B4530836EBB28 /* user.png */ = {isa = PBXFileReference; name = "user.png"; path = "../assets/images/user.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		C3963CAA8B4E4A9FAEC9AFA0 /* Apple.svg */ = {isa = PBXFileReference; name = "Apple.svg"; path = "../assets/icons/Apple.svg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		06A8BB918CC043358C4EE6C3 /* Buy.svg */ = {isa = PBXFileReference; name = "Buy.svg"; path = "../assets/icons/Buy.svg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		86661D897F554CD4B0B4AE44 /* Heart.svg */ = {isa = PBXFileReference; name = "Heart.svg"; path = "../assets/icons/Heart.svg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		8D0BF31BC955492283D8BB28 /* Home.svg */ = {isa = PBXFileReference; name = "Home.svg"; path = "../assets/icons/Home.svg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		C5EDBDC7F97140D383D16BB7 /* Notification.svg */ = {isa = PBXFileReference; name = "Notification.svg"; path = "../assets/icons/Notification.svg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		E3A51F1DFC0E40BA97B0975B /* Paper.svg */ = {isa = PBXFileReference; name = "Paper.svg"; path = "../assets/icons/Paper.svg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		869E6E48052E40D2B2996567 /* Profile.svg */ = {isa = PBXFileReference; name = "Profile.svg"; path = "../assets/icons/Profile.svg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		2DBC1E411A2C4836930E4125 /* ApplePay.svg */ = {isa = PBXFileReference; name = "ApplePay.svg"; path = "../assets/icons/ApplePay.svg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		E37C90FC622D4ACE98206C06 /* BackIcon.svg */ = {isa = PBXFileReference; name = "BackIcon.svg"; path = "../assets/icons/BackIcon.svg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		A2B045A335534166ACF94863 /* Bags.svg */ = {isa = PBXFileReference; name = "Bags.svg"; path = "../assets/icons/Bags.svg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
@@ -112,7 +138,39 @@
 		0C6543BB7C1A46D9AE284635 /* Star.svg */ = {isa = PBXFileReference; name = "Star.svg"; path = "../assets/icons/Star.svg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		28AC09197CE548B08270A59D /* TShirt.svg */ = {isa = PBXFileReference; name = "TShirt.svg"; path = "../assets/icons/TShirt.svg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		1D4AC02CC8D540F0A0AA98DD /* Tapes.svg */ = {isa = PBXFileReference; name = "Tapes.svg"; path = "../assets/icons/Tapes.svg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		2A3E8C33092A497B929CD0A4 /* index.ts */ = {isa = PBXFileReference; name = "index.ts"; path = "../assets/icons/index.ts"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		A4B737B2E4504121B4A81467 /* Poppins-Black.ttf */ = {isa = PBXFileReference; name = "Poppins-Black.ttf"; path = "../assets/fonts/Poppins/Poppins-Black.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		125E599295EB40F4B891D598 /* Poppins-Bold.ttf */ = {isa = PBXFileReference; name = "Poppins-Bold.ttf"; path = "../assets/fonts/Poppins/Poppins-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		518B92F02D124FFBA03744D7 /* Poppins-ExtraBold.ttf */ = {isa = PBXFileReference; name = "Poppins-ExtraBold.ttf"; path = "../assets/fonts/Poppins/Poppins-ExtraBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		1EED967F8900498C8EEF810C /* Poppins-Light.ttf */ = {isa = PBXFileReference; name = "Poppins-Light.ttf"; path = "../assets/fonts/Poppins/Poppins-Light.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		50F1FD9BAFF746CAAEA3B2C1 /* Poppins-Medium.ttf */ = {isa = PBXFileReference; name = "Poppins-Medium.ttf"; path = "../assets/fonts/Poppins/Poppins-Medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		661EBB52B2EA4452983DC286 /* Poppins-Regular.ttf */ = {isa = PBXFileReference; name = "Poppins-Regular.ttf"; path = "../assets/fonts/Poppins/Poppins-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		DEF7A58B41194BD3B90AFABE /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; name = "Poppins-SemiBold.ttf"; path = "../assets/fonts/Poppins/Poppins-SemiBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		D1D00C7286BE4EF4ADCA9AC1 /* Poppins-Thin.ttf */ = {isa = PBXFileReference; name = "Poppins-Thin.ttf"; path = "../assets/fonts/Poppins/Poppins-Thin.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		8826308B3B494DA9A069A93E /* placeholder.png */ = {isa = PBXFileReference; name = "placeholder.png"; path = "../assets/images/placeholder.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		D38FDB23ADD54C60A5171DA4 /* AccountDetails.svg */ = {isa = PBXFileReference; name = "AccountDetails.svg"; path = "../assets/icons/AccountDetails.svg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		23464F519C0D4E2894FDD16A /* Addresses.svg */ = {isa = PBXFileReference; name = "Addresses.svg"; path = "../assets/icons/Addresses.svg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		4CE3292B88114FB9B7C2354C /* BulkOrder.svg */ = {isa = PBXFileReference; name = "BulkOrder.svg"; path = "../assets/icons/BulkOrder.svg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		9558C4D9FB03409CB3FFEBA4 /* Category.svg */ = {isa = PBXFileReference; name = "Category.svg"; path = "../assets/icons/Category.svg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		B50F01FD070341FD96B28838 /* CheckSquare.svg */ = {isa = PBXFileReference; name = "CheckSquare.svg"; path = "../assets/icons/CheckSquare.svg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		CAF23FC2C0B248CE8754B004 /* Communication.svg */ = {isa = PBXFileReference; name = "Communication.svg"; path = "../assets/icons/Communication.svg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		69A89EE803A840DBB578C91D /* Dashboard.svg */ = {isa = PBXFileReference; name = "Dashboard.svg"; path = "../assets/icons/Dashboard.svg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		7DFDC13262E04AE6886B6663 /* Edit.svg */ = {isa = PBXFileReference; name = "Edit.svg"; path = "../assets/icons/Edit.svg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		C38F6C2B0A814D78B9FA13FD /* Filter.svg */ = {isa = PBXFileReference; name = "Filter.svg"; path = "../assets/icons/Filter.svg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		B54D23F9ED084B35A0F0480D /* Heart.svg */ = {isa = PBXFileReference; name = "Heart.svg"; path = "../assets/icons/Heart.svg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		C259C556DB3E477693C35AF5 /* Home.svg */ = {isa = PBXFileReference; name = "Home.svg"; path = "../assets/icons/Home.svg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		59C2303B6FA9493CB7A5C8E5 /* Invoices.svg */ = {isa = PBXFileReference; name = "Invoices.svg"; path = "../assets/icons/Invoices.svg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		F4E1483ADDB64C7C99739E39 /* Location.svg */ = {isa = PBXFileReference; name = "Location.svg"; path = "../assets/icons/Location.svg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		E841174AC6B844A6949857E1 /* Logout.svg */ = {isa = PBXFileReference; name = "Logout.svg"; path = "../assets/icons/Logout.svg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		2B977DC96DB5443FBD178C62 /* NotSelectedRadioButton.svg */ = {isa = PBXFileReference; name = "NotSelectedRadioButton.svg"; path = "../assets/icons/NotSelectedRadioButton.svg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		E806748FB6F3491F9AE4C9BC /* Orders.svg */ = {isa = PBXFileReference; name = "Orders.svg"; path = "../assets/icons/Orders.svg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		A9333EE00AC446778C7F8F93 /* Profile.svg */ = {isa = PBXFileReference; name = "Profile.svg"; path = "../assets/icons/Profile.svg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		2BA25BA664D841D19A8E42FB /* RightArrow.svg */ = {isa = PBXFileReference; name = "RightArrow.svg"; path = "../assets/icons/RightArrow.svg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		08D29304745B4159B70D4E5C /* SelectedRadioButton.svg */ = {isa = PBXFileReference; name = "SelectedRadioButton.svg"; path = "../assets/icons/SelectedRadioButton.svg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		28D2045C119A4531A22AE857 /* SendMessage.svg */ = {isa = PBXFileReference; name = "SendMessage.svg"; path = "../assets/icons/SendMessage.svg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		A36A4222A52A4B848AB94A70 /* Shop.svg */ = {isa = PBXFileReference; name = "Shop.svg"; path = "../assets/icons/Shop.svg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		47EFAF1EEB164E53AB212888 /* UncheckSquare.svg */ = {isa = PBXFileReference; name = "UncheckSquare.svg"; path = "../assets/icons/UncheckSquare.svg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		964DC5239C484A7FBF3D1BEC /* index.ts */ = {isa = PBXFileReference; name = "index.ts"; path = "../assets/icons/index.ts"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		5E327FEB521746779F6C56C9 /* logo.png */ = {isa = PBXFileReference; name = "logo.png"; path = "../assets/images/logo.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,11 +201,8 @@
 				F44C28F0F92B4530836EBB28 /* user.png */,
 				C3963CAA8B4E4A9FAEC9AFA0 /* Apple.svg */,
 				06A8BB918CC043358C4EE6C3 /* Buy.svg */,
-				86661D897F554CD4B0B4AE44 /* Heart.svg */,
-				8D0BF31BC955492283D8BB28 /* Home.svg */,
 				C5EDBDC7F97140D383D16BB7 /* Notification.svg */,
 				E3A51F1DFC0E40BA97B0975B /* Paper.svg */,
-				869E6E48052E40D2B2996567 /* Profile.svg */,
 				2DBC1E411A2C4836930E4125 /* ApplePay.svg */,
 				E37C90FC622D4ACE98206C06 /* BackIcon.svg */,
 				A2B045A335534166ACF94863 /* Bags.svg */,
@@ -173,7 +228,39 @@
 				0C6543BB7C1A46D9AE284635 /* Star.svg */,
 				28AC09197CE548B08270A59D /* TShirt.svg */,
 				1D4AC02CC8D540F0A0AA98DD /* Tapes.svg */,
-				2A3E8C33092A497B929CD0A4 /* index.ts */,
+				A4B737B2E4504121B4A81467 /* Poppins-Black.ttf */,
+				125E599295EB40F4B891D598 /* Poppins-Bold.ttf */,
+				518B92F02D124FFBA03744D7 /* Poppins-ExtraBold.ttf */,
+				1EED967F8900498C8EEF810C /* Poppins-Light.ttf */,
+				50F1FD9BAFF746CAAEA3B2C1 /* Poppins-Medium.ttf */,
+				661EBB52B2EA4452983DC286 /* Poppins-Regular.ttf */,
+				DEF7A58B41194BD3B90AFABE /* Poppins-SemiBold.ttf */,
+				D1D00C7286BE4EF4ADCA9AC1 /* Poppins-Thin.ttf */,
+				8826308B3B494DA9A069A93E /* placeholder.png */,
+				D38FDB23ADD54C60A5171DA4 /* AccountDetails.svg */,
+				23464F519C0D4E2894FDD16A /* Addresses.svg */,
+				4CE3292B88114FB9B7C2354C /* BulkOrder.svg */,
+				9558C4D9FB03409CB3FFEBA4 /* Category.svg */,
+				B50F01FD070341FD96B28838 /* CheckSquare.svg */,
+				CAF23FC2C0B248CE8754B004 /* Communication.svg */,
+				69A89EE803A840DBB578C91D /* Dashboard.svg */,
+				7DFDC13262E04AE6886B6663 /* Edit.svg */,
+				C38F6C2B0A814D78B9FA13FD /* Filter.svg */,
+				B54D23F9ED084B35A0F0480D /* Heart.svg */,
+				C259C556DB3E477693C35AF5 /* Home.svg */,
+				59C2303B6FA9493CB7A5C8E5 /* Invoices.svg */,
+				F4E1483ADDB64C7C99739E39 /* Location.svg */,
+				E841174AC6B844A6949857E1 /* Logout.svg */,
+				2B977DC96DB5443FBD178C62 /* NotSelectedRadioButton.svg */,
+				E806748FB6F3491F9AE4C9BC /* Orders.svg */,
+				A9333EE00AC446778C7F8F93 /* Profile.svg */,
+				2BA25BA664D841D19A8E42FB /* RightArrow.svg */,
+				08D29304745B4159B70D4E5C /* SelectedRadioButton.svg */,
+				28D2045C119A4531A22AE857 /* SendMessage.svg */,
+				A36A4222A52A4B848AB94A70 /* Shop.svg */,
+				47EFAF1EEB164E53AB212888 /* UncheckSquare.svg */,
+				964DC5239C484A7FBF3D1BEC /* index.ts */,
+				5E327FEB521746779F6C56C9 /* logo.png */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -314,11 +401,8 @@
 				92AA3BE991F14452AE30E595 /* user.png in Resources */,
 				A7DAF7BFC7324B9285926527 /* Apple.svg in Resources */,
 				49D710F95C6A4079A44F556B /* Buy.svg in Resources */,
-				81097CD7295D4707A750EBB6 /* Heart.svg in Resources */,
-				55868BF766514DD2B592C28A /* Home.svg in Resources */,
 				9B3BC6E26AA243BE9B590E9C /* Notification.svg in Resources */,
 				CB6C63DEB9B44BFD97FB38B3 /* Paper.svg in Resources */,
-				24DAB08262C547F7A6D29C4C /* Profile.svg in Resources */,
 				A9A1AB43A60145DD8B363AB7 /* ApplePay.svg in Resources */,
 				25D97DD9B4B04C618B44F3F2 /* BackIcon.svg in Resources */,
 				2F2BAAA0E43A47D993557607 /* Bags.svg in Resources */,
@@ -344,7 +428,39 @@
 				7CEA0038D6E848DE9EF0CB87 /* Star.svg in Resources */,
 				17F0EDD7FBF04758A5729073 /* TShirt.svg in Resources */,
 				F3F47F8C33464536964CAEB2 /* Tapes.svg in Resources */,
-				65313D64B89A4069BE830716 /* index.ts in Resources */,
+				A3E23CC4D6FA40D0ADDC4E56 /* Poppins-Black.ttf in Resources */,
+				C72038EEFC0442868288C128 /* Poppins-Bold.ttf in Resources */,
+				CE24302E54A1408F89F07325 /* Poppins-ExtraBold.ttf in Resources */,
+				469CB4DD738F4671A5BDF3B8 /* Poppins-Light.ttf in Resources */,
+				533296C6E10E424488B67098 /* Poppins-Medium.ttf in Resources */,
+				3F858EF9BB7145F4AEB034B7 /* Poppins-Regular.ttf in Resources */,
+				9C22CCED0FC9400987E46C8D /* Poppins-SemiBold.ttf in Resources */,
+				8A5FF2BB82A1482CAE9DB391 /* Poppins-Thin.ttf in Resources */,
+				F238C1E47ECE46D4BC45574E /* placeholder.png in Resources */,
+				C6AC586B97FA40F19A89F533 /* AccountDetails.svg in Resources */,
+				37E5E7B398FA4AA4A2106D2B /* Addresses.svg in Resources */,
+				588BFF47FDA249EB8504835C /* BulkOrder.svg in Resources */,
+				A66B753AC2C74960A0363BB1 /* Category.svg in Resources */,
+				18AB594F80294A09B242E07C /* CheckSquare.svg in Resources */,
+				478FF5BA2F3F4B8984CFA9BC /* Communication.svg in Resources */,
+				AD00B33858294230A1D3C3A4 /* Dashboard.svg in Resources */,
+				9812710876E24E1DB04D7038 /* Edit.svg in Resources */,
+				B882A43D6DA943C380BC5BFC /* Filter.svg in Resources */,
+				EB4C9B66ABC44E98BB376B71 /* Heart.svg in Resources */,
+				C654B5AE23F549078E8D0CC0 /* Home.svg in Resources */,
+				38FF7A29F63E46BDBAC7E650 /* Invoices.svg in Resources */,
+				39EFBE49E10A488D96FAA153 /* Location.svg in Resources */,
+				7B3E378CA8B64C53B1CCDA80 /* Logout.svg in Resources */,
+				B33B648DE02C422CB239BB45 /* NotSelectedRadioButton.svg in Resources */,
+				C5E11E4C66F3427DAF22F82A /* Orders.svg in Resources */,
+				5953253A36834A539D5C7690 /* Profile.svg in Resources */,
+				8DF4636A26CC4A8CB48B0DBE /* RightArrow.svg in Resources */,
+				59A997FD2AAF43EBA9F8B305 /* SelectedRadioButton.svg in Resources */,
+				F9A59DAA13794FB990665BC9 /* SendMessage.svg in Resources */,
+				1F56A5E883F7484A9FD257FB /* Shop.svg in Resources */,
+				09DB868BCFF84EEDBA22C8BF /* UncheckSquare.svg in Resources */,
+				7DDA2BCEE39D455D81541765 /* index.ts in Resources */,
+				59F8C500BB994D6EBFA1BA4E /* logo.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

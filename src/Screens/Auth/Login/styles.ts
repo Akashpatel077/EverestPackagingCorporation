@@ -1,14 +1,14 @@
-import { StyleSheet } from 'react-native';
+import {StyleSheet} from 'react-native';
 
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#FFFFFF',
-    padding:15
+    padding: 15,
   },
   logo: {
     fontSize: 32,
-    fontWeight: '600',
+    fontFamily: 'Poppins-SemiBold',
     color: '#000000',
     textAlign: 'center',
     marginTop: 60,
@@ -19,6 +19,7 @@ export const styles = StyleSheet.create({
     color: '#666666',
     textAlign: 'center',
     marginBottom: 40,
+    fontFamily: 'Poppins-Regular',
   },
   inputContainer: {
     marginBottom: 20,
@@ -27,6 +28,7 @@ export const styles = StyleSheet.create({
     fontSize: 14,
     color: '#333333',
     marginBottom: 8,
+    fontFamily: 'Poppins-Regular',
   },
   input: {
     height: 48,
@@ -35,6 +37,7 @@ export const styles = StyleSheet.create({
     borderRadius: 8,
     paddingHorizontal: 16,
     fontSize: 16,
+    fontFamily: 'Poppins-Regular',
   },
   passwordContainer: {
     flexDirection: 'row',
@@ -60,6 +63,7 @@ export const styles = StyleSheet.create({
   forgotPasswordText: {
     color: '#0088cc',
     fontSize: 14,
+    fontFamily: 'Poppins-Regular',
   },
   signInButton: {
     backgroundColor: '#0088cc',
@@ -71,7 +75,7 @@ export const styles = StyleSheet.create({
   signInText: {
     color: '#FFFFFF',
     fontSize: 16,
-    fontWeight: '600',
+    fontFamily: 'Poppins-SemiBold',
   },
   dividerContainer: {
     flexDirection: 'row',
@@ -87,6 +91,7 @@ export const styles = StyleSheet.create({
     marginHorizontal: 16,
     color: '#666666',
     fontSize: 14,
+    fontFamily: 'Poppins-Medium',
   },
   socialContainer: {
     flexDirection: 'row',
@@ -110,10 +115,12 @@ export const styles = StyleSheet.create({
   signUpText: {
     color: '#666666',
     fontSize: 14,
+    fontFamily: 'Poppins-Regular',
   },
   signUpLink: {
     color: '#0088cc',
     fontSize: 14,
     marginLeft: 4,
+    fontFamily: 'Poppins-Regular',
   },
 });

@@ -7,7 +7,7 @@ export const styles = StyleSheet.create({
   },
   logo: {
     fontSize: 32,
-    fontWeight: '600',
+    fontFamily: 'Poppins-SemiBold',
     color: '#000000',
     textAlign: 'center',
     marginTop: 60,
@@ -18,6 +18,7 @@ export const styles = StyleSheet.create({
     color: '#666666',
     textAlign: 'center',
     marginBottom: 40,
+    fontFamily: 'Poppins-Regular',
   },
   inputContainer: {
     marginBottom: 20,
@@ -26,6 +27,7 @@ export const styles = StyleSheet.create({
     fontSize: 14,
     color: '#333333',
     marginBottom: 8,
+    fontFamily: 'Poppins-Regular',
   },
   input: {
     height: 48,
@@ -34,6 +36,7 @@ export const styles = StyleSheet.create({
     borderRadius: 8,
     paddingHorizontal: 16,
     fontSize: 16,
+    fontFamily: 'Poppins-Regular',
   },
   passwordContainer: {
     flexDirection: 'row',
@@ -71,6 +74,7 @@ export const styles = StyleSheet.create({
     fontSize: 14,
     color: '#666666',
     paddingLeft: 5,
+    fontFamily: 'Poppins-SemiBold',
   },
   termsLink: {
     color: '#0088cc',
@@ -89,7 +93,7 @@ export const styles = StyleSheet.create({
   signUpButtonText: {
     color: '#FFFFFF',
     fontSize: 16,
-    fontWeight: '600',
+    fontFamily: 'Poppins-SemiBold',
   },
   dividerContainer: {
     flexDirection: 'row',
@@ -105,6 +109,7 @@ export const styles = StyleSheet.create({
     marginHorizontal: 16,
     color: '#666666',
     fontSize: 14,
+    fontFamily: 'Poppins-Medium',
   },
   socialContainer: {
     flexDirection: 'row',
@@ -128,10 +133,12 @@ export const styles = StyleSheet.create({
   signInText: {
     color: '#666666',
     fontSize: 14,
+    fontFamily: 'Poppins-Medium',
   },
   signInLink: {
     color: '#0088cc',
     fontSize: 14,
     marginLeft: 4,
+    fontFamily: 'Poppins-Medium',
   },
 });

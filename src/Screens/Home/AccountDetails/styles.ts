@@ -12,10 +12,11 @@ export const styles = StyleSheet.create({
     fontSize: 14,
     color: '#333',
     marginBottom: 8,
-    fontFamily: 'SchibstedGrotesk-Medium',
+    fontFamily: 'Poppins-Regular',
   },
   requiredStar: {
     color: 'red',
+    fontFamily: 'Poppins-SemiBold',
   },
   inputContainer: {
     marginBottom: 20,
@@ -26,13 +27,13 @@ export const styles = StyleSheet.create({
     borderRadius: 8,
     padding: 12,
     fontSize: 14,
-    fontFamily: 'SchibstedGrotesk-Regular',
+    fontFamily: 'Poppins-Regular',
   },
   helperText: {
     fontSize: 12,
     color: '#666',
     marginTop: 4,
-    fontFamily: 'SchibstedGrotesk-Regular',
+    fontFamily: 'Poppins-SemiBold',
   },
   passwordSection: {
     marginTop: 24,
@@ -42,7 +43,7 @@ export const styles = StyleSheet.create({
   },
   passwordTitle: {
     fontSize: 16,
-    fontFamily: 'SchibstedGrotesk-Bold',
+    fontFamily: 'Poppins-SemiBold',
     color: '#333',
     marginBottom: 16,
   },
@@ -65,6 +66,6 @@ export const styles = StyleSheet.create({
   saveButtonText: {
     color: '#fff',
     fontSize: 16,
-    fontFamily: 'SchibstedGrotesk-Medium',
+    fontFamily: 'Poppins-SemiBold',
   },
 });

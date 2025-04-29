@@ -117,6 +117,7 @@ export const styles = StyleSheet.create({
     fontWeight: '600',
     color: '#000000',
     lineHeight: 32,
+    fontFamily: 'Poppins-SemiBold',
   },
   reviewContainer: {
     flexDirection: 'row',
@@ -131,10 +132,12 @@ export const styles = StyleSheet.create({
     color: '#FFD700',
     fontSize: 16,
     marginRight: 2,
+    fontFamily: 'Poppins-SemiBold',
   },
   reviewText: {
     fontSize: 14,
     color: '#666666',
+    fontFamily: 'Poppins-SemiBold',
   },
   priceRow: {
     flexDirection: 'row',
@@ -146,11 +149,13 @@ export const styles = StyleSheet.create({
     color: '#666666',
     textDecorationLine: 'line-through',
     marginRight: 8,
+    fontFamily: 'Poppins-SemiBold',
   },
   salePrice: {
     fontSize: 24,
     fontWeight: '600',
     color: '#000000',
+    fontFamily: 'Poppins-SemiBold',
   },
   description: {
     fontSize: 14,
@@ -162,11 +167,13 @@ export const styles = StyleSheet.create({
     fontSize: 14,
     color: '#0088cc',
     marginBottom: 24,
+    fontFamily: 'Poppins-SemiBold',
   },
   sectionTitle: {
     fontSize: 16,
     fontWeight: '600',
     color: '#000000',
+    fontFamily: 'Poppins-SemiBold',
     marginBottom: 12,
   },
   optionContainer: {
@@ -192,6 +199,7 @@ export const styles = StyleSheet.create({
   optionText: {
     fontSize: 14,
     color: '#000000',
+    fontFamily: 'Poppins-Regular',
   },
   selectedItemText: {
     color: '#FFFFFF',
@@ -235,11 +243,13 @@ export const styles = StyleSheet.create({
     fontSize: 12,
     color: '#0088cc',
     marginBottom: 0,
+    fontFamily: 'Poppins-SemiBold',
   },
   price: {
     fontSize: 24,
     fontWeight: '600',
     color: '#000000',
+    fontFamily: 'Poppins-SemiBold',
   },
   addToCartButton: {
     flex: 1,
@@ -253,11 +263,13 @@ export const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontSize: 16,
     fontWeight: '600',
+    fontFamily: 'Poppins-SemiBold',
   },
   alertLabel: {
     fontSize: 15,
     fontWeight: '500',
     color: '#000000',
+    fontFamily: 'Poppins-SemiBold',
   },
   qtyContainer: {
     marginBottom: 10,
@@ -290,6 +302,7 @@ export const styles = StyleSheet.create({
   bulkDiscountTitleText: {
     fontSize: 18,
     fontWeight: '800',
+    fontFamily: 'Poppins-SemiBold',
   },
   bulkDiscountTitleContainer: {
     borderWidth: 1,
@@ -305,6 +318,7 @@ export const styles = StyleSheet.create({
   bulkDiscountRowText: {
     fontSize: 16,
     fontWeight: '400',
+    fontFamily: 'Poppins-SemiBold',
   },
   bulkDiscountRowContainer: {
     borderWidth: 1,

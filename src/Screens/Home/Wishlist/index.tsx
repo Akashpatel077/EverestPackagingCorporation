@@ -120,10 +120,10 @@ const WishlistScreen = () => {
     <CSafeAreaView removeBottomSafeArea>
       <View style={[styles.container, {}]}>
         <Header title="My Wishlist" />
-        <View style={{paddingTop: 8}}>
+        <View style={{paddingTop: 8, flex: 1}}>
           {filteredItems.length === 0 ? (
             <View style={styles.emptyContainer}>
-              <Text style={styles.emptyText}>No items in wishlist</Text>
+              <Text style={styles.emptyText}>No items in Your Wishlist</Text>
             </View>
           ) : (
             <FlatList

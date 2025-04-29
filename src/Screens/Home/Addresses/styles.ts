@@ -27,7 +27,7 @@ export const styles = StyleSheet.create({
   },
   sectionTitle: {
     fontSize: 18,
-    fontWeight: '600',
+    fontFamily: 'Poppins-SemiBold',
     color: '#000000',
     marginBottom: 12,
   },
@@ -41,6 +41,7 @@ export const styles = StyleSheet.create({
     fontSize: 14,
     color: '#666666',
     marginBottom: 8,
+    fontFamily: 'Poppins-Regular',
   },
   addButton: {
     backgroundColor: '#007AFF',
@@ -52,7 +53,7 @@ export const styles = StyleSheet.create({
   addButtonText: {
     color: '#FFFFFF',
     fontSize: 16,
-    fontWeight: '600',
+    fontFamily: 'Poppins-SemiBold',
   },
   addressInfo: {
     flexDirection: 'row',
@@ -67,7 +68,7 @@ export const styles = StyleSheet.create({
   },
   addressType: {
     fontSize: 16,
-    fontWeight: '600',
+    fontFamily: 'Poppins-SemiBold',
     color: '#000000',
     marginBottom: 4,
   },
@@ -75,6 +76,7 @@ export const styles = StyleSheet.create({
     fontSize: 14,
     color: '#666666',
     lineHeight: 20,
+    fontFamily: 'Poppins-Regular',
   },
   defaultText: {
     fontSize: 12,
