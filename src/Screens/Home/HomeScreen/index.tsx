@@ -1,6 +1,7 @@
 import React, {useRef, useEffect} from 'react';
 import {View} from 'react-native';
 import Video from 'react-native-video';
+import VideoPlayer from 'react-native-video-controls';
 import styles from './styles';
 import {Header} from 'src/Components';
 import {Filter, Search} from 'assets/icons';
@@ -33,7 +34,21 @@ const HomeScreen = () => {
           title={'Everest Packaging'}
         />
         <View style={styles.videoContainer}>
-          <Video
+          <VideoPlayer
+            ref={videoRef}
+            source={{
+              uri: 'https://everestpackaging.co.in/wp-content/uploads/2022/04/Compressed-Video-For-Insta-Fb.mp4#t=5',
+            }}
+            style={styles.video}
+            disableFullscreen
+            disableBack
+            // seekColor="#0088cc"
+            controlColor="red"
+            controlTimeout={10000}
+            paused={!isFocused}
+            repeat={true}
+          />
+          {/* <Video
             ref={videoRef}
             source={{
               uri: 'https://everestpackaging.co.in/wp-content/uploads/2022/04/Compressed-Video-For-Insta-Fb.mp4#t=5',
@@ -43,7 +58,7 @@ const HomeScreen = () => {
             repeat
             controls
             paused={!isFocused}
-          />
+          /> */}
         </View>
       </View>
     </CSafeAreaView>
