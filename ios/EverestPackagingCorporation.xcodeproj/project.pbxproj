@@ -83,8 +83,9 @@
 		F9A59DAA13794FB990665BC9 /* SendMessage.svg in Resources */ = {isa = PBXBuildFile; fileRef = 28D2045C119A4531A22AE857 /* SendMessage.svg */; };
 		1F56A5E883F7484A9FD257FB /* Shop.svg in Resources */ = {isa = PBXBuildFile; fileRef = A36A4222A52A4B848AB94A70 /* Shop.svg */; };
 		09DB868BCFF84EEDBA22C8BF /* UncheckSquare.svg in Resources */ = {isa = PBXBuildFile; fileRef = 47EFAF1EEB164E53AB212888 /* UncheckSquare.svg */; };
-		7DDA2BCEE39D455D81541765 /* index.ts in Resources */ = {isa = PBXBuildFile; fileRef = 964DC5239C484A7FBF3D1BEC /* index.ts */; };
-		59F8C500BB994D6EBFA1BA4E /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E327FEB521746779F6C56C9 /* logo.png */; };
+		CC8325FD08A54ED6B9DF4D0E /* Menu.svg in Resources */ = {isa = PBXBuildFile; fileRef = 4A3731EC66D74F81B759CE6C /* Menu.svg */; };
+		78F63C9A9F6F47C2B23AA550 /* index.ts in Resources */ = {isa = PBXBuildFile; fileRef = C63FE1063CF7413B9CB58FDC /* index.ts */; };
+		4DE84E9B50E341F49CBB724B /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = AF5E6E1F13CB4F0185D9D77F /* logo.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -169,8 +170,9 @@
 		28D2045C119A4531A22AE857 /* SendMessage.svg */ = {isa = PBXFileReference; name = "SendMessage.svg"; path = "../assets/icons/SendMessage.svg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		A36A4222A52A4B848AB94A70 /* Shop.svg */ = {isa = PBXFileReference; name = "Shop.svg"; path = "../assets/icons/Shop.svg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		47EFAF1EEB164E53AB212888 /* UncheckSquare.svg */ = {isa = PBXFileReference; name = "UncheckSquare.svg"; path = "../assets/icons/UncheckSquare.svg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		964DC5239C484A7FBF3D1BEC /* index.ts */ = {isa = PBXFileReference; name = "index.ts"; path = "../assets/icons/index.ts"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		5E327FEB521746779F6C56C9 /* logo.png */ = {isa = PBXFileReference; name = "logo.png"; path = "../assets/images/logo.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		4A3731EC66D74F81B759CE6C /* Menu.svg */ = {isa = PBXFileReference; name = "Menu.svg"; path = "../assets/icons/Menu.svg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		C63FE1063CF7413B9CB58FDC /* index.ts */ = {isa = PBXFileReference; name = "index.ts"; path = "../assets/icons/index.ts"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		AF5E6E1F13CB4F0185D9D77F /* logo.png */ = {isa = PBXFileReference; name = "logo.png"; path = "../assets/images/logo.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -259,8 +261,9 @@
 				28D2045C119A4531A22AE857 /* SendMessage.svg */,
 				A36A4222A52A4B848AB94A70 /* Shop.svg */,
 				47EFAF1EEB164E53AB212888 /* UncheckSquare.svg */,
-				964DC5239C484A7FBF3D1BEC /* index.ts */,
-				5E327FEB521746779F6C56C9 /* logo.png */,
+				4A3731EC66D74F81B759CE6C /* Menu.svg */,
+				C63FE1063CF7413B9CB58FDC /* index.ts */,
+				AF5E6E1F13CB4F0185D9D77F /* logo.png */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -459,8 +462,9 @@
 				F9A59DAA13794FB990665BC9 /* SendMessage.svg in Resources */,
 				1F56A5E883F7484A9FD257FB /* Shop.svg in Resources */,
 				09DB868BCFF84EEDBA22C8BF /* UncheckSquare.svg in Resources */,
-				7DDA2BCEE39D455D81541765 /* index.ts in Resources */,
-				59F8C500BB994D6EBFA1BA4E /* logo.png in Resources */,
+				CC8325FD08A54ED6B9DF4D0E /* Menu.svg in Resources */,
+				78F63C9A9F6F47C2B23AA550 /* index.ts in Resources */,
+				4DE84E9B50E341F49CBB724B /* logo.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

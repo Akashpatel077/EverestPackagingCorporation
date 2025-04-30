@@ -35,7 +35,7 @@ const BulkOrder = () => {
         user: {
           _id: 2,
           name: 'Bulk Order Bot',
-          avatar: require('assets/images/logo.png'),
+          avatar: require('../../../../assets/images/logo.png'),
         },
       };
       setMessages(previousMessages =>

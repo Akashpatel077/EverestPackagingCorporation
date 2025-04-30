@@ -214,6 +214,10 @@
       "sha1": "6681252688f1982d28ad769556c933fc852f92c7"
     },
     {
+      "path": "assets/icons/Menu.svg",
+      "sha1": "cf9f1b6f66d0fb2f46b59ef00bc39f7eb9bfe619"
+    },
+    {
       "path": "assets/icons/NotSelectedRadioButton.svg",
       "sha1": "e3a0369f0f0ea5411c0198af0a6216fe28b0ea94"
     },
@@ -291,7 +295,7 @@
     },
     {
       "path": "assets/icons/index.ts",
-      "sha1": "3406b04a150886f5cae90e3c8a9b04edffe17889"
+      "sha1": "dd7e2c112be6e44515dc8e8092cf1492fcc7ba90"
     }
   ]
 }
