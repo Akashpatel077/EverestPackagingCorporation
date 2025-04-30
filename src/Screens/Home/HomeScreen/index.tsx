@@ -14,11 +14,11 @@ const HomeScreen = () => {
   const videoRef = useRef(null);
   const isFocused = useIsFocused();
 
-  useEffect(() => {
-    if (!isFocused && videoRef.current) {
-      videoRef.current.pause();
-    }
-  }, [isFocused]);
+  // useEffect(() => {
+  //   if (!isFocused && videoRef.current) {
+  //     videoRef.current.pause();
+  //   }
+  // }, [isFocused]);
 
   return (
     <CSafeAreaView removeBottomSafeArea>

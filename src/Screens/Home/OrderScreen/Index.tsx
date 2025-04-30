@@ -37,7 +37,7 @@ const OrderScreen = () => {
   >('active');
 
   useEffect(() => {
-    if (user.id) {
+    if (user && user.id) {
       dispatch(fetchOrders({id: user.id}));
     }
   }, []);

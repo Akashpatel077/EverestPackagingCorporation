@@ -136,9 +136,9 @@ const MyCart = () => {
     setShowRemoveModal(true);
   };
 
-  useEffect(() => {
-    dispatch(getCartListAction());
-  }, []);
+  // useEffect(() => {
+  //   dispatch(getCartListAction());
+  // }, []);
 
   // Apply promo code
   const applyPromoCode = () => {

@@ -11,7 +11,11 @@ import {SafeAreaProvider} from 'react-native-safe-area-context';
 const App = () => {
   return (
     <SafeAreaProvider>
-      <StatusBar barStyle="dark-content" translucent={false} />
+      <StatusBar
+        barStyle="dark-content"
+        translucent={true}
+        backgroundColor="transparent"
+      />
       <Provider store={store}>
         <I18nextProvider i18n={i18n}>
           <MainContainer />
