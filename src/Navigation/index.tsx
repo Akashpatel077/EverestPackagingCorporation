@@ -2,7 +2,6 @@ import React from 'react';
 import AuthContainer from './auth';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {NavigationContainer} from '@react-navigation/native';
-import HomeContainer from './home';
 import SplashScreen from '../Screens/SplashScreen';
 import Welcome from '../Screens/Welcome';
 import {useSelector} from 'react-redux';
@@ -27,6 +26,7 @@ import {
 } from 'src/Screens/Home';
 import CheckoutScreen from 'src/Screens/Home/Checkout';
 import PaymentMethodScreen from 'src/Screens/Home/PaymentMethod';
+import DrawerNavigator from './DrawerNavigator';
 
 const MainStack = createNativeStackNavigator();
 
@@ -43,7 +43,7 @@ const MainContainer = () => {
       <MainStack.Navigator screenOptions={{headerShown: false}}>
         {isLoggedIn || hasStarted ? (
           <>
-            <MainStack.Screen name="Home" component={HomeContainer} />
+            <MainStack.Screen name="Home" component={DrawerNavigator} />
             <MainStack.Screen
               name={PAYMENT_WEBVIEW}
               component={PaymentWebView}

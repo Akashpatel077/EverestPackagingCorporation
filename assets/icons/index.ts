@@ -47,6 +47,7 @@ import CheckSquare from './CheckSquare.svg';
 import UncheckSquareNew from './UncheckSquare.svg';
 import SelectedRadioButton from './SelectedRadioButton.svg';
 import NotSelectedRadioButton from './NotSelectedRadioButton.svg';
+import Menu from './Menu.svg';
 
 export {
   Buy,
@@ -98,4 +99,5 @@ export {
   UncheckSquareNew,
   SelectedRadioButton,
   NotSelectedRadioButton,
+  Menu,
 };

@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {ic_Boxes, ic_Tapes, ic_Bags} from '../../../assets/icons';
-import Logo from '../../../assets/images/Logo.png';
+import Logo from '../../../assets/images/logo.png';
 import {Icon} from 'src/Components';
 import {WELCOME, HOMESCREEN} from 'src/Navigation/home/routes';
 import {useSelector} from 'react-redux';

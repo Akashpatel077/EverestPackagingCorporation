@@ -4,7 +4,7 @@ import Video from 'react-native-video';
 import VideoPlayer from 'react-native-video-controls';
 import styles from './styles';
 import {Header} from 'src/Components';
-import {Filter, Search} from 'assets/icons';
+import {Search, Menu} from 'assets/icons';
 import {useNavigation, useIsFocused} from '@react-navigation/native';
 import {SEARCH_SCREEN} from 'src/Navigation/home/routes';
 import CSafeAreaView from 'src/Components/CSafeAreaView';
@@ -24,13 +24,11 @@ const HomeScreen = () => {
     <CSafeAreaView removeBottomSafeArea>
       <View style={styles.container}>
         <Header
-          icon1={Search}
-          onPressFirst={() => navigation.navigate(SEARCH_SCREEN)}
-          icon2={Filter}
+          icon1={Menu}
+          onPressFirst={() => navigation.openDrawer()}
+          icon2={Search}
           icon2Color="#FFF"
-          onPressSecond={() => {
-            console.log('Filter pressed');
-          }}
+          onPressSecond={() => navigation.navigate(SEARCH_SCREEN)}
           title={'Everest Packaging'}
         />
         <View style={styles.videoContainer}>

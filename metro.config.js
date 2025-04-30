@@ -1,5 +1,7 @@
-const { getDefaultConfig, mergeConfig } = require('@react-native/metro-config');
-
+const {getDefaultConfig, mergeConfig} = require('@react-native/metro-config');
+const {
+  wrapWithReanimatedMetroConfig,
+} = require('react-native-reanimated/metro-config');
 const defaultConfig = getDefaultConfig(__dirname);
 
 // Ensure assets like fonts are included properly
@@ -11,10 +13,12 @@ const config = {
       'otf',
       'png',
       'jpg',
-      'svg'
+      'svg',
     ],
     sourceExts: [...defaultConfig.resolver.sourceExts, 'jsx', 'tsx'],
   },
 };
 
-module.exports = mergeConfig(defaultConfig, config);
+module.exports = wrapWithReanimatedMetroConfig(
+  mergeConfig(defaultConfig, config),
+);
