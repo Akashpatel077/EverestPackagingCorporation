@@ -43,7 +43,7 @@ const MainContainer = () => {
       <MainStack.Navigator screenOptions={{headerShown: false}}>
         {isLoggedIn || hasStarted ? (
           <>
-            <MainStack.Screen name="Home" component={DrawerNavigator} />
+            <MainStack.Screen name="HomeDrawer" component={DrawerNavigator} />
             <MainStack.Screen
               name={PAYMENT_WEBVIEW}
               component={PaymentWebView}

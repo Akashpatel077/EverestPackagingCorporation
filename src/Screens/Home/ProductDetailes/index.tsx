@@ -108,15 +108,23 @@ const ProductDetails = ({navigation, route}) => {
           index: 0,
           routes: [
             {
-              name: 'Home',
+              name: 'HomeDrawer',
               state: {
                 index: 0,
                 routes: [
                   {
-                    name: 'Cart',
+                    name: 'Home',
                     state: {
                       index: 0,
-                      routes: [{name: MYCART}],
+                      routes: [
+                        {
+                          name: 'Cart',
+                          state: {
+                            index: 0,
+                            routes: [{name: 'MYCART'}],
+                          },
+                        },
+                      ],
                     },
                   },
                 ],
