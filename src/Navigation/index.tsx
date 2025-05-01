@@ -31,17 +31,32 @@ import DrawerNavigator from './DrawerNavigator';
 const MainStack = createNativeStackNavigator();
 
 const MainContainer = () => {
-  const {hasStarted} = useSelector((state: RootState) => state.startKey);
+  const {hasStarted, showWelcome} = useSelector(
+    (state: RootState) => state.startKey,
+  );
   const store = useSelector((state: RootState) => state);
+
   const {token} = useSelector((state: RootState) => state.auth);
   const isLoggedIn = Boolean(token);
 
+  const [showSplash, setShowSplash] = React.useState(true);
+
   console.log('store', store);
+
+  React.useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowSplash(false);
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <NavigationContainer>
       <MainStack.Navigator screenOptions={{headerShown: false}}>
-        {isLoggedIn || hasStarted ? (
+        {showSplash ? (
+          <MainStack.Screen name="Splash" component={SplashScreen} />
+        ) : isLoggedIn || hasStarted ? (
           <>
             <MainStack.Screen name="HomeDrawer" component={DrawerNavigator} />
             <MainStack.Screen
@@ -76,9 +91,11 @@ const MainContainer = () => {
           </>
         ) : (
           <>
-            <MainStack.Screen name="Splash" component={SplashScreen} />
-            <MainStack.Screen name="Auth" component={AuthContainer} />
-            <MainStack.Screen name="Welcome" component={Welcome} />
+            {showWelcome ? (
+              <MainStack.Screen name="Welcome" component={Welcome} />
+            ) : (
+              <MainStack.Screen name="Auth" component={AuthContainer} />
+            )}
           </>
         )}
       </MainStack.Navigator>

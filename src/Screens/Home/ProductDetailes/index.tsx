@@ -6,8 +6,6 @@ import {
   TouchableOpacity,
   ScrollView,
   FlatList,
-  SafeAreaView,
-  ActivityIndicator,
   Alert,
 } from 'react-native';
 import {styles} from './styles';
@@ -20,7 +18,11 @@ import {
   removeFromWishlist,
   isProductInWishlist,
 } from '../../../store/slices/wishlistSlice';
-import {addToCartAction, resetFlags} from '../../../store/slices/cartSlice';
+import {
+  addToCartAction,
+  resetFlags,
+  selectCartItems,
+} from '../../../store/slices/cartSlice';
 import RenderHtml from 'react-native-render-html';
 import {getCartItems, getProductVariations} from 'src/services/wooCommerceApi';
 import {FilePicker} from '../../../Components';
@@ -29,6 +31,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {MYCART} from 'src/Navigation/home/routes';
 import {CommonActions} from '@react-navigation/native';
 import CSafeAreaView from 'src/Components/CSafeAreaView';
+import {useSelector} from 'react-redux';
 
 function findVariation(variations, selectedAttributes) {
   return variations.find(variation => {
@@ -58,6 +61,10 @@ const ProductDetails = ({navigation, route}) => {
   const [isVariationNotAvailable, setIsVariationNotAvailable] = useState(false);
   const [filteredMetaData, setFilteredMetaData] = useState({});
   const [quantity, setQuantity] = useState(1);
+  const {items} = useSelector(selectCartItems);
+  const cartItemsCount = items
+    ? items.reduce((total, item) => total + item.quantity, 0)
+    : 0;
   const [selectedCustomExtraFields, setSelectedCustomExtraFields] = useState(
     {},
   );
@@ -274,14 +281,39 @@ const ProductDetails = ({navigation, route}) => {
         <Header
           title="Product Details"
           icon1={BackIcon}
-          showWishlistIcon
-          isInWishlist={isInWishlist}
-          onWishlistPress={() => {
-            if (isInWishlist) {
-              dispatch(removeFromWishlist(productId));
-            } else {
-              dispatch(addToWishlist(productDetails));
-            }
+          badgeCount={cartItemsCount ?? 0}
+          showCartIcon
+          onCartPress={() => {
+            navigation.dispatch(
+              CommonActions.reset({
+                index: 0,
+                routes: [
+                  {
+                    name: 'HomeDrawer',
+                    state: {
+                      index: 0,
+                      routes: [
+                        {
+                          name: 'Home',
+                          state: {
+                            index: 0,
+                            routes: [
+                              {
+                                name: 'Cart',
+                                state: {
+                                  index: 0,
+                                  routes: [{name: 'MYCART'}],
+                                },
+                              },
+                            ],
+                          },
+                        },
+                      ],
+                    },
+                  },
+                ],
+              }),
+            );
           }}
           icon2Color={isInWishlist ? '#CC5656' : '#FFF'}
         />
@@ -318,7 +350,7 @@ const ProductDetails = ({navigation, route}) => {
                 <View style={styles.titleRow}>
                   <Text style={styles.title}>{productDetails.name}</Text>
                 </View>
-                <View style={styles.reviewContainer}>
+                {/* <View style={styles.reviewContainer}>
                   <View style={styles.starContainer}>
                     {[1, 2, 3, 4, 5].map(star => (
                       <Text key={star} style={styles.starIcon}>
@@ -331,7 +363,7 @@ const ProductDetails = ({navigation, route}) => {
                   <Text style={styles.reviewText}>
                     ( There are no reviews yet. )
                   </Text>
-                </View>
+                </View> */}
                 <View style={styles.priceRow}>
                   <Text style={styles.regularPrice}>₹{regularPrice}</Text>
                   <Text style={styles.salePrice}>₹{salePrice}</Text>
@@ -482,6 +514,22 @@ const ProductDetails = ({navigation, route}) => {
                 <Text style={styles.priceLabel}>Total Price</Text>
                 <Text style={styles.price}>₹{totalPrice.toFixed(2)}</Text>
               </View>
+              <TouchableOpacity
+                style={styles.wishListButton}
+                onPress={() => {
+                  if (isInWishlist) {
+                    dispatch(removeFromWishlist(productId));
+                  } else {
+                    dispatch(addToWishlist(productDetails));
+                  }
+                }}>
+                <Icon
+                  name={Heart}
+                  width={24}
+                  height={24}
+                  color={isInWishlist ? '#CC5656' : '#ffffff'}
+                />
+              </TouchableOpacity>
               <TouchableOpacity
                 style={[
                   styles.addToCartButton,

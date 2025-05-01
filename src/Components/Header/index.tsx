@@ -3,18 +3,18 @@ import {Text, TouchableOpacity, View} from 'react-native';
 import {styles} from './styles';
 import {useNavigation} from '@react-navigation/native';
 import {Icon} from '../Icons';
-import {Heart} from 'assets/icons';
+import {Buy, Heart} from 'assets/icons';
 
 interface Props {
+  onCartPress: () => void;
   title?: string;
   onPressSecond?: () => void;
   onPressFirst?: () => void;
   icon1?: string;
   icon2?: string;
   icon2Color?: string;
-  showWishlistIcon?: boolean;
-  isInWishlist?: boolean;
-  onWishlistPress?: () => void;
+  showCartIcon?: boolean;
+  badgeCount?: number;
 }
 const Header: React.FC<Props> = ({
   title,
@@ -23,13 +23,11 @@ const Header: React.FC<Props> = ({
   icon2,
   icon2Color = '#FFF',
   onPressFirst,
-  isInWishlist,
-  onWishlistPress,
-  showWishlistIcon,
+  onCartPress,
+  showCartIcon,
+  badgeCount,
 }) => {
   const navigation = useNavigation();
-
-  console.log('icon2Color', icon2Color);
 
   return (
     <View style={styles.header}>
@@ -44,16 +42,16 @@ const Header: React.FC<Props> = ({
           numberOfLines={1}>
           {title}
         </Text>
-        {showWishlistIcon ? (
-          <TouchableOpacity
-            style={styles.RightButton}
-            onPress={onWishlistPress}>
-            <Icon
-              name={Heart}
-              width={24}
-              height={24}
-              color={isInWishlist ? '#CC5656' : '#ffffff'}
-            />
+        {showCartIcon ? (
+          <TouchableOpacity style={styles.RightButton} onPress={onCartPress}>
+            <Icon name={Buy} width={24} height={24} color={'#ffffff'} />
+            {badgeCount && (
+              <View style={styles.cartBadgeStyle}>
+                <Text numberOfLines={1} style={styles.cartBadgeText}>
+                  {badgeCount}
+                </Text>
+              </View>
+            )}
           </TouchableOpacity>
         ) : (
           <TouchableOpacity

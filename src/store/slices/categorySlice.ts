@@ -66,7 +66,6 @@ export const fetchCategories = createAsyncThunk(
         per_page: 50,
         parent: 0,
       });
-      console.log('data', data);
 
       return data;
     } catch (error: any) {

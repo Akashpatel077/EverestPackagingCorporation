@@ -12,7 +12,7 @@ import {useNavigation} from '@react-navigation/native';
 import {HOMESCREEN} from 'src/Navigation/home/routes';
 import {LOGIN} from 'src/Navigation/auth/routes';
 import {useDispatch} from 'react-redux';
-import {setStartKey} from 'src/store/slices/startKeySlice';
+import {setShowWelcome, setStartKey} from 'src/store/slices/startKeySlice';
 
 const fashionImages = [
   'https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=800',
@@ -117,7 +117,10 @@ const Welcome = () => {
 
         <TouchableOpacity
           style={styles.button}
-          onPress={() => dispatch(setStartKey('user'))}>
+          onPress={() => {
+            dispatch(setStartKey('user'));
+            dispatch(setShowWelcome(false));
+          }}>
           <Text style={styles.buttonText}>Let's Get Started</Text>
         </TouchableOpacity>
 

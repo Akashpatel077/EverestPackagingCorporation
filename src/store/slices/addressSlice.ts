@@ -32,8 +32,6 @@ const addressSlice = createSlice({
   reducers: {
     addBillingAddress: (state, action: PayloadAction<Address>) => {
       if (state.billingAddresses.length === 0) {
-        console.log('state', state);
-
         action.payload.isDefault = true;
         state.selectedBillingAddressId = action.payload.id;
       }

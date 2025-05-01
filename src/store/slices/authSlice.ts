@@ -26,7 +26,7 @@ export const loginUser = createAsyncThunk(
       const data = await loginUserApi(username, password);
       // After successful login, fetch user profile
       const userProfile = await fetchUserProfileApi(data.token);
-      console.log('userProfile', userProfile);
+
       const userDetails = await fetchUserDetails(userProfile.id, data.token);
 
       return {token: data.token, user: userDetails};

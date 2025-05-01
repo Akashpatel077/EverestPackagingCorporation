@@ -7,7 +7,6 @@ import {
   TextInput,
   FlatList,
   Modal,
-  SafeAreaView,
   StatusBar,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
@@ -22,18 +21,12 @@ import {
 import {Header} from 'src/Components';
 import {decode} from 'he';
 import {
-  getCartListAction,
   removeFromCartAction,
   resetFlags,
   updateProductInCartAction,
 } from 'src/store/slices/cartSlice';
 import CSafeAreaView from 'src/Components/CSafeAreaView';
-
-const encodedName = '4x3x1  inch Brown Tuck in Mailer Boxes &#8211; 3 ply';
-const decodedName = decode(encodedName);
-
-console.log(decodedName);
-// Output: "4x3x1  inch Brown Tuck in Mailer Boxes – 3 ply"
+import {resetStartKey, setShowWelcome} from 'src/store/slices/startKeySlice';
 
 interface CartItem {
   key: string;
@@ -80,6 +73,7 @@ const MyCart = () => {
     loading,
     isSuccess,
   } = useSelector(item => item.cart);
+  const {hasStarted} = useSelector(item => item.startKey);
 
   const {totals, shipping_rates, items: cartItems, coupons} = cartDetails || {};
   const {
@@ -328,7 +322,10 @@ const MyCart = () => {
           <TouchableOpacity
             style={styles.checkoutButton}
             onPress={() => {
-              if (!selectedBillingAddress) {
+              if (hasStarted) {
+                dispatch(resetStartKey());
+                dispatch(setShowWelcome(true));
+              } else if (!selectedBillingAddress) {
                 navigation.navigate(BILLING_ADDRESS_FORM);
               } else if (!selectedShippingAddress) {
                 navigation.navigate(SHIPPING_ADDRESS_FORM);

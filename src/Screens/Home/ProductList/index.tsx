@@ -221,12 +221,12 @@ const ProductItemCard = React.memo(
               <Text style={styles.regularPrice}>₹{regularPrice}</Text>
               <Text style={styles.salePrice}>₹{salePrice}</Text>
             </View>
-            <View style={styles.ratingContainer}>
+            {/* <View style={styles.ratingContainer}>
               <Text style={styles.ratingIcon}>⭐</Text>
               <Text style={styles.ratingText}>
                 {item.average_rating || '0.0'}
               </Text>
-            </View>
+            </View> */}
           </View>
         </View>
       </TouchableOpacity>

@@ -74,4 +74,19 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  cartBadgeStyle: {
+    position: 'absolute',
+    backgroundColor: 'red',
+    borderRadius: 10,
+    height: 20,
+    width: 30,
+    alignItems: 'center',
+    justifyContent: 'center',
+    top: -5,
+    right: -5,
+  },
+  cartBadgeText: {
+    fontSize: 12,
+    color: 'white',
+  },
 });

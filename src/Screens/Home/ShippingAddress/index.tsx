@@ -21,8 +21,6 @@ const ShippingAddressScreen = () => {
     (state: RootState) => state.address,
   );
 
-  console.log('shippingAddresses', shippingAddresses);
-
   const selectedAddressData = shippingAddresses.find(
     addr => addr.id === selectedShippingAddressId,
   );

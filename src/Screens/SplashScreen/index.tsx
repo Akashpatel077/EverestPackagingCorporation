@@ -19,7 +19,7 @@ const {width, height} = Dimensions.get('window');
 
 const SplashScreen = () => {
   const navigation = useNavigation();
-  const startKey = useSelector((state: RootState) => state.startKey.value);
+  const startKey = useSelector((state: RootState) => state.startKey.hasStarted);
   const logoScale = new Animated.Value(0);
   const fadeAnim = new Animated.Value(0);
   const iconPosition = new Animated.Value(height);
@@ -77,11 +77,13 @@ const SplashScreen = () => {
     ]).start();
 
     // Navigate based on startKey after animations
-    const timer = setTimeout(() => {
-      navigation.replace(startKey ? 'Home' : 'Welcome');
-    }, 4500);
+    // const timer = setTimeout(() => {
+    //   console.log('satrt : ', startKey);
 
-    return () => clearTimeout(timer);
+    //   navigation.replace(startKey ? 'HomeDrawer' : 'Welcome');
+    // }, 4500);
+
+    // return () => clearTimeout(timer);
   }, [navigation, startKey]);
 
   return (

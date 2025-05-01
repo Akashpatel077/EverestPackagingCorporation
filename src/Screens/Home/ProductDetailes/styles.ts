@@ -154,7 +154,7 @@ export const styles = StyleSheet.create({
   salePrice: {
     fontSize: 24,
     fontWeight: '600',
-    color: '#000000',
+    color: '#0088cc',
     fontFamily: 'Poppins-SemiBold',
   },
   description: {
@@ -241,21 +241,21 @@ export const styles = StyleSheet.create({
   },
   priceLabel: {
     fontSize: 12,
-    color: '#0088cc',
+    color: '#000000',
     marginBottom: 0,
     fontFamily: 'Poppins-SemiBold',
   },
   price: {
     fontSize: 24,
     fontWeight: '600',
-    color: '#000000',
+    color: '#0088cc',
     fontFamily: 'Poppins-SemiBold',
   },
   addToCartButton: {
-    flex: 1,
+    // flex: 1,
     backgroundColor: '#0088cc',
     borderRadius: 25,
-    paddingVertical: 12,
+    padding: 8,
     marginLeft: 16,
     alignItems: 'center',
   },
@@ -300,7 +300,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   bulkDiscountTitleText: {
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: '800',
     fontFamily: 'Poppins-SemiBold',
   },
@@ -316,7 +316,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   bulkDiscountRowText: {
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: '400',
     fontFamily: 'Poppins-SemiBold',
   },
@@ -326,5 +326,23 @@ export const styles = StyleSheet.create({
     borderColor: '#CCCCCC',
     paddingHorizontal: 20,
     paddingVertical: 5,
+  },
+  wishListButton: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    borderWidth: 0.3,
+    borderColor: '#CCCCCC',
+    backgroundColor: '#FFFFFF',
+    justifyContent: 'center',
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 8,
+    elevation: 3,
   },
 });

@@ -64,7 +64,6 @@ const PaymentMethodScreen = () => {
         };
 
         const checkoutResponse = await cartCheckout(checkoutData);
-        console.log('checkoutResponse : ', checkoutResponse);
 
         if (
           checkoutResponse.status &&
@@ -75,7 +74,6 @@ const PaymentMethodScreen = () => {
           });
         }
       } catch (error) {
-        console.log('error : ', error.response.data.message);
         Alert.alert('Attention!', error.response.data.message ?? error.message);
       } finally {
         setLoading(false);

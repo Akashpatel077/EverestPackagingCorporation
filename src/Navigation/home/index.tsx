@@ -308,15 +308,12 @@ const getTabBarStyle = (route: any) => {
 
 const HomeContainer = () => {
   const {items} = useSelector(selectCartItems);
-  const {hasStarted} = useSelector((state: RootState) => state.startKey);
 
   const cartItemsCount = items
     ? items.reduce((total, item) => total + item.quantity, 0)
     : 0;
 
   const getTabBarIcon = (name: React.FC<TabIconProps>, tabName: string) => {
-    console.log('tabName', tabName);
-
     return tabName === 'Home' ? (
       <Icon width={24} height={24} name={name} color="#000" />
     ) : (
@@ -352,6 +349,9 @@ const HomeContainer = () => {
               backgroundColor: '#0088cc',
               color: '#FFFFFF',
               fontSize: 12,
+            },
+            tabBarLabelStyle: {
+              fontFamily: 'Poppins-Medium',
             },
           })}
         />

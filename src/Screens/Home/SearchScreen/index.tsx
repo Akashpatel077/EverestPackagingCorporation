@@ -34,8 +34,6 @@ const SearchScreen = () => {
   const wishlistItems = useAppSelector(state => state.wishlist.items);
   const [recentSearches, setRecentSearches] = useState([]);
 
-  console.log('items', products);
-
   useEffect(() => {
     dispatch(fetchAllProducts());
   }, [dispatch]);
