@@ -33,7 +33,7 @@ export const styles = StyleSheet.create({
   },
   addressContainer: {
     backgroundColor: '#F5F5F5',
-    borderRadius: 8,
+    borderRadius: 10,
     padding: 16,
     marginBottom: 12,
   },
@@ -45,7 +45,7 @@ export const styles = StyleSheet.create({
   },
   addButton: {
     backgroundColor: '#007AFF',
-    borderRadius: 8,
+    borderRadius: 10,
     padding: 12,
     alignItems: 'center',
     marginTop: 8,

@@ -107,7 +107,7 @@ const BillingAddressForm: React.FC = () => {
       type: formData.addressType,
     };
 
-    if (isShippingAddressSame) {
+    if (!isShippingAddressSame) {
       dispatch(addBillingAddress(addressData));
       dispatch(addShippingAddress(addressData));
       navigation.navigate(CHECKOUT);
@@ -216,6 +216,7 @@ const BillingAddressForm: React.FC = () => {
             </Text>
             <CDropdown
               data={states}
+              dropDownStyle={{height: 50}}
               title="State / County"
               selectedItem={selectedState}
               onSelect={(itemObject: any) => {
@@ -263,7 +264,7 @@ const BillingAddressForm: React.FC = () => {
               <Icon name={UncheckSquareNew} height={30} width={30} />
             )}
             <Text style={styles.shippingCheckBoxText}>
-              Make This as Shipping Address
+              Ship to a different address?
             </Text>
           </TouchableOpacity>
 

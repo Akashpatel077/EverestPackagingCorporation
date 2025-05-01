@@ -99,6 +99,7 @@ export default StyleSheet.create({
     marginHorizontal: 10,
     fontSize: 16,
     fontFamily: 'Poppins-SemiBold',
+    paddingTop: 5,
   },
   removeButton: {
     padding: 10,

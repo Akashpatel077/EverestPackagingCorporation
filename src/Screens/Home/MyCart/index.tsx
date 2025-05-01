@@ -153,7 +153,16 @@ const MyCart = () => {
         <Image source={{uri: item.images[0].src}} style={styles.itemImage} />
         <View style={styles.itemDetails}>
           <Text style={styles.itemName}>{decodedName}</Text>
-          <Text style={styles.itemSize}>Size : {item.size}</Text>
+          {item.type === 'variation' &&
+            item.variation &&
+            item.variation.map(item => {
+              const decodedValue = decode(item.value);
+              return (
+                <Text style={styles.itemSize}>
+                  {item.attribute} : {decodedValue}
+                </Text>
+              );
+            })}
           <Text style={styles.itemPrice}>
             ₹
             {(
@@ -167,7 +176,9 @@ const MyCart = () => {
             <TouchableOpacity
               style={styles.quantityButton}
               onPress={() => decreaseQuantity(item.id)}>
-              <Text style={styles.quantityButtonText}>-</Text>
+              <Text style={[styles.quantityButtonText, {paddingBottom: 2}]}>
+                -
+              </Text>
             </TouchableOpacity>
             <Text style={styles.quantityText}>{item.quantity}</Text>
             <TouchableOpacity
@@ -324,7 +335,7 @@ const MyCart = () => {
             onPress={() => {
               if (hasStarted) {
                 dispatch(resetStartKey());
-                dispatch(setShowWelcome(true));
+                dispatch(setShowWelcome(false));
               } else if (!selectedBillingAddress) {
                 navigation.navigate(BILLING_ADDRESS_FORM);
               } else if (!selectedShippingAddress) {

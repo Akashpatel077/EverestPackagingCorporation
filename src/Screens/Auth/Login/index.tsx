@@ -8,6 +8,7 @@ import {
   Image,
   ActivityIndicator,
   Alert,
+  BackHandler,
 } from 'react-native';
 import {styles} from './styles';
 import {useTranslation} from 'react-i18next';
@@ -19,6 +20,7 @@ import {REGISTRATION} from 'src/Navigation/auth/routes';
 import {useDispatch, useSelector} from 'react-redux';
 import {loginUser, logout} from 'src/store/slices/authSlice';
 import {RootState} from 'src/store';
+import {setShowWelcome} from 'src/store/slices/startKeySlice';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -45,6 +47,20 @@ const Login = () => {
       );
     }
   }, [error]);
+
+  useEffect(() => {
+    const backAction = () => {
+      dispatch(setShowWelcome(true));
+      return true;
+    };
+
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      backAction,
+    );
+
+    return () => backHandler.remove(); // clean up on unmount
+  }, []);
 
   const handleLogin = async () => {
     dispatch(loginUser({username: email, password}));

@@ -192,6 +192,7 @@ const ProductItemCard = React.memo(
           <Image
             source={item.images?.[0]?.src && {uri: item.images[0].src}}
             style={styles.productImage}
+            resizeMode="contain"
           />
           {isOutOfStock && (
             <View style={styles.outOfStockOverlay}>

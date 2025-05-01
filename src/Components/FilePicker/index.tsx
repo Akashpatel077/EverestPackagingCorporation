@@ -4,9 +4,10 @@ import {pick} from '@react-native-documents/picker';
 
 interface FilePickerProps {
   onUpdateFile: (val: any) => void;
+  placeHolder: string;
 }
 
-const FilePicker: React.FC<FilePickerProps> = ({onUpdateFile}) => {
+const FilePicker: React.FC<FilePickerProps> = ({onUpdateFile, placeHolder}) => {
   const [fileResponse, setFileResponse] = useState({});
 
   const onFileSelect = useCallback(async () => {
@@ -26,9 +27,15 @@ const FilePicker: React.FC<FilePickerProps> = ({onUpdateFile}) => {
         style={styles.container}
         onPress={onFileSelect}>
         <View style={styles.fileNamecontainer}>
-          <Text numberOfLines={1}>{fileResponse.name}</Text>
+          <Text
+            numberOfLines={1}
+            style={[styles.buttonText, {color: '#000000'}]}>
+            {fileResponse.name || placeHolder}
+          </Text>
         </View>
-        <Text style={styles.buttonText}>Choose File</Text>
+        <View style={styles.buttonTextContainer}>
+          <Text style={styles.buttonText}>Choose File</Text>
+        </View>
       </TouchableOpacity>
       {fileResponse.name && (
         <Text
@@ -53,12 +60,21 @@ const styles = StyleSheet.create({
     borderColor: '#AAAAAA',
     marginVertical: 5,
     alignItems: 'center',
+    borderRadius: 10,
+    height: 40,
   },
   buttonText: {
-    backgroundColor: '#0088cc',
-    paddingVertical: 5,
-    padding: 10,
+    paddingHorizontal: 10,
     color: '#FFFFFF',
+    fontFamily: 'Poppins-Regular',
+  },
+  buttonTextContainer: {
+    height: 40,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#0088cc',
+    borderTopRightRadius: 10,
+    borderBottomRightRadius: 10,
   },
   fileNamecontainer: {
     flex: 1,

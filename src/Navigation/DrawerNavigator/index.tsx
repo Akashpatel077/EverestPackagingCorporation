@@ -108,7 +108,7 @@ const CustomDrawerContent = (props: any) => {
             }
             style={styles.avatar}
           />
-          <Text style={styles.profileName}>{username}</Text>
+          <Text style={styles.profileName}>{username ?? 'Guest'}</Text>
           <Text style={styles.email}>{email}</Text>
         </View>
 
@@ -135,7 +135,7 @@ const DrawerNavigator = () => {
   return (
     <Drawer.Navigator
       drawerContent={props => <CustomDrawerContent {...props} />}
-      screenOptions={{headerShown: false}}>
+      screenOptions={{headerShown: false, drawerStyle: {width: '75%'}}}>
       <Drawer.Screen name="Home" component={HomeContainer} />
     </Drawer.Navigator>
   );

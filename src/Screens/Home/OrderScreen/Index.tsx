@@ -121,9 +121,8 @@ const OrderScreen = () => {
       <Image source={item.image} style={styles.itemImage} />
       <View style={styles.itemDetails}>
         <Text style={styles.itemName}>{item.name}</Text>
-        <Text style={styles.itemInfo}>
-          Size : {item.size} | Qty : {item.quantity}pcs
-        </Text>
+        <Text style={styles.itemInfo}>Size : {item.size}</Text>
+        <Text style={styles.itemInfo}>Qty : {item.quantity}pcs</Text>
         <Text style={styles.itemPrice}>${item.price}</Text>
       </View>
       {getActionButton(item.status, item)}

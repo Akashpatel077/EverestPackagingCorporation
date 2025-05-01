@@ -142,7 +142,7 @@ export const styles = StyleSheet.create({
   priceRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 16,
+    // marginBottom: 16,
   },
   regularPrice: {
     fontSize: 18,
@@ -184,7 +184,7 @@ export const styles = StyleSheet.create({
   optionButton: {
     width: 85,
     height: 40,
-    borderRadius: 8,
+    borderRadius: 10,
     borderWidth: 1,
     borderColor: '#0088cc',
     justifyContent: 'center',
@@ -311,6 +311,7 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 20,
     margin: 2,
     paddingVertical: 5,
+    borderRadius: 5,
   },
   bulkDiscountTableRow: {
     flexDirection: 'row',
@@ -326,6 +327,7 @@ export const styles = StyleSheet.create({
     borderColor: '#CCCCCC',
     paddingHorizontal: 20,
     paddingVertical: 5,
+    borderRadius: 5,
   },
   wishListButton: {
     width: 40,
@@ -344,5 +346,10 @@ export const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 8,
     elevation: 3,
+  },
+  gstTitleText: {
+    paddingBottom: 16,
+    fontFamily: 'Poppins-SemiBold',
+    color: '#666666',
   },
 });

@@ -33,7 +33,7 @@ export const styles = StyleSheet.create({
     height: 48,
     borderWidth: 1,
     borderColor: '#E0E0E0',
-    borderRadius: 8,
+    borderRadius: 10,
     paddingHorizontal: 16,
     fontSize: 16,
     fontFamily: 'Poppins-Regular',
@@ -43,7 +43,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     borderWidth: 1,
     borderColor: '#E0E0E0',
-    borderRadius: 8,
+    borderRadius: 10,
     height: 48,
   },
   passwordInput: {

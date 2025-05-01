@@ -24,7 +24,7 @@ export const styles = StyleSheet.create({
   input: {
     borderWidth: 1,
     borderColor: '#E0E0E0',
-    borderRadius: 8,
+    borderRadius: 10,
     padding: 12,
     fontSize: 14,
     fontFamily: 'Poppins-Regular',
@@ -39,7 +39,7 @@ export const styles = StyleSheet.create({
     marginTop: 24,
     backgroundColor: '#F5F5F5',
     padding: 16,
-    borderRadius: 8,
+    borderRadius: 10,
   },
   passwordTitle: {
     fontSize: 16,
@@ -59,7 +59,7 @@ export const styles = StyleSheet.create({
   saveButton: {
     backgroundColor: '#000',
     padding: 16,
-    borderRadius: 8,
+    borderRadius: 10,
     alignItems: 'center',
     marginTop: 24,
   },

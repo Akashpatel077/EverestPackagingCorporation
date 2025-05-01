@@ -110,35 +110,17 @@ const ProductDetails = ({navigation, route}) => {
 
   useEffect(() => {
     if (isAddSuccess) {
-      navigation.dispatch(
-        CommonActions.reset({
-          index: 0,
-          routes: [
-            {
-              name: 'HomeDrawer',
-              state: {
-                index: 0,
-                routes: [
-                  {
-                    name: 'Home',
-                    state: {
-                      index: 0,
-                      routes: [
-                        {
-                          name: 'Cart',
-                          state: {
-                            index: 0,
-                            routes: [{name: 'MYCART'}],
-                          },
-                        },
-                      ],
-                    },
-                  },
-                ],
-              },
-            },
-          ],
-        }),
+      Alert.alert(
+        'Success',
+        'Product added to cart',
+        [
+          {
+            text: 'Ok',
+            style: 'default', // This is often blue on iOS
+            onPress: async () => {},
+          },
+        ],
+        {cancelable: true},
       );
 
       dispatch(resetFlags());
@@ -365,6 +347,10 @@ const ProductDetails = ({navigation, route}) => {
                   <Text style={styles.regularPrice}>₹{regularPrice}</Text>
                   <Text style={styles.salePrice}>₹{salePrice}</Text>
                 </View>
+
+                <Text style={styles.gstTitleText}>
+                  GST and Shipping are calculated at checkout.
+                </Text>
 
                 {ranges && (
                   <View style={styles.bulkDiscountTableHeader}>
@@ -714,6 +700,7 @@ type CustomExtraFieldsTypes = {
   values: {label: string; value: string; selected?: boolean}[];
   type: string;
   form_id: string;
+  placeholder: string;
 };
 
 const RenderCustomExtraFields = ({
@@ -742,6 +729,7 @@ const RenderCustomExtraFields = ({
       <Text style={[styles.sectionTitle, {marginBottom: 0}]}>{item.label}</Text>
       <CDropdown
         data={item.values}
+        dropDownStyle={{height: 40}}
         selectedItem={selectedValue}
         onSelect={(itemObject: any) => {
           setSelectedCustomExtraFields(prevValue => ({
@@ -756,6 +744,7 @@ const RenderCustomExtraFields = ({
     <>
       <Text style={[styles.sectionTitle, {marginBottom: 0}]}>{item.label}</Text>
       <FilePicker
+        placeHolder={item.placeholder}
         onUpdateFile={(fileObject: any) => {
           setSelectedCustomExtraFields(prevValue => ({
             ...prevValue,

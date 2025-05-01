@@ -8,6 +8,8 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
 } from 'react-native';
+import {Icon} from '../Icons';
+import {DropDown} from 'assets/icons';
 
 interface DropdownItem {
   label: string;
@@ -17,8 +19,9 @@ interface DropdownItem {
 interface CDropdownProps {
   data: DropdownItem[];
   onSelect: (item: DropdownItem) => void;
-  selectedItem?: DropdownItem | null;
   title: string;
+  selectedItem?: DropdownItem | null;
+  dropDownStyle?: {};
 }
 
 const CDropdown: React.FC<CDropdownProps> = ({
@@ -26,6 +29,7 @@ const CDropdown: React.FC<CDropdownProps> = ({
   onSelect,
   selectedItem,
   title,
+  dropDownStyle,
 }) => {
   const [visible, setVisible] = useState<boolean>(false);
 
@@ -38,11 +42,12 @@ const CDropdown: React.FC<CDropdownProps> = ({
     <>
       <TouchableOpacity
         activeOpacity={0.7}
-        style={styles.dropdown}
+        style={[styles.dropdown, dropDownStyle]}
         onPress={() => setVisible(true)}>
         <Text style={styles.selectedText}>
           {selectedItem?.label || title || 'Select an option'}
         </Text>
+        <Icon name={DropDown} width={24} height={24} color={'#FFFFFF'} />
       </TouchableOpacity>
 
       <Modal
@@ -57,6 +62,7 @@ const CDropdown: React.FC<CDropdownProps> = ({
               <View style={styles.modalContent}>
                 <FlatList
                   data={data}
+                  showsVerticalScrollIndicator={false}
                   keyExtractor={(item, index) => index.toString()}
                   renderItem={({item}) => (
                     <TouchableOpacity
@@ -83,8 +89,16 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
     marginTop: 5,
     marginBottom: 10,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    borderRadius: 10,
   },
-  selectedText: {fontSize: 16, color: '#333'},
+  selectedText: {
+    fontSize: 16,
+    color: '#000000',
+    fontFamily: 'Poppins-Regular',
+  },
   modalOverlay: {
     flex: 1,
     backgroundColor: 'rgba(0,0,0,0.3)',

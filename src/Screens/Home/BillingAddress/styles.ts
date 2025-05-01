@@ -25,7 +25,7 @@ export const styles = StyleSheet.create({
   },
   applyButton: {
     backgroundColor: '#0088cc',
-    borderRadius: 12,
+    borderRadius: 10,
     padding: 16,
     alignItems: 'center',
     position: 'absolute',
@@ -65,7 +65,7 @@ export const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
     marginTop: 12,
     padding: 16,
-    borderRadius: 12,
+    borderRadius: 10,
     marginBottom: 12,
   },
   addressLeft: {
@@ -109,7 +109,7 @@ export const styles = StyleSheet.create({
     borderWidth: 1,
     borderStyle: 'dashed',
     borderColor: '#0088cc',
-    borderRadius: 12,
+    borderRadius: 10,
     padding: 16,
     alignItems: 'center',
     position: 'absolute',

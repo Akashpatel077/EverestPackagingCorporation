@@ -45,13 +45,11 @@ const Header: React.FC<Props> = ({
         {showCartIcon ? (
           <TouchableOpacity style={styles.RightButton} onPress={onCartPress}>
             <Icon name={Buy} width={24} height={24} color={'#ffffff'} />
-            {badgeCount && (
-              <View style={styles.cartBadgeStyle}>
-                <Text numberOfLines={1} style={styles.cartBadgeText}>
-                  {badgeCount}
-                </Text>
-              </View>
-            )}
+            <View style={styles.cartBadgeStyle}>
+              <Text numberOfLines={1} style={styles.cartBadgeText}>
+                {badgeCount}
+              </Text>
+            </View>
           </TouchableOpacity>
         ) : (
           <TouchableOpacity

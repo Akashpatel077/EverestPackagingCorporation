@@ -126,8 +126,7 @@ const Welcome = () => {
 
         <View style={styles.signInContainer}>
           <Text style={styles.signInText}>Already have an account? </Text>
-          <TouchableOpacity
-            onPress={() => navigation.navigate('Auth', {screen: LOGIN})}>
+          <TouchableOpacity onPress={() => dispatch(setShowWelcome(false))}>
             <Text style={styles.signInLink}>Sign In</Text>
           </TouchableOpacity>
         </View>
