@@ -12,7 +12,7 @@ import {
 import {useNavigation} from '@react-navigation/native';
 import {useDispatch, useSelector} from 'react-redux';
 
-import {Header} from '../../../Components';
+import {CustomAlert, Header} from '../../../Components';
 import {BackIcon, Heart} from '../../../../assets/icons';
 import {Icon} from '../../../Components/Icons';
 import {PRODUCT_DETAILS} from '../../../Navigation/home/routes';
@@ -57,7 +57,6 @@ const ProductList = ({route}) => {
     products: [],
   };
   const wishlistItems = useSelector(state => state.wishlist.items);
-
   useEffect(() => {
     dispatch(fetchProducts({categoryId, currentPage}));
   }, [categoryId, currentPage]);
@@ -127,6 +126,8 @@ const ProductItemCard = React.memo(
     );
     const isOutOfStock = item.stock_status === 'outofstock';
 
+    const [alertVisible, setAlertVisible] = useState(false);
+    const [alertMessage, setAlertMessage] = useState('');
     const handleWishlistToggle = product => {
       const isInWishlist = wishlistItems.some(item => item.id === product.id);
       if (isInWishlist) {
@@ -172,7 +173,8 @@ const ProductItemCard = React.memo(
           }
         }
       } catch (e) {
-        Alert.alert('Error : ', e.message);
+        setAlertMessage(e.message || 'Something went wrong');
+        setAlertVisible(true);
       }
     };
 
@@ -230,6 +232,16 @@ const ProductItemCard = React.memo(
             </View> */}
           </View>
         </View>
+        <CustomAlert
+          visible={alertVisible}
+          title="Attention!"
+          description={alertMessage}
+          button2={{
+            text: 'OK',
+            onPress: () => setAlertVisible(false),
+            color: '#007bff',
+          }}
+        />
       </TouchableOpacity>
     );
   },

@@ -40,6 +40,7 @@ import CSafeAreaView from 'src/Components/CSafeAreaView';
 import {resetWishList} from 'src/store/slices/wishlistSlice';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {clearCookies} from 'src/services/wooCommerceApi';
+import {ScrollView} from 'react-native-gesture-handler';
 
 const ProfileScreen = () => {
   const navigation = useNavigation();
@@ -96,9 +97,8 @@ const ProfileScreen = () => {
 
   return (
     <CSafeAreaView removeBottomSafeArea>
-      <View style={styles.container}>
-        <Header title="Profile" />
-
+      <Header title="Profile" />
+      <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
         <View style={styles.profileSection}>
           <View style={styles.avatarContainer}>
             <Image
@@ -119,7 +119,7 @@ const ProfileScreen = () => {
         <View style={styles.menuContainer}>
           {menuItems.map(renderMenuItem)}
         </View>
-      </View>
+      </ScrollView>
       <CustomAlert
         visible={showAlert}
         title="Logout"

@@ -42,6 +42,6 @@ export const onShare = async (user_name: any, id: any) => {
       // dismissed
     }
   } catch (error) {
-    Alert.alert('Message Error');
+    throw error;
   }
 };

@@ -82,6 +82,7 @@ const CustomDrawerContent = (props: any) => {
 
   return (
     <DrawerContentScrollView
+      showsVerticalScrollIndicator={false}
       {...props}
       contentContainerStyle={styles.drawerContainer}>
       <CSafeAreaView removeBottomSafeArea>

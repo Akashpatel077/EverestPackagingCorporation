@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import {View, Text, TouchableOpacity, Alert} from 'react-native';
-import {Header, Icon} from 'src/Components';
+import {View, Text, TouchableOpacity} from 'react-native';
+import {CustomAlert, Header, Icon} from 'src/Components';
 import {
   Heart,
   CreditCard,
@@ -29,6 +29,8 @@ const PaymentMethodScreen = () => {
 
   const [isRazorPay, setIsRazorPay] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [alertVisible, setAlertVisible] = useState(false);
+  const [alertMessage, setAlertMessage] = useState('');
 
   const onPlaceOrder = async () => {
     const selectedBillingAddress = billingAddresses.filter(
@@ -74,7 +76,8 @@ const PaymentMethodScreen = () => {
           });
         }
       } catch (error) {
-        Alert.alert('Attention!', error.response.data.message ?? error.message);
+        setAlertMessage(error?.response?.data?.message ?? error.message);
+        setAlertVisible(true);
       } finally {
         setLoading(false);
       }
@@ -196,6 +199,16 @@ const PaymentMethodScreen = () => {
           <Text style={styles.paymentButtonText}>Place Order</Text>
         </TouchableOpacity>
       </View>
+      <CustomAlert
+        visible={alertVisible}
+        title="Attention!"
+        description={alertMessage}
+        button2={{
+          text: 'OK',
+          onPress: () => setAlertVisible(false),
+          color: '#007bff',
+        }}
+      />
     </CSafeAreaView>
   );
 };

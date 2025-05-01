@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, Text, TouchableOpacity, ScrollView, Alert} from 'react-native';
-import {Header, Icon} from 'src/Components';
+import {CustomAlert, Header, Icon} from 'src/Components';
 import {Home, BackIcon, Close} from 'assets/icons';
 import {styles} from './styles';
 import {useNavigation} from '@react-navigation/native';
@@ -20,7 +20,16 @@ const ShippingAddressScreen = () => {
   const {shippingAddresses, selectedShippingAddressId} = useSelector(
     (state: RootState) => state.address,
   );
-
+  const [alertVisible, setAlertVisible] = useState(false);
+  const [alertConfig, setAlertConfig] = useState<{
+    title: string;
+    description: string;
+    onConfirm: () => void;
+  }>({
+    title: '',
+    description: '',
+    onConfirm: () => {},
+  });
   const selectedAddressData = shippingAddresses.find(
     addr => addr.id === selectedShippingAddressId,
   );
@@ -56,19 +65,14 @@ const ShippingAddressScreen = () => {
                       <TouchableOpacity
                         style={styles.deleteButton}
                         onPress={() => {
-                          Alert.alert(
-                            'Delete Address',
-                            'Are you sure you want to delete this address?',
-                            [
-                              {text: 'Cancel', style: 'cancel'},
-                              {
-                                text: 'Delete',
-                                style: 'destructive',
-                                onPress: () =>
-                                  dispatch(removeShippingAddress(address.id)),
-                              },
-                            ],
-                          );
+                          setAlertConfig({
+                            title: 'Delete Address',
+                            description:
+                              'Are you sure you want to delete this address?',
+                            onConfirm: () =>
+                              dispatch(removeShippingAddress(address.id)),
+                          });
+                          setAlertVisible(true);
                         }}>
                         <Icon name={Close} width={20} height={20} />
                       </TouchableOpacity>
@@ -107,6 +111,23 @@ const ShippingAddressScreen = () => {
           </TouchableOpacity>
         </ScrollView>
       </View>
+      <CustomAlert
+        visible={alertVisible}
+        title={alertConfig.title}
+        description={alertConfig.description}
+        button1={{
+          text: 'Cancel',
+          onPress: () => setAlertVisible(false),
+        }}
+        button2={{
+          text: 'Delete',
+          color: '#ff4d4f',
+          onPress: () => {
+            alertConfig.onConfirm();
+            setAlertVisible(false);
+          },
+        }}
+      />
     </CSafeAreaView>
   );
 };

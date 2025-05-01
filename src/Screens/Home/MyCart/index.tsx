@@ -238,7 +238,7 @@ const MyCart = () => {
           />
 
           {/* Promo Code */}
-          <View style={styles.promoContainer}>
+          {/* <View style={styles.promoContainer}>
             <TextInput
               style={styles.promoInput}
               placeholder="Promo Code"
@@ -251,7 +251,7 @@ const MyCart = () => {
               onPress={applyPromoCode}>
               <Text style={styles.promoApplyText}>Apply</Text>
             </TouchableOpacity>
-          </View>
+          </View> */}
 
           {/* Price Summary */}
           <View style={styles.summaryContainer}>
