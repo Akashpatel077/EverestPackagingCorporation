@@ -1,12 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import {
-  View,
-  FlatList,
-  TouchableOpacity,
-  Text,
-  Image,
-  Alert,
-} from 'react-native';
+import {View, FlatList, TouchableOpacity, Text, Image} from 'react-native';
+import {CustomAlert} from 'src/Components';
 import LoadingLogo from '../../../Components/LoadingLogo';
 import {useIsFocused, useNavigation} from '@react-navigation/native';
 import {useDispatch, useSelector} from 'react-redux';
@@ -31,6 +25,8 @@ const CategoryScreen = () => {
   const [isLoading, setIsLoading] = useState(false);
   const isFocus = useIsFocused();
   const [subCategoriesList, setSubCategoriesList] = useState([]);
+  const [showAlert, setShowAlert] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
   useEffect(() => {
     if (isFocus) {
       setIsLoading(false);
@@ -48,7 +44,8 @@ const CategoryScreen = () => {
         const subCategories = await getSubCategories();
         setSubCategoriesList(subCategories);
       } catch (error) {
-        Alert.alert('', error.message);
+        setErrorMessage(error.message);
+        setShowAlert(true);
       }
     };
 
@@ -117,6 +114,16 @@ const CategoryScreen = () => {
           )}
         </View>
       </View>
+      <CustomAlert
+        visible={showAlert}
+        title="Error"
+        description={errorMessage}
+        button2={{
+          text: 'OK',
+          onPress: () => setShowAlert(false),
+          color: '#0088cc',
+        }}
+      />
     </CSafeAreaView>
   );
 };

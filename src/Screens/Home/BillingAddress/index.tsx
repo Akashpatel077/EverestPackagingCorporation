@@ -1,8 +1,8 @@
-import React from 'react';
-import {View, Text, TouchableOpacity, ScrollView, Alert} from 'react-native';
+import React, {useState} from 'react';
+import {View, Text, TouchableOpacity, ScrollView} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {useSelector, useDispatch} from 'react-redux';
-import {Header, Icon} from 'src/Components';
+import {Header, Icon, CustomAlert} from 'src/Components';
 import {BackIcon, Home, Close} from 'assets/icons';
 import {styles} from './styles';
 import {BILLING_ADDRESS_FORM} from 'src/Navigation/home/routes';
@@ -20,6 +20,12 @@ const BillingAddress = () => {
   const {billingAddresses, selectedBillingAddressId} = useSelector(
     (state: RootState) => state.address,
   );
+  const [showAlert, setShowAlert] = useState(false);
+  const [alertConfig, setAlertConfig] = useState({
+    title: '',
+    message: '',
+    buttons: [],
+  });
 
   const selectedAddressData = billingAddresses.find(
     (addr: Address) => addr.id === selectedBillingAddressId,
@@ -42,11 +48,21 @@ const BillingAddress = () => {
           icon1={BackIcon}
           onPressFirst={() => {
             if (billingAddresses.length === 0) {
-              Alert.alert('No Address', 'Please add a billing address first');
+              setAlertConfig({
+                title: 'No Address',
+                message: 'Please add a billing address first',
+                buttons: [{text: 'OK', onPress: () => setShowAlert(false)}],
+              });
+              setShowAlert(true);
               return;
             }
             if (!selectedBillingAddressId) {
-              Alert.alert('No Selection', 'Please select a billing address');
+              setAlertConfig({
+                title: 'No Selection',
+                message: 'Please select a billing address',
+                buttons: [{text: 'OK', onPress: () => setShowAlert(false)}],
+              });
+              setShowAlert(true);
               return;
             }
             navigation.goBack();
@@ -79,19 +95,26 @@ const BillingAddress = () => {
                       <TouchableOpacity
                         style={styles.deleteButton}
                         onPress={() => {
-                          Alert.alert(
-                            'Delete Address',
-                            'Are you sure you want to delete this address?',
-                            [
-                              {text: 'Cancel', style: 'cancel'},
+                          setAlertConfig({
+                            title: 'Delete Address',
+                            message:
+                              'Are you sure you want to delete this address?',
+                            buttons: [
+                              {
+                                text: 'Cancel',
+                                onPress: () => setShowAlert(false),
+                              },
                               {
                                 text: 'Delete',
-                                style: 'destructive',
-                                onPress: () =>
-                                  dispatch(removeBillingAddress(address.id)),
+                                type: 'destructive',
+                                onPress: () => {
+                                  dispatch(removeBillingAddress(address.id));
+                                  setShowAlert(false);
+                                },
                               },
                             ],
-                          );
+                          });
+                          setShowAlert(true);
                         }}>
                         <Icon name={Close} width={20} height={20} />
                       </TouchableOpacity>
@@ -127,11 +150,21 @@ const BillingAddress = () => {
             disabled={!selectedAddressData}
             onPress={() => {
               if (billingAddresses.length === 0) {
-                Alert.alert('No Address', 'Please add a billing address first');
+                setAlertConfig({
+                  title: 'No Address',
+                  message: 'Please add a billing address first',
+                  buttons: [{text: 'OK', onPress: () => setShowAlert(false)}],
+                });
+                setShowAlert(true);
                 return;
               }
               if (!selectedAddressData) {
-                Alert.alert('No Selection', 'Please select a billing address');
+                setAlertConfig({
+                  title: 'No Selection',
+                  message: 'Please select a billing address',
+                  buttons: [{text: 'OK', onPress: () => setShowAlert(false)}],
+                });
+                setShowAlert(true);
                 return;
               }
               navigation.goBack();
@@ -140,6 +173,12 @@ const BillingAddress = () => {
           </TouchableOpacity>
         </ScrollView>
       </View>
+      <CustomAlert
+        visible={showAlert}
+        title={alertConfig.title}
+        message={alertConfig.message}
+        buttons={alertConfig.buttons}
+      />
     </CSafeAreaView>
   );
 };

@@ -4,7 +4,6 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  Alert,
   ScrollView,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
@@ -14,7 +13,7 @@ import {
   setSelectedShippingAddress,
 } from 'src/store/slices/addressSlice';
 import styles from './styles';
-import {CDropdown, Header} from 'src/Components';
+import {CDropdown, CustomAlert, Header} from 'src/Components';
 import {BackIcon} from 'assets/icons';
 import {CHECKOUT} from 'src/Navigation/home/routes';
 import {getStates} from 'src/services/wooCommerceApi';
@@ -39,6 +38,7 @@ const ShippingAddressForm: React.FC = () => {
     label: string;
     value: string;
   }>();
+  const [showAlert, setShowAlert] = useState(false);
 
   const handleChange = (name, value) => {
     setFormData(prevData => ({
@@ -60,7 +60,7 @@ const ShippingAddressForm: React.FC = () => {
     const emptyFields = requiredFields.filter(field => !formData[field]);
 
     if (emptyFields.length > 0) {
-      Alert.alert('Error', 'Please fill in all required fields');
+      setShowAlert(true);
       return false;
     }
     return true;
@@ -252,6 +252,16 @@ const ShippingAddressForm: React.FC = () => {
           </TouchableOpacity>
         </ScrollView>
       </View>
+      <CustomAlert
+        visible={showAlert}
+        title="Error"
+        description="Please fill in all required fields"
+        button2={{
+          text: 'OK',
+          onPress: () => setShowAlert(false),
+          color: '#0088cc',
+        }}
+      />
     </CSafeAreaView>
   );
 };

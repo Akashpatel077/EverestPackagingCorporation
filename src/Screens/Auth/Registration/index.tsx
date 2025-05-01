@@ -6,12 +6,11 @@ import {
   TextInput,
   TouchableOpacity,
   ActivityIndicator,
-  Alert,
   ScrollView,
 } from 'react-native';
 import {styles} from './styles';
 import {useTranslation} from 'react-i18next';
-import {Icon} from '../../../Components';
+import {Icon, CustomAlert} from '../../../Components';
 import {
   CheckSquare,
   UncheckSquareNew,
@@ -34,6 +33,13 @@ const Registration = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [agreeToTerms, setAgreeToTerms] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
+  const [alertConfig, setAlertConfig] = useState({
+    title: '',
+    description: '',
+    buttonText: '',
+    onPress: () => {},
+  });
   const {t} = useTranslation();
   const navigation = useNavigation();
 
@@ -49,12 +55,24 @@ const Registration = () => {
   const handleSignUp = async () => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-      Alert.alert('Attention', 'Please enter a valid email address');
+      setAlertConfig({
+        title: 'Attention',
+        description: 'Please enter a valid email address',
+        buttonText: 'OK',
+        onPress: () => setShowAlert(false),
+      });
+      setShowAlert(true);
       return;
     }
 
     if (password.length < 6) {
-      Alert.alert('Attention', 'Password must be at least 6 characters long');
+      setAlertConfig({
+        title: 'Attention',
+        description: 'Password must be at least 6 characters long',
+        buttonText: 'OK',
+        onPress: () => setShowAlert(false),
+      });
+      setShowAlert(true);
       return;
     }
 
@@ -62,14 +80,21 @@ const Registration = () => {
       setIsLoading(true);
       await registerUserApi(firstName, lastName, name, email, password);
 
-      Alert.alert('Success', 'Registration successful', [
-        {text: 'OK', onPress: () => navigation.navigate(LOGIN)},
-      ]);
+      setAlertConfig({
+        title: 'Success',
+        description: 'Registration successful',
+        buttonText: 'OK',
+        onPress: () => navigation.navigate(LOGIN),
+      });
+      setShowAlert(true);
     } catch (error) {
-      Alert.alert(
-        'Attention',
-        error.response?.data?.message || 'Registration failed',
-      );
+      setAlertConfig({
+        title: 'Attention',
+        description: error.response?.data?.message || 'Registration failed',
+        buttonText: 'OK',
+        onPress: () => setShowAlert(false),
+      });
+      setShowAlert(true);
     } finally {
       setIsLoading(false);
     }
@@ -229,6 +254,16 @@ const Registration = () => {
           </View>
         </ScrollView>
       </View>
+      <CustomAlert
+        visible={showAlert}
+        title={alertConfig.title}
+        description={alertConfig.description}
+        button2={{
+          text: alertConfig.buttonText,
+          onPress: alertConfig.onPress,
+          color: alertConfig.title === 'Success' ? '#0088cc' : '#CC5656',
+        }}
+      />
     </CSafeAreaView>
   );
 };

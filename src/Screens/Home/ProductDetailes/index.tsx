@@ -6,11 +6,10 @@ import {
   TouchableOpacity,
   ScrollView,
   FlatList,
-  Alert,
 } from 'react-native';
 import {styles} from './styles';
 import {BackIcon, Heart} from 'assets/icons';
-import {CDropdown, Header, Icon} from 'src/Components';
+import {CDropdown, Header, Icon, CustomAlert} from 'src/Components';
 import {useAppDispatch, useAppSelector} from 'src/store/hooks';
 import {fetchProductDetails} from '../../../store/slices/productDetailsSlice';
 import {
@@ -53,6 +52,9 @@ const variationNotAvailableText =
 
 const ProductDetails = ({navigation, route}) => {
   const {productId} = route.params;
+  const [showAlert, setShowAlert] = useState(false);
+  const [alertTitle, setAlertTitle] = useState('');
+  const [alertMessage, setAlertMessage] = useState('');
   const [selectedColor, setSelectedColor] = useState('');
   const [isExpanded, setIsExpanded] = useState(false);
   const [selectedAttributes, setSelectedAttributes] = useState({});
@@ -90,38 +92,17 @@ const ProductDetails = ({navigation, route}) => {
 
   useEffect(() => {
     if (addToCartError) {
-      Alert.alert('Attention!', addToCartError);
-      Alert.alert(
-        'Attention!',
-        addToCartError,
-        [
-          {
-            text: 'OK',
-            style: 'default',
-            onPress: async () => {
-              dispatch(resetFlags());
-            },
-          },
-        ],
-        {cancelable: true},
-      );
+      setAlertTitle('Attention!');
+      setAlertMessage(addToCartError);
+      setShowAlert(true);
     }
   }, [addToCartError]);
 
   useEffect(() => {
     if (isAddSuccess) {
-      Alert.alert(
-        'Success',
-        'Product added to cart',
-        [
-          {
-            text: 'Ok',
-            style: 'default', // This is often blue on iOS
-            onPress: async () => {},
-          },
-        ],
-        {cancelable: true},
-      );
+      setAlertTitle('Success');
+      setAlertMessage('Product added to cart');
+      setShowAlert(true);
 
       dispatch(resetFlags());
     }
@@ -144,7 +125,9 @@ const ProductDetails = ({navigation, route}) => {
 
       setProductVariations([...variationList]);
     } catch (e) {
-      Alert.alert('Error : ', e.message);
+      setAlertTitle('Error');
+      setAlertMessage(e.message);
+      setShowAlert(true);
     }
   };
 
@@ -171,7 +154,9 @@ const ProductDetails = ({navigation, route}) => {
           storeToken(cartItemsObject.headers['cart-token']);
         }
       } catch (error) {
-        Alert.alert('', error.message);
+        setAlertTitle('Error');
+        setAlertMessage(error.message);
+        setShowAlert(true);
       }
     };
 
@@ -559,7 +544,9 @@ const ProductDetails = ({navigation, route}) => {
                 onPress={() => {
                   if (isOutOfStock) {
                   } else if (isVariationNotAvailable) {
-                    Alert.alert('', variationNotAvailableText);
+                    setAlertTitle('Attention!');
+                    setAlertMessage(variationNotAvailableText);
+                    setShowAlert(true);
                   } else {
                     dispatch(
                       addToCartAction({
@@ -578,6 +565,24 @@ const ProductDetails = ({navigation, route}) => {
           </View>
         )}
       </View>
+      <CustomAlert
+        visible={showAlert}
+        title={alertTitle}
+        description={alertMessage}
+        button2={{
+          text: 'OK',
+          onPress: () => {
+            setShowAlert(false);
+            if (
+              alertTitle === 'Attention!' &&
+              alertMessage === addToCartError
+            ) {
+              dispatch(resetFlags());
+            }
+          },
+          color: '#0088cc',
+        }}
+      />
     </CSafeAreaView>
   );
 };
