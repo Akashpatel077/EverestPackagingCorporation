@@ -52,7 +52,7 @@ const CheckoutScreen = ({route}) => {
                 <Icon name={Home} width={24} height={24} />
                 <View style={styles.addressDetails}>
                   <Text style={styles.addressType}>
-                    {selectedBillingAddress && selectedBillingAddress.type}
+                    {selectedBillingAddress && selectedBillingAddress.name}
                   </Text>
                   <Text style={styles.addressText}>
                     {selectedBillingAddress &&

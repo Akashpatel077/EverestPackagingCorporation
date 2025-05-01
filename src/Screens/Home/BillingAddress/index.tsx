@@ -75,25 +75,27 @@ const BillingAddress = () => {
                     </View>
                   </View>
                   <View style={styles.addressRight}>
-                    <TouchableOpacity
-                      style={styles.deleteButton}
-                      onPress={() => {
-                        Alert.alert(
-                          'Delete Address',
-                          'Are you sure you want to delete this address?',
-                          [
-                            {text: 'Cancel', style: 'cancel'},
-                            {
-                              text: 'Delete',
-                              style: 'destructive',
-                              onPress: () =>
-                                dispatch(removeBillingAddress(address.id)),
-                            },
-                          ],
-                        );
-                      }}>
-                      <Icon name={Close} width={20} height={20} />
-                    </TouchableOpacity>
+                    {billingAddresses.length > 1 && (
+                      <TouchableOpacity
+                        style={styles.deleteButton}
+                        onPress={() => {
+                          Alert.alert(
+                            'Delete Address',
+                            'Are you sure you want to delete this address?',
+                            [
+                              {text: 'Cancel', style: 'cancel'},
+                              {
+                                text: 'Delete',
+                                style: 'destructive',
+                                onPress: () =>
+                                  dispatch(removeBillingAddress(address.id)),
+                              },
+                            ],
+                          );
+                        }}>
+                        <Icon name={Close} width={20} height={20} />
+                      </TouchableOpacity>
+                    )}
                     <View
                       style={[
                         styles.radioButton,
@@ -112,7 +114,7 @@ const BillingAddress = () => {
               !billingAddresses.length && {marginTop: 20},
             ]}
             onPress={() => {
-              navigation.navigate(BILLING_ADDRESS_FORM);
+              navigation.navigate(BILLING_ADDRESS_FORM, {hideCheckbox: true});
             }}>
             <Text style={styles.addButtonText}>Add New Billing Address</Text>
           </TouchableOpacity>

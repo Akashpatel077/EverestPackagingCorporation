@@ -9,7 +9,10 @@ import {
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {useDispatch} from 'react-redux';
-import {addShippingAddress} from 'src/store/slices/addressSlice';
+import {
+  addShippingAddress,
+  setSelectedShippingAddress,
+} from 'src/store/slices/addressSlice';
 import styles from './styles';
 import {CDropdown, Header} from 'src/Components';
 import {BackIcon} from 'assets/icons';
@@ -102,6 +105,8 @@ const ShippingAddressForm: React.FC = () => {
     };
 
     dispatch(addShippingAddress(addressData));
+    dispatch(setSelectedShippingAddress(addressData.id));
+
     navigation.navigate(CHECKOUT);
   };
 

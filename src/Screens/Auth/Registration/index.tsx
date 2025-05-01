@@ -181,7 +181,7 @@ const Registration = () => {
             disabled={isSignUpDisabled}
             onPress={handleSignUp}>
             {isLoading ? (
-              <ActivityIndicator color="white" />
+              <ActivityIndicator color="#0088cc" />
             ) : (
               <Text style={styles.signUpButtonText}>
                 {t('common.signUp') || 'Sign Up'}

@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, Text, TouchableOpacity, Image, Alert} from 'react-native';
-import {Header, Icon} from 'src/Components';
+import {CustomAlert, Header, Icon} from 'src/Components';
 import {
   Profile as ProfileIcon,
   Paper,
@@ -34,7 +34,7 @@ import {
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '@reduxjs/toolkit/query';
 import {logout} from 'src/store/slices/authSlice';
-import {resetStartKey} from 'src/store/slices/startKeySlice';
+import {resetStartKey, setShowWelcome} from 'src/store/slices/startKeySlice';
 import {clearCart} from 'src/store/slices/cartSlice';
 import CSafeAreaView from 'src/Components/CSafeAreaView';
 import {resetWishList} from 'src/store/slices/wishlistSlice';
@@ -45,7 +45,9 @@ const ProfileScreen = () => {
   const navigation = useNavigation();
   const {user} = useSelector((state: RootState) => state.auth);
   const {username, avatar_urls} = user || {};
+  const {hasStarted} = useSelector((state: RootState) => state.startKey);
   const dispatch = useDispatch();
+  const [showAlert, setShowAlert] = useState(false);
 
   const menuItems = [
     // {id: 1, title: 'Dashboard', icon: Dashboard, screen: DASHBOARD},
@@ -65,29 +67,13 @@ const ProfileScreen = () => {
 
   const onItemPress = (item: any) => {
     if (item.title === 'Log out') {
-      Alert.alert(
-        'Logout',
-        'Are you sure you want to logout?',
-        [
-          {
-            text: 'Cancel',
-            style: 'cancel',
-          },
-          {
-            text: 'Logout',
-            style: 'destructive',
-            onPress: async () => {
-              dispatch(logout());
-              dispatch(resetStartKey());
-              dispatch(clearCart());
-              dispatch(resetWishList());
-              clearCookies();
-              await AsyncStorage.setItem('userToken', '');
-            },
-          },
-        ],
-        {cancelable: true},
-      );
+      if (hasStarted) {
+        dispatch(logout());
+        dispatch(resetStartKey());
+        dispatch(setShowWelcome(false));
+      } else {
+        setShowAlert(true);
+      }
     } else {
       navigation.navigate(item.screen);
     }
@@ -100,7 +86,9 @@ const ProfileScreen = () => {
       onPress={() => onItemPress(item)}>
       <View style={styles.menuItemLeft}>
         <Icon name={item.icon} width={28} height={28} color="white" />
-        <Text style={styles.menuItemText}>{item.title}</Text>
+        <Text style={styles.menuItemText}>
+          {item.title === 'Log out' && hasStarted ? 'Log in' : item.title}
+        </Text>
       </View>
       <Icon name={RightArrow} width={24} height={24} color={'#fff'} />
     </TouchableOpacity>
@@ -132,6 +120,32 @@ const ProfileScreen = () => {
           {menuItems.map(renderMenuItem)}
         </View>
       </View>
+      <CustomAlert
+        visible={showAlert}
+        title="Logout"
+        description="Are you sure you want to logout?"
+        button1={{
+          text: 'CANCEL',
+          onPress: () => {
+            setShowAlert(false);
+          },
+          color: '#D3D3D3',
+        }}
+        button2={{
+          text: 'LOGOUT',
+          onPress: async () => {
+            setShowAlert(false);
+            dispatch(logout());
+            dispatch(resetStartKey());
+            dispatch(clearCart());
+            dispatch(resetWishList());
+            dispatch(setShowWelcome(true));
+            clearCookies();
+            await AsyncStorage.setItem('userToken', '');
+          },
+          color: '#CC5656',
+        }}
+      />
     </CSafeAreaView>
   );
 };

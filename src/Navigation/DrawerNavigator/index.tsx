@@ -1,5 +1,5 @@
 // src/navigation/DrawerNavigator.tsx
-import React from 'react';
+import React, {useState} from 'react';
 import HomeContainer from '../home';
 import {
   View,
@@ -26,10 +26,10 @@ import {
   RightArrow,
 } from 'assets/icons';
 import {ORDER_SCREEN} from '../home/routes';
-import {Icon} from 'src/Components';
-import {useDispatch} from 'react-redux';
+import {CustomAlert, Icon} from 'src/Components';
+import {useDispatch, useSelector} from 'react-redux';
 import {logout} from 'src/store/slices/authSlice';
-import {resetStartKey} from 'src/store/slices/startKeySlice';
+import {resetStartKey, setShowWelcome} from 'src/store/slices/startKeySlice';
 import {clearCart} from 'src/store/slices/cartSlice';
 import {resetWishList} from 'src/store/slices/wishlistSlice';
 import {clearCookies} from 'src/services/wooCommerceApi';
@@ -51,33 +51,19 @@ const menuItems = [
 const CustomDrawerContent = (props: any) => {
   const {user} = useAppSelector((state: RootState) => state.auth);
   const {username, avatar_urls, email} = user || {};
+  const {hasStarted} = useSelector((state: RootState) => state.startKey);
+  const [showAlert, setShowAlert] = useState(false);
   const dispatch = useDispatch();
 
   const onItemPress = (item: any) => {
     if (item.title === 'Log out') {
-      Alert.alert(
-        'Logout',
-        'Are you sure you want to logout?',
-        [
-          {
-            text: 'Cancel',
-            style: 'cancel',
-          },
-          {
-            text: 'Logout',
-            style: 'destructive',
-            onPress: async () => {
-              dispatch(logout());
-              dispatch(resetStartKey());
-              dispatch(clearCart());
-              dispatch(resetWishList());
-              clearCookies();
-              await AsyncStorage.setItem('userToken', '');
-            },
-          },
-        ],
-        {cancelable: true},
-      );
+      if (hasStarted) {
+        dispatch(logout());
+        dispatch(resetStartKey());
+        dispatch(setShowWelcome(false));
+      } else {
+        setShowAlert(true);
+      }
     } else {
       if (item.screen === ORDER_SCREEN) {
         props.navigation.navigate('Home', {
@@ -121,11 +107,39 @@ const CustomDrawerContent = (props: any) => {
               style={styles.navItem}
               onPress={() => onItemPress(item)}>
               <Icon name={item.icon} width={28} height={28} color="white" />
-              <Text style={styles.navText}>{item.title}</Text>
+              <Text style={styles.navText}>
+                {item.title === 'Log out' && hasStarted ? 'Log in' : item.title}
+              </Text>
               <Icon name={RightArrow} width={28} height={28} color="white" />
             </TouchableOpacity>
           ))}
         </View>
+        <CustomAlert
+          visible={showAlert}
+          title="Logout"
+          description="Are you sure you want to logout?"
+          button1={{
+            text: 'CANCEL',
+            onPress: () => {
+              setShowAlert(false);
+            },
+            color: '#D3D3D3',
+          }}
+          button2={{
+            text: 'LOGOUT',
+            onPress: async () => {
+              setShowAlert(false);
+              dispatch(logout());
+              dispatch(resetStartKey());
+              dispatch(clearCart());
+              dispatch(resetWishList());
+              dispatch(setShowWelcome(true));
+              clearCookies();
+              await AsyncStorage.setItem('userToken', '');
+            },
+            color: '#CC5656',
+          }}
+        />
       </CSafeAreaView>
     </DrawerContentScrollView>
   );

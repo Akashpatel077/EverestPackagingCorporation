@@ -44,30 +44,35 @@ const ShippingAddressScreen = () => {
                   <View style={styles.addressLeft}>
                     <Icon name={Home} width={24} height={24} />
                     <View style={styles.addressDetails}>
-                      <Text style={styles.addressType}>{address.type}</Text>
-                      <Text style={styles.addressText}>{address.street}</Text>
+                      <Text style={styles.addressType}>{address.name}</Text>
+                      <Text
+                        style={
+                          styles.addressText
+                        }>{`${address.street}, ${address.city}, ${address.state} ${address.postcode}`}</Text>
                     </View>
                   </View>
                   <View style={styles.addressRight}>
-                    <TouchableOpacity
-                      style={styles.deleteButton}
-                      onPress={() => {
-                        Alert.alert(
-                          'Delete Address',
-                          'Are you sure you want to delete this address?',
-                          [
-                            {text: 'Cancel', style: 'cancel'},
-                            {
-                              text: 'Delete',
-                              style: 'destructive',
-                              onPress: () =>
-                                dispatch(removeShippingAddress(address.id)),
-                            },
-                          ],
-                        );
-                      }}>
-                      <Icon name={Close} width={20} height={20} />
-                    </TouchableOpacity>
+                    {shippingAddresses.length > 1 && (
+                      <TouchableOpacity
+                        style={styles.deleteButton}
+                        onPress={() => {
+                          Alert.alert(
+                            'Delete Address',
+                            'Are you sure you want to delete this address?',
+                            [
+                              {text: 'Cancel', style: 'cancel'},
+                              {
+                                text: 'Delete',
+                                style: 'destructive',
+                                onPress: () =>
+                                  dispatch(removeShippingAddress(address.id)),
+                              },
+                            ],
+                          );
+                        }}>
+                        <Icon name={Close} width={20} height={20} />
+                      </TouchableOpacity>
+                    )}
                     <View
                       style={[
                         styles.radioButton,

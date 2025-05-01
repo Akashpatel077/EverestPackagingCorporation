@@ -12,6 +12,8 @@ import {useDispatch} from 'react-redux';
 import {
   addBillingAddress,
   addShippingAddress,
+  setSelectedBillingAddress,
+  setSelectedShippingAddress,
 } from 'src/store/slices/addressSlice';
 import styles from './styles';
 import {CDropdown, Header} from 'src/Components';
@@ -22,8 +24,9 @@ import {CheckSquare, UncheckSquareNew} from '../../../../assets/icons';
 import {getStates} from 'src/services/wooCommerceApi';
 import CSafeAreaView from 'src/Components/CSafeAreaView';
 
-const BillingAddressForm: React.FC = () => {
+const BillingAddressForm: React.FC = ({route}) => {
   const navigation = useNavigation();
+  const {hideCheckbox} = route.params || {};
   const [formData, setFormData] = React.useState({
     firstName: '',
     lastName: '',
@@ -110,9 +113,12 @@ const BillingAddressForm: React.FC = () => {
     if (!isShippingAddressSame) {
       dispatch(addBillingAddress(addressData));
       dispatch(addShippingAddress(addressData));
+      dispatch(setSelectedBillingAddress(addressData.id));
+      dispatch(setSelectedShippingAddress(addressData.id));
       navigation.navigate(CHECKOUT);
     } else {
       dispatch(addBillingAddress(addressData));
+      dispatch(setSelectedBillingAddress(addressData.id));
       navigation.navigate(SHIPPING_ADDRESS_FORM);
     }
   };
@@ -254,19 +260,21 @@ const BillingAddressForm: React.FC = () => {
             />
           </View>
 
-          <TouchableOpacity
-            activeOpacity={0.7}
-            style={styles.makeThisAsShippingAddress}
-            onPress={() => SetIsShippingAddressSame(prevValue => !prevValue)}>
-            {isShippingAddressSame ? (
-              <Icon name={CheckSquare} height={30} width={30} />
-            ) : (
-              <Icon name={UncheckSquareNew} height={30} width={30} />
-            )}
-            <Text style={styles.shippingCheckBoxText}>
-              Ship to a different address?
-            </Text>
-          </TouchableOpacity>
+          {!hideCheckbox && (
+            <TouchableOpacity
+              activeOpacity={0.7}
+              style={styles.makeThisAsShippingAddress}
+              onPress={() => SetIsShippingAddressSame(prevValue => !prevValue)}>
+              {isShippingAddressSame ? (
+                <Icon name={CheckSquare} height={30} width={30} />
+              ) : (
+                <Icon name={UncheckSquareNew} height={30} width={30} />
+              )}
+              <Text style={styles.shippingCheckBoxText}>
+                Ship to a different address?
+              </Text>
+            </TouchableOpacity>
+          )}
 
           <TouchableOpacity style={styles.button} onPress={handleSubmit}>
             <Text style={styles.buttonText}>SAVE ADDRESS</Text>

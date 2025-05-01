@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import {styles} from './styles';
 import {useTranslation} from 'react-i18next';
-import {Icon} from '../../../Components';
+import {CustomAlert, Icon, LoadingOverlay} from '../../../Components';
 import {ic_Apple, ic_Facebook, ic_Google} from '../../../../assets/icons';
 import {loginWithGoogle} from 'src/services/firebase-services';
 import {useNavigation} from '@react-navigation/native';
@@ -31,20 +31,11 @@ const Login = () => {
   const dispatch = useDispatch();
   const {loading, error} = useSelector((state: RootState) => state.auth);
   const isButtonDisabled = !email || !password || loading;
+  const [showAlert, setShowAlert] = useState(false);
 
   useEffect(() => {
     if (error && error.code && error.code.includes('authentication_failed')) {
-      Alert.alert(
-        'Everest Packaging',
-        'Username or Password is incorrect!',
-        [
-          {
-            text: 'OK',
-            onPress: () => dispatch(logout()),
-          },
-        ],
-        {cancelable: false},
-      );
+      setShowAlert(true);
     }
   }, [error]);
 
@@ -114,7 +105,7 @@ const Login = () => {
         <Text style={styles.signInText}>{t('common.signIn')}</Text>
       </TouchableOpacity>
       {/* {error && <Text style={styles.errorText}>{error}</Text>} */}
-      {loading && <ActivityIndicator size="large" color="#0000ff" />}
+      {/* {loading && <ActivityIndicator size="large" color="#0000ff" />} */}
 
       <View style={styles.dividerContainer}>
         <View style={styles.dividerLine} />
@@ -147,6 +138,20 @@ const Login = () => {
           <Text style={styles.signUpLink}>{t('common.signUp')}</Text>
         </TouchableOpacity>
       </View>
+      <CustomAlert
+        visible={showAlert}
+        title="Everest Packaging"
+        description="Username or Password is incorrect!"
+        button2={{
+          text: 'Ok',
+          onPress: () => {
+            setShowAlert(false);
+            dispatch(logout());
+          },
+          color: '#0088cc',
+        }}
+      />
+      <LoadingOverlay visible={loading} />
     </SafeAreaView>
   );
 };
