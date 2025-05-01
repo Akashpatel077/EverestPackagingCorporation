@@ -97,7 +97,7 @@ const SplashScreen = () => {
         Everest Packaging Corporation
       </Animated.Text> */}
 
-      <Animated.View
+      {/* <Animated.View
         style={[
           styles.iconContainer,
           {
@@ -122,7 +122,7 @@ const SplashScreen = () => {
             <Icon name={icon} width={40} height={40} color="#FFFFFF" />
           </Animated.View>
         ))}
-      </Animated.View>
+      </Animated.View> */}
 
       <Animated.Text style={[styles.tagline, {opacity: fadeAnim}]}>
         Your Complete Packaging Solution
@@ -157,6 +157,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   iconContainer: {
+    flex: 1,
     flexDirection: 'row',
     position: 'absolute',
     justifyContent: 'center',
@@ -164,13 +165,14 @@ const styles = StyleSheet.create({
     width: width * 0.9,
     backgroundColor: 'rgba(255, 255, 255, 0.95)',
     borderRadius: 25,
+    bottom: 1000,
     padding: 20,
     shadowColor: '#000',
     shadowOffset: {width: 0, height: 4},
     shadowOpacity: 0.2,
     shadowRadius: 12,
     elevation: 8,
-    backdropFilter: 'blur(10px)',
+    // backdropFilter: 'blur(10px)',
   },
   tagline: {
     position: 'absolute',

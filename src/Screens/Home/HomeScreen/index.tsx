@@ -45,6 +45,7 @@ const HomeScreen = () => {
             controlTimeout={10000}
             paused={!isFocused}
             repeat={true}
+            muted={true}
           />
           {/* <Video
             ref={videoRef}

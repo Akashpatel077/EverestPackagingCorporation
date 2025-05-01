@@ -323,10 +323,7 @@ const ProductDetails = ({navigation, route}) => {
           </View>
         ) : (
           <View style={{flex: 1}}>
-            <ScrollView
-              showsVerticalScrollIndicator={false}
-              style={{flex: 1}}
-              contentContainerStyle={{paddingTop: 60}}>
+            <ScrollView showsVerticalScrollIndicator={false} style={{flex: 1}}>
               <View style={styles.mainImageContainer}>
                 <Image
                   source={{
@@ -488,20 +485,57 @@ const ProductDetails = ({navigation, route}) => {
                     <Text
                       style={[
                         styles.sectionTitle,
-                        {marginBottom: 5, marginTop: 10},
+                        {marginBottom: 10, marginTop: 15},
                       ]}>
                       Product Description:
                     </Text>
                     <View
                       style={{
-                        maxHeight: isExpanded ? 'auto' : 92,
+                        maxHeight: isExpanded ? 'auto' : 100,
                         overflow: 'hidden',
+                        borderRadius: 8,
+                        marginHorizontal: 5,
                       }}>
-                      <RenderHtml source={{html: cleanedHTML}} />
+                      <RenderHtml
+                        contentWidth={300}
+                        source={{html: cleanedHTML}}
+                        tagsStyles={{
+                          body: {
+                            color: '#666666',
+                            fontSize: 14,
+                            lineHeight: 22,
+                          },
+                          p: {
+                            marginBottom: 8,
+                          },
+                          ul: {
+                            marginLeft: 20,
+                          },
+                          li: {
+                            marginBottom: 5,
+                          },
+                          strong: {
+                            fontWeight: '700',
+                            color: '#333333',
+                          },
+                          b: {
+                            fontWeight: '700',
+                            color: '#333333',
+                          },
+                        }}
+                      />
                     </View>
                     <TouchableOpacity
+                      style={{
+                        alignItems: 'flex-start',
+                        paddingVertical: 10,
+                      }}
                       onPress={() => setIsExpanded(prevValue => !prevValue)}>
-                      <Text style={styles.readMore}>
+                      <Text
+                        style={[
+                          styles.readMore,
+                          {color: '#0088cc', fontWeight: '600'},
+                        ]}>
                         {isExpanded ? 'Read less' : 'Read more'}
                       </Text>
                     </TouchableOpacity>

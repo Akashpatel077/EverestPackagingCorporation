@@ -84,7 +84,7 @@ const ProductList = ({route}) => {
   return (
     <CSafeAreaView removeBottomSafeArea>
       <View style={styles.container}>
-        <Header title={`${category} Products`} icon1={BackIcon} />
+        <Header title={category} icon1={BackIcon} />
         {productsLoading ? (
           <View style={styles.loadingContainer}>
             <LoadingLogo size={120} />
