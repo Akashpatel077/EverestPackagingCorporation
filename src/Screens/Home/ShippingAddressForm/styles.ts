@@ -34,8 +34,8 @@ const styles = StyleSheet.create({
   input: {
     borderWidth: 1,
     borderColor: '#ddd',
-    borderRadius: 4,
-    padding: 12,
+    borderRadius: 10,
+    paddingHorizontal: 12,
     fontSize: 14,
     backgroundColor: '#f5f5f5',
     flexDirection: 'row',
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
     color: '#fff',
   },
   button: {
-    backgroundColor: '#000',
+    backgroundColor: '#0088cc',
     padding: 16,
     borderRadius: 10,
     alignItems: 'center',

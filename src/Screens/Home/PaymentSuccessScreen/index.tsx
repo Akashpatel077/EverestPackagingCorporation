@@ -3,7 +3,8 @@ import {View, Text, TouchableOpacity} from 'react-native';
 import {Header, Icon} from 'src/Components';
 import {BackIcon, Heart} from 'assets/icons';
 import {styles} from './styles';
-import {useNavigation} from '@react-navigation/native';
+import {CommonActions, useNavigation} from '@react-navigation/native';
+import {ORDER_SCREEN} from 'src/Navigation/home/routes';
 
 const PaymentSuccessScreen = () => {
   const navigation = useNavigation();
@@ -21,15 +22,50 @@ const PaymentSuccessScreen = () => {
 
         <TouchableOpacity
           style={styles.button}
-          onPress={() => navigation.navigate('OrderDetails')}>
+          onPress={() => {
+            navigation.dispatch(
+              CommonActions.reset({
+                index: 0,
+                routes: [
+                  {
+                    name: 'HomeDrawer',
+                    state: {
+                      index: 0,
+                      routes: [
+                        {
+                          name: 'Home',
+                          state: {
+                            index: 0,
+                            routes: [
+                              {
+                                name: 'Profile',
+                                state: {
+                                  index: 0,
+                                  routes: [
+                                    {
+                                      name: ORDER_SCREEN,
+                                    },
+                                  ],
+                                },
+                              },
+                            ],
+                          },
+                        },
+                      ],
+                    },
+                  },
+                ],
+              }),
+            );
+          }}>
           <Text style={styles.buttonText}>View Order</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity
+        {/* <TouchableOpacity
           style={styles.linkButton}
           onPress={() => navigation.navigate('Receipt')}>
           <Text style={styles.linkButtonText}>View E-Receipt</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
     </View>
   );

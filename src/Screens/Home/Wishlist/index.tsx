@@ -120,22 +120,25 @@ const WishlistScreen = () => {
     <CSafeAreaView removeBottomSafeArea>
       <View style={[styles.container, {}]}>
         <Header title="My Wishlist" />
-        <View style={{paddingTop: 8, flex: 1}}>
-          {filteredItems.length === 0 ? (
-            <View style={styles.emptyContainer}>
-              <Text style={styles.emptyText}>No items in Your Wishlist</Text>
-            </View>
-          ) : (
-            <FlatList
-              data={filteredItems}
-              renderItem={renderWishlistItem}
-              numColumns={2}
-              showsVerticalScrollIndicator={false}
-              contentContainerStyle={styles.productGrid}
-              keyExtractor={item => item.id.toString()}
-            />
-          )}
-        </View>
+        {false ? (
+          <View style={styles.wishListContainer}>
+            <Text style={styles.wishListTitle}>Login to see your Wishlist</Text>
+          </View>
+        ) : (
+          <FlatList
+            data={filteredItems}
+            renderItem={renderWishlistItem}
+            numColumns={2}
+            ListEmptyComponent={
+              <View style={styles.emptyContainer}>
+                <Text style={styles.emptyText}>No items in Your Wishlist</Text>
+              </View>
+            }
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={styles.productGrid}
+            keyExtractor={item => item.id.toString()}
+          />
+        )}
       </View>
     </CSafeAreaView>
   );

@@ -57,7 +57,7 @@ export const styles = StyleSheet.create({
     top: 12,
   },
   saveButton: {
-    backgroundColor: '#000',
+    backgroundColor: '#0088cc',
     padding: 16,
     borderRadius: 10,
     alignItems: 'center',

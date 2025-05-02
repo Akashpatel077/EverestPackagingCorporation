@@ -11,14 +11,17 @@ import {BackIcon, Eye, Password_Hide} from 'assets/icons';
 import {styles} from './styles';
 import {useNavigation} from '@react-navigation/native';
 import CSafeAreaView from 'src/Components/CSafeAreaView';
+import {useAppSelector} from 'src/store/hooks';
 
 const AccountDetails = () => {
   const navigation = useNavigation();
+  const {user} = useAppSelector((state: RootState) => state.auth);
+  const {first_name, last_name, username, email} = user || {};
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    displayName: 'mit.ashishkher',
-    email: 'mit.ashishkher@gmail.com',
+    firstName: first_name,
+    lastName: last_name,
+    displayName: username,
+    email: email,
   });
 
   const [currentPassword, setCurrentPassword] = useState('');

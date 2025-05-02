@@ -4,9 +4,12 @@ import {Header, Icon} from 'src/Components';
 import {BackIcon, CheckSquare, UncheckSquareNew} from 'assets/icons';
 import {styles} from './styles';
 import CSafeAreaView from 'src/Components/CSafeAreaView';
+import {useAppSelector} from 'src/store/hooks';
 
 const CommunicationScreen = () => {
   const [accountInfo, setAccountInfo] = useState(true);
+  const {user} = useAppSelector((state: RootState) => state.auth);
+  const {email} = user || {};
 
   const handleSavePreferences = () => {
     // Handle saving preferences
@@ -24,7 +27,7 @@ const CommunicationScreen = () => {
           </Text>
 
           <Text style={styles.emailText}>
-            You are managing preferences for mit.ashishkher@gmail.com.
+            You are managing preferences for {email}.
           </Text>
 
           <View style={styles.preferencesContainer}>

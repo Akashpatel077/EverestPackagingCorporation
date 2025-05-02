@@ -173,7 +173,7 @@ export const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '600',
     color: '#000000',
-    fontFamily: 'Poppins-SemiBold',
+    fontFamily: 'Poppins-Medium',
     marginBottom: 12,
   },
   optionContainer: {
@@ -182,15 +182,15 @@ export const styles = StyleSheet.create({
     marginBottom: 24,
   },
   optionButton: {
-    width: 85,
+    width: 90,
     height: 40,
     borderRadius: 10,
     borderWidth: 1,
-    borderColor: '#0088cc',
+    borderColor: '#000000',
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 12,
-    backgroundColor: '#FAF3EE',
+    backgroundColor: '#FFFFFF',
   },
   selectedItem: {
     backgroundColor: '#0088cc',
@@ -254,7 +254,7 @@ export const styles = StyleSheet.create({
   addToCartButton: {
     // flex: 1,
     backgroundColor: '#0088cc',
-    borderRadius: 25,
+    borderRadius: 10,
     padding: 8,
     marginLeft: 16,
     alignItems: 'center',
@@ -349,7 +349,7 @@ export const styles = StyleSheet.create({
   },
   gstTitleText: {
     paddingBottom: 16,
-    fontFamily: 'Poppins-SemiBold',
+    fontFamily: 'Poppins-Regular',
     color: '#666666',
   },
 });

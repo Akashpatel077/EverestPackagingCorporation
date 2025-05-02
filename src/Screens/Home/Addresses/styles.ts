@@ -44,7 +44,7 @@ export const styles = StyleSheet.create({
     fontFamily: 'Poppins-Regular',
   },
   addButton: {
-    backgroundColor: '#007AFF',
+    backgroundColor: '#0088cc',
     borderRadius: 10,
     padding: 12,
     alignItems: 'center',

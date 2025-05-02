@@ -222,7 +222,7 @@ const BillingAddressForm: React.FC = ({route}) => {
             </Text>
             <CDropdown
               data={states}
-              dropDownStyle={{height: 50}}
+              dropDownStyle={{height: 48}}
               title="State / County"
               selectedItem={selectedState}
               onSelect={(itemObject: any) => {

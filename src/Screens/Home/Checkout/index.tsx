@@ -13,6 +13,7 @@ import {
 import {selectCartItems} from 'src/store/slices/cartSlice';
 import {RootState} from 'src/store';
 import CSafeAreaView from 'src/Components/CSafeAreaView';
+import {decode} from 'he';
 
 const getFormattedPrice = (price: string, currencyMinorUnit: number) => {
   const formattedPrice = (
@@ -112,7 +113,17 @@ const CheckoutScreen = ({route}) => {
                     style={styles.orderImage}
                   />
                   <View style={styles.orderDetails}>
-                    <Text style={styles.orderTitle}>{item.name}</Text>
+                    <Text style={styles.orderTitle}>{decode(item.name)}</Text>
+                    {item.type === 'variation' &&
+                      item.variation &&
+                      item.variation.map(item => {
+                        const decodedValue = decode(item.value);
+                        return (
+                          <Text style={styles.itemSize}>
+                            {item.attribute} : {decodedValue}
+                          </Text>
+                        );
+                      })}
                     {Array.isArray(item.attributes) &&
                       item.attributes
                         .filter(attr => attr.name !== 'HSN Code')

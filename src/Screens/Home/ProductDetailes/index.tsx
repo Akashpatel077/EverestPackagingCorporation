@@ -617,7 +617,7 @@ const RenderAttributes = ({
       <Text style={styles.sectionTitle}>
         {item.name}
         {selectedItem && (
-          <Text style={[styles.sectionTitle, {color: '#0088cc'}]}>
+          <Text style={[styles.sectionTitle, {color: '#666666'}]}>
             {` : ${selectedItem}`}
           </Text>
         )}

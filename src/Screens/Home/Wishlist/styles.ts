@@ -4,8 +4,8 @@ const {width} = Dimensions.get('window');
 
 export const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: '#F5F6FA',
+    height: '100%',
   },
   header: {
     flexDirection: 'row',
@@ -48,8 +48,8 @@ export const styles = StyleSheet.create({
   },
   productGrid: {
     paddingHorizontal: 6,
-    marginBottom: 20,
     gap: 8,
+    paddingTop: 8,
   },
   productCard: {
     width: '48%',
@@ -164,5 +164,14 @@ export const styles = StyleSheet.create({
   emptyText: {
     fontFamily: 'Poppins-SemiBold',
     fontSize: 18,
+  },
+  wishListContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  wishListTitle: {
+    fontFamily: 'Poppins-Medium',
+    fontSize: 16,
   },
 });

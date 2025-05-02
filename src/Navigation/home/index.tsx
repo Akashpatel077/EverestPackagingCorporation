@@ -313,11 +313,18 @@ const HomeContainer = () => {
     ? items.reduce((total, item) => total + item.quantity, 0)
     : 0;
 
-  const getTabBarIcon = (name: React.FC<TabIconProps>, tabName: string) => {
-    return tabName === 'Home' ? (
-      <Icon width={24} height={24} name={name} color="#000" />
-    ) : (
-      <Icon width={24} height={24} name={name} color="#FFF" />
+  const getTabBarIcon = (
+    name: React.FC<TabIconProps>,
+    tabName: string,
+    focused: boolean,
+  ) => {
+    return (
+      <Icon
+        width={24}
+        height={24}
+        name={name}
+        color={focused ? '#0088cc' : '#FFF'}
+      />
     );
   };
 
@@ -342,11 +349,12 @@ const HomeContainer = () => {
           component={tab.component}
           options={({route}) => ({
             tabBarLabel: tab.label,
-            tabBarIcon: () => getTabBarIcon(tab.icon, tab.label),
+            tabBarIcon: ({focused}) =>
+              getTabBarIcon(tab.icon, tab.label, focused),
             tabBarStyle: getTabBarStyle(route),
             tabBarBadge: tab.name === 'Cart' ? cartItemsCount : undefined,
             tabBarBadgeStyle: {
-              backgroundColor: '#0088cc',
+              backgroundColor: '#CC5656',
               color: '#FFFFFF',
               fontSize: 12,
             },

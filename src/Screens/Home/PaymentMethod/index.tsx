@@ -11,14 +11,21 @@ import {
   NotSelectedRadioButton,
 } from 'assets/icons';
 import {styles} from './styles';
-import {useNavigation} from '@react-navigation/native';
-import {useSelector} from 'react-redux';
+import {CommonActions, useNavigation} from '@react-navigation/native';
+import {useDispatch, useSelector} from 'react-redux';
 import {cartCheckout} from 'src/services/wooCommerceApi';
-import {PAYMENT_WEBVIEW} from 'src/Navigation/home/routes';
+import {
+  CHECKOUT,
+  MYCART,
+  PAYMENT_SUCCESS_SCREEN,
+  PAYMENT_WEBVIEW,
+} from 'src/Navigation/home/routes';
 import CSafeAreaView from 'src/Components/CSafeAreaView';
+import {clearCart} from 'src/store/slices/cartSlice';
 
 const PaymentMethodScreen = () => {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
   const {
     billingAddresses,
     shippingAddresses,
@@ -33,55 +40,127 @@ const PaymentMethodScreen = () => {
   const [alertMessage, setAlertMessage] = useState('');
 
   const onPlaceOrder = async () => {
-    const selectedBillingAddress = billingAddresses.filter(
-      item => item.id === selectedBillingAddressId,
-    );
-    const selectedShippingAddress = shippingAddresses.filter(
-      item => item.id === selectedShippingAddressId,
-    );
-
-    if (
-      selectedBillingAddress.length > 0 &&
-      selectedShippingAddress.length > 0
-    ) {
-      try {
-        setLoading(true);
-        const checkoutData = {
-          // customer_id: user.id,
-          billing_address: {
-            ...selectedBillingAddress[0],
-            country: 'IN',
-            email: user.email ?? '',
-            phone: user.billing.phone ?? '',
+    navigation.dispatch(
+      CommonActions.reset({
+        index: 0,
+        routes: [
+          {
+            name: 'HomeDrawer',
+            state: {
+              index: 0,
+              routes: [
+                {
+                  name: 'Home',
+                  state: {
+                    index: 0,
+                    routes: [
+                      {
+                        name: 'Cart',
+                        state: {
+                          index: 0,
+                          routes: [
+                            {
+                              name: MYCART,
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
           },
-          shipping_address: {
-            ...selectedShippingAddress[0],
-            country: 'IN',
-          },
-          customer_note: '',
-          create_account: false,
-          payment_method: 'razorpay',
-          payment_data: [],
-          extensions: {},
-        };
+        ],
+      }),
+    );
 
-        const checkoutResponse = await cartCheckout(checkoutData);
-
-        if (
-          checkoutResponse.status &&
-          checkoutResponse.payment_result.redirect_url
-        ) {
-          navigation.navigate(PAYMENT_WEBVIEW, {
-            redirectUrl: checkoutResponse.payment_result.redirect_url,
-          });
-        }
-      } catch (error) {
-        setAlertMessage(error?.response?.data?.message ?? error.message);
-        setAlertVisible(true);
-      } finally {
-        setLoading(false);
-      }
-    }
+    // const selectedBillingAddress = billingAddresses.filter(
+    //   item => item.id === selectedBillingAddressId,
+    // );
+    // const selectedShippingAddress = shippingAddresses.filter(
+    //   item => item.id === selectedShippingAddressId,
+    // );
+    // if (
+    //   selectedBillingAddress.length > 0 &&
+    //   selectedShippingAddress.length > 0
+    // ) {
+    //   try {
+    //     setLoading(true);
+    //     const checkoutData = {
+    //       // customer_id: user.id,
+    //       billing_address: {
+    //         ...selectedBillingAddress[0],
+    //         country: 'IN',
+    //         email: user.email ?? '',
+    //         phone: user.billing.phone ?? '',
+    //       },
+    //       shipping_address: {
+    //         ...selectedShippingAddress[0],
+    //         country: 'IN',
+    //       },
+    //       customer_note: '',
+    //       create_account: false,
+    //       payment_method: isRazorPay ? 'razorpay' : 'cod',
+    //       payment_data: [],
+    //       extensions: {},
+    //     };
+    //     const checkoutResponse = await cartCheckout(checkoutData);
+    //     console.log('res checkout : ', checkoutResponse);
+    //     if (
+    //       !isRazorPay &&
+    //       checkoutResponse.payment_result.payment_status === 'success'
+    //     ) {
+    //       dispatch(clearCart());
+    //       navigation.dispatch(
+    //         CommonActions.reset({
+    //           index: 0,
+    //           routes: [
+    //             {
+    //               name: 'HomeDrawer',
+    //               state: {
+    //                 index: 0,
+    //                 routes: [
+    //                   {
+    //                     name: 'Home',
+    //                     state: {
+    //                       index: 0,
+    //                       routes: [
+    //                         {
+    //                           name: 'Cart',
+    //                           state: {
+    //                             index: 0,
+    //                             routes: [
+    //                               {
+    //                                 name: PAYMENT_SUCCESS_SCREEN,
+    //                               },
+    //                             ],
+    //                           },
+    //                         },
+    //                       ],
+    //                     },
+    //                   },
+    //                 ],
+    //               },
+    //             },
+    //           ],
+    //         }),
+    //       );
+    //     } else if (
+    //       checkoutResponse.status &&
+    //       checkoutResponse.payment_result.redirect_url
+    //     ) {
+    //       navigation.navigate(PAYMENT_WEBVIEW, {
+    //         redirectUrl: checkoutResponse.payment_result.redirect_url,
+    //       });
+    //     }
+    //   } catch (error) {
+    //     setAlertMessage(error?.response?.data?.message ?? error.message);
+    //     setAlertVisible(true);
+    //   } finally {
+    //     setLoading(false);
+    //   }
+    // }
   };
 
   return (
@@ -93,7 +172,6 @@ const PaymentMethodScreen = () => {
           style={styles.paymentOption}
           activeOpacity={0.7}
           onPress={() => {
-            // navigation.navigate(ADD_CARD_SCREEN);
             setIsRazorPay(true);
           }}>
           <View style={styles.paymentOptionLeft}>
@@ -102,28 +180,15 @@ const PaymentMethodScreen = () => {
               width={24}
               height={24}
             />
-            <View>
-              <Text style={[styles.paymentOptionText, {fontSize: 18}]}>
-                Credit Card/Debit Card/NetBanking
-              </Text>
-              <View style={styles.razorPayIconContainer}>
-                <Icon name={CreditCard} width={24} height={24} color="#FFF" />
-                <View style={styles.razorPayTextContainer}>
-                  <Text style={styles.razorPayTitle}>Pay by Razorpay</Text>
-                  <Text style={styles.razorPaySubTitle}>
-                    Cards, Netbanking, Wallet & UPI
-                  </Text>
-                </View>
-              </View>
-            </View>
+            <Text style={styles.razorPayTitle}>Pay by Razorpay</Text>
           </View>
           {isRazorPay && (
             <Text
               style={[
                 styles.paymentOptionText,
                 {
-                  fontSize: 17,
-                  marginLeft: 0,
+                  fontSize: 14,
+                  marginLeft: 35,
                   fontWeight: '500',
                   color: '#666666',
                 },
@@ -143,17 +208,15 @@ const PaymentMethodScreen = () => {
               width={24}
               height={24}
             />
-            <View>
-              <Text style={styles.paymentOptionText}>Cash on delivery</Text>
-            </View>
+            <Text style={styles.paymentOptionText}>Cash on delivery</Text>
           </View>
           {!isRazorPay && (
             <Text
               style={[
                 styles.paymentOptionText,
                 {
-                  fontSize: 17,
-                  marginLeft: 0,
+                  fontSize: 14,
+                  marginLeft: 35,
                   fontWeight: '500',
                   color: '#666666',
                 },
@@ -196,7 +259,7 @@ const PaymentMethodScreen = () => {
           style={[styles.paymentButton, {opacity: loading ? 0.7 : 1}]}
           disabled={loading}
           onPress={onPlaceOrder}>
-          <Text style={styles.paymentButtonText}>Place Order</Text>
+          <Text style={styles.paymentButtonText}>Continue</Text>
         </TouchableOpacity>
       </View>
       <CustomAlert

@@ -41,9 +41,11 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
   paymentOptionText: {
-    marginLeft: 12,
+    marginLeft: 10,
     fontSize: 16,
     color: '#000000',
+    paddingTop: 5,
+    fontFamily: 'Poppins-Medium',
   },
   linkText: {
     color: '#0088cc',
@@ -51,11 +53,15 @@ export const styles = StyleSheet.create({
     fontWeight: '500',
   },
   razorPayTitle: {
+    marginLeft: 10,
     fontSize: 16,
     fontWeight: '500',
+    fontFamily: 'Poppins-Medium',
+    paddingTop: 5,
   },
   razorPaySubTitle: {
     color: '#555555',
+    fontFamily: 'Poppins-Medium',
   },
   razorPayIconContainer: {
     flexDirection: 'row',
@@ -63,9 +69,7 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 10,
     paddingVertical: 5,
   },
-  razorPayTextContainer: {
-    paddingLeft: 10,
-  },
+  razorPayTextContainer: {},
   paymentButton: {
     backgroundColor: '#0088cc',
     padding: 15,

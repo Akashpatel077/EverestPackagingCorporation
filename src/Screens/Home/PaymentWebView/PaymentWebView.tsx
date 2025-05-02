@@ -14,26 +14,57 @@ const PaymentWebView = ({navigation, route}) => {
   const handleNavigationStateChange = navState => {
     const {url, canGoBack} = navState;
 
-    console.log('url : ', url);
+    console.log('url : ', url, canGoBack);
 
     if (canGoBack) {
       setTimeout(() => {
-        dispatch(getCartListAction());
+        // dispatch(getCartListAction());
       }, 2000);
+      // navigation.dispatch(
+      //   CommonActions.reset({
+      //     index: 0,
+      //     routes: [
+      //       {
+      //         name: 'Home',
+      //         state: {
+      //           index: 0,
+      //           routes: [
+      //             {
+      //               name: 'Cart',
+      //               state: {
+      //                 index: 0,
+      //                 routes: [{name: MYCART}],
+      //               },
+      //             },
+      //           ],
+      //         },
+      //       },
+      //     ],
+      //   }),
+      // );
+
       navigation.dispatch(
         CommonActions.reset({
           index: 0,
           routes: [
             {
-              name: 'Home',
+              name: 'HomeDrawer',
               state: {
                 index: 0,
                 routes: [
                   {
-                    name: 'Cart',
+                    name: 'Home',
                     state: {
                       index: 0,
-                      routes: [{name: MYCART}],
+                      routes: [
+                        {
+                          name: 'Cart',
+                          state: {
+                            index: 0,
+                            routes: [{name: 'MYCART'}],
+                          },
+                        },
+                      ],
                     },
                   },
                 ],

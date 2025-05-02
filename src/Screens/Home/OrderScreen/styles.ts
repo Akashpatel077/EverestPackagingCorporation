@@ -89,18 +89,19 @@ export default StyleSheet.create({
   },
   itemName: {
     fontSize: 16,
-    fontWeight: '600',
     color: '#000000',
     marginBottom: 4,
+    fontFamily: 'Poppins-SemiBold',
   },
   itemInfo: {
     fontSize: 14,
     color: '#666666',
     marginBottom: 4,
+    fontFamily: 'Poppins-Regular',
   },
   itemPrice: {
     fontSize: 16,
-    fontWeight: '600',
+    fontFamily: 'Poppins-SemiBold',
     color: '#0088cc',
   },
   actionButton: {

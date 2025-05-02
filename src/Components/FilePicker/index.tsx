@@ -44,7 +44,7 @@ const FilePicker: React.FC<FilePickerProps> = ({onUpdateFile, placeHolder}) => {
             onUpdateFile({});
           }}
           style={styles.cancelText}>
-          remove
+          ❌ Remove
         </Text>
       )}
     </>
@@ -86,5 +86,6 @@ const styles = StyleSheet.create({
     color: '#FF0000',
     marginBottom: 10,
     textAlign: 'right',
+    fontFamily: 'Poppins-Regular',
   },
 });

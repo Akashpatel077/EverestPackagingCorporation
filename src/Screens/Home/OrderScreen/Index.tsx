@@ -24,13 +24,14 @@ interface OrderItem {
   quantity: number;
   price: number;
   image: any;
-  status: 'active' | 'completed' | 'cancelled';
+  status: 'active' | 'completed' | 'failed';
 }
 
 const OrderScreen = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch<AppDispatch>();
   const {user} = useSelector(state => state.auth);
+  const {orders} = useSelector(state => state.orders);
 
   const [activeTab, setActiveTab] = useState<
     'active' | 'completed' | 'cancelled'
@@ -42,46 +43,16 @@ const OrderScreen = () => {
     }
   }, []);
 
-  const [orders] = useState<OrderItem[]>([
-    {
-      id: '1',
-      name: 'Brown Jacket',
-      size: 'XL',
-      quantity: 10,
-      price: 83.97,
-      image: require('../../../../assets/images/user.png'),
-      status: 'active',
-    },
-    {
-      id: '2',
-      name: 'Brown Suite',
-      size: 'XL',
-      quantity: 10,
-      price: 120,
-      image: require('../../../../assets/images/user.png'),
-      status: 'active',
-    },
-    {
-      id: '3',
-      name: 'Brown Jacket',
-      size: 'XL',
-      quantity: 10,
-      price: 83.97,
-      image: require('../../../../assets/images/user.png'),
-      status: 'completed',
-    },
-    {
-      id: '4',
-      name: 'Brown Suite',
-      size: 'XL',
-      quantity: 10,
-      price: 120,
-      image: require('../../../../assets/images/user.png'),
-      status: 'cancelled',
-    },
-  ]);
-
-  const filteredOrders = orders.filter(order => order.status === activeTab);
+  const filteredOrders = orders.filter(order => {
+    if (activeTab === 'active') {
+      return ['pending', 'processing'].includes(order.status);
+    } else if (activeTab === 'completed') {
+      return order.status === 'completed';
+    } else if (activeTab === 'cancelled') {
+      return ['failed', 'cancelled'].includes(order.status);
+    }
+    return false;
+  });
 
   const getActionButton = (status: string, item: OrderItem) => {
     switch (status) {
@@ -111,6 +82,12 @@ const OrderScreen = () => {
             <Text style={styles.actionButtonText}>Re-Order</Text>
           </TouchableOpacity>
         );
+      case 'failed':
+        return (
+          <TouchableOpacity style={styles.actionButton}>
+            <Text style={styles.actionButtonText}>Re-Order</Text>
+          </TouchableOpacity>
+        );
       default:
         return null;
     }
@@ -118,12 +95,12 @@ const OrderScreen = () => {
 
   const renderOrderItem = ({item}: {item: OrderItem}) => (
     <View style={styles.orderItemContainer}>
-      <Image source={item.image} style={styles.itemImage} />
+      {/* <Image source={item.image} style={styles.itemImage} /> */}
       <View style={styles.itemDetails}>
-        <Text style={styles.itemName}>{item.name}</Text>
-        <Text style={styles.itemInfo}>Size : {item.size}</Text>
-        <Text style={styles.itemInfo}>Qty : {item.quantity}pcs</Text>
-        <Text style={styles.itemPrice}>${item.price}</Text>
+        <Text style={styles.itemName}>Order : #{item.number}</Text>
+        <Text style={styles.itemInfo}>Date : {item.date_modified}</Text>
+        <Text style={styles.itemInfo}>Status : {item.status}</Text>
+        <Text style={styles.itemPrice}>Total : ₹{item.total}</Text>
       </View>
       {getActionButton(item.status, item)}
     </View>
@@ -157,12 +134,12 @@ const OrderScreen = () => {
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={[styles.tab, activeTab === 'cancelled' && styles.activeTab]}
+            style={[styles.tab, activeTab === 'failed' && styles.activeTab]}
             onPress={() => setActiveTab('cancelled')}>
             <Text
               style={[
                 styles.tabText,
-                activeTab === 'cancelled' && styles.activeTabText,
+                activeTab === 'failed' && styles.activeTabText,
               ]}>
               Cancelled
             </Text>

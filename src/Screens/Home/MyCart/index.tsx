@@ -9,7 +9,7 @@ import {
   Modal,
   StatusBar,
 } from 'react-native';
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 import {useSelector, useDispatch} from 'react-redux';
 import styles from './styles';
 import {
@@ -56,7 +56,7 @@ const getFormattedPrice = (price: string, currencyMinorUnit: number) => {
   return formattedPrice;
 };
 
-const MyCart = () => {
+const MyCart = ({}) => {
   const navigation = useNavigation();
   const addresses = useSelector((state: any) => state.address);
 
@@ -202,7 +202,6 @@ const MyCart = () => {
       <CSafeAreaView removeBottomSafeArea>
         <View style={styles.container}>
           <Header title="My Cart" />
-          <StatusBar barStyle="dark-content" />
           <View style={styles.emptyCartContainer}>
             <Image
               source={require('assets/icons/Bags.svg')}
