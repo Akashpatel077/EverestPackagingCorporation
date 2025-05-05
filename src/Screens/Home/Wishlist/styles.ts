@@ -180,15 +180,6 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
   },
   loginButton: {
-    backgroundColor: '#0088cc',
-    paddingHorizontal: 40,
-    paddingVertical: 12,
-    borderRadius: 10,
-    marginTop: 16,
-  },
-  loginButtonText: {
-    color: '#FFFFFF',
-    fontSize: 16,
-    fontFamily: 'Poppins-SemiBold',
+    width: '50%',
   },
 });

@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, Text, TouchableOpacity, Image, ScrollView} from 'react-native';
-import {Header, Icon} from 'src/Components';
+import {CButton, Header, Icon} from 'src/Components';
 import {BackIcon, Home} from 'assets/icons';
 import {styles} from './styles';
 import {useNavigation} from '@react-navigation/native';
@@ -150,13 +150,13 @@ const CheckoutScreen = ({route}) => {
             </ScrollView>
           </View>
 
-          <TouchableOpacity
+          <CButton
             style={styles.paymentButton}
             onPress={() => {
               navigation.navigate(PAYMENT_METHOD);
-            }}>
-            <Text style={styles.paymentButtonText}>Continue to Payment</Text>
-          </TouchableOpacity>
+            }}
+            title={'Continue to Payment'}
+          />
         </View>
       </View>
     </CSafeAreaView>

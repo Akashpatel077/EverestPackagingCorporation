@@ -41,6 +41,7 @@ import {resetWishList} from 'src/store/slices/wishlistSlice';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {clearCookies} from 'src/services/wooCommerceApi';
 import {ScrollView} from 'react-native-gesture-handler';
+import {clearAddresses} from 'src/store/slices/addressSlice';
 
 const ProfileScreen = () => {
   const navigation = useNavigation();
@@ -140,6 +141,7 @@ const ProfileScreen = () => {
             dispatch(clearCart());
             dispatch(resetWishList());
             dispatch(setShowWelcome(true));
+            dispatch(clearAddresses());
             clearCookies();
             await AsyncStorage.setItem('userToken', '');
           },

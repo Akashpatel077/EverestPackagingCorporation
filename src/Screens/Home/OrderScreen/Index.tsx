@@ -11,7 +11,7 @@ import {useNavigation} from '@react-navigation/native';
 import {BackIcon, Heart} from 'assets/icons';
 import styles from './styles';
 import {REVIEW_SCREEN, TRACK_ORDER_SCREEN} from 'src/Navigation/home/routes';
-import {Header} from 'src/Components';
+import {CButton, Header} from 'src/Components';
 import {useDispatch, useSelector} from 'react-redux';
 import {fetchOrders} from 'src/store/slices/ordersSlice';
 import {AppDispatch} from '@store';
@@ -58,36 +58,28 @@ const OrderScreen = () => {
     switch (status) {
       case 'active':
         return (
-          <TouchableOpacity
+          <CButton
             style={styles.actionButton}
             onPress={() => {
               navigation.navigate(TRACK_ORDER_SCREEN);
-            }}>
-            <Text style={styles.actionButtonText}>Track Order</Text>
-          </TouchableOpacity>
+            }}
+            title={'Track Order'}
+          />
         );
       case 'completed':
         return (
-          <TouchableOpacity
-            style={styles.actionButton}
+          <CButton
             onPress={() => {
               navigation.navigate(REVIEW_SCREEN, {orderItem: item});
-            }}>
-            <Text style={styles.actionButtonText}>Leave Review</Text>
-          </TouchableOpacity>
+            }}
+            style={styles.actionButton}
+            title={'Leave Review'}
+          />
         );
       case 'cancelled':
-        return (
-          <TouchableOpacity style={styles.actionButton}>
-            <Text style={styles.actionButtonText}>Re-Order</Text>
-          </TouchableOpacity>
-        );
+        return <CButton style={styles.actionButton} title={'Re-Order'} />;
       case 'failed':
-        return (
-          <TouchableOpacity style={styles.actionButton}>
-            <Text style={styles.actionButtonText}>Re-Order</Text>
-          </TouchableOpacity>
-        );
+        return <CButton style={styles.actionButton} title={'Track Order'} />;
       default:
         return null;
     }

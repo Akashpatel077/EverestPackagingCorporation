@@ -56,16 +56,7 @@ export const styles = StyleSheet.create({
     right: 12,
     top: 12,
   },
-  saveButton: {
-    backgroundColor: '#0088cc',
-    padding: 16,
-    borderRadius: 10,
-    alignItems: 'center',
-    marginTop: 24,
-  },
-  saveButtonText: {
-    color: '#fff',
-    fontSize: 16,
-    fontFamily: 'Poppins-SemiBold',
+  saveChangesButton: {
+    marginTop: 10,
   },
 });

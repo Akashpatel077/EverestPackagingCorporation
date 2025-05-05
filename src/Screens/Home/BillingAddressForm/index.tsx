@@ -15,7 +15,7 @@ import {
   setSelectedShippingAddress,
 } from 'src/store/slices/addressSlice';
 import styles from './styles';
-import {CDropdown, CustomAlert, Header} from 'src/Components';
+import {CButton, CDropdown, CustomAlert, Header} from 'src/Components';
 import {BackIcon} from 'assets/icons';
 import {CHECKOUT, SHIPPING_ADDRESS_FORM} from 'src/Navigation/home/routes';
 import {Icon} from '../../../Components';
@@ -276,9 +276,7 @@ const BillingAddressForm: React.FC = ({route}) => {
             </TouchableOpacity>
           )}
 
-          <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-            <Text style={styles.buttonText}>SAVE ADDRESS</Text>
-          </TouchableOpacity>
+          <CButton onPress={handleSubmit} title={'SAVE ADDRESS'} />
         </ScrollView>
       </View>
       <CustomAlert

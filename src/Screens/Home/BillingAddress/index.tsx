@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {View, Text, TouchableOpacity, ScrollView} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {useSelector, useDispatch} from 'react-redux';
-import {Header, Icon, CustomAlert} from 'src/Components';
+import {Header, Icon, CustomAlert, CButton} from 'src/Components';
 import {BackIcon, Home, Close} from 'assets/icons';
 import {styles} from './styles';
 import {BILLING_ADDRESS_FORM} from 'src/Navigation/home/routes';
@@ -131,22 +131,19 @@ const BillingAddress = () => {
               ))
             : renderEmptyState()}
 
-          <TouchableOpacity
+          <CButton
+            textStyle={styles.addButtonText}
             style={[
               styles.addButton,
               !billingAddresses.length && {marginTop: 20},
             ]}
             onPress={() => {
               navigation.navigate(BILLING_ADDRESS_FORM, {hideCheckbox: true});
-            }}>
-            <Text style={styles.addButtonText}>Add New Billing Address</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            style={[
-              styles.applyButton,
-              !selectedAddressData && styles.disabledButton,
-            ]}
+            }}
+            title={'Add New Billing Address'}
+          />
+          <CButton
+            style={styles.applyButton}
             disabled={!selectedAddressData}
             onPress={() => {
               if (billingAddresses.length === 0) {
@@ -168,9 +165,9 @@ const BillingAddress = () => {
                 return;
               }
               navigation.goBack();
-            }}>
-            <Text style={styles.applyButtonText}>Apply</Text>
-          </TouchableOpacity>
+            }}
+            title={'Apply'}
+          />
         </ScrollView>
       </View>
       <CustomAlert

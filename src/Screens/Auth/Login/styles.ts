@@ -65,18 +65,6 @@ export const styles = StyleSheet.create({
     fontSize: 14,
     fontFamily: 'Poppins-Regular',
   },
-  signInButton: {
-    backgroundColor: '#0088cc',
-    height: 48,
-    borderRadius: 24,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  signInText: {
-    color: '#FFFFFF',
-    fontSize: 16,
-    fontFamily: 'Poppins-SemiBold',
-  },
   dividerContainer: {
     flexDirection: 'row',
     alignItems: 'center',

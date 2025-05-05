@@ -6,16 +6,19 @@ import {
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
-import {Header, Icon} from 'src/Components';
+import {CButton, CustomAlert, Header, Icon} from 'src/Components';
 import {BackIcon, Eye, Password_Hide} from 'assets/icons';
 import {styles} from './styles';
 import {useNavigation} from '@react-navigation/native';
 import CSafeAreaView from 'src/Components/CSafeAreaView';
-import {useAppSelector} from 'src/store/hooks';
+import {useAppDispatch, useAppSelector} from 'src/store/hooks';
+import {changePassword, updateProfile} from 'src/services/wooCommerceApi';
+import {fetchUserProfile, updateUserProfile} from 'src/store/slices/authSlice';
 
 const AccountDetails = () => {
   const navigation = useNavigation();
-  const {user} = useAppSelector((state: RootState) => state.auth);
+  const dispatch = useAppDispatch();
+  const {user, token} = useAppSelector((state: RootState) => state.auth);
   const {first_name, last_name, username, email} = user || {};
   const [formData, setFormData] = useState({
     firstName: first_name,
@@ -30,9 +33,117 @@ const AccountDetails = () => {
   const [showCurrentPassword, setShowCurrentPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
+  const [changePasswordLoading, setChangePasswordLoading] = useState(false);
+  const [updateProfileLoading, setUpdateProfileLoading] = useState(false);
+  const [alertConfig, setAlertConfig] = useState({
+    title: '',
+    description: '',
+    buttonText: '',
+    onPress: () => {},
+  });
 
-  const handleSaveChanges = () => {
-    // Implement save changes logic here
+  const disableSaveChangesButton =
+    !formData.firstName || !formData.lastName || !formData.displayName;
+
+  const disableSavePasswordButton =
+    !currentPassword || !newPassword || !confirmPassword;
+
+  const handleSaveChanges = async () => {
+    try {
+      setUpdateProfileLoading(true);
+
+      const updatedUserData = {
+        first_name: formData.firstName,
+        last_name: formData.lastName,
+        display_name: formData.displayName,
+      };
+
+      const response = await updateProfile(token, updatedUserData);
+
+      console.log('res update profile : ', response);
+
+      if (response.success) {
+        // Update user details in Redux store
+        await dispatch(updateUserProfile({token}));
+
+        setAlertConfig({
+          title: 'Success',
+          description: response.message,
+          buttonText: 'OK',
+          onPress: () => setShowAlert(false),
+        });
+        setShowAlert(true);
+      } else {
+        setAlertConfig({
+          title: 'Error',
+          description: response.message,
+          buttonText: 'OK',
+          onPress: () => setShowAlert(false),
+        });
+        setShowAlert(true);
+      }
+    } catch (error) {
+      setAlertConfig({
+        title: 'Error',
+        description: error.response.data.message,
+        buttonText: 'OK',
+        onPress: () => setShowAlert(false),
+      });
+    } finally {
+      setUpdateProfileLoading(false);
+    }
+  };
+
+  const handlePasswordChange = async () => {
+    try {
+      setChangePasswordLoading(true);
+      if (newPassword !== confirmPassword) {
+        setAlertConfig({
+          title: 'Attention',
+          description: 'Passwords do not match',
+          buttonText: 'OK',
+          onPress: () => setShowAlert(false),
+        });
+        setShowAlert(true);
+        return;
+      }
+
+      const response = await changePassword(
+        currentPassword,
+        newPassword,
+        token,
+      );
+
+      if (response.success) {
+        setAlertConfig({
+          title: 'Success',
+          description: response.message,
+          buttonText: 'OK',
+          onPress: () => setShowAlert(false),
+        });
+        setShowAlert(true);
+        return;
+      } else {
+        setAlertConfig({
+          title: 'Error',
+          description: response.message,
+          buttonText: 'OK',
+          onPress: () => setShowAlert(false),
+        });
+        setShowAlert(true);
+      }
+    } catch (error) {
+      setAlertConfig({
+        title: 'Error',
+        description: error.response.data.message,
+        buttonText: 'OK',
+        onPress: () => setShowAlert(false),
+      });
+      setShowAlert(true);
+    } finally {
+      setChangePasswordLoading(false);
+    }
   };
 
   return (
@@ -86,7 +197,8 @@ const AccountDetails = () => {
               Email address <Text style={styles.requiredStar}>*</Text>
             </Text>
             <TextInput
-              style={styles.input}
+              style={[styles.input, {color: '#666666'}]}
+              editable={false}
               value={formData.email}
               onChangeText={text => setFormData({...formData, email: text})}
               keyboardType="email-address"
@@ -157,13 +269,32 @@ const AccountDetails = () => {
             </View>
           </View>
 
-          <TouchableOpacity
-            style={styles.saveButton}
-            onPress={handleSaveChanges}>
-            <Text style={styles.saveButtonText}>SAVE CHANGES</Text>
-          </TouchableOpacity>
+          <CButton
+            disabled={disableSavePasswordButton || changePasswordLoading}
+            isLoading={changePasswordLoading}
+            onPress={handlePasswordChange}
+            title={'CHANGE PASSWORD'}
+          />
+
+          <CButton
+            disabled={disableSaveChangesButton || updateProfileLoading}
+            isLoading={updateProfileLoading}
+            style={styles.saveChangesButton}
+            onPress={handleSaveChanges}
+            title={'SAVE CHANGES'}
+          />
         </View>
       </ScrollView>
+      <CustomAlert
+        visible={showAlert}
+        title={alertConfig.title}
+        description={alertConfig.description}
+        button2={{
+          text: alertConfig.buttonText,
+          onPress: alertConfig.onPress,
+          color: alertConfig.title === 'Success' ? '#0088cc' : '#CC5656',
+        }}
+      />
     </CSafeAreaView>
   );
 };

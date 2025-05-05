@@ -105,15 +105,6 @@ export default StyleSheet.create({
     color: '#0088cc',
   },
   actionButton: {
-    backgroundColor: '#0088cc',
-    paddingHorizontal: 16,
-    paddingVertical: 8,
-    borderRadius: 20,
-    marginLeft: 12,
-  },
-  actionButtonText: {
-    color: '#FFFFFF',
-    fontSize: 14,
-    fontWeight: '600',
+    width: '40%',
   },
 });

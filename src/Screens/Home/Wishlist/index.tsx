@@ -2,7 +2,7 @@ import React from 'react';
 import {View, Text, Image, TouchableOpacity, FlatList} from 'react-native';
 import {styles} from './styles';
 import {Heart} from 'assets/icons';
-import {Header, Icon} from 'src/Components';
+import {CButton, Header, Icon} from 'src/Components';
 import {useNavigation} from '@react-navigation/native';
 import {PRODUCT_DETAILS} from 'src/Navigation/home/routes';
 import {useDispatch, useSelector} from 'react-redux';
@@ -91,12 +91,14 @@ const WishlistScreen = () => {
         <Header title="My Wishlist" />
         {!user ? (
           <View style={styles.wishListContainer}>
-            <Text style={styles.wishListTitle}>Login to see your Wishlist</Text>
-            <TouchableOpacity
+            <Text style={styles.wishListTitle}>
+              Login to add in Your Wishlist
+            </Text>
+            <CButton
               style={styles.loginButton}
-              onPress={() => dispatch(resetStartKey())}>
-              <Text style={styles.loginButtonText}>Login</Text>
-            </TouchableOpacity>
+              onPress={() => dispatch(resetStartKey())}
+              title={'Login'}
+            />
           </View>
         ) : (
           <FlatList

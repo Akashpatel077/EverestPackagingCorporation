@@ -62,22 +62,11 @@ const styles = StyleSheet.create({
   selectedTypeText: {
     color: '#fff',
   },
-  button: {
-    backgroundColor: '#0088cc',
-    padding: 16,
-    alignItems: 'center',
-    marginTop: 24,
-    borderRadius: 10,
-  },
-  buttonText: {
-    color: '#fff',
-    fontSize: 16,
-    fontFamily: 'Poppins-Bold',
-  },
   makeThisAsShippingAddress: {
     flexDirection: 'row',
     alignItems: 'center',
     alignSelf: 'flex-start',
+    marginBottom: 10,
   },
   shippingCheckBoxText: {
     fontSize: 14,

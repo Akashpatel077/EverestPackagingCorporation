@@ -62,18 +62,6 @@ const styles = StyleSheet.create({
   selectedTypeText: {
     color: '#fff',
   },
-  button: {
-    backgroundColor: '#0088cc',
-    padding: 16,
-    borderRadius: 10,
-    alignItems: 'center',
-    marginTop: 24,
-  },
-  buttonText: {
-    color: '#fff',
-    fontSize: 16,
-    fontFamily: 'Poppins-Bold',
-  },
 });
 
 export default styles;

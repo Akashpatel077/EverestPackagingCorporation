@@ -43,18 +43,6 @@ export const styles = StyleSheet.create({
     marginBottom: 8,
     fontFamily: 'Poppins-Regular',
   },
-  addButton: {
-    backgroundColor: '#0088cc',
-    borderRadius: 10,
-    padding: 12,
-    alignItems: 'center',
-    marginTop: 8,
-  },
-  addButtonText: {
-    color: '#FFFFFF',
-    fontSize: 16,
-    fontFamily: 'Poppins-SemiBold',
-  },
   addressInfo: {
     flexDirection: 'row',
     alignItems: 'flex-start',

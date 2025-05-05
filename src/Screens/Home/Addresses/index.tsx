@@ -2,7 +2,7 @@ import React from 'react';
 import {View, Text, TouchableOpacity, ScrollView} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {useSelector} from 'react-redux';
-import {Header, Icon} from 'src/Components';
+import {CButton, Header, Icon} from 'src/Components';
 import {BackIcon, Home, Location} from 'assets/icons';
 import {styles} from './styles';
 import {
@@ -49,11 +49,10 @@ const Addresses = () => {
           You have not set up this type of address yet.
         </Text>
       )}
-      <TouchableOpacity
-        style={styles.addButton}
-        onPress={() => navigation.navigate(formRoute)}>
-        <Text style={styles.addButtonText}>{`Add ${title}`}</Text>
-      </TouchableOpacity>
+      <CButton
+        onPress={() => navigation.navigate(formRoute)}
+        title={`Add ${title}`}
+      />
     </View>
   );
 

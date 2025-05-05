@@ -6,6 +6,7 @@ import FilePicker from './FilePicker';
 import CDropdown from './CDropdown';
 import LoadingOverlay from './LoadingOverlay';
 import CustomAlert from './CustomAlert';
+import CButton from './CButton';
 
 export {
   Carousel,
@@ -16,4 +17,5 @@ export {
   CDropdown,
   LoadingOverlay,
   CustomAlert,
+  CButton,
 };

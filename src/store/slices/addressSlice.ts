@@ -83,6 +83,12 @@ const addressSlice = createSlice({
     setSelectedShippingAddress: (state, action: PayloadAction<string>) => {
       state.selectedShippingAddressId = action.payload;
     },
+    clearAddresses: state => {
+      state.billingAddresses = [];
+      state.shippingAddresses = [];
+      state.selectedBillingAddressId = null;
+      state.selectedShippingAddressId = null;
+    },
   },
 });
 
@@ -95,6 +101,7 @@ export const {
   removeShippingAddress,
   setSelectedBillingAddress,
   setSelectedShippingAddress,
+  clearAddresses,
 } = addressSlice.actions;
 
 export default addressSlice.reducer;

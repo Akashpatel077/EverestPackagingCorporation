@@ -46,16 +46,4 @@ export const styles = StyleSheet.create({
     lineHeight: 20,
     fontFamily: 'Poppins-Regular',
   },
-  saveButton: {
-    backgroundColor: '#0088CC',
-    paddingVertical: 12,
-    paddingHorizontal: 24,
-    borderRadius: 8,
-    alignItems: 'center',
-  },
-  saveButtonText: {
-    color: '#FFFFFF',
-    fontSize: 16,
-    fontFamily: 'Poppins-SemiBold',
-  },
 });

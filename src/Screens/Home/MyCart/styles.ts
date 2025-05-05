@@ -133,7 +133,7 @@ export default StyleSheet.create({
     fontFamily: 'Poppins-Bold',
   },
   summaryContainer: {
-    marginBottom: 20,
+    marginBottom: 5,
   },
   summaryRow: {
     flexDirection: 'row',
@@ -153,6 +153,8 @@ export default StyleSheet.create({
     borderTopWidth: 1,
     borderTopColor: '#E0E0E0',
     paddingTop: 10,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   totalLabel: {
     fontSize: 18,
@@ -163,17 +165,7 @@ export default StyleSheet.create({
     fontFamily: 'Poppins-Bold',
     color: '#0088cc',
   },
-  checkoutButton: {
-    backgroundColor: '#0088cc',
-    borderRadius: 10,
-    padding: 15,
-    alignItems: 'center',
-  },
-  checkoutButtonText: {
-    color: 'white',
-    fontSize: 18,
-    fontFamily: 'Poppins-Bold',
-  },
+  checkoutButton: {},
   emptyCartContainer: {
     flex: 1,
     justifyContent: 'center',
@@ -199,17 +191,6 @@ export default StyleSheet.create({
     textAlign: 'center',
     fontFamily: 'Poppins-Regular',
     marginBottom: 30,
-  },
-  shopNowButton: {
-    backgroundColor: '#0088cc',
-    paddingHorizontal: 40,
-    paddingVertical: 15,
-    borderRadius: 10,
-  },
-  shopNowButtonText: {
-    color: 'white',
-    fontSize: 16,
-    fontFamily: 'Poppins-Bold',
   },
   modalOverlay: {
     flex: 1,
@@ -295,5 +276,17 @@ export default StyleSheet.create({
     fontSize: 16,
     fontFamily: 'Poppins-Regular',
     color: '#888888',
+  },
+  changePaymentMethodText: {
+    fontSize: 14,
+    color: '#0088cc',
+    marginBottom: 5,
+    fontFamily: 'Poppins-SemiBold',
+  },
+  changePaymentMethodButton: {
+    alignItems: 'center',
+  },
+  shopNowButton: {
+    width: '50%',
   },
 });

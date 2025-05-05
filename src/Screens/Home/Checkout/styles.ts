@@ -123,19 +123,11 @@ export const styles = StyleSheet.create({
     color: '#0088cc',
   },
   paymentButton: {
-    backgroundColor: '#0088cc',
-    padding: 15,
-    borderRadius: 10,
     alignItems: 'center',
     position: 'absolute',
     bottom: 8,
     left: 16,
     right: 16,
-  },
-  paymentButtonText: {
-    color: '#FFFFFF',
-    fontSize: 16,
-    fontWeight: '600',
   },
   itemSize: {
     fontSize: 14,

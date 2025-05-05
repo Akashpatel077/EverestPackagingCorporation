@@ -35,6 +35,7 @@ import {resetWishList} from 'src/store/slices/wishlistSlice';
 import {clearCookies} from 'src/services/wooCommerceApi';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import CSafeAreaView from 'src/Components/CSafeAreaView';
+import {clearAddresses} from 'src/store/slices/addressSlice';
 
 const Drawer = createDrawerNavigator();
 
@@ -135,6 +136,7 @@ const CustomDrawerContent = (props: any) => {
               dispatch(clearCart());
               dispatch(resetWishList());
               dispatch(setShowWelcome(true));
+              dispatch(clearAddresses());
               clearCookies();
               await AsyncStorage.setItem('userToken', '');
             },

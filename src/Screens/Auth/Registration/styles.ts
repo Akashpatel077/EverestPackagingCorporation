@@ -80,21 +80,6 @@ export const styles = StyleSheet.create({
     color: '#0088cc',
     textDecorationLine: 'underline',
   },
-  signUpButton: {
-    backgroundColor: '#0088cc',
-    height: 48,
-    borderRadius: 24,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  signUpButtonDisabled: {
-    backgroundColor: '#D3D3D3',
-  },
-  signUpButtonText: {
-    color: '#FFFFFF',
-    fontSize: 16,
-    fontFamily: 'Poppins-SemiBold',
-  },
   dividerContainer: {
     flexDirection: 'row',
     alignItems: 'center',

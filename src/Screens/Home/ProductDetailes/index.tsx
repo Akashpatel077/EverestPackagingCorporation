@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import {styles} from './styles';
 import {BackIcon, Heart} from 'assets/icons';
-import {CDropdown, Header, Icon, CustomAlert} from 'src/Components';
+import {CDropdown, Header, Icon, CustomAlert, CButton} from 'src/Components';
 import {useAppDispatch, useAppSelector} from 'src/store/hooks';
 import {fetchProductDetails} from '../../../store/slices/productDetailsSlice';
 import {
@@ -502,11 +502,7 @@ const ProductDetails = ({navigation, route}) => {
                         paddingVertical: 10,
                       }}
                       onPress={() => setIsExpanded(prevValue => !prevValue)}>
-                      <Text
-                        style={[
-                          styles.readMore,
-                          {color: '#0088cc', fontWeight: '600'},
-                        ]}>
+                      <Text style={[styles.readMore, {color: '#0088cc'}]}>
                         {isExpanded ? 'Read less' : 'Read more'}
                       </Text>
                     </TouchableOpacity>
@@ -535,12 +531,10 @@ const ProductDetails = ({navigation, route}) => {
                   color={isInWishlist ? '#CC5656' : '#ffffff'}
                 />
               </TouchableOpacity>
-              <TouchableOpacity
-                style={[
-                  styles.addToCartButton,
-                  {opacity: isOutOfStock || isLoading ? 0.8 : 1},
-                ]}
+              <CButton
                 disabled={isLoading}
+                isLoading={isLoading}
+                style={styles.addToCartButton}
                 onPress={() => {
                   if (isOutOfStock) {
                   } else if (isVariationNotAvailable) {
@@ -556,11 +550,9 @@ const ProductDetails = ({navigation, route}) => {
                       }),
                     );
                   }
-                }}>
-                <Text style={styles.addToCartText}>
-                  {isOutOfStock ? 'Out of Stock' : '🛍 Add to Cart'}
-                </Text>
-              </TouchableOpacity>
+                }}
+                title={isOutOfStock ? 'Out of Stock' : '🛍 Add to Cart'}
+              />
             </View>
           </View>
         )}

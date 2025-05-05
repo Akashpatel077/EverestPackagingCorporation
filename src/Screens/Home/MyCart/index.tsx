@@ -14,11 +14,12 @@ import {
   BILLING_ADDRESS_FORM,
   CATEGORY_SCREEN,
   CHECKOUT,
+  PAYMENT_METHOD,
   PAYMENT_SUCCESS_SCREEN,
   PAYMENT_WEBVIEW,
   SHIPPING_ADDRESS_FORM,
 } from 'src/Navigation/home/routes';
-import {CustomAlert, Header} from 'src/Components';
+import {CButton, CustomAlert, Header} from 'src/Components';
 import {decode} from 'he';
 import {
   clearCart,
@@ -320,11 +321,11 @@ const MyCart = ({}) => {
             <Text style={styles.emptyCartText}>
               Looks like you haven't added anything to your cart yet
             </Text>
-            <TouchableOpacity
+            <CButton
               style={styles.shopNowButton}
-              onPress={() => navigation.navigate(CATEGORY_SCREEN)}>
-              <Text style={styles.shopNowButtonText}>Shop Now</Text>
-            </TouchableOpacity>
+              onPress={() => navigation.navigate(CATEGORY_SCREEN)}
+              title={'Shop Now'}
+            />
           </View>
         </View>
       </CSafeAreaView>
@@ -412,15 +413,20 @@ const MyCart = ({}) => {
               </Text>
             </View>
 
+            {selectedPaymentMethod === 'cod' && (
+              <View style={styles.summaryRow}>
+                <Text style={[styles.summaryLabel, {color: '#555555'}]}>
+                  Cash on Delivery
+                </Text>
+                <Text style={styles.summaryValue}>₹50.00</Text>
+              </View>
+            )}
+
             {tax_lines?.length > 0 &&
               tax_lines.map((item, index) => {
                 return (
                   <View key={index} style={styles.summaryRow}>
-                    <Text
-                      style={[
-                        styles.summaryLabel,
-                        {color: '#555555', fontWeight: '900'},
-                      ]}>
+                    <Text style={[styles.summaryLabel, {color: '#555555'}]}>
                       {item.name && item.name?.trim()}
                     </Text>
                     <Text style={styles.summaryValue}>
@@ -429,7 +435,7 @@ const MyCart = ({}) => {
                   </View>
                 );
               })}
-            <View style={[styles.summaryRow, styles.totalRow]}>
+            <View style={[styles.totalRow]}>
               <Text style={styles.totalLabel}>Total Cost</Text>
               <Text style={styles.totalValue}>
                 ₹{getFormattedPrice(total_price, currency_minor_unit)}
@@ -437,10 +443,21 @@ const MyCart = ({}) => {
             </View>
           </View>
 
+          {selectedPaymentMethod && (
+            <TouchableOpacity
+              style={styles.changePaymentMethodButton}
+              onPress={() => navigation.navigate(PAYMENT_METHOD)}>
+              <Text style={styles.changePaymentMethodText}>
+                Change Payment Method
+              </Text>
+            </TouchableOpacity>
+          )}
+
           {/* Checkout Button */}
-          <TouchableOpacity
-            disabled={paymentLoading}
+          <CButton
             style={styles.checkoutButton}
+            disabled={paymentLoading}
+            isLoading={paymentLoading}
             onPress={() => {
               if (selectedPaymentMethod) {
                 processPayment();
@@ -454,11 +471,11 @@ const MyCart = ({}) => {
               } else {
                 navigation.navigate(CHECKOUT);
               }
-            }}>
-            <Text style={styles.checkoutButtonText}>
-              {selectedPaymentMethod ? 'Place Order' : 'Proceed to Checkout'}
-            </Text>
-          </TouchableOpacity>
+            }}
+            title={
+              selectedPaymentMethod ? 'Place Order' : 'Proceed to Checkout'
+            }
+          />
 
           {/* Remove Confirmation Modal */}
           <Modal

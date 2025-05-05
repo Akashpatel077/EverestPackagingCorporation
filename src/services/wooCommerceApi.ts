@@ -61,6 +61,24 @@ export const fetchUserProfileApi = async (token: string) => {
   }
 };
 
+export const fetchUserProfileDetails = async (token: string) => {
+  try {
+    const response = await axios.get(
+      `${AUTH_BASE_URL}/wp-json/custom/v1/profile`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      },
+    );
+
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export const fetchUserDetails = async (id: number, token: string) => {
   try {
     const response = await wooCommerceApi.get(`/customers/${id}`, {
@@ -69,6 +87,58 @@ export const fetchUserDetails = async (id: number, token: string) => {
         'Content-Type': 'application/json',
       },
     });
+
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const changePassword = async (
+  currentPassword: string,
+  newPassword: string,
+  token: string,
+) => {
+  try {
+    const response = await axios.post(
+      `${AUTH_BASE_URL}/wp-json/custom/v1/change-password`,
+      {
+        current_password: currentPassword,
+        new_password: newPassword,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      },
+    );
+
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const updateProfile = async (
+  token: string,
+  userInfo: {
+    first_name: string;
+    last_name: string;
+    display_name: string;
+  },
+) => {
+  try {
+    const response = await axios.post(
+      `${AUTH_BASE_URL}/wp-json/custom/v1/profile`,
+      userInfo,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      },
+    );
 
     return response.data;
   } catch (error) {

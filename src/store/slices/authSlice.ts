@@ -3,6 +3,7 @@ import {
   loginUserApi,
   fetchUserProfileApi,
   fetchUserDetails,
+  fetchUserProfileDetails,
 } from '../../services/wooCommerceApi';
 import {addBillingAddress, addShippingAddress} from './addressSlice';
 
@@ -70,6 +71,19 @@ export const loginUser = createAsyncThunk(
   },
 );
 
+export const updateUserProfile = createAsyncThunk(
+  'auth/updateProfile',
+  async ({token}: {token: string}) => {
+    try {
+      const userProfile = await fetchUserProfileDetails(token);
+
+      return userProfile;
+    } catch (error: any) {
+      throw error.response?.data?.message || 'Failed to fetch profile';
+    }
+  },
+);
+
 export const fetchUserProfile = createAsyncThunk(
   'auth/fetchProfile',
   async (token: string) => {
@@ -120,6 +134,19 @@ const authSlice = createSlice({
       .addCase(fetchUserProfile.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message || 'Failed to fetch profile';
+      })
+      .addCase(updateUserProfile.pending, state => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(updateUserProfile.fulfilled, (state, action) => {
+        state.loading = false;
+        state.user = action.payload;
+        state.error = null;
+      })
+      .addCase(updateUserProfile.rejected, (state, action) => {
+        state.loading = false;
+        state.error = (action.payload as string) || 'Failed to update profile';
       });
   },
 });

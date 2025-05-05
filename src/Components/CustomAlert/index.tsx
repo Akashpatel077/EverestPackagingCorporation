@@ -1,12 +1,6 @@
 import React from 'react';
-import {
-  Modal,
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  Dimensions,
-} from 'react-native';
+import {Modal, View, Text, StyleSheet, Dimensions} from 'react-native';
+import CButton from '../CButton';
 
 const {width} = Dimensions.get('window');
 
@@ -32,33 +26,29 @@ const CustomAlert: React.FC<CustomAlertProps> = ({
   button2,
 }) => {
   return (
-    <Modal visible={visible} transparent animationType="none">
+    <Modal visible={visible} transparent animationType="fade">
       <View style={styles.overlay}>
         <View style={styles.container}>
           <Text style={styles.title}>{title}</Text>
           <Text style={styles.description}>{description}</Text>
           <View style={styles.buttonContainer}>
             {button1 && (
-              <TouchableOpacity
+              <CButton
                 style={[
                   styles.button,
                   {backgroundColor: button1.color || '#007bff'},
                 ]}
-                onPress={button1.onPress}>
-                <Text style={[styles.buttonText, {color: '#000000'}]}>
-                  {button1.text}
-                </Text>
-              </TouchableOpacity>
+                textStyle={styles.buttonText}
+                onPress={button1.onPress}
+                title={button1.text}
+              />
             )}
             {button2 && (
-              <TouchableOpacity
-                style={[
-                  styles.button,
-                  {backgroundColor: button2.color || '#6c757d'},
-                ]}
-                onPress={button2.onPress}>
-                <Text style={styles.buttonText}>{button2.text}</Text>
-              </TouchableOpacity>
+              <CButton
+                style={styles.button}
+                onPress={button2.onPress}
+                title={button2.text}
+              />
             )}
           </View>
         </View>
@@ -103,13 +93,9 @@ const styles = StyleSheet.create({
   },
   button: {
     width: '40%',
-    paddingVertical: 12,
-    marginHorizontal: 5,
-    borderRadius: 10,
-    alignItems: 'center',
   },
   buttonText: {
-    color: '#fff',
+    color: '#000000',
     fontFamily: 'Poppins-SemiBold',
   },
 });

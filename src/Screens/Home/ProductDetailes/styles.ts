@@ -253,18 +253,8 @@ export const styles = StyleSheet.create({
     fontFamily: 'Poppins-SemiBold',
   },
   addToCartButton: {
-    // flex: 1,
-    backgroundColor: '#0088cc',
-    borderRadius: 10,
-    padding: 8,
-    marginLeft: 16,
-    alignItems: 'center',
-  },
-  addToCartText: {
-    color: '#FFFFFF',
-    fontSize: 16,
-    fontWeight: '600',
-    fontFamily: 'Poppins-SemiBold',
+    width: '40%',
+    marginLeft: 10,
   },
   alertLabel: {
     fontSize: 15,

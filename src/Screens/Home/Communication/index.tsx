@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
-import {Header, Icon} from 'src/Components';
+import {CButton, Header, Icon} from 'src/Components';
 import {BackIcon, CheckSquare, UncheckSquareNew} from 'assets/icons';
 import {styles} from './styles';
 import CSafeAreaView from 'src/Components/CSafeAreaView';
@@ -50,11 +50,7 @@ const CommunicationScreen = () => {
             </TouchableOpacity>
           </View>
 
-          <TouchableOpacity
-            style={styles.saveButton}
-            onPress={handleSavePreferences}>
-            <Text style={styles.saveButtonText}>Save preferences</Text>
-          </TouchableOpacity>
+          <CButton onPress={handleSavePreferences} title={'Save preferences'} />
         </View>
       </View>
     </CSafeAreaView>

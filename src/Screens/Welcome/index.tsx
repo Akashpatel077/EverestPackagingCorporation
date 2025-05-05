@@ -13,6 +13,7 @@ import {HOMESCREEN} from 'src/Navigation/home/routes';
 import {LOGIN} from 'src/Navigation/auth/routes';
 import {useDispatch} from 'react-redux';
 import {setShowWelcome, setStartKey} from 'src/store/slices/startKeySlice';
+import {CButton} from 'src/Components';
 
 const fashionImages = [
   'https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=800',
@@ -115,14 +116,13 @@ const Welcome = () => {
           eiusmod tempor incididunt
         </Text>
 
-        <TouchableOpacity
-          style={styles.button}
+        <CButton
           onPress={() => {
             dispatch(setStartKey('user'));
             dispatch(setShowWelcome(false));
-          }}>
-          <Text style={styles.buttonText}>Let's Get Started</Text>
-        </TouchableOpacity>
+          }}
+          title={"Let's Get Started"}
+        />
 
         <View style={styles.signInContainer}>
           <Text style={styles.signInText}>Already have an account? </Text>
@@ -188,24 +188,11 @@ const styles = StyleSheet.create({
     marginBottom: 32,
     fontFamily: 'Poppins-Regular',
   },
-  button: {
-    backgroundColor: '#0088cc',
-    paddingVertical: 16,
-    paddingHorizontal: 32,
-    borderRadius: 30,
-    width: '100%',
-    marginBottom: 24,
-  },
-  buttonText: {
-    color: '#FFFFFF',
-    fontSize: 18,
-    fontWeight: '600',
-    textAlign: 'center',
-  },
   signInContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
+    marginTop: 24,
   },
   signInText: {
     fontSize: 16,

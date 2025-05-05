@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {View, Text, TouchableOpacity, ScrollView, Alert} from 'react-native';
-import {CustomAlert, Header, Icon} from 'src/Components';
+import {CButton, CustomAlert, Header, Icon} from 'src/Components';
 import {Home, BackIcon, Close} from 'assets/icons';
 import {styles} from './styles';
 import {useNavigation} from '@react-navigation/native';
@@ -89,26 +89,27 @@ const ShippingAddressScreen = () => {
               ))
             : null}
 
-          <TouchableOpacity
+          <CButton
+            textStyle={styles.addButtonText}
             style={[
               styles.addButton,
               !shippingAddresses.length && {marginTop: 20},
             ]}
             onPress={() => {
               navigation.navigate(SHIPPING_ADDRESS_FORM);
-            }}>
-            <Text style={styles.addButtonText}>Add New Shipping Address</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
+            }}
+            title={'Add New Shipping Address'}
+          />
+          <CButton
             style={styles.applyButton}
+            disabled={!selectedAddressData}
             onPress={() => {
               navigation.navigate(CHECKOUT, {
                 selectedAddress: selectedAddressData,
               });
-            }}>
-            <Text style={styles.applyButtonText}>Apply</Text>
-          </TouchableOpacity>
+            }}
+            title={'Apply'}
+          />
         </ScrollView>
       </View>
       <CustomAlert

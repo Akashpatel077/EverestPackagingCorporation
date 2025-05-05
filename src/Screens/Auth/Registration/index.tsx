@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import {styles} from './styles';
 import {useTranslation} from 'react-i18next';
-import {Icon, CustomAlert} from '../../../Components';
+import {Icon, CustomAlert, CButton} from '../../../Components';
 import {
   CheckSquare,
   UncheckSquareNew,
@@ -198,21 +198,12 @@ const Registration = () => {
             </Text>
           </TouchableOpacity>
 
-          <TouchableOpacity
-            style={[
-              styles.signUpButton,
-              isSignUpDisabled && styles.signUpButtonDisabled,
-            ]}
+          <CButton
+            isLoading={isLoading}
+            onPress={handleSignUp}
             disabled={isSignUpDisabled}
-            onPress={handleSignUp}>
-            {isLoading ? (
-              <ActivityIndicator color="#0088cc" />
-            ) : (
-              <Text style={styles.signUpButtonText}>
-                {t('common.signUp') || 'Sign Up'}
-              </Text>
-            )}
-          </TouchableOpacity>
+            title={t('common.signUp') || 'Sign Up'}
+          />
 
           <View style={styles.dividerContainer}>
             <View style={styles.dividerLine} />

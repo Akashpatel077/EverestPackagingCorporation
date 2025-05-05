@@ -1,19 +1,15 @@
 import React, {useEffect, useState} from 'react';
 import {
-  SafeAreaView,
   Text,
   View,
   TextInput,
   TouchableOpacity,
-  Image,
-  ActivityIndicator,
-  Alert,
   BackHandler,
   ScrollView,
 } from 'react-native';
 import {styles} from './styles';
 import {useTranslation} from 'react-i18next';
-import {CustomAlert, Icon, LoadingOverlay} from '../../../Components';
+import {CButton, CustomAlert, Icon} from '../../../Components';
 import {ic_Apple, ic_Facebook, ic_Google} from '../../../../assets/icons';
 import {loginWithGoogle} from 'src/services/firebase-services';
 import {useNavigation} from '@react-navigation/native';
@@ -103,14 +99,12 @@ const Login = () => {
           </Text>
         </TouchableOpacity>
 
-        <TouchableOpacity
+        <CButton
+          isLoading={loading}
+          onPress={handleLogin}
           disabled={isButtonDisabled}
-          style={[styles.signInButton, {opacity: isButtonDisabled ? 0.7 : 1}]}
-          onPress={handleLogin}>
-          <Text style={styles.signInText}>{t('common.signIn')}</Text>
-        </TouchableOpacity>
-        {/* {error && <Text style={styles.errorText}>{error}</Text>} */}
-        {/* {loading && <ActivityIndicator size="large" color="#0000ff" />} */}
+          title={t('common.signIn')}
+        />
 
         <View style={styles.dividerContainer}>
           <View style={styles.dividerLine} />
@@ -157,7 +151,6 @@ const Login = () => {
           color: '#0088cc',
         }}
       />
-      <LoadingOverlay visible={loading} />
     </CSafeAreaView>
   );
 };
