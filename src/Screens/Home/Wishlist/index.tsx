@@ -1,14 +1,7 @@
-import React, {useState, useMemo} from 'react';
-import {
-  View,
-  Text,
-  Image,
-  TouchableOpacity,
-  FlatList,
-  SafeAreaView,
-} from 'react-native';
+import React from 'react';
+import {View, Text, Image, TouchableOpacity, FlatList} from 'react-native';
 import {styles} from './styles';
-import {BackIcon, Heart} from 'assets/icons';
+import {Heart} from 'assets/icons';
 import {Header, Icon} from 'src/Components';
 import {useNavigation} from '@react-navigation/native';
 import {PRODUCT_DETAILS} from 'src/Navigation/home/routes';
@@ -18,38 +11,14 @@ import {
   removeFromWishlist,
 } from 'src/store/slices/wishlistSlice';
 import CSafeAreaView from 'src/Components/CSafeAreaView';
+import {resetStartKey} from 'src/store/slices/startKeySlice';
 
 const WishlistScreen = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  const [selectedCategory, setSelectedCategory] = useState('All');
+  const {user} = useSelector(state => state.auth);
 
   const wishlistItems = useSelector(selectWishlistItems) || [];
-
-  const categories = useMemo(() => {
-    const uniqueCategories = new Set(['All']);
-    if (Array.isArray(wishlistItems)) {
-      wishlistItems.forEach(item => {
-        if (
-          item?.categories &&
-          Array.isArray(item.categories) &&
-          item.categories.length > 0
-        ) {
-          item.categories.forEach(
-            cat => cat?.name && uniqueCategories.add(cat.name),
-          );
-        }
-      });
-    }
-    return Array.from(uniqueCategories);
-  }, [wishlistItems]);
-
-  const filteredItems = useMemo(() => {
-    if (selectedCategory === 'All') return wishlistItems;
-    return wishlistItems.filter(item =>
-      item.categories?.some(cat => cat.name === selectedCategory),
-    );
-  }, [selectedCategory, wishlistItems]);
 
   const handleRemoveFromWishlist = (productId: number) => {
     dispatch(removeFromWishlist(productId));
@@ -58,10 +27,10 @@ const WishlistScreen = () => {
   const renderWishlistItem = ({item, index}: any) => {
     const isOutOfStock = item.stock_status === 'outofstock';
 
-    const isLastItem = index === filteredItems.length - 1;
+    const isLastItem = index === wishlistItems.length - 1;
     const isInLastRow =
-      Math.floor(index / 2) === Math.floor((filteredItems.length - 1) / 2);
-    const needsExtraMargin = isLastItem && filteredItems.length % 2 === 1;
+      Math.floor(index / 2) === Math.floor((wishlistItems.length - 1) / 2);
+    const needsExtraMargin = isLastItem && wishlistItems.length % 2 === 1;
     return (
       <TouchableOpacity
         style={[
@@ -104,12 +73,12 @@ const WishlistScreen = () => {
                 {item.sale_price ? `₹${item.sale_price}` : `₹${item.price}`}
               </Text>
             </View>
-            <View style={styles.ratingContainer}>
+            {/* <View style={styles.ratingContainer}>
               <Text style={styles.ratingIcon}>⭐</Text>
               <Text style={styles.ratingText}>
                 {item.average_rating || '0.0'}
               </Text>
-            </View>
+            </View> */}
           </View>
         </View>
       </TouchableOpacity>
@@ -120,13 +89,18 @@ const WishlistScreen = () => {
     <CSafeAreaView removeBottomSafeArea>
       <View style={[styles.container, {}]}>
         <Header title="My Wishlist" />
-        {false ? (
+        {!user ? (
           <View style={styles.wishListContainer}>
             <Text style={styles.wishListTitle}>Login to see your Wishlist</Text>
+            <TouchableOpacity
+              style={styles.loginButton}
+              onPress={() => dispatch(resetStartKey())}>
+              <Text style={styles.loginButtonText}>Login</Text>
+            </TouchableOpacity>
           </View>
         ) : (
           <FlatList
-            data={filteredItems}
+            data={wishlistItems}
             renderItem={renderWishlistItem}
             numColumns={2}
             ListEmptyComponent={

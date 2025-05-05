@@ -92,7 +92,7 @@ const SearchScreen = () => {
             name={Search}
             width={20}
             height={20}
-            color="#333333"
+            color="#ffffff"
             style={styles.searchIcon}
           />
           <TextInput

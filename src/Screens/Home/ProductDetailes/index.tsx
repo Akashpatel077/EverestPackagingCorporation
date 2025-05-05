@@ -403,7 +403,7 @@ const ProductDetails = ({navigation, route}) => {
                     <Text style={styles.sectionTitle}>
                       Select Color
                       {selectedColor && (
-                        <Text style={[styles.sectionTitle, {color: '#0088cc'}]}>
+                        <Text style={[styles.sectionTitle, {color: '#666666'}]}>
                           {` : ${selectedColor}`}
                         </Text>
                       )}

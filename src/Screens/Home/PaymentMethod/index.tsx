@@ -61,6 +61,7 @@ const PaymentMethodScreen = () => {
                           routes: [
                             {
                               name: MYCART,
+                              params: {isRazorPay},
                             },
                           ],
                         },

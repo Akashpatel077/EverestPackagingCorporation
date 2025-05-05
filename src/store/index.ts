@@ -26,12 +26,21 @@ const rootReducer = combineReducers({
 
 const persistedReducer = createPersistedReducer(rootReducer);
 
+const asyncDispatchMiddleware = () => (next: any) => (action: any) => {
+  const {asyncDispatch, ...rest} = action;
+  const result = next(rest);
+  if (asyncDispatch) {
+    asyncDispatch(store.dispatch);
+  }
+  return result;
+};
+
 const store = configureStore({
   reducer: persistedReducer,
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
       serializableCheck: false,
-    }),
+    }).concat(asyncDispatchMiddleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

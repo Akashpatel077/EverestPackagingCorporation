@@ -158,20 +158,37 @@ export const styles = StyleSheet.create({
   },
   emptyContainer: {
     flex: 1,
+    marginTop: 20,
     justifyContent: 'center',
     alignItems: 'center',
   },
   emptyText: {
-    fontFamily: 'Poppins-SemiBold',
+    fontFamily: 'Poppins-Regular',
     fontSize: 18,
   },
   wishListContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    paddingHorizontal: 20,
   },
   wishListTitle: {
-    fontFamily: 'Poppins-Medium',
     fontSize: 16,
+    fontFamily: 'Poppins-Regular',
+    color: '#333333',
+    marginBottom: 20,
+    textAlign: 'center',
+  },
+  loginButton: {
+    backgroundColor: '#0088cc',
+    paddingHorizontal: 40,
+    paddingVertical: 12,
+    borderRadius: 10,
+    marginTop: 16,
+  },
+  loginButtonText: {
+    color: '#FFFFFF',
+    fontSize: 16,
+    fontFamily: 'Poppins-SemiBold',
   },
 });

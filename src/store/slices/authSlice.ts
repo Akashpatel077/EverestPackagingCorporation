@@ -4,6 +4,7 @@ import {
   fetchUserProfileApi,
   fetchUserDetails,
 } from '../../services/wooCommerceApi';
+import {addBillingAddress, addShippingAddress} from './addressSlice';
 
 interface AuthState {
   token: string | null;
@@ -21,17 +22,50 @@ const initialState: AuthState = {
 
 export const loginUser = createAsyncThunk(
   'auth/login',
-  async ({username, password}: {username: string; password: string}) => {
+  async (
+    {username, password}: {username: string; password: string},
+    thunkAPI,
+  ) => {
     try {
       const data = await loginUserApi(username, password);
-      // After successful login, fetch user profile
       const userProfile = await fetchUserProfileApi(data.token);
-
       const userDetails = await fetchUserDetails(userProfile.id, data.token);
+
+      // Dispatch billing address
+      if (userDetails?.billing) {
+        const billingAddress = {
+          id: Date.now().toString(),
+          name: `${userDetails.billing.first_name} ${userDetails.billing.last_name}`,
+          street: userDetails.billing.address_1,
+          city: userDetails.billing.city,
+          state: userDetails.billing.state,
+          postcode: userDetails.billing.postcode,
+          country: userDetails.billing.country,
+          phone: userDetails.billing.phone,
+          isDefault: true,
+        };
+        thunkAPI.dispatch(addBillingAddress(billingAddress));
+      }
+
+      // Dispatch shipping address
+      if (userDetails?.shipping) {
+        const shippingAddress = {
+          id: Date.now().toString(),
+          name: `${userDetails.shipping.first_name} ${userDetails.shipping.last_name}`,
+          street: userDetails.shipping.address_1,
+          city: userDetails.shipping.city,
+          state: userDetails.shipping.state,
+          postcode: userDetails.shipping.postcode,
+          country: userDetails.shipping.country,
+          phone: userDetails.billing?.phone || '',
+          isDefault: true,
+        };
+        thunkAPI.dispatch(addShippingAddress(shippingAddress));
+      }
 
       return {token: data.token, user: userDetails};
     } catch (error: any) {
-      throw error.response?.data || 'Login failed';
+      return thunkAPI.rejectWithValue(error.response?.data || 'Login failed');
     }
   },
 );
@@ -74,7 +108,7 @@ const authSlice = createSlice({
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error || 'Login failed';
+        state.error = (action.payload as string) || 'Login failed';
       })
       .addCase(fetchUserProfile.pending, state => {
         state.loading = true;

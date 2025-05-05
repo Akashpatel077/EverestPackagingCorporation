@@ -204,7 +204,7 @@ export default StyleSheet.create({
     backgroundColor: '#0088cc',
     paddingHorizontal: 40,
     paddingVertical: 15,
-    borderRadius: 25,
+    borderRadius: 10,
   },
   shopNowButtonText: {
     color: 'white',

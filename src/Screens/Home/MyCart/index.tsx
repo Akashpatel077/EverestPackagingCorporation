@@ -4,29 +4,31 @@ import {
   Text,
   Image,
   TouchableOpacity,
-  TextInput,
   FlatList,
   Modal,
-  StatusBar,
 } from 'react-native';
-import {useNavigation, useRoute} from '@react-navigation/native';
+import {CommonActions, useNavigation, useRoute} from '@react-navigation/native';
 import {useSelector, useDispatch} from 'react-redux';
 import styles from './styles';
 import {
   BILLING_ADDRESS_FORM,
   CATEGORY_SCREEN,
   CHECKOUT,
+  PAYMENT_SUCCESS_SCREEN,
+  PAYMENT_WEBVIEW,
   SHIPPING_ADDRESS_FORM,
 } from 'src/Navigation/home/routes';
-import {Header} from 'src/Components';
+import {CustomAlert, Header} from 'src/Components';
 import {decode} from 'he';
 import {
+  clearCart,
   removeFromCartAction,
   resetFlags,
   updateProductInCartAction,
 } from 'src/store/slices/cartSlice';
 import CSafeAreaView from 'src/Components/CSafeAreaView';
 import {resetStartKey, setShowWelcome} from 'src/store/slices/startKeySlice';
+import {cartCheckout} from 'src/services/wooCommerceApi';
 
 interface CartItem {
   key: string;
@@ -58,7 +60,19 @@ const getFormattedPrice = (price: string, currencyMinorUnit: number) => {
 
 const MyCart = ({}) => {
   const navigation = useNavigation();
+  const route = useRoute();
+  const {isRazorPay} = route.params || {};
   const addresses = useSelector((state: any) => state.address);
+  const [paymentLoading, setPaymentLoading] = useState(false);
+  const [alertVisible, setAlertVisible] = useState(false);
+  const [alertMessage, setAlertMessage] = useState('');
+  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState('');
+  useEffect(() => {
+    if (isRazorPay !== undefined) {
+      console.log('Payment Method:', isRazorPay ? 'Razorpay' : 'COD');
+      setSelectedPaymentMethod(isRazorPay ? 'razorpay' : 'cod');
+    }
+  }, [isRazorPay]);
 
   const selectedShippingAddress = addresses.shippingAddresses.find(
     (address: any) => address.id === addresses.selectedShippingAddressId,
@@ -87,7 +101,13 @@ const MyCart = ({}) => {
   const [promoCode, setPromoCode] = useState('');
   const [showRemoveModal, setShowRemoveModal] = useState(false);
   const [selectedItem, setSelectedItem] = useState<CartItem | null>(null);
-
+  const {
+    billingAddresses,
+    shippingAddresses,
+    selectedShippingAddressId,
+    selectedBillingAddressId,
+  } = useSelector(item => item.address);
+  const {user} = useSelector(item => item.auth);
   useEffect(() => {
     if (isSuccess) {
       setShowRemoveModal(false);
@@ -195,6 +215,95 @@ const MyCart = ({}) => {
         </TouchableOpacity>
       </View>
     );
+  };
+
+  const processPayment = async () => {
+    const selectedBillingAddress = billingAddresses.filter(
+      item => item.id === selectedBillingAddressId,
+    );
+    const selectedShippingAddress = shippingAddresses.filter(
+      item => item.id === selectedShippingAddressId,
+    );
+    if (
+      selectedBillingAddress.length > 0 &&
+      selectedShippingAddress.length > 0
+    ) {
+      try {
+        setPaymentLoading(true);
+        const checkoutData = {
+          // customer_id: user.id,
+          billing_address: {
+            ...selectedBillingAddress[0],
+            country: 'IN',
+            email: user.email ?? '',
+            phone: user.billing.phone ?? '',
+          },
+          shipping_address: {
+            ...selectedShippingAddress[0],
+            country: 'IN',
+          },
+          customer_note: '',
+          create_account: false,
+          payment_method: selectedPaymentMethod,
+          payment_data: [],
+          extensions: {},
+        };
+        const checkoutResponse = await cartCheckout(checkoutData);
+
+        if (
+          selectedPaymentMethod === 'cod' &&
+          checkoutResponse.payment_result.payment_status === 'success'
+        ) {
+          dispatch(clearCart());
+          navigation.dispatch(
+            CommonActions.reset({
+              index: 0,
+              routes: [
+                {
+                  name: 'HomeDrawer',
+                  state: {
+                    index: 0,
+                    routes: [
+                      {
+                        name: 'Home',
+                        state: {
+                          index: 0,
+                          routes: [
+                            {
+                              name: 'Cart',
+                              state: {
+                                index: 0,
+                                routes: [
+                                  {
+                                    name: PAYMENT_SUCCESS_SCREEN,
+                                  },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+              ],
+            }),
+          );
+        } else if (
+          checkoutResponse.status &&
+          checkoutResponse.payment_result.redirect_url
+        ) {
+          navigation.navigate(PAYMENT_WEBVIEW, {
+            redirectUrl: checkoutResponse.payment_result.redirect_url,
+          });
+        }
+      } catch (error) {
+        setAlertMessage(error?.response?.data?.message ?? error.message);
+        setAlertVisible(true);
+      } finally {
+        setPaymentLoading(false);
+      }
+    }
   };
 
   if (!cartItems || cartItems.length === 0) {
@@ -330,9 +439,12 @@ const MyCart = ({}) => {
 
           {/* Checkout Button */}
           <TouchableOpacity
+            disabled={paymentLoading}
             style={styles.checkoutButton}
             onPress={() => {
-              if (hasStarted) {
+              if (selectedPaymentMethod) {
+                processPayment();
+              } else if (hasStarted) {
                 dispatch(resetStartKey());
                 dispatch(setShowWelcome(false));
               } else if (!selectedBillingAddress) {
@@ -343,7 +455,9 @@ const MyCart = ({}) => {
                 navigation.navigate(CHECKOUT);
               }
             }}>
-            <Text style={styles.checkoutButtonText}>Proceed to Checkout</Text>
+            <Text style={styles.checkoutButtonText}>
+              {selectedPaymentMethod ? 'Place Order' : 'Proceed to Checkout'}
+            </Text>
           </TouchableOpacity>
 
           {/* Remove Confirmation Modal */}
@@ -422,6 +536,16 @@ const MyCart = ({}) => {
           </Modal>
         </View>
       </View>
+      <CustomAlert
+        visible={alertVisible}
+        title="Attention!"
+        description={alertMessage}
+        button2={{
+          text: 'OK',
+          onPress: () => setAlertVisible(false),
+          color: '#007bff',
+        }}
+      />
     </CSafeAreaView>
   );
 };
