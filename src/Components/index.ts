@@ -7,6 +7,7 @@ import CDropdown from './CDropdown';
 import LoadingOverlay from './LoadingOverlay';
 import CustomAlert from './CustomAlert';
 import CButton from './CButton';
+import CustomTextInput from './CustomTextInput';
 
 export {
   Carousel,
@@ -18,4 +19,5 @@ export {
   LoadingOverlay,
   CustomAlert,
   CButton,
+  CustomTextInput,
 };

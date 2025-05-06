@@ -9,8 +9,14 @@ import {
 } from 'react-native';
 import {styles} from './styles';
 import {useTranslation} from 'react-i18next';
-import {CButton, CustomAlert, Icon} from '../../../Components';
-import {ic_Apple, ic_Facebook, ic_Google} from '../../../../assets/icons';
+import {CButton, CustomAlert, CustomTextInput, Icon} from '../../../Components';
+import {
+  Eye,
+  ic_Apple,
+  ic_Facebook,
+  ic_Google,
+  Password_Hide,
+} from '../../../../assets/icons';
 import {loginWithGoogle} from 'src/services/firebase-services';
 import {useNavigation} from '@react-navigation/native';
 import {REGISTRATION} from 'src/Navigation/auth/routes';
@@ -63,35 +69,28 @@ const Login = () => {
         <Text style={styles.logo}>{t('login.heading')}</Text>
         <Text style={styles.welcomeText}>{t('login.subTitle')}</Text>
 
-        <View style={styles.inputContainer}>
-          <Text style={styles.label}>{t('login.email')}</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="example@gmail.com"
-            value={email}
-            onChangeText={setEmail}
-            keyboardType="email-address"
-            autoCapitalize="none"
-          />
-        </View>
+        <CustomTextInput
+          containerStyle={styles.inputContainer}
+          title={t('login.email')}
+          required
+          value={email}
+          onChangeText={setEmail}
+          placeholder="example@gmail.com"
+          keyboardType="email-address"
+          autoCapitalize="none"
+        />
 
-        <View style={styles.inputContainer}>
-          <Text style={styles.label}>{t('login.password')}</Text>
-          <View style={styles.passwordContainer}>
-            <TextInput
-              style={styles.passwordInput}
-              placeholder="****************"
-              value={password}
-              onChangeText={setPassword}
-              secureTextEntry={!showPassword}
-            />
-            <TouchableOpacity
-              style={styles.eyeIcon}
-              onPress={() => setShowPassword(!showPassword)}>
-              <Text>{showPassword ? '👁️' : '👁️‍🗨️'}</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
+        <CustomTextInput
+          containerStyle={styles.inputContainer}
+          title={t('login.password')}
+          required
+          value={password}
+          onChangeText={setPassword}
+          placeholder="****************"
+          secureTextEntry={!showPassword}
+          icon={showPassword ? Password_Hide : Eye}
+          onIconPress={() => setShowPassword(!showPassword)}
+        />
 
         <TouchableOpacity style={styles.forgotPassword}>
           <Text style={styles.forgotPasswordText}>

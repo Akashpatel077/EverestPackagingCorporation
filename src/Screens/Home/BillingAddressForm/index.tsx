@@ -2,9 +2,9 @@ import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
-  TextInput,
   TouchableOpacity,
   ScrollView,
+  TextInput,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {useDispatch} from 'react-redux';
@@ -15,7 +15,13 @@ import {
   setSelectedShippingAddress,
 } from 'src/store/slices/addressSlice';
 import styles from './styles';
-import {CButton, CDropdown, CustomAlert, Header} from 'src/Components';
+import {
+  CButton,
+  CDropdown,
+  CustomAlert,
+  CustomTextInput,
+  Header,
+} from 'src/Components';
 import {BackIcon} from 'assets/icons';
 import {CHECKOUT, SHIPPING_ADDRESS_FORM} from 'src/Navigation/home/routes';
 import {Icon} from '../../../Components';
@@ -132,89 +138,65 @@ const BillingAddressForm: React.FC = ({route}) => {
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{padding: 16, paddingBottom: 30}}>
           <View style={styles.row}>
-            <View style={styles.halfField}>
-              <Text style={styles.label}>
-                First name <Text style={styles.required}>*</Text>
-              </Text>
-              <TextInput
-                style={styles.input}
-                value={formData.firstName}
-                onChangeText={value => handleChange('firstName', value)}
-                placeholder="First name"
-              />
-            </View>
-            <View style={styles.halfField}>
-              <Text style={styles.label}>
-                Last name <Text style={styles.required}>*</Text>
-              </Text>
-              <TextInput
-                style={styles.input}
-                value={formData.lastName}
-                onChangeText={value => handleChange('lastName', value)}
-                placeholder="Last name"
-              />
-            </View>
-          </View>
-
-          <View style={styles.field}>
-            <Text style={styles.label}>Company name (optional)</Text>
-            <TextInput
-              style={styles.input}
-              value={formData.companyName}
-              onChangeText={value => handleChange('companyName', value)}
-              placeholder="Company name"
+            <CustomTextInput
+              containerStyle={styles.halfField}
+              title="First name"
+              required
+              value={formData.firstName}
+              onChangeText={value => handleChange('firstName', value)}
+              placeholder="First name"
+            />
+            <CustomTextInput
+              containerStyle={styles.halfField}
+              title="Last name"
+              required
+              value={formData.lastName}
+              onChangeText={value => handleChange('lastName', value)}
+              placeholder="Last name"
             />
           </View>
 
-          <View style={styles.field}>
-            <Text style={styles.label}>
-              Country / Region <Text style={styles.required}>*</Text>
-            </Text>
-            <TextInput
-              style={styles.input}
-              value={formData.countryRegion}
-              onChangeText={value => handleChange('countryRegion', value)}
-              placeholder="Country / Region"
-              readOnly={true}
-              editable={false}
-            />
-          </View>
+          <CustomTextInput
+            containerStyle={styles.field}
+            title="Company name (optional)"
+            value={formData.companyName}
+            onChangeText={value => handleChange('companyName', value)}
+            placeholder="Company name"
+          />
 
-          <View style={styles.field}>
-            <Text style={styles.label}>
-              Street address <Text style={styles.required}>*</Text>
-            </Text>
-            <TextInput
-              style={styles.input}
-              value={formData.streetAddress}
-              onChangeText={value => handleChange('streetAddress', value)}
-              placeholder="House number and street name"
-            />
-          </View>
+          <CustomTextInput
+            title="Country / Region"
+            required
+            value={formData.countryRegion}
+            onChangeText={value => handleChange('countryRegion', value)}
+            placeholder="Country / Region"
+            editable={false}
+          />
 
-          <View style={styles.field}>
-            <Text style={styles.label}>
-              Apartment, suite, unit, etc. (optional)
-            </Text>
-            <TextInput
-              style={styles.input}
-              value={formData.apartment}
-              onChangeText={value => handleChange('apartment', value)}
-              placeholder="Apartment, suite, unit, etc."
-            />
-          </View>
+          <CustomTextInput
+            title="Street address"
+            required
+            value={formData.streetAddress}
+            onChangeText={value => handleChange('streetAddress', value)}
+            placeholder="House number and street name"
+          />
 
-          <View style={styles.field}>
-            <Text style={styles.label}>
-              Town / City <Text style={styles.required}>*</Text>
-            </Text>
-            <TextInput
-              style={styles.input}
-              value={formData.townCity}
-              onChangeText={value => handleChange('townCity', value)}
-              placeholder="Town / City"
-            />
-          </View>
+          <CustomTextInput
+            containerStyle={styles.field}
+            title="Apartment, suite, unit, etc. (optional)"
+            value={formData.apartment}
+            onChangeText={value => handleChange('apartment', value)}
+            placeholder="Apartment, suite, unit, etc."
+          />
+
+          <CustomTextInput
+            required
+            containerStyle={styles.field}
+            title="Town / City"
+            value={formData.townCity}
+            onChangeText={value => handleChange('townCity', value)}
+            placeholder="Town / City"
+          />
 
           <View style={styles.field}>
             <Text style={styles.label}>
@@ -235,30 +217,24 @@ const BillingAddressForm: React.FC = ({route}) => {
             />
           </View>
 
-          <View style={styles.field}>
-            <Text style={styles.label}>
-              Postcode / ZIP <Text style={styles.required}>*</Text>
-            </Text>
-            <TextInput
-              style={styles.input}
-              value={formData.postcode}
-              keyboardType="numeric"
-              onChangeText={value => handleChange('postcode', value)}
-              placeholder="Postcode / ZIP"
-            />
-          </View>
+          <CustomTextInput
+            containerStyle={styles.field}
+            title="Postcode / ZIP"
+            required
+            value={formData.postcode}
+            keyboardType="numeric"
+            onChangeText={value => handleChange('postcode', value)}
+            placeholder="Postcode / ZIP"
+          />
 
-          <View style={styles.field}>
-            <Text style={styles.label}>
-              Address Type <Text style={styles.required}>*</Text>
-            </Text>
-            <TextInput
-              style={styles.input}
-              value={formData.addressType}
-              onChangeText={value => handleChange('addressType', value)}
-              placeholder="Select address type"
-            />
-          </View>
+          <CustomTextInput
+            containerStyle={styles.field}
+            title="Address Type"
+            required
+            value={formData.addressType}
+            onChangeText={value => handleChange('addressType', value)}
+            placeholder="Select address type"
+          />
 
           {!hideCheckbox && (
             <TouchableOpacity

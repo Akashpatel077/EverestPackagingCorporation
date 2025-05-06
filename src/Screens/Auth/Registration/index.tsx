@@ -1,18 +1,12 @@
 import React, {useState} from 'react';
-import {
-  SafeAreaView,
-  Text,
-  View,
-  TextInput,
-  TouchableOpacity,
-  ActivityIndicator,
-  ScrollView,
-} from 'react-native';
+import {Text, View, TouchableOpacity, ScrollView} from 'react-native';
 import {styles} from './styles';
 import {useTranslation} from 'react-i18next';
-import {Icon, CustomAlert, CButton} from '../../../Components';
+import {Icon, CustomAlert, CButton, CustomTextInput} from '../../../Components';
 import {
   CheckSquare,
+  Eye,
+  Password_Hide,
   UncheckSquareNew,
   ic_Apple,
   ic_Facebook,
@@ -114,72 +108,58 @@ const Registration = () => {
               'Fill your information below or register with your social account.'}
           </Text>
 
-          <View style={styles.inputContainer}>
-            <Text style={styles.label}>First Name</Text>
-            <TextInput
-              style={styles.input}
-              placeholder="John"
-              value={firstName}
-              onChangeText={setFirstName}
-              autoCapitalize="words"
-            />
-          </View>
+          <CustomTextInput
+            containerStyle={styles.inputContainer}
+            title="First Name"
+            required
+            value={firstName}
+            onChangeText={setFirstName}
+            placeholder="John"
+            autoCapitalize="words"
+          />
 
-          <View style={styles.inputContainer}>
-            <Text style={styles.label}>Last Name</Text>
-            <TextInput
-              style={styles.input}
-              placeholder="Doe"
-              value={lastName}
-              onChangeText={setLastName}
-              autoCapitalize="words"
-            />
-          </View>
+          <CustomTextInput
+            containerStyle={styles.inputContainer}
+            title="Last Name"
+            required
+            value={lastName}
+            onChangeText={setLastName}
+            placeholder="Doe"
+            autoCapitalize="words"
+          />
 
-          <View style={styles.inputContainer}>
-            <Text style={styles.label}>User Name</Text>
-            <TextInput
-              style={styles.input}
-              placeholder="John Doe"
-              value={name}
-              onChangeText={setName}
-              autoCapitalize="words"
-            />
-          </View>
+          <CustomTextInput
+            containerStyle={styles.inputContainer}
+            title="User Name"
+            required
+            value={name}
+            onChangeText={setName}
+            placeholder="John Doe"
+            autoCapitalize="words"
+          />
 
-          <View style={styles.inputContainer}>
-            <Text style={styles.label}>
-              {t('registration.email') || 'Email'}
-            </Text>
-            <TextInput
-              style={styles.input}
-              placeholder="example@gmail.com"
-              value={email}
-              onChangeText={setEmail}
-              keyboardType="email-address"
-              autoCapitalize="none"
-            />
-          </View>
+          <CustomTextInput
+            containerStyle={styles.inputContainer}
+            title={t('registration.email') || 'Email'}
+            required
+            value={email}
+            onChangeText={setEmail}
+            placeholder="example@gmail.com"
+            keyboardType="email-address"
+            autoCapitalize="none"
+          />
 
-          <View style={styles.inputContainer}>
-            <Text style={styles.label}>
-              {t('registration.password') || 'Password'}
-            </Text>
-            <View style={styles.passwordContainer}>
-              <TextInput
-                style={styles.passwordInput}
-                placeholder="****************"
-                value={password}
-                onChangeText={setPassword}
-                secureTextEntry={!showPassword}
-              />
-              <TouchableOpacity
-                style={styles.eyeIcon}
-                onPress={() => setShowPassword(!showPassword)}>
-                <Text>{showPassword ? '👁️' : '👁️‍🗨️'}</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
+          <CustomTextInput
+            containerStyle={styles.inputContainer}
+            title={t('registration.password') || 'Password'}
+            required
+            value={password}
+            onChangeText={setPassword}
+            placeholder="****************"
+            secureTextEntry={!showPassword}
+            icon={showPassword ? Password_Hide : Eye}
+            onIconPress={() => setShowPassword(!showPassword)}
+          />
 
           <TouchableOpacity
             style={styles.termsContainer}

@@ -14,7 +14,6 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: 16,
   },
   halfField: {
     width: '48%',
@@ -24,7 +23,7 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 14,
-    marginBottom: 8,
+    marginBottom: 3,
     color: '#333',
     fontFamily: 'Poppins-Regular',
   },

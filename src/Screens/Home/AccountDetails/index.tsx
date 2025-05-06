@@ -1,19 +1,19 @@
 import React, {useState} from 'react';
+import {View, Text, TouchableOpacity, ScrollView} from 'react-native';
 import {
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  ScrollView,
-} from 'react-native';
-import {CButton, CustomAlert, Header, Icon} from 'src/Components';
+  CButton,
+  CustomAlert,
+  CustomTextInput,
+  Header,
+  Icon,
+} from 'src/Components';
 import {BackIcon, Eye, Password_Hide} from 'assets/icons';
 import {styles} from './styles';
 import {useNavigation} from '@react-navigation/native';
 import CSafeAreaView from 'src/Components/CSafeAreaView';
 import {useAppDispatch, useAppSelector} from 'src/store/hooks';
 import {changePassword, updateProfile} from 'src/services/wooCommerceApi';
-import {fetchUserProfile, updateUserProfile} from 'src/store/slices/authSlice';
+import {updateUserProfile} from 'src/store/slices/authSlice';
 
 const AccountDetails = () => {
   const navigation = useNavigation();
@@ -151,122 +151,75 @@ const AccountDetails = () => {
       <Header title="Account details" icon1={BackIcon} />
       <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
         <View style={styles.content}>
-          <View style={styles.inputContainer}>
-            <Text style={styles.label}>
-              First name <Text style={styles.requiredStar}>*</Text>
-            </Text>
-            <TextInput
-              style={styles.input}
-              value={formData.firstName}
-              onChangeText={text => setFormData({...formData, firstName: text})}
-              placeholder="Enter your first name"
-            />
-          </View>
+          <CustomTextInput
+            title="First name"
+            required
+            value={formData.firstName}
+            onChangeText={text => setFormData({...formData, firstName: text})}
+            placeholder="Enter your first name"
+          />
 
-          <View style={styles.inputContainer}>
-            <Text style={styles.label}>
-              Last name <Text style={styles.requiredStar}>*</Text>
-            </Text>
-            <TextInput
-              style={styles.input}
-              value={formData.lastName}
-              onChangeText={text => setFormData({...formData, lastName: text})}
-              placeholder="Enter your last name"
-            />
-          </View>
+          <CustomTextInput
+            title="Last name"
+            required
+            value={formData.lastName}
+            onChangeText={text => setFormData({...formData, lastName: text})}
+            placeholder="Enter your last name"
+          />
 
-          <View style={styles.inputContainer}>
-            <Text style={styles.label}>
-              Display name <Text style={styles.requiredStar}>*</Text>
-            </Text>
-            <TextInput
-              style={styles.input}
-              value={formData.displayName}
-              onChangeText={text =>
-                setFormData({...formData, displayName: text})
-              }
-            />
-            <Text style={styles.helperText}>
-              This will be how your name will be displayed in the account
-              section and in reviews
-            </Text>
-          </View>
+          <CustomTextInput
+            title="Display name"
+            required
+            value={formData.displayName}
+            onChangeText={text => setFormData({...formData, displayName: text})}
+            helperText="This will be how your name will be displayed in the account section and in reviews"
+          />
 
-          <View style={styles.inputContainer}>
-            <Text style={styles.label}>
-              Email address <Text style={styles.requiredStar}>*</Text>
-            </Text>
-            <TextInput
-              style={[styles.input, {color: '#666666'}]}
-              editable={false}
-              value={formData.email}
-              onChangeText={text => setFormData({...formData, email: text})}
-              keyboardType="email-address"
-            />
-          </View>
+          <CustomTextInput
+            title="Email address"
+            required
+            style={{color: '#666666'}}
+            editable={false}
+            value={formData.email}
+            onChangeText={text => setFormData({...formData, email: text})}
+            keyboardType="email-address"
+          />
 
           <View style={styles.passwordSection}>
             <Text style={styles.passwordTitle}>PASSWORD CHANGE</Text>
 
-            <View style={styles.passwordInputContainer}>
-              <TextInput
-                style={styles.input}
-                value={currentPassword}
-                onChangeText={setCurrentPassword}
-                secureTextEntry={!showCurrentPassword}
-                placeholder="Current password (leave blank to leave unchanged)"
-              />
-              <TouchableOpacity
-                style={styles.toggleButton}
-                onPress={() => setShowCurrentPassword(!showCurrentPassword)}>
-                <Icon
-                  name={showCurrentPassword ? Password_Hide : Eye}
-                  width={24}
-                  height={24}
-                  color="white"
-                />
-              </TouchableOpacity>
-            </View>
+            <CustomTextInput
+              title="Current Password"
+              placeholder="Current password (leave blank to leave unchanged)"
+              required
+              icon={showCurrentPassword ? Password_Hide : Eye}
+              onIconPress={() => setShowCurrentPassword(!showCurrentPassword)}
+              secureTextEntry={!showCurrentPassword}
+              value={currentPassword}
+              onChangeText={setCurrentPassword}
+            />
 
-            <View style={styles.passwordInputContainer}>
-              <TextInput
-                style={styles.input}
-                value={newPassword}
-                onChangeText={setNewPassword}
-                secureTextEntry={!showNewPassword}
-                placeholder="New password (leave blank to leave unchanged)"
-              />
-              <TouchableOpacity
-                style={styles.toggleButton}
-                onPress={() => setShowNewPassword(!showNewPassword)}>
-                <Icon
-                  name={showNewPassword ? Password_Hide : Eye}
-                  width={24}
-                  height={24}
-                  color="white"
-                />
-              </TouchableOpacity>
-            </View>
+            <CustomTextInput
+              title="New Password"
+              placeholder="New password (leave blank to leave unchanged)"
+              required
+              icon={showNewPassword ? Password_Hide : Eye}
+              onIconPress={() => setShowNewPassword(!showNewPassword)}
+              secureTextEntry={!showNewPassword}
+              value={newPassword}
+              onChangeText={setNewPassword}
+            />
 
-            <View style={styles.passwordInputContainer}>
-              <TextInput
-                style={styles.input}
-                value={confirmPassword}
-                onChangeText={setConfirmPassword}
-                secureTextEntry={!showConfirmPassword}
-                placeholder="Confirm new password"
-              />
-              <TouchableOpacity
-                style={styles.toggleButton}
-                onPress={() => setShowConfirmPassword(!showConfirmPassword)}>
-                <Icon
-                  name={showConfirmPassword ? Password_Hide : Eye}
-                  width={24}
-                  height={24}
-                  color="white"
-                />
-              </TouchableOpacity>
-            </View>
+            <CustomTextInput
+              title="Confirm Password"
+              placeholder="Confirm new password"
+              required
+              icon={showConfirmPassword ? Password_Hide : Eye}
+              onIconPress={() => setShowConfirmPassword(!showConfirmPassword)}
+              secureTextEntry={!showConfirmPassword}
+              value={confirmPassword}
+              onChangeText={setConfirmPassword}
+            />
           </View>
 
           <CButton
