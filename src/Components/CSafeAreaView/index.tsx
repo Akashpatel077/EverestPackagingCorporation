@@ -1,6 +1,7 @@
 import React from 'react';
 import {StyleSheet} from 'react-native';
 import {SafeAreaView, SafeAreaViewProps} from 'react-native-safe-area-context';
+import {colors} from 'src/theme';
 
 interface CSafeAreaViewProps extends SafeAreaViewProps {
   children: React.ReactNode;
@@ -23,7 +24,7 @@ const CSafeAreaView: React.FC<CSafeAreaViewProps> = ({
 };
 
 const styles = StyleSheet.create({
-  container: {backgroundColor: '#FFFFFF', flex: 1},
+  container: {backgroundColor: colors.white, flex: 1},
 });
 
 export default CSafeAreaView;

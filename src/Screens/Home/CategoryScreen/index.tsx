@@ -15,6 +15,7 @@ import {BackIcon} from 'assets/icons';
 import {PRODUCT_LIST, SUB_CATEGORY_SCREEN} from 'src/Navigation/home/routes';
 import {getSubCategories} from 'src/services/wooCommerceApi';
 import CSafeAreaView from 'src/Components/CSafeAreaView';
+import {colors} from 'src/theme';
 
 const CategoryScreen = () => {
   const navigation = useNavigation();
@@ -121,7 +122,7 @@ const CategoryScreen = () => {
         button2={{
           text: 'OK',
           onPress: () => setShowAlert(false),
-          color: '#0088cc',
+          color: colors.primary,
         }}
       />
     </CSafeAreaView>

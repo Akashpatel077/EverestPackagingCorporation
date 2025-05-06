@@ -1,4 +1,5 @@
 import {StyleSheet, Dimensions} from 'react-native';
+import {colors} from 'src/theme';
 
 const {width} = Dimensions.get('window');
 
@@ -52,7 +53,7 @@ export const styles = StyleSheet.create({
     marginBottom: 16,
   },
   shopNowButton: {
-    backgroundColor: '#0088cc',
+    backgroundColor: colors.primary,
     paddingHorizontal: 24,
     paddingVertical: 8,
     borderRadius: 20,
@@ -80,7 +81,7 @@ export const styles = StyleSheet.create({
   },
   seeAllButton: {
     fontSize: 14,
-    color: '#0088cc',
+    color: colors.primary,
   },
   categoryList: {
     paddingHorizontal: 12,
@@ -194,7 +195,7 @@ export const styles = StyleSheet.create({
     backgroundColor: '#F5F5F5',
   },
   filterActive: {
-    backgroundColor: '#0088cc',
+    backgroundColor: colors.primary,
   },
   filterText: {
     fontSize: 14,

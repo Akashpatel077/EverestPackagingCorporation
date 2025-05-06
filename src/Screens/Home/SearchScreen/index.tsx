@@ -20,6 +20,7 @@ import {
   removeFromWishlist,
 } from '../../../store/slices/wishlistSlice';
 import CSafeAreaView from 'src/Components/CSafeAreaView';
+import {colors} from 'src/theme';
 
 const SearchScreen = () => {
   const navigation = useNavigation();
@@ -77,7 +78,7 @@ const SearchScreen = () => {
       <TouchableOpacity
         style={styles.deleteButton}
         onPress={() => deleteSearch(item)}>
-        <Icon name={Close} width={20} height={20} color="#0088cc" />
+        <Icon name={Close} width={20} height={20} color={colors.primary} />
       </TouchableOpacity>
     </TouchableOpacity>
   );
@@ -107,7 +108,7 @@ const SearchScreen = () => {
 
         {loading ? (
           <View style={styles.loadingContainer}>
-            <ActivityIndicator size="large" color="#0088cc" />
+            <ActivityIndicator size="large" color={colors.primary} />
           </View>
         ) : error ? (
           <View style={styles.errorContainer}>

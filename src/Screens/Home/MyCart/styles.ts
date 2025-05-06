@@ -1,5 +1,6 @@
 // styles.js
 import {StyleSheet} from 'react-native';
+import {colors} from 'src/theme';
 
 export default StyleSheet.create({
   container: {
@@ -89,7 +90,7 @@ export default StyleSheet.create({
     borderRadius: 15,
   },
   increaseButton: {
-    backgroundColor: '#0088cc',
+    backgroundColor: colors.primary,
   },
   quantityButtonText: {
     fontSize: 18,
@@ -123,7 +124,7 @@ export default StyleSheet.create({
     color: '#999',
   },
   promoApplyButton: {
-    backgroundColor: '#0088cc',
+    backgroundColor: colors.primary,
     borderRadius: 10,
     paddingHorizontal: 20,
     justifyContent: 'center',
@@ -163,7 +164,7 @@ export default StyleSheet.create({
   totalValue: {
     fontSize: 18,
     fontFamily: 'Poppins-Bold',
-    color: '#0088cc',
+    color: colors.primary,
   },
   checkoutButton: {},
   emptyCartContainer: {
@@ -176,12 +177,12 @@ export default StyleSheet.create({
     width: 120,
     height: 120,
     marginBottom: 20,
-    tintColor: '#0088cc',
+    tintColor: colors.primary,
   },
   emptyCartTitle: {
     fontSize: 24,
     fontFamily: 'Poppins-Bold',
-    color: '#0088cc',
+    color: colors.primary,
     marginBottom: 10,
     textAlign: 'center',
   },
@@ -279,7 +280,7 @@ export default StyleSheet.create({
   },
   changePaymentMethodText: {
     fontSize: 14,
-    color: '#0088cc',
+    color: colors.primary,
     marginBottom: 5,
     fontFamily: 'Poppins-SemiBold',
   },

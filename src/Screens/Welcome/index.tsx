@@ -14,6 +14,7 @@ import {LOGIN} from 'src/Navigation/auth/routes';
 import {useDispatch} from 'react-redux';
 import {setShowWelcome, setStartKey} from 'src/store/slices/startKeySlice';
 import {CButton} from 'src/Components';
+import {colors} from 'src/theme';
 
 const fashionImages = [
   'https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=800',
@@ -172,7 +173,7 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   titleHighlight: {
-    color: '#0088cc',
+    color: colors.primary,
   },
   subtitle: {
     fontSize: 24,
@@ -201,7 +202,7 @@ const styles = StyleSheet.create({
   },
   signInLink: {
     fontSize: 16,
-    color: '#0088cc',
+    color: colors.primary,
     fontFamily: 'Poppins-SemiBold',
   },
 });

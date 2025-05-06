@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import {colors} from 'src/theme';
 
 export const styles = StyleSheet.create({
   container: {
@@ -61,7 +62,7 @@ export const styles = StyleSheet.create({
     marginBottom: 24,
   },
   forgotPasswordText: {
-    color: '#0088cc',
+    color: colors.primary,
     fontSize: 14,
     fontFamily: 'Poppins-Regular',
   },
@@ -106,7 +107,7 @@ export const styles = StyleSheet.create({
     fontFamily: 'Poppins-Regular',
   },
   signUpLink: {
-    color: '#0088cc',
+    color: colors.primary,
     fontSize: 14,
     marginLeft: 4,
     fontFamily: 'Poppins-Regular',

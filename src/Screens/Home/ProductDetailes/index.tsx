@@ -31,6 +31,7 @@ import {MYCART} from 'src/Navigation/home/routes';
 import {CommonActions} from '@react-navigation/native';
 import CSafeAreaView from 'src/Components/CSafeAreaView';
 import {useSelector} from 'react-redux';
+import {colors} from 'src/theme';
 
 function findVariation(variations, selectedAttributes) {
   return variations.find(variation => {
@@ -234,7 +235,7 @@ const ProductDetails = ({navigation, route}) => {
         style={[
           styles.thumbnailImage,
           currentImageIndex === index && {
-            borderColor: '#0088cc',
+            borderColor: colors.primary,
             borderWidth: 2,
           },
         ]}
@@ -502,7 +503,7 @@ const ProductDetails = ({navigation, route}) => {
                         paddingVertical: 10,
                       }}
                       onPress={() => setIsExpanded(prevValue => !prevValue)}>
-                      <Text style={[styles.readMore, {color: '#0088cc'}]}>
+                      <Text style={[styles.readMore, {color: colors.primary}]}>
                         {isExpanded ? 'Read less' : 'Read more'}
                       </Text>
                     </TouchableOpacity>
@@ -572,7 +573,7 @@ const ProductDetails = ({navigation, route}) => {
               dispatch(resetFlags());
             }
           },
-          color: '#0088cc',
+          color: colors.primary,
         }}
       />
     </CSafeAreaView>

@@ -5,6 +5,7 @@ import {
   ActivityIndicator,
   StyleSheet,
 } from 'react-native';
+import {scale, typography, verticalScale, metrics, colors} from '../../theme';
 
 interface CButtonProps {
   title: string;
@@ -29,7 +30,7 @@ const CButton: React.FC<CButtonProps> = ({
       onPress={onPress}
       disabled={disabled || isLoading}>
       {isLoading ? (
-        <ActivityIndicator color="#0088cc" size="small" />
+        <ActivityIndicator color={colors.primary} size="small" />
       ) : (
         <Text style={[styles.buttonText, textStyle]}>{title}</Text>
       )}
@@ -39,21 +40,21 @@ const CButton: React.FC<CButtonProps> = ({
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: '#0088cc',
-    height: 48,
-    borderRadius: 10,
+    backgroundColor: colors.primary,
+    height: verticalScale(35),
+    borderRadius: metrics.borderRadius.md,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingHorizontal: 16,
+    paddingHorizontal: metrics.padding.md,
     width: '100%',
   },
   disabled: {
-    backgroundColor: '#999999',
+    backgroundColor: colors.suvaGray,
     opacity: 0.7,
   },
   buttonText: {
-    color: '#FFFFFF',
-    fontSize: 16,
+    color: colors.white,
+    fontSize: typography.fontSize.xs,
     fontFamily: 'Poppins-SemiBold',
   },
 });

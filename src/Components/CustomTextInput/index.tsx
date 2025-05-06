@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {Icon} from 'src/Components';
+import {scale, typography, verticalScale, metrics, colors} from '../../theme';
 
 interface CustomTextInputProps extends TextInputProps {
   title: string;
@@ -35,12 +36,18 @@ const CustomTextInput: React.FC<CustomTextInputProps> = ({
       </Text>
       <View style={styles.inputWrapper}>
         <TextInput
+          placeholderTextColor={colors.suvaGray}
           style={[styles.input, icon && styles.inputWithIcon, style]}
           {...props}
         />
         {icon && (
           <TouchableOpacity style={styles.iconContainer} onPress={onIconPress}>
-            <Icon name={icon} width={24} height={24} color="#FFFFFF" />
+            <Icon
+              name={icon}
+              width={metrics.iconSize.sm}
+              height={metrics.iconSize.sm}
+              color="#FFFFFF"
+            />
           </TouchableOpacity>
         )}
       </View>
@@ -53,12 +60,12 @@ export default CustomTextInput;
 
 const styles = StyleSheet.create({
   inputContainer: {
-    marginBottom: 15,
+    marginBottom: metrics.margin.md,
   },
   label: {
-    fontSize: 14,
-    color: '#333',
-    marginBottom: 3,
+    fontSize: typography.fontSize.xs,
+    color: colors.darkGray,
+    marginBottom: metrics.margin.xs,
     fontFamily: 'Poppins-Regular',
   },
   requiredStar: {
@@ -73,25 +80,26 @@ const styles = StyleSheet.create({
   input: {
     flex: 1,
     borderWidth: 1,
-    borderColor: '#E0E0E0',
-    borderRadius: 10,
-    padding: 12,
-    fontSize: 14,
+    borderColor: colors.gainsBoro,
+    borderRadius: metrics.borderRadius.md,
+    padding: metrics.padding.sm,
+    fontSize: typography.fontSize.xs,
     fontFamily: 'Poppins-Regular',
+    height: verticalScale(35),
   },
   inputWithIcon: {
-    paddingRight: 40,
+    paddingRight: metrics.padding.xxl,
   },
   iconContainer: {
     position: 'absolute',
-    right: 12,
+    right: metrics.margin.sm,
     justifyContent: 'center',
     alignItems: 'center',
   },
   helperText: {
-    fontSize: 12,
-    color: '#666',
-    marginTop: 4,
+    fontSize: typography.fontSize.xs,
+    color: colors.dimGray,
+    marginTop: metrics.margin.xs,
     fontFamily: 'Poppins-SemiBold',
   },
 });

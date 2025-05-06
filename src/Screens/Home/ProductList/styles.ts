@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import {colors} from 'src/theme';
 
 const styles = StyleSheet.create({
   container: {
@@ -27,7 +28,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5F5F5',
   },
   categoryButtonActive: {
-    backgroundColor: '#0088cc',
+    backgroundColor: colors.primary,
   },
   categoryText: {
     fontSize: 14,
@@ -104,7 +105,7 @@ const styles = StyleSheet.create({
   salePrice: {
     fontSize: 18,
     fontFamily: 'Poppins-SemiBold',
-    color: '#0088cc',
+    color: colors.primary,
     marginLeft: 4,
   },
   ratingContainer: {

@@ -1,3 +1,4 @@
+import {colors} from 'src/theme';
 import React, {useEffect, useState} from 'react';
 import {View, Text, ScrollView} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
@@ -227,7 +228,7 @@ const ShippingAddressForm: React.FC = () => {
         button2={{
           text: 'OK',
           onPress: () => setShowAlert(false),
-          color: '#0088cc',
+          color: colors.primary,
         }}
       />
     </CSafeAreaView>

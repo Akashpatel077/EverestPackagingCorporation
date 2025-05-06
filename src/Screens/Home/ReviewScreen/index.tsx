@@ -5,6 +5,7 @@ import {Heart, Camera, Star, BackIcon} from 'assets/icons';
 import {styles} from './styles';
 import {useNavigation} from '@react-navigation/native';
 import CSafeAreaView from 'src/Components/CSafeAreaView';
+import {colors} from 'src/theme';
 
 const ReviewScreen = () => {
   const navigation = useNavigation();
@@ -57,7 +58,7 @@ const ReviewScreen = () => {
         />
 
         <TouchableOpacity style={styles.addPhotoButton}>
-          <Icon name={Camera} width={24} height={24} color="#0088cc" />
+          <Icon name={Camera} width={24} height={24} color={colors.primary} />
           <Text style={styles.addPhotoText}>Add photo</Text>
         </TouchableOpacity>
 

@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {SvgXml} from 'react-native-svg';
+import {metrics} from 'src/theme';
 
 interface IIconProps {
   name: any;
@@ -8,7 +9,12 @@ interface IIconProps {
   color?: string;
 }
 
-const Icon = ({name, height = 20, width = 20, color}: IIconProps) => {
+const Icon = ({
+  name,
+  height = metrics.iconSize.sm,
+  width = metrics.iconSize.sm,
+  color,
+}: IIconProps) => {
   return <SvgXml xml={name} height={height} width={width} fill={color} />;
 };
 

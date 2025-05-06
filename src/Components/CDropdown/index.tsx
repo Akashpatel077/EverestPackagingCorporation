@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import {Icon} from '../Icons';
 import {DropDown} from 'assets/icons';
+import {scale, typography, verticalScale, metrics, colors} from '../../theme';
 
 interface DropdownItem {
   label: string;
@@ -47,7 +48,12 @@ const CDropdown: React.FC<CDropdownProps> = ({
         <Text style={styles.selectedText}>
           {selectedItem?.label || title || 'Select an option'}
         </Text>
-        <Icon name={DropDown} width={24} height={24} color={'#FFFFFF'} />
+        <Icon
+          name={DropDown}
+          width={metrics.iconSize.sm}
+          height={metrics.iconSize.sm}
+          color={colors.white}
+        />
       </TouchableOpacity>
 
       <Modal
@@ -84,39 +90,43 @@ const CDropdown: React.FC<CDropdownProps> = ({
 const styles = StyleSheet.create({
   dropdown: {
     borderWidth: 1,
-    borderColor: '#AAAAAA',
-    paddingHorizontal: 12,
-    paddingVertical: 5,
+    borderColor: colors.gainsBoro,
+    paddingHorizontal: metrics.padding.md,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    borderRadius: 10,
+    borderRadius: metrics.borderRadius.md,
+    height: verticalScale(33),
   },
   selectedText: {
-    fontSize: 16,
-    color: '#000000',
+    fontSize: typography.fontSize.xs,
+    color: colors.darkGray,
     fontFamily: 'Poppins-Regular',
   },
   modalOverlay: {
     flex: 1,
-    backgroundColor: 'rgba(0,0,0,0.3)',
-    justifyContent: 'center', // Center vertically
+    backgroundColor: colors.modalBackground,
+    justifyContent: 'center',
     alignItems: 'center',
   },
   modalContent: {
     width: '80%',
     maxHeight: '70%',
-    backgroundColor: '#fff',
-    borderRadius: 10,
-    paddingHorizontal: 15,
+    backgroundColor: colors.white,
+    borderRadius: metrics.borderRadius.md,
+    paddingHorizontal: metrics.padding.md,
     elevation: 5,
   },
   option: {
-    paddingVertical: 10,
+    paddingVertical: metrics.padding.sm,
     borderBottomWidth: 1,
-    borderBottomColor: '#eee',
+    borderBottomColor: colors.gainsBoro,
   },
-  optionText: {fontSize: 16},
+  optionText: {
+    fontSize: typography.fontSize.xs,
+    fontFamily: 'Poppins-Regular',
+    color: colors.darkGray,
+  },
 });
 
 export default CDropdown;

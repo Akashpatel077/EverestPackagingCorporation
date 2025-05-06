@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import {colors} from 'src/theme';
 
 export const styles = StyleSheet.create({
   container: {
@@ -57,11 +58,11 @@ export const styles = StyleSheet.create({
     marginLeft: 12,
   },
   radioButtonSelected: {
-    borderColor: '#0088cc',
-    backgroundColor: '#0088cc',
+    borderColor: colors.primary,
+    backgroundColor: colors.primary,
   },
   applyButton: {
-    backgroundColor: '#0088cc',
+    backgroundColor: colors.primary,
     borderRadius: 25,
     paddingVertical: 16,
     alignItems: 'center',

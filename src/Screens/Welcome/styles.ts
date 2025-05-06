@@ -1,4 +1,5 @@
 import {StyleSheet, Dimensions} from 'react-native';
+import {colors} from 'src/theme';
 
 const {width} = Dimensions.get('window');
 const cardWidth = (width - 48) / 2; // 2 cards per row with 16px padding on each side
@@ -23,18 +24,18 @@ export const styles = StyleSheet.create({
   },
   title: {
     fontSize: 32,
-    fontFamily: 'SchibstedGrotesk-Bold',
+    fontFamily: 'Poppins-Bold',
     textAlign: 'center',
     marginBottom: 8,
     color: '#2D2D2D',
     lineHeight: 40,
   },
   titleHighlight: {
-    color: '#0088cc',
+    color: colors.primary,
   },
   subtitle: {
     fontSize: 16,
-    fontFamily: 'SchibstedGrotesk-Regular',
+    fontFamily: 'Poppins-Regular',
     color: '#666666',
     textAlign: 'center',
     marginTop: 8,
@@ -70,14 +71,14 @@ export const styles = StyleSheet.create({
   },
   categoryTitle: {
     fontSize: 16,
-    fontFamily: 'SchibstedGrotesk-SemiBold',
+    fontFamily: 'Poppins-SemiBold',
     color: '#2D2D2D',
     marginBottom: 4,
     textAlign: 'center',
   },
   categoryDescription: {
     fontSize: 12,
-    fontFamily: 'SchibstedGrotesk-Regular',
+    fontFamily: 'Poppins-Regular',
     color: '#666666',
     textAlign: 'center',
     lineHeight: 16,
@@ -87,14 +88,14 @@ export const styles = StyleSheet.create({
     paddingVertical: 24,
   },
   button: {
-    backgroundColor: '#0088cc',
+    backgroundColor: colors.primary,
     borderRadius: 12,
     width: '100%',
     padding: 16,
     alignItems: 'center',
     marginBottom: 16,
     elevation: 4,
-    shadowColor: '#0088cc',
+    shadowColor: colors.primary,
     shadowOffset: {width: 0, height: 4},
     shadowOpacity: 0.2,
     shadowRadius: 8,
@@ -102,7 +103,7 @@ export const styles = StyleSheet.create({
   buttonText: {
     color: '#FFFFFF',
     fontSize: 16,
-    fontFamily: 'SchibstedGrotesk-SemiBold',
+    fontFamily: 'Poppins-SemiBold',
   },
   signInContainer: {
     flexDirection: 'row',
@@ -112,12 +113,12 @@ export const styles = StyleSheet.create({
   signInText: {
     color: '#666666',
     fontSize: 14,
-    fontFamily: 'SchibstedGrotesk-Regular',
+    fontFamily: 'Poppins-Regular',
   },
   signInLink: {
-    color: '#0088cc',
+    color: colors.primary,
     fontSize: 14,
     marginLeft: 4,
-    fontFamily: 'SchibstedGrotesk-SemiBold',
+    fontFamily: 'Poppins-SemiBold',
   },
 });

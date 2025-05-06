@@ -1,4 +1,5 @@
 import {StyleSheet, Dimensions} from 'react-native';
+import {colors} from 'src/theme';
 
 const {width} = Dimensions.get('window');
 
@@ -154,7 +155,7 @@ export const styles = StyleSheet.create({
   salePrice: {
     fontSize: 24,
     fontWeight: '600',
-    color: '#0088cc',
+    color: colors.primary,
     fontFamily: 'Poppins-SemiBold',
   },
   description: {
@@ -165,7 +166,7 @@ export const styles = StyleSheet.create({
   },
   readMore: {
     fontSize: 14,
-    color: '#0088cc',
+    color: colors.primary,
     marginBottom: 24,
     fontFamily: 'Poppins-SemiBold',
   },
@@ -193,8 +194,8 @@ export const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
   },
   selectedItem: {
-    backgroundColor: '#0088cc',
-    borderColor: '#0088cc',
+    backgroundColor: colors.primary,
+    borderColor: colors.primary,
     borderWidth: 0,
   },
   optionText: {
@@ -224,7 +225,7 @@ export const styles = StyleSheet.create({
     borderColor: '#CCCCCC',
   },
   selectedColorButton: {
-    borderColor: '#0088cc',
+    borderColor: colors.primary,
     borderWidth: 2,
     transform: [{scale: 1.1}],
   },
@@ -249,7 +250,7 @@ export const styles = StyleSheet.create({
   price: {
     fontSize: 24,
     fontWeight: '600',
-    color: '#0088cc',
+    color: colors.primary,
     fontFamily: 'Poppins-SemiBold',
   },
   addToCartButton: {

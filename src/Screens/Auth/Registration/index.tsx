@@ -17,6 +17,7 @@ import {useNavigation} from '@react-navigation/native';
 import {LOGIN} from 'src/Navigation/auth/routes';
 import {registerUserApi} from 'src/services/wooCommerceApi';
 import CSafeAreaView from 'src/Components/CSafeAreaView';
+import {colors} from 'src/theme';
 
 const Registration = () => {
   const [firstName, setFirstName] = useState('');
@@ -232,7 +233,7 @@ const Registration = () => {
         button2={{
           text: alertConfig.buttonText,
           onPress: alertConfig.onPress,
-          color: alertConfig.title === 'Success' ? '#0088cc' : '#CC5656',
+          color: alertConfig.title === 'Success' ? colors.primary : colors.red,
         }}
       />
     </CSafeAreaView>

@@ -1,8 +1,7 @@
 import React from 'react';
-import {Modal, View, Text, StyleSheet, Dimensions} from 'react-native';
+import {Modal, View, Text, StyleSheet} from 'react-native';
 import CButton from '../CButton';
-
-const {width} = Dimensions.get('window');
+import {scale, typography, verticalScale, metrics, colors} from '../../theme';
 
 interface ButtonProps {
   text: string;
@@ -36,7 +35,7 @@ const CustomAlert: React.FC<CustomAlertProps> = ({
               <CButton
                 style={[
                   styles.button,
-                  {backgroundColor: button1.color || '#007bff'},
+                  {backgroundColor: button1.color || colors.primary},
                 ]}
                 textStyle={styles.buttonText}
                 onPress={button1.onPress}
@@ -62,29 +61,28 @@ export default CustomAlert;
 const styles = StyleSheet.create({
   overlay: {
     flex: 1,
-    backgroundColor: 'rgba(0,0,0,0.4)',
+    backgroundColor: colors.modalBackground,
     justifyContent: 'center',
     alignItems: 'center',
   },
   container: {
-    width: width * 0.8,
-    backgroundColor: '#fff',
-    borderRadius: 10,
-    padding: 20,
+    width: scale(280),
+    backgroundColor: colors.white,
+    borderRadius: metrics.borderRadius.lg,
+    padding: metrics.padding.lg,
     elevation: 5,
   },
   title: {
-    fontSize: 18,
-    fontWeight: '600',
-    marginBottom: 10,
+    fontSize: typography.fontSize.md,
+    marginBottom: metrics.margin.sm,
     textAlign: 'center',
     fontFamily: 'Poppins-SemiBold',
   },
   description: {
-    fontSize: 15,
-    marginBottom: 20,
+    fontSize: typography.fontSize.sm,
+    marginBottom: metrics.margin.lg,
     textAlign: 'center',
-    color: '#555',
+    color: colors.dimGray,
     fontFamily: 'Poppins-Regular',
   },
   buttonContainer: {
@@ -92,10 +90,10 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
   },
   button: {
-    width: '40%',
+    width: scale(100),
   },
   buttonText: {
-    color: '#000000',
+    color: colors.black,
     fontFamily: 'Poppins-SemiBold',
   },
 });

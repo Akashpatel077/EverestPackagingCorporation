@@ -10,6 +10,7 @@ import {
 import {search} from '../../Constants/images';
 import {useNavigation} from '@react-navigation/native';
 import {SEARCH_SCREEN} from 'src/Navigation/home/routes';
+import {scale, typography, verticalScale, metrics, colors} from '../../theme';
 
 interface SearchBarProps extends TextInputProps {
   placeholder?: string;
@@ -44,21 +45,22 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#F5F5F5',
-    borderRadius: 10,
-    paddingHorizontal: 10,
-    height: 40,
+    backgroundColor: colors.white,
+    borderRadius: metrics.borderRadius.md,
+    paddingHorizontal: metrics.padding.sm,
+    height: verticalScale(40),
     borderWidth: 1,
-    borderColor: '#E0E0E0',
+    borderColor: colors.gainsBoro,
   },
   icon: {
-    marginRight: 8,
-    width: 20,
-    height: 20,
+    marginRight: metrics.margin.sm,
+    width: metrics.iconSize.sm,
+    height: metrics.iconSize.sm,
   },
   input: {
     flex: 1,
-    fontSize: 14,
-    color: '#333',
+    fontSize: typography.fontSize.xs,
+    color: colors.darkGray,
+    fontFamily: 'Poppins-Regular',
   },
 });

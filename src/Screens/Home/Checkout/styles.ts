@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import {colors} from 'src/theme';
 
 export const styles = StyleSheet.create({
   container: {
@@ -58,7 +59,7 @@ export const styles = StyleSheet.create({
     color: '#666666',
   },
   changeButton: {
-    color: '#0088cc',
+    color: colors.primary,
     fontSize: 14,
     fontWeight: '600',
   },
@@ -120,7 +121,7 @@ export const styles = StyleSheet.create({
   orderPrice: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#0088cc',
+    color: colors.primary,
   },
   paymentButton: {
     alignItems: 'center',

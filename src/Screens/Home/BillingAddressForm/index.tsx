@@ -28,6 +28,7 @@ import {Icon} from '../../../Components';
 import {CheckSquare, UncheckSquareNew} from '../../../../assets/icons';
 import {getStates} from 'src/services/wooCommerceApi';
 import CSafeAreaView from 'src/Components/CSafeAreaView';
+import {colors} from 'src/theme';
 
 const BillingAddressForm: React.FC = ({route}) => {
   const navigation = useNavigation();
@@ -204,7 +205,6 @@ const BillingAddressForm: React.FC = ({route}) => {
             </Text>
             <CDropdown
               data={states}
-              dropDownStyle={{height: 48}}
               title="State / County"
               selectedItem={selectedState}
               onSelect={(itemObject: any) => {
@@ -262,7 +262,7 @@ const BillingAddressForm: React.FC = ({route}) => {
         button2={{
           text: 'OK',
           onPress: () => setShowAlert(false),
-          color: '#0088cc',
+          color: colors.primary,
         }}
       />
     </CSafeAreaView>

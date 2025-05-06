@@ -41,7 +41,7 @@ import {
   BULKORDERS,
 } from './routes';
 import {SvgProps} from 'react-native-svg';
-import {Home, Buy, Heart, Paper, Profile, Shop, Category} from 'assets/icons';
+import {Home, Buy, Heart, Profile, Category} from 'assets/icons';
 import {Icon} from 'src/Components';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import AddCardScreen from 'src/Screens/Home/AddCardScreen';
@@ -50,6 +50,7 @@ import SearchScreen from 'src/Screens/Home/SearchScreen';
 import {getFocusedRouteNameFromRoute} from '@react-navigation/native';
 import {useSelector} from 'react-redux';
 import {selectCartItems} from 'src/store/slices/cartSlice';
+import {colors} from 'src/theme';
 
 const Tab = createBottomTabNavigator();
 
@@ -323,7 +324,7 @@ const HomeContainer = () => {
         width={24}
         height={24}
         name={name}
-        color={focused ? '#0088cc' : '#FFF'}
+        color={focused ? colors.primary : colors.white}
       />
     );
   };
@@ -333,14 +334,14 @@ const HomeContainer = () => {
       screenOptions={{
         headerShown: false,
         tabBarStyle: {
-          backgroundColor: '#FFFFFF',
+          backgroundColor: colors.white,
           borderTopWidth: 1,
-          borderTopColor: '#E5E5E5',
+          borderTopColor: colors.WhisperE5,
           height: 60,
           paddingBottom: 8,
         },
-        tabBarActiveTintColor: '#0088cc',
-        tabBarInactiveTintColor: '#999999',
+        tabBarActiveTintColor: colors.primary,
+        tabBarInactiveTintColor: colors.nobel9,
       }}>
       {tabConfig.map(tab => (
         <Tab.Screen
@@ -354,8 +355,8 @@ const HomeContainer = () => {
             tabBarStyle: getTabBarStyle(route),
             tabBarBadge: tab.name === 'Cart' ? cartItemsCount : undefined,
             tabBarBadgeStyle: {
-              backgroundColor: '#CC5656',
-              color: '#FFFFFF',
+              backgroundColor: colors.red,
+              color: colors.white,
               fontSize: 12,
             },
             tabBarLabelStyle: {

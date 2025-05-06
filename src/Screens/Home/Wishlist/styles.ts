@@ -1,4 +1,5 @@
 import {StyleSheet, Dimensions} from 'react-native';
+import {colors} from 'src/theme';
 
 const {width} = Dimensions.get('window');
 
@@ -36,7 +37,7 @@ export const styles = StyleSheet.create({
     backgroundColor: '#F5F5F5',
   },
   categoryButtonActive: {
-    backgroundColor: '#0088cc',
+    backgroundColor: colors.primary,
   },
   categoryText: {
     fontSize: 14,
@@ -93,7 +94,7 @@ export const styles = StyleSheet.create({
   },
   favoriteIcon: {
     fontSize: 18,
-    color: '#0088cc',
+    color: colors.primary,
   },
   productInfo: {
     padding: 12,
@@ -119,7 +120,7 @@ export const styles = StyleSheet.create({
   salePrice: {
     fontSize: 18,
     fontFamily: 'Poppins-SemiBold',
-    color: '#0088cc',
+    color: colors.primary,
     marginLeft: 4,
   },
   ratingContainer: {

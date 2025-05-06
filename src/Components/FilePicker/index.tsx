@@ -1,6 +1,7 @@
 import React, {useCallback, useState} from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {pick} from '@react-native-documents/picker';
+import {scale, typography, verticalScale, metrics, colors} from '../../theme';
 
 interface FilePickerProps {
   onUpdateFile: (val: any) => void;
@@ -26,10 +27,10 @@ const FilePicker: React.FC<FilePickerProps> = ({onUpdateFile, placeHolder}) => {
         activeOpacity={0.7}
         style={styles.container}
         onPress={onFileSelect}>
-        <View style={styles.fileNamecontainer}>
+        <View style={styles.fileNameContainer}>
           <Text
             numberOfLines={1}
-            style={[styles.buttonText, {color: '#000000'}]}>
+            style={[styles.buttonText, {color: colors.black}]}>
             {fileResponse.name || placeHolder}
           </Text>
         </View>
@@ -57,35 +58,37 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     borderWidth: 1,
-    borderColor: '#AAAAAA',
-    marginVertical: 5,
+    borderColor: colors.gainsBoro,
+    marginVertical: metrics.margin.xs,
     alignItems: 'center',
-    borderRadius: 10,
-    height: 40,
+    borderRadius: metrics.borderRadius.md,
+    height: verticalScale(33),
   },
   buttonText: {
-    paddingHorizontal: 10,
-    color: '#FFFFFF',
+    paddingHorizontal: metrics.padding.sm,
+    color: colors.white,
     fontFamily: 'Poppins-Regular',
+    fontSize: typography.fontSize.xs,
   },
   buttonTextContainer: {
-    height: 40,
+    height: verticalScale(33),
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#0088cc',
-    borderTopRightRadius: 10,
-    borderBottomRightRadius: 10,
+    backgroundColor: colors.primary,
+    borderTopRightRadius: metrics.borderRadius.md,
+    borderBottomRightRadius: metrics.borderRadius.md,
   },
-  fileNamecontainer: {
+  fileNameContainer: {
     flex: 1,
-    padding: 5,
-    paddingRight: 15,
+    padding: metrics.padding.xs,
+    paddingRight: metrics.padding.md,
     flexDirection: 'row',
   },
   cancelText: {
-    color: '#FF0000',
-    marginBottom: 10,
+    color: colors.red,
+    marginBottom: metrics.margin.sm,
     textAlign: 'right',
     fontFamily: 'Poppins-Regular',
+    fontSize: typography.fontSize.xs,
   },
 });

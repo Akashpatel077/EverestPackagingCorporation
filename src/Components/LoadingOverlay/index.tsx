@@ -6,6 +6,7 @@ import {
   StyleSheet,
   Dimensions,
 } from 'react-native';
+import {colors} from 'src/theme';
 
 const {width, height} = Dimensions.get('window');
 
@@ -21,7 +22,7 @@ const LoadingOverlay: React.FC<LoadingOverlayProps> = ({visible}) => {
       animationType="fade"
       onRequestClose={() => {}}>
       <View style={styles.overlay}>
-        <ActivityIndicator size="large" color="#0088cc" />
+        <ActivityIndicator size="large" color={colors.primary} />
       </View>
     </Modal>
   );
@@ -30,7 +31,7 @@ const LoadingOverlay: React.FC<LoadingOverlayProps> = ({visible}) => {
 const styles = StyleSheet.create({
   overlay: {
     flex: 1,
-    backgroundColor: 'rgba(0,0,0,0.4)', // Dark transparent background
+    backgroundColor: colors.modalBackground, // Dark transparent background
     justifyContent: 'center',
     alignItems: 'center',
     width,

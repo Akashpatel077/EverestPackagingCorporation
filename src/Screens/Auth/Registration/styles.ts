@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import {colors} from 'src/theme';
 
 export const styles = StyleSheet.create({
   container: {
@@ -63,12 +64,12 @@ export const styles = StyleSheet.create({
     width: 20,
     height: 20,
     borderWidth: 1,
-    borderColor: '#0088cc',
+    borderColor: colors.primary,
     borderRadius: 4,
     marginRight: 8,
   },
   checkboxChecked: {
-    backgroundColor: '#0088cc',
+    backgroundColor: colors.primary,
   },
   termsText: {
     fontSize: 14,
@@ -77,7 +78,7 @@ export const styles = StyleSheet.create({
     fontFamily: 'Poppins-SemiBold',
   },
   termsLink: {
-    color: '#0088cc',
+    color: colors.primary,
     textDecorationLine: 'underline',
   },
   dividerContainer: {
@@ -121,7 +122,7 @@ export const styles = StyleSheet.create({
     fontFamily: 'Poppins-Medium',
   },
   signInLink: {
-    color: '#0088cc',
+    color: colors.primary,
     fontSize: 14,
     marginLeft: 4,
     fontFamily: 'Poppins-Medium',

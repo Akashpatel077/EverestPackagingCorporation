@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import {colors} from 'src/theme';
 
 export const styles = StyleSheet.create({
   container: {
@@ -54,7 +55,7 @@ export const styles = StyleSheet.create({
     marginBottom: 12,
   },
   reorderButton: {
-    backgroundColor: '#0088cc',
+    backgroundColor: colors.primary,
     paddingHorizontal: 20,
     paddingVertical: 10,
     borderRadius: 25,
@@ -103,7 +104,7 @@ export const styles = StyleSheet.create({
   addPhotoText: {
     marginLeft: 8,
     fontSize: 16,
-    color: '#0088cc',
+    color: colors.primary,
     fontWeight: '500',
   },
   buttonContainer: {
@@ -126,7 +127,7 @@ export const styles = StyleSheet.create({
   },
   submitButton: {
     flex: 1,
-    backgroundColor: '#0088cc',
+    backgroundColor: colors.primary,
     paddingVertical: 16,
     borderRadius: 25,
     alignItems: 'center',

@@ -92,15 +92,15 @@ export const styles = StyleSheet.create({
     height: 20,
     borderRadius: 10,
     borderWidth: 2,
-    borderColor: '#0088cc',
+    borderColor: colors.primary,
   },
   radioButtonSelected: {
-    backgroundColor: '#0088cc',
+    backgroundColor: colors.primary,
   },
   addButton: {
     borderWidth: 1,
     borderStyle: 'dashed',
-    borderColor: '#0088cc',
+    borderColor: colors.primary,
     alignItems: 'center',
     position: 'absolute',
     bottom: 90,
@@ -109,6 +109,6 @@ export const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
   },
   addButtonText: {
-    color: '#0088cc',
+    color: colors.primary,
   },
 });

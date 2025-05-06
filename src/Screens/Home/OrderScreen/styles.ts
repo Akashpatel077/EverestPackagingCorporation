@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import {colors} from 'src/theme';
 
 export default StyleSheet.create({
   container: {
@@ -48,14 +49,14 @@ export default StyleSheet.create({
   },
   activeTab: {
     borderBottomWidth: 2,
-    borderBottomColor: '#0088cc',
+    borderBottomColor: colors.primary,
   },
   tabText: {
     fontSize: 16,
     color: '#666666',
   },
   activeTabText: {
-    color: '#0088cc',
+    color: colors.primary,
     fontWeight: '600',
   },
   ordersList: {
@@ -102,7 +103,7 @@ export default StyleSheet.create({
   itemPrice: {
     fontSize: 16,
     fontFamily: 'Poppins-SemiBold',
-    color: '#0088cc',
+    color: colors.primary,
   },
   actionButton: {
     width: '40%',

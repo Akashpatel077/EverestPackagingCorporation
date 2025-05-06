@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import {colors} from 'src/theme';
 
 export const styles = StyleSheet.create({
   container: {
@@ -48,7 +49,7 @@ export const styles = StyleSheet.create({
     fontFamily: 'Poppins-Medium',
   },
   linkText: {
-    color: '#0088cc',
+    color: colors.primary,
     fontSize: 16,
     fontWeight: '500',
   },
@@ -71,7 +72,7 @@ export const styles = StyleSheet.create({
   },
   razorPayTextContainer: {},
   paymentButton: {
-    backgroundColor: '#0088cc',
+    backgroundColor: colors.primary,
     padding: 15,
     borderRadius: 10,
     alignItems: 'center',

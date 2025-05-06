@@ -1,4 +1,5 @@
 import {StyleSheet, Dimensions} from 'react-native';
+import {colors} from 'src/theme';
 
 const {width} = Dimensions.get('window');
 const CARD_WIDTH = (width - 36) / 2;
@@ -43,7 +44,7 @@ export const styles = StyleSheet.create({
   },
   clearText: {
     fontSize: 14,
-    color: '#0088cc',
+    color: colors.primary,
   },
   searchItem: {
     flexDirection: 'row',
@@ -114,7 +115,7 @@ export const styles = StyleSheet.create({
   },
   favoriteIcon: {
     fontSize: 20,
-    color: '#0088cc',
+    color: colors.primary,
   },
   productInfo: {
     padding: 12,
@@ -133,7 +134,7 @@ export const styles = StyleSheet.create({
   productPrice: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#0088cc',
+    color: colors.primary,
   },
   ratingContainer: {
     flexDirection: 'row',

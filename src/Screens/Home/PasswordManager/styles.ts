@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import {colors} from 'src/theme';
 
 export const styles = StyleSheet.create({
   container: {
@@ -57,11 +58,11 @@ export const styles = StyleSheet.create({
   },
   forgotPasswordText: {
     fontSize: 14,
-    color: '#0088cc',
+    color: colors.primary,
     textDecorationLine: 'underline',
   },
   button: {
-    backgroundColor: '#0088cc',
+    backgroundColor: colors.primary,
     borderRadius: 25,
     paddingVertical: 14,
     marginTop: 'auto',

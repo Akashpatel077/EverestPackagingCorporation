@@ -3,7 +3,8 @@ import {Text, TouchableOpacity, View} from 'react-native';
 import {styles} from './styles';
 import {useNavigation} from '@react-navigation/native';
 import {Icon} from '../Icons';
-import {Buy, Heart} from 'assets/icons';
+import {Buy} from 'assets/icons';
+import {metrics} from 'src/theme';
 
 interface Props {
   onCartPress: () => void;
@@ -35,16 +36,31 @@ const Header: React.FC<Props> = ({
         <TouchableOpacity
           style={icon1 ? styles.backButton : undefined}
           onPress={() => (onPressFirst ? onPressFirst() : navigation.goBack())}>
-          {icon1 && <Icon name={icon1} width={24} height={24} color="#FFF" />}
+          {icon1 && (
+            <Icon
+              name={icon1}
+              width={metrics.iconSize.sm}
+              height={metrics.iconSize.sm}
+              color="#FFF"
+            />
+          )}
         </TouchableOpacity>
         <Text
-          style={[styles.headerTitle, {marginLeft: icon1 ? 16 : 0}]}
+          style={[
+            styles.headerTitle,
+            {marginLeft: icon1 ? metrics.margin.md : 0},
+          ]}
           numberOfLines={1}>
           {title}
         </Text>
         {showCartIcon ? (
           <TouchableOpacity style={styles.RightButton} onPress={onCartPress}>
-            <Icon name={Buy} width={24} height={24} color={'#ffffff'} />
+            <Icon
+              name={Buy}
+              width={metrics.iconSize.sm}
+              height={metrics.iconSize.sm}
+              color={'#ffffff'}
+            />
             <View style={styles.cartBadgeStyle}>
               <Text numberOfLines={1} style={styles.cartBadgeText}>
                 {badgeCount}
@@ -56,7 +72,12 @@ const Header: React.FC<Props> = ({
             style={[styles.RightButton, {display: icon2 ? 'flex' : 'none'}]}
             onPress={() => onPressSecond && onPressSecond()}>
             {icon2 && (
-              <Icon name={icon2} width={24} height={24} color={icon2Color} />
+              <Icon
+                name={icon2}
+                width={metrics.iconSize.sm}
+                height={metrics.iconSize.sm}
+                color={icon2Color}
+              />
             )}
           </TouchableOpacity>
         )}

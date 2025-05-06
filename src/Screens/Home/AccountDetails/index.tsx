@@ -14,6 +14,7 @@ import CSafeAreaView from 'src/Components/CSafeAreaView';
 import {useAppDispatch, useAppSelector} from 'src/store/hooks';
 import {changePassword, updateProfile} from 'src/services/wooCommerceApi';
 import {updateUserProfile} from 'src/store/slices/authSlice';
+import {colors} from 'src/theme';
 
 const AccountDetails = () => {
   const navigation = useNavigation();
@@ -245,7 +246,7 @@ const AccountDetails = () => {
         button2={{
           text: alertConfig.buttonText,
           onPress: alertConfig.onPress,
-          color: alertConfig.title === 'Success' ? '#0088cc' : '#CC5656',
+          color: alertConfig.title === 'Success' ? colors.primary : colors.red,
         }}
       />
     </CSafeAreaView>

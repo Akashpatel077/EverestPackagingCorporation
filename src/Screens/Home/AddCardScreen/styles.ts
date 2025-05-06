@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import {colors} from 'src/theme';
 
 export const styles = StyleSheet.create({
   container: {
@@ -22,7 +23,7 @@ export const styles = StyleSheet.create({
   cardPreview: {
     width: '100%',
     height: 200,
-    backgroundColor: '#0088cc',
+    backgroundColor: colors.primary,
     borderRadius: 16,
     padding: 24,
     marginBottom: 32,
@@ -82,18 +83,18 @@ export const styles = StyleSheet.create({
     width: 20,
     height: 20,
     borderWidth: 2,
-    borderColor: '#0088cc',
+    borderColor: colors.primary,
     borderRadius: 4,
     marginRight: 8,
   },
   checkboxChecked: {
-    backgroundColor: '#0088cc',
+    backgroundColor: colors.primary,
   },
   saveCardText: {
     fontSize: 14,
   },
   addButton: {
-    backgroundColor: '#0088cc',
+    backgroundColor: colors.primary,
     borderRadius: 25,
     padding: 16,
     alignItems: 'center',

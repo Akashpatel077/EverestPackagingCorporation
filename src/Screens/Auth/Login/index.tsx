@@ -25,6 +25,7 @@ import {loginUser, logout} from 'src/store/slices/authSlice';
 import {RootState} from 'src/store';
 import {setShowWelcome} from 'src/store/slices/startKeySlice';
 import CSafeAreaView from 'src/Components/CSafeAreaView';
+import {colors} from 'src/theme';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -147,7 +148,7 @@ const Login = () => {
             setShowAlert(false);
             dispatch(logout());
           },
-          color: '#0088cc',
+          color: colors.primary,
         }}
       />
     </CSafeAreaView>
