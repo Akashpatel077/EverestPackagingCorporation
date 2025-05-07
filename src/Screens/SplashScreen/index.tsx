@@ -1,21 +1,12 @@
 import React, {useEffect} from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  Animated,
-  Dimensions,
-  Image,
-} from 'react-native';
+import {View, StyleSheet, Animated, Dimensions, Image} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import {ic_Boxes, ic_Tapes, ic_Bags} from '../../../assets/icons';
 import Logo from '../../../assets/images/logo.png';
-import {Icon} from 'src/Components';
-import {WELCOME, HOMESCREEN} from 'src/Navigation/home/routes';
 import {useSelector} from 'react-redux';
 import {RootState} from 'src/store';
+import {colors, scale, typography} from 'src/theme';
 
-const {width, height} = Dimensions.get('window');
+const {height} = Dimensions.get('window');
 
 const SplashScreen = () => {
   const navigation = useNavigation();
@@ -75,15 +66,6 @@ const SplashScreen = () => {
         ),
       ]),
     ]).start();
-
-    // Navigate based on startKey after animations
-    // const timer = setTimeout(() => {
-    //   console.log('satrt : ', startKey);
-
-    //   navigation.replace(startKey ? 'HomeDrawer' : 'Welcome');
-    // }, 4500);
-
-    // return () => clearTimeout(timer);
   }, [navigation, startKey]);
 
   return (
@@ -92,37 +74,6 @@ const SplashScreen = () => {
         style={[styles.logoContainer, {transform: [{scale: logoScale}]}]}>
         <Image source={Logo} style={styles.logoImage} resizeMode="contain" />
       </Animated.View>
-
-      {/* <Animated.Text style={[styles.title, { opacity: fadeAnim }]}>
-        Everest Packaging Corporation
-      </Animated.Text> */}
-
-      {/* <Animated.View
-        style={[
-          styles.iconContainer,
-          {
-            transform: [{translateY: iconPosition}, {scale: iconScale}],
-          },
-        ]}>
-        {[ic_Boxes, ic_Bags, ic_Tapes].map((icon, index) => (
-          <Animated.View
-            key={index}
-            style={{
-              transform: [{scale: iconBubbles[index]}],
-              backgroundColor: ['#2196F3', '#4CAF50', '#FF9800'][index],
-              borderRadius: 30,
-              padding: 12,
-              marginHorizontal: 8,
-              shadowColor: '#000',
-              shadowOffset: {width: 0, height: 2},
-              shadowOpacity: 0.25,
-              shadowRadius: 3.84,
-              elevation: 5,
-            }}>
-            <Icon name={icon} width={40} height={40} color="#FFFFFF" />
-          </Animated.View>
-        ))}
-      </Animated.View> */}
 
       <Animated.Text style={[styles.tagline, {opacity: fadeAnim}]}>
         Your Complete Packaging Solution
@@ -134,51 +85,21 @@ const SplashScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5F6FA',
+    backgroundColor: colors.ghostWhite,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  logoContainer: {
-    width: 120,
-    height: 120,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+  logoContainer: {},
   logoImage: {
-    width: 350,
-    height: 300,
+    width: scale(300),
+    height: scale(250),
     resizeMode: 'contain',
-  },
-  title: {
-    marginTop: 20,
-    fontSize: 24,
-    color: '#1976D2',
-    fontFamily: 'SchibstedGrotesk-Bold',
-    textAlign: 'center',
-  },
-  iconContainer: {
-    flex: 1,
-    flexDirection: 'row',
-    position: 'absolute',
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: width * 0.9,
-    backgroundColor: 'rgba(255, 255, 255, 0.95)',
-    borderRadius: 25,
-    bottom: 1000,
-    padding: 20,
-    shadowColor: '#000',
-    shadowOffset: {width: 0, height: 4},
-    shadowOpacity: 0.2,
-    shadowRadius: 12,
-    elevation: 8,
-    // backdropFilter: 'blur(10px)',
   },
   tagline: {
     position: 'absolute',
-    bottom: 50,
-    fontSize: 16,
-    color: '#666666',
+    bottom: scale(45),
+    fontSize: typography.fontSize.sm,
+    color: colors.dimGray,
     fontFamily: 'Poppins-SemiBold',
   },
 });

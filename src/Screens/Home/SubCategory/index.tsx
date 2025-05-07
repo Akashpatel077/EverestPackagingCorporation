@@ -1,13 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import {View, Text, FlatList, TouchableOpacity, Image} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import {useSelector} from 'react-redux';
 import {Header} from 'src/Components';
 import {BackIcon} from 'assets/icons';
 import {PRODUCT_LIST} from 'src/Navigation/home/routes';
 import styles from './styles';
-import {RootState} from 'src/store';
-import {Category} from 'src/store/slices/categorySlice';
 import LoadingLogo from 'src/Components/LoadingLogo';
 import CSafeAreaView from 'src/Components/CSafeAreaView';
 

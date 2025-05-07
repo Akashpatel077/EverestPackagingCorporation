@@ -283,7 +283,7 @@ const ProductDetails = ({navigation, route}) => {
               }),
             );
           }}
-          icon2Color={isInWishlist ? '#CC5656' : '#FFF'}
+          icon2Color={isInWishlist ? colors.red : colors.white}
         />
         {loading ? (
           <View style={styles.loadingContainer}>

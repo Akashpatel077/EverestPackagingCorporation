@@ -9,6 +9,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {fetchOrders} from 'src/store/slices/ordersSlice';
 import {AppDispatch} from '@store';
 import CSafeAreaView from 'src/Components/CSafeAreaView';
+import {formatDate} from 'src/utils/dateFormatter';
 
 interface OrderItem {
   id: string;
@@ -93,7 +94,9 @@ const OrderScreen = () => {
       {/* <Image source={item.image} style={styles.itemImage} /> */}
       <View style={styles.itemDetails}>
         <Text style={styles.itemName}>Order : #{item.number}</Text>
-        <Text style={styles.itemInfo}>Date : {item.date_modified}</Text>
+        <Text style={styles.itemInfo}>
+          Date : {formatDate(item.date_modified)}
+        </Text>
         <Text style={styles.itemInfo}>Status : {item.status}</Text>
         <Text style={styles.itemPrice}>Total : ₹{item.total}</Text>
       </View>
@@ -129,12 +132,12 @@ const OrderScreen = () => {
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={[styles.tab, activeTab === 'failed' && styles.activeTab]}
+            style={[styles.tab, activeTab === 'cancelled' && styles.activeTab]}
             onPress={() => setActiveTab('cancelled')}>
             <Text
               style={[
                 styles.tabText,
-                activeTab === 'failed' && styles.activeTabText,
+                activeTab === 'cancelled' && styles.activeTabText,
               ]}>
               Cancelled
             </Text>

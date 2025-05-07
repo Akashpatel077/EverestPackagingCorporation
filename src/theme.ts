@@ -22,6 +22,7 @@ const colors = {
   outOfStockOverlay: 'rgba(0, 0, 0, 0.7)',
   WhisperE5: '#E5E5E5',
   green: '#32a852',
+  gold: '#FFD700',
   background: {
     light: '#FFFFFF',
     dark: '#121212',

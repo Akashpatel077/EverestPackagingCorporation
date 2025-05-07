@@ -12,6 +12,7 @@ import {
 } from 'src/store/slices/wishlistSlice';
 import CSafeAreaView from 'src/Components/CSafeAreaView';
 import {resetStartKey} from 'src/store/slices/startKeySlice';
+import {metrics} from 'src/theme';
 
 const WishlistScreen = () => {
   const navigation = useNavigation();
@@ -35,7 +36,9 @@ const WishlistScreen = () => {
       <TouchableOpacity
         style={[
           styles.productCard,
-          (isInLastRow || needsExtraMargin) && {marginBottom: 70},
+          (isInLastRow || needsExtraMargin) && {
+            marginBottom: metrics.margin.md,
+          },
           {opacity: isOutOfStock ? 0.7 : 1},
         ]}
         onPress={() =>
@@ -54,11 +57,18 @@ const WishlistScreen = () => {
           <TouchableOpacity
             style={styles.favoriteButton}
             onPress={() => handleRemoveFromWishlist(item.id)}>
-            <Icon name={Heart} width={20} height={20} color="#CC5656" />
+            <Icon
+              name={Heart}
+              width={metrics.iconSize.sm}
+              height={metrics.iconSize.sm}
+              color="#CC5656"
+            />
           </TouchableOpacity>
         </View>
         <View style={styles.productInfo}>
-          <Text style={styles.productName}>{item.name}</Text>
+          <Text style={styles.productName} numberOfLines={2}>
+            {item.name}
+          </Text>
           <View style={styles.productDetails}>
             <View
               style={{

@@ -1,65 +1,22 @@
-import {StyleSheet, Dimensions} from 'react-native';
-import {colors} from 'src/theme';
-
-const {width} = Dimensions.get('window');
+import {StyleSheet} from 'react-native';
+import {colors, metrics, scale, typography, verticalScale} from 'src/theme';
 
 export const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#F5F6FA',
-    height: '100%',
-  },
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-  },
-  headerTitle: {
-    fontSize: 20,
-    fontWeight: '600',
-    color: '#000000',
-  },
-  emptyView: {
-    width: 40,
-  },
-  categoryContainer: {
-    marginVertical: 16,
-  },
-  categoryList: {
-    paddingHorizontal: 16,
-    gap: 10,
-  },
-  categoryButton: {
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-    borderRadius: 20,
-    backgroundColor: '#F5F5F5',
-  },
-  categoryButtonActive: {
-    backgroundColor: colors.primary,
-  },
-  categoryText: {
-    fontSize: 14,
-    color: '#666666',
-  },
-  categoryTextActive: {
-    color: '#FFFFFF',
-    fontWeight: '500',
+    backgroundColor: colors.ghostWhite,
+    flex: 1,
   },
   productGrid: {
-    paddingHorizontal: 6,
+    paddingHorizontal: metrics.padding.xs,
     gap: 8,
-    paddingTop: 8,
+    paddingTop: metrics.padding.sm,
   },
   productCard: {
     width: '48%',
-    // flex: 1,
-    marginHorizontal: 4,
-    // marginBottom: 40,
-    backgroundColor: '#FFFFFF',
-    borderRadius: 12,
-    shadowColor: '#000',
+    marginHorizontal: '1%',
+    backgroundColor: colors.white,
+    borderRadius: metrics.borderRadius.md,
+    shadowColor: colors.black,
     shadowOffset: {
       width: 0,
       height: 2,
@@ -67,13 +24,14 @@ export const styles = StyleSheet.create({
     shadowOpacity: 0.15,
     shadowRadius: 5,
     elevation: 4,
+    height: verticalScale(210),
   },
   productImageContainer: {
-    // position: 'relative',
+    position: 'relative',
     width: '100%',
-    height: 180,
-    borderTopLeftRadius: 12,
-    borderTopRightRadius: 12,
+    height: verticalScale(135),
+    borderTopLeftRadius: metrics.borderRadius.md,
+    borderTopRightRadius: metrics.borderRadius.md,
     overflow: 'hidden',
   },
   productImage: {
@@ -86,25 +44,21 @@ export const styles = StyleSheet.create({
     top: 10,
     right: 10,
     backgroundColor: 'rgba(255, 255, 255, 0.9)',
-    borderRadius: 20,
-    width: 32,
-    height: 32,
+    borderRadius: metrics.borderRadius.xl,
+    width: scale(30),
+    height: scale(30),
     justifyContent: 'center',
     alignItems: 'center',
   },
-  favoriteIcon: {
-    fontSize: 18,
-    color: colors.primary,
-  },
   productInfo: {
-    padding: 12,
+    paddingVertical: metrics.padding.md,
+    paddingHorizontal: metrics.padding.sm,
   },
   productName: {
-    fontSize: 14,
+    fontSize: typography.fontSize.xs,
     fontFamily: 'Poppins-SemiBold',
-    color: '#333333',
-    marginBottom: 8,
-    height: 40,
+    color: colors.darkGray,
+    marginBottom: metrics.margin.xs,
   },
   productDetails: {
     flexDirection: 'row',
@@ -112,16 +66,16 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
   regularPrice: {
-    fontSize: 16,
+    fontSize: typography.fontSize.sm,
     fontFamily: 'Poppins-SemiBold',
-    color: '#666666',
+    color: colors.dimGray,
     textDecorationLine: 'line-through',
   },
   salePrice: {
-    fontSize: 18,
+    fontSize: typography.fontSize.md,
     fontFamily: 'Poppins-SemiBold',
     color: colors.primary,
-    marginLeft: 4,
+    marginLeft: metrics.margin.xs,
   },
   ratingContainer: {
     flexDirection: 'row',
@@ -136,48 +90,47 @@ export const styles = StyleSheet.create({
     color: '#666666',
     fontFamily: 'SchibstedGrotesk-Regular',
   },
-
   outOfStockOverlay: {
     position: 'absolute',
     top: 0,
     left: 0,
     right: 0,
     bottom: 0,
-    backgroundColor: 'rgba(0, 0, 0, 0.7)',
+    backgroundColor: colors.outOfStockOverlay,
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 8,
+    borderRadius: metrics.borderRadius.md,
   },
   outOfStockText: {
-    color: '#FFFFFF',
-    fontSize: 16,
+    color: colors.white,
+    fontSize: typography.fontSize.sm,
     fontFamily: 'Poppins-SemiBold',
     textTransform: 'uppercase',
-    textShadowColor: 'rgba(0, 0, 0, 0.75)',
+    textShadowColor: colors.outOfStockOverlay,
     textShadowOffset: {width: 1, height: 1},
     textShadowRadius: 2,
   },
   emptyContainer: {
     flex: 1,
-    marginTop: 20,
+    marginTop: metrics.margin.lg,
     justifyContent: 'center',
     alignItems: 'center',
   },
   emptyText: {
     fontFamily: 'Poppins-Regular',
-    fontSize: 18,
+    fontSize: typography.fontSize.md,
   },
   wishListContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingHorizontal: 20,
+    paddingHorizontal: metrics.padding.md,
   },
   wishListTitle: {
-    fontSize: 16,
+    fontSize: typography.fontSize.md,
     fontFamily: 'Poppins-Regular',
-    color: '#333333',
-    marginBottom: 20,
+    color: colors.darkGray,
+    marginBottom: metrics.margin.md,
     textAlign: 'center',
   },
   loginButton: {

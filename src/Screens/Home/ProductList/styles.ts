@@ -27,6 +27,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.15,
     shadowRadius: 5,
     elevation: 4,
+    height: verticalScale(210),
   },
   productImageContainer: {
     position: 'relative',
@@ -39,7 +40,7 @@ const styles = StyleSheet.create({
   productImage: {
     width: '100%',
     height: '100%',
-    resizeMode: 'cover',
+    resizeMode: 'contain',
   },
   favoriteButton: {
     position: 'absolute',
