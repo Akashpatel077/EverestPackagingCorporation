@@ -1,15 +1,9 @@
 import React, {useState} from 'react';
-import {View, Text, TouchableOpacity, Image, Alert} from 'react-native';
+import {View, Text, TouchableOpacity, Image} from 'react-native';
 import {CustomAlert, Header, Icon} from 'src/Components';
 import {
-  Profile as ProfileIcon,
-  Paper,
-  Buy,
-  Heart,
-  BackIcon,
   RightArrow,
   Edit,
-  Dashboard,
   Orders,
   Invoices,
   Addresses,
@@ -25,10 +19,7 @@ import {
   ADDRESSES,
   BULKORDERS,
   COMMUNICATION,
-  DASHBOARD,
   ORDER_SCREEN,
-  PAYMENT_METHOD,
-  SETTING_SCREEN,
   WELCOME,
 } from 'src/Navigation/home/routes';
 import {useDispatch, useSelector} from 'react-redux';
@@ -42,6 +33,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {clearCookies} from 'src/services/wooCommerceApi';
 import {ScrollView} from 'react-native-gesture-handler';
 import {clearAddresses} from 'src/store/slices/addressSlice';
+import {colors, metrics} from 'src/theme';
 
 const ProfileScreen = () => {
   const navigation = useNavigation();
@@ -87,12 +79,22 @@ const ProfileScreen = () => {
       style={styles.menuItem}
       onPress={() => onItemPress(item)}>
       <View style={styles.menuItemLeft}>
-        <Icon name={item.icon} width={28} height={28} color="white" />
+        <Icon
+          name={item.icon}
+          width={metrics.iconSize.md}
+          height={metrics.iconSize.md}
+          color={colors.white}
+        />
         <Text style={styles.menuItemText}>
           {item.title === 'Log out' && hasStarted ? 'Log in' : item.title}
         </Text>
       </View>
-      <Icon name={RightArrow} width={24} height={24} color={'#fff'} />
+      <Icon
+        name={RightArrow}
+        width={metrics.iconSize.md}
+        height={metrics.iconSize.md}
+        color={colors.white}
+      />
     </TouchableOpacity>
   );
 
@@ -111,7 +113,11 @@ const ProfileScreen = () => {
               style={styles.avatar}
             />
             <TouchableOpacity style={styles.editButton}>
-              <Icon name={Edit} width={20} height={20} />
+              <Icon
+                name={Edit}
+                width={metrics.iconSize.sm}
+                height={metrics.iconSize.sm}
+              />
             </TouchableOpacity>
           </View>
           <Text style={styles.userName}>{username ?? 'Guest'}</Text>
@@ -130,7 +136,7 @@ const ProfileScreen = () => {
           onPress: () => {
             setShowAlert(false);
           },
-          color: '#D3D3D3',
+          color: colors.gainsBoro,
         }}
         button2={{
           text: 'LOGOUT',
@@ -145,7 +151,7 @@ const ProfileScreen = () => {
             clearCookies();
             await AsyncStorage.setItem('userToken', '');
           },
-          color: '#CC5656',
+          color: colors.red,
         }}
       />
     </CSafeAreaView>

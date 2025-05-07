@@ -1,62 +1,29 @@
 import {StyleSheet} from 'react-native';
+import {colors, metrics, typography, scale} from 'src/theme';
 
 export const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#ffffff',
+    flex: 1,
+    backgroundColor: colors.white,
   },
   content: {
     flex: 1,
-    padding: 16,
-  },
-  label: {
-    fontSize: 14,
-    color: '#333',
-    marginBottom: 8,
-    fontFamily: 'Poppins-Regular',
-  },
-  requiredStar: {
-    color: 'red',
-    fontFamily: 'Poppins-SemiBold',
-  },
-  inputContainer: {
-    marginBottom: 20,
-  },
-  input: {
-    borderWidth: 1,
-    borderColor: '#E0E0E0',
-    borderRadius: 10,
-    padding: 12,
-    fontSize: 14,
-    fontFamily: 'Poppins-Regular',
-  },
-  helperText: {
-    fontSize: 12,
-    color: '#666',
-    marginTop: 4,
-    fontFamily: 'Poppins-SemiBold',
+    padding: metrics.padding.md,
   },
   passwordSection: {
-    marginTop: 24,
-    backgroundColor: '#F5F5F5',
-    padding: 16,
-    borderRadius: 10,
+    marginTop: metrics.margin.sm,
+    backgroundColor: colors.whiteSmoke6,
+    padding: metrics.padding.sm,
+    borderRadius: metrics.borderRadius.md,
+    marginBottom: metrics.margin.sm,
   },
   passwordTitle: {
-    fontSize: 16,
+    fontSize: typography.fontSize.sm,
     fontFamily: 'Poppins-SemiBold',
-    color: '#333',
-    marginBottom: 16,
-  },
-  passwordInputContainer: {
-    position: 'relative',
-    marginBottom: 16,
-  },
-  toggleButton: {
-    position: 'absolute',
-    right: 12,
-    top: 12,
+    color: colors.darkGray,
+    marginBottom: metrics.margin.md,
   },
   saveChangesButton: {
-    marginTop: 10,
+    marginTop: metrics.margin.sm,
   },
 });

@@ -1,77 +1,61 @@
 import {StyleSheet} from 'react-native';
+import {colors, metrics, scale, typography} from 'src/theme';
 
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5F6FA',
-  },
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: 16,
-    paddingTop: 48,
-    paddingBottom: 16,
-  },
-  backButton: {
-    padding: 8,
-  },
-  headerTitle: {
-    flex: 1,
-    fontSize: 20,
-    fontWeight: '600',
-    textAlign: 'center',
-    marginRight: 40,
+    backgroundColor: colors.ghostWhite,
   },
   profileSection: {
     alignItems: 'center',
-    marginTop: 20,
-    marginBottom: 32,
+    marginTop: metrics.margin.md,
+    marginBottom: metrics.margin.md,
   },
   avatarContainer: {
     position: 'relative',
-    marginBottom: 16,
+    marginBottom: metrics.margin.sm,
   },
   avatar: {
-    width: 100,
-    height: 100,
-    borderRadius: 50,
+    width: scale(100),
+    height: scale(100),
+    borderRadius: scale(50),
     elevation: 5,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: colors.white,
   },
   editButton: {
     position: 'absolute',
     right: 0,
     bottom: 0,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: colors.white,
     elevation: 4,
     zIndex: 1,
-    borderRadius: 20,
-    padding: 8,
+    borderRadius: metrics.borderRadius.xxl,
+    padding: metrics.padding.sm,
   },
   userName: {
-    fontSize: 24,
+    fontSize: typography.fontSize.xl,
     fontFamily: 'Poppins-SemiBold',
-    color: '#000000',
+    color: colors.black,
   },
   menuContainer: {
-    paddingHorizontal: 16,
+    paddingHorizontal: metrics.padding.md,
   },
   menuItem: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingVertical: 16,
+    paddingVertical: scale(12),
     borderBottomWidth: 1,
-    borderBottomColor: '#E5E5E5',
+    borderBottomColor: colors.gainsBoro,
   },
   menuItemLeft: {
     flexDirection: 'row',
     alignItems: 'center',
   },
   menuItemText: {
-    marginLeft: 12,
-    fontSize: 20,
-    color: '#000000',
+    marginLeft: metrics.margin.md,
+    fontSize: typography.fontSize.md,
+    color: colors.black,
     fontFamily: 'Poppins-Regular',
   },
 });

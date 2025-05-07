@@ -179,7 +179,7 @@ const AccountDetails = () => {
           <CustomTextInput
             title="Email address"
             required
-            style={{color: '#666666'}}
+            style={{color: colors.dimGray}}
             editable={false}
             value={formData.email}
             onChangeText={text => setFormData({...formData, email: text})}

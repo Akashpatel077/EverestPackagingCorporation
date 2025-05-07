@@ -45,7 +45,6 @@ import {Home, Buy, Heart, Profile, Category} from 'assets/icons';
 import {Icon} from 'src/Components';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import AddCardScreen from 'src/Screens/Home/AddCardScreen';
-import PaymentSuccessScreen from 'src/Screens/Home/PaymentSuccessScreen';
 import SearchScreen from 'src/Screens/Home/SearchScreen';
 import {getFocusedRouteNameFromRoute} from '@react-navigation/native';
 import {useSelector} from 'react-redux';
@@ -156,10 +155,6 @@ const MyCartStack = () => {
     {
       name: ADD_CARD_SCREEN,
       component: AddCardScreen,
-    },
-    {
-      name: PAYMENT_SUCCESS_SCREEN,
-      component: PaymentSuccessScreen,
     },
     {
       name: SHIPPING_TYPE_SCREEN,
@@ -292,6 +287,7 @@ const getTabBarStyle = (route: any) => {
     SUB_CATEGORY_SCREEN,
     PRODUCT_LIST,
     BULKORDERS,
+    PAYMENT_SUCCESS_SCREEN,
   ];
 
   if (hiddenRoutes.includes(routeName)) {

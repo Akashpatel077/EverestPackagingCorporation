@@ -1,11 +1,10 @@
-import {StyleSheet, Dimensions} from 'react-native';
-
-const {width} = Dimensions.get('window');
+import {StyleSheet} from 'react-native';
+import {colors, metrics, scale, typography} from 'src/theme';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5F6FA',
+    backgroundColor: colors.ghostWhite,
   },
   contentContainer: {
     flex: 1,
@@ -15,14 +14,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   categoriesContainer: {
-    padding: 8,
+    padding: metrics.padding.sm,
   },
   categoryWrapper: {
     width: '48%',
     margin: '1%',
-    backgroundColor: '#FFFFFF',
-    borderRadius: 16,
-    shadowColor: '#000',
+    backgroundColor: colors.white,
+    borderRadius: metrics.borderRadius.md,
+    shadowColor: colors.black,
     shadowOffset: {
       width: 0,
       height: 3,
@@ -30,36 +29,34 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 8,
     elevation: 5,
-    height: 220,
+    height: scale(200),
     borderWidth: 1,
-    borderColor: 'rgba(0, 0, 0, 0.05)',
+    borderColor: colors.lightBorder,
   },
   categoryCard: {
     flex: 1,
     overflow: 'hidden',
-    borderRadius: 16,
+    borderRadius: metrics.borderRadius.md,
   },
   categoryImage: {
     width: '100%',
-    height: 140,
+    height: scale(130),
     resizeMode: 'cover',
-    backgroundColor: '#FFFFFF',
-    padding: 10,
+    backgroundColor: colors.white,
   },
   categoryName: {
-    fontSize: 16,
+    fontSize: typography.fontSize.sm,
     fontFamily: 'Poppins-SemiBold',
-    color: '#1A1B1E',
-    paddingHorizontal: 12,
-    paddingTop: 4,
+    color: colors.black,
+    paddingHorizontal: metrics.padding.sm,
+    paddingTop: metrics.padding.xxs,
     textAlign: 'left',
   },
   categoryCount: {
-    fontSize: 16,
+    fontSize: typography.fontSize.xs,
     fontFamily: 'Poppins-Regular',
-    color: '#666666',
-    paddingHorizontal: 12,
-    paddingBottom: 8,
+    color: colors.dimGray,
+    paddingHorizontal: metrics.padding.sm,
     textAlign: 'left',
   },
 });

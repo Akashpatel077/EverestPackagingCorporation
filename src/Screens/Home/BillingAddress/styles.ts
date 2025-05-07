@@ -1,64 +1,27 @@
 import {StyleSheet} from 'react-native';
-import {colors} from 'src/theme';
+import {colors, metrics, scale, verticalScale, typography} from 'src/theme';
 
 export const styles = StyleSheet.create({
-  emptyContainer: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingHorizontal: 20,
-    marginTop: 40,
-  },
-  emptyText: {
-    fontSize: 18,
-    fontWeight: '600',
-    color: colors.textPrimary,
-    marginBottom: 8,
-  },
-  emptySubText: {
-    fontSize: 14,
-    color: colors.textSecondary,
-    textAlign: 'center',
-  },
-  disabledButton: {
-    opacity: 0.5,
-  },
   applyButton: {
     alignItems: 'center',
     position: 'absolute',
-    bottom: 24,
+    bottom: scale(20),
     left: 16,
     right: 16,
   },
   container: {
     flex: 1,
-    backgroundColor: '#F5F6FA',
-    // paddingHorizontal: 16,
-  },
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingVertical: 16,
-    marginBottom: 16,
-  },
-  backButton: {
-    padding: 8,
-    marginRight: 16,
-  },
-  headerTitle: {
-    fontSize: 20,
-    fontWeight: '600',
-    color: '#000000',
+    backgroundColor: colors.ghostWhite,
   },
   addressContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: '#FFFFFF',
-    marginTop: 12,
-    padding: 16,
-    borderRadius: 10,
-    marginBottom: 12,
+    backgroundColor: colors.white,
+    marginTop: metrics.margin.sm,
+    padding: metrics.padding.md,
+    borderRadius: metrics.borderRadius.md,
+    marginBottom: metrics.margin.xs,
   },
   addressLeft: {
     flexDirection: 'row',
@@ -66,18 +29,18 @@ export const styles = StyleSheet.create({
     flex: 1,
   },
   addressDetails: {
-    marginLeft: 12,
+    marginLeft: metrics.margin.md,
     flex: 1,
   },
   addressType: {
-    fontSize: 16,
-    fontWeight: '600',
-    color: '#000000',
-    marginBottom: 4,
+    fontSize: typography.fontSize.sm,
+    fontFamily: 'Poppins-SemiBold',
+    color: colors.black,
+    marginBottom: metrics.margin.xxs,
   },
   addressText: {
-    fontSize: 14,
-    color: '#666666',
+    fontSize: typography.fontSize.xs,
+    color: colors.dimGray,
   },
   addressRight: {
     flexDirection: 'row',
@@ -85,12 +48,12 @@ export const styles = StyleSheet.create({
     gap: 12,
   },
   deleteButton: {
-    padding: 4,
+    padding: metrics.padding.xxs,
   },
   radioButton: {
-    width: 20,
-    height: 20,
-    borderRadius: 10,
+    width: scale(18),
+    height: scale(18),
+    borderRadius: scale(9),
     borderWidth: 2,
     borderColor: colors.primary,
   },
@@ -103,10 +66,10 @@ export const styles = StyleSheet.create({
     borderColor: colors.primary,
     alignItems: 'center',
     position: 'absolute',
-    bottom: 90,
+    bottom: scale(75),
     left: 16,
     right: 16,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: colors.white,
   },
   addButtonText: {
     color: colors.primary,

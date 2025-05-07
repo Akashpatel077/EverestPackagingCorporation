@@ -17,7 +17,7 @@ import {useNavigation} from '@react-navigation/native';
 import {LOGIN} from 'src/Navigation/auth/routes';
 import {registerUserApi} from 'src/services/wooCommerceApi';
 import CSafeAreaView from 'src/Components/CSafeAreaView';
-import {colors} from 'src/theme';
+import {colors, metrics} from 'src/theme';
 
 const Registration = () => {
   const [firstName, setFirstName] = useState('');
@@ -100,7 +100,10 @@ const Registration = () => {
       <View style={styles.container}>
         <ScrollView
           showsVerticalScrollIndicator={false}
-          contentContainerStyle={{padding: 15, paddingBottom: 30}}>
+          contentContainerStyle={{
+            padding: metrics.padding.md,
+            paddingBottom: metrics.padding.xl,
+          }}>
           <Text style={styles.logo}>
             {t('registration.heading') || 'Create Account'}
           </Text>
@@ -110,7 +113,6 @@ const Registration = () => {
           </Text>
 
           <CustomTextInput
-            containerStyle={styles.inputContainer}
             title="First Name"
             required
             value={firstName}
@@ -120,7 +122,6 @@ const Registration = () => {
           />
 
           <CustomTextInput
-            containerStyle={styles.inputContainer}
             title="Last Name"
             required
             value={lastName}
@@ -130,7 +131,6 @@ const Registration = () => {
           />
 
           <CustomTextInput
-            containerStyle={styles.inputContainer}
             title="User Name"
             required
             value={name}
@@ -140,7 +140,6 @@ const Registration = () => {
           />
 
           <CustomTextInput
-            containerStyle={styles.inputContainer}
             title={t('registration.email') || 'Email'}
             required
             value={email}
@@ -151,7 +150,6 @@ const Registration = () => {
           />
 
           <CustomTextInput
-            containerStyle={styles.inputContainer}
             title={t('registration.password') || 'Password'}
             required
             value={password}
@@ -166,9 +164,17 @@ const Registration = () => {
             style={styles.termsContainer}
             onPress={() => setAgreeToTerms(!agreeToTerms)}>
             {agreeToTerms ? (
-              <Icon name={CheckSquare} height={30} width={30} />
+              <Icon
+                name={CheckSquare}
+                height={metrics.iconSize.md}
+                width={metrics.iconSize.md}
+              />
             ) : (
-              <Icon name={UncheckSquareNew} height={30} width={30} />
+              <Icon
+                name={UncheckSquareNew}
+                height={metrics.iconSize.md}
+                width={metrics.iconSize.md}
+              />
             )}
 
             <Text style={styles.termsText}>
@@ -196,17 +202,29 @@ const Registration = () => {
 
           <View style={styles.socialContainer}>
             <TouchableOpacity style={styles.socialButton}>
-              <Icon name={ic_Apple} height={30} width={30} />
+              <Icon
+                name={ic_Apple}
+                height={metrics.iconSize.md}
+                width={metrics.iconSize.md}
+              />
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.socialButton}
               onPress={() => {
                 loginWithGoogle();
               }}>
-              <Icon name={ic_Google} height={30} width={30} />
+              <Icon
+                name={ic_Google}
+                height={metrics.iconSize.md}
+                width={metrics.iconSize.md}
+              />
             </TouchableOpacity>
             <TouchableOpacity style={styles.socialButton}>
-              <Icon name={ic_Facebook} height={30} width={30} />
+              <Icon
+                name={ic_Facebook}
+                height={metrics.iconSize.md}
+                width={metrics.iconSize.md}
+              />
             </TouchableOpacity>
           </View>
 

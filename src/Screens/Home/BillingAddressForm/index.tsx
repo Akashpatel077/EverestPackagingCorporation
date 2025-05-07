@@ -28,7 +28,7 @@ import {Icon} from '../../../Components';
 import {CheckSquare, UncheckSquareNew} from '../../../../assets/icons';
 import {getStates} from 'src/services/wooCommerceApi';
 import CSafeAreaView from 'src/Components/CSafeAreaView';
-import {colors} from 'src/theme';
+import {colors, metrics} from 'src/theme';
 
 const BillingAddressForm: React.FC = ({route}) => {
   const navigation = useNavigation();
@@ -137,7 +137,10 @@ const BillingAddressForm: React.FC = ({route}) => {
         <ScrollView
           showsHorizontalScrollIndicator={false}
           showsVerticalScrollIndicator={false}
-          contentContainerStyle={{padding: 16, paddingBottom: 30}}>
+          contentContainerStyle={{
+            padding: metrics.padding.md,
+            paddingBottom: metrics.padding.lg,
+          }}>
           <View style={styles.row}>
             <CustomTextInput
               containerStyle={styles.halfField}
@@ -158,7 +161,6 @@ const BillingAddressForm: React.FC = ({route}) => {
           </View>
 
           <CustomTextInput
-            containerStyle={styles.field}
             title="Company name (optional)"
             value={formData.companyName}
             onChangeText={value => handleChange('companyName', value)}
@@ -183,7 +185,6 @@ const BillingAddressForm: React.FC = ({route}) => {
           />
 
           <CustomTextInput
-            containerStyle={styles.field}
             title="Apartment, suite, unit, etc. (optional)"
             value={formData.apartment}
             onChangeText={value => handleChange('apartment', value)}
@@ -192,7 +193,6 @@ const BillingAddressForm: React.FC = ({route}) => {
 
           <CustomTextInput
             required
-            containerStyle={styles.field}
             title="Town / City"
             value={formData.townCity}
             onChangeText={value => handleChange('townCity', value)}
@@ -218,7 +218,6 @@ const BillingAddressForm: React.FC = ({route}) => {
           </View>
 
           <CustomTextInput
-            containerStyle={styles.field}
             title="Postcode / ZIP"
             required
             value={formData.postcode}
@@ -228,7 +227,6 @@ const BillingAddressForm: React.FC = ({route}) => {
           />
 
           <CustomTextInput
-            containerStyle={styles.field}
             title="Address Type"
             required
             value={formData.addressType}
@@ -236,21 +234,29 @@ const BillingAddressForm: React.FC = ({route}) => {
             placeholder="Select address type"
           />
 
-          {!hideCheckbox && (
-            <TouchableOpacity
-              activeOpacity={0.7}
-              style={styles.makeThisAsShippingAddress}
-              onPress={() => SetIsShippingAddressSame(prevValue => !prevValue)}>
-              {isShippingAddressSame ? (
-                <Icon name={CheckSquare} height={30} width={30} />
-              ) : (
-                <Icon name={UncheckSquareNew} height={30} width={30} />
-              )}
-              <Text style={styles.shippingCheckBoxText}>
-                Ship to a different address?
-              </Text>
-            </TouchableOpacity>
-          )}
+          {/* {!hideCheckbox && ( */}
+          <TouchableOpacity
+            activeOpacity={0.7}
+            style={styles.makeThisAsShippingAddress}
+            onPress={() => SetIsShippingAddressSame(prevValue => !prevValue)}>
+            {isShippingAddressSame ? (
+              <Icon
+                name={CheckSquare}
+                height={metrics.iconSize.md}
+                width={metrics.iconSize.md}
+              />
+            ) : (
+              <Icon
+                name={UncheckSquareNew}
+                height={metrics.iconSize.md}
+                width={metrics.iconSize.md}
+              />
+            )}
+            <Text style={styles.shippingCheckBoxText}>
+              Ship to a different address?
+            </Text>
+          </TouchableOpacity>
+          {/* )} */}
 
           <CButton onPress={handleSubmit} title={'SAVE ADDRESS'} />
         </ScrollView>

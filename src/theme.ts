@@ -7,6 +7,7 @@ import {
 
 const colors = {
   primary: '#0088cc',
+  ghostWhite: '#F5F6FA',
   white: '#FFFFFF',
   black: '#000000',
   red: '#CC5656',
@@ -17,7 +18,10 @@ const colors = {
   whiteSmoke6: '#F6F6F6',
   gainsBoro: '#E0E0E0',
   modalBackground: 'rgba(0,0,0,0.4)',
+  lightBorder: 'rgba(0, 0, 0, 0.05)',
+  outOfStockOverlay: 'rgba(0, 0, 0, 0.7)',
   WhisperE5: '#E5E5E5',
+  green: '#32a852',
   background: {
     light: '#FFFFFF',
     dark: '#121212',
@@ -29,12 +33,15 @@ const colors = {
 };
 
 const spacing = {
+  xxs: scale(2),
   xs: scale(4),
   sm: scale(8),
   md: scale(16),
   lg: scale(24),
   xl: scale(32),
   xxl: scale(40),
+  xxxl: scale(48),
+  xxxxl: scale(56),
 };
 
 const typography = {
@@ -46,6 +53,8 @@ const typography = {
     lg: scale(18),
     xl: scale(20),
     xxl: scale(24),
+    xxxl: scale(28),
+    xxxxl: scale(32),
   },
   lineHeight: {
     xs: scale(16),
@@ -62,6 +71,8 @@ const metrics = {
     sm: scale(4),
     md: scale(8),
     lg: scale(12),
+    xl: scale(16),
+    xxl: scale(20),
   },
   padding: spacing,
   margin: spacing,

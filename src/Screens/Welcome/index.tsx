@@ -8,13 +8,15 @@ import {
   StyleSheet,
   Dimensions,
 } from 'react-native';
+import {scale, verticalScale, moderateScale} from 'react-native-size-matters';
 import {useNavigation} from '@react-navigation/native';
 import {HOMESCREEN} from 'src/Navigation/home/routes';
 import {LOGIN} from 'src/Navigation/auth/routes';
 import {useDispatch} from 'react-redux';
 import {setShowWelcome, setStartKey} from 'src/store/slices/startKeySlice';
 import {CButton} from 'src/Components';
-import {colors} from 'src/theme';
+import {colors, metrics, typography} from 'src/theme';
+import CSafeAreaView from 'src/Components/CSafeAreaView';
 
 const fashionImages = [
   'https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=800',
@@ -86,162 +88,126 @@ const Welcome = () => {
   const dispatch = useDispatch();
 
   return (
-    <ScrollView style={styles.container}>
-      <View style={styles.imageLayout}>
-        <Image
-          source={{uri: fashionImages[0]}}
-          style={styles.mainImage}
-          resizeMode="cover"
-        />
-        <View style={styles.smallImagesContainer}>
+    <CSafeAreaView removeBottomSafeArea>
+      <ScrollView
+        contentContainerStyle={styles.container}
+        showsVerticalScrollIndicator={false}>
+        <View style={styles.imageLayout}>
           <Image
-            source={{uri: fashionImages[1]}}
-            style={styles.smallImage}
+            source={{uri: fashionImages[0]}}
+            style={styles.mainImage}
             resizeMode="cover"
           />
-          <Image
-            source={{uri: fashionImages[2]}}
-            style={styles.smallImage}
-            resizeMode="cover"
+          <View style={styles.smallImagesContainer}>
+            <Image
+              source={{uri: fashionImages[1]}}
+              style={styles.smallImage}
+              resizeMode="cover"
+            />
+            <Image
+              source={{uri: fashionImages[2]}}
+              style={styles.smallImage}
+              resizeMode="cover"
+            />
+          </View>
+        </View>
+
+        <View style={styles.contentContainer}>
+          <Text style={styles.title}>
+            The <Text style={styles.titleHighlight}>Fashion App</Text> That
+          </Text>
+          <Text style={styles.subtitle}>Makes You Look Your Best</Text>
+          <Text style={styles.description}>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt
+          </Text>
+
+          <CButton
+            onPress={() => {
+              dispatch(setStartKey('user'));
+              dispatch(setShowWelcome(false));
+            }}
+            title={"Let's Get Started"}
           />
+
+          <View style={styles.signInContainer}>
+            <Text style={styles.signInText}>Already have an account? </Text>
+            <TouchableOpacity onPress={() => dispatch(setShowWelcome(false))}>
+              <Text style={styles.signInLink}>Sign In</Text>
+            </TouchableOpacity>
+          </View>
         </View>
-      </View>
-
-      <View style={styles.contentContainer}>
-        <Text style={styles.title}>
-          The <Text style={styles.titleHighlight}>Fashion App</Text> That
-        </Text>
-        <Text style={styles.subtitle}>Makes You Look Your Best</Text>
-        <Text style={styles.description}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt
-        </Text>
-
-        <CButton
-          onPress={() => {
-            dispatch(setStartKey('user'));
-            dispatch(setShowWelcome(false));
-          }}
-          title={"Let's Get Started"}
-        />
-
-        <View style={styles.signInContainer}>
-          <Text style={styles.signInText}>Already have an account? </Text>
-          <TouchableOpacity onPress={() => dispatch(setShowWelcome(false))}>
-            <Text style={styles.signInLink}>Sign In</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-    </ScrollView>
+      </ScrollView>
+    </CSafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#FFFFFF',
+    paddingBottom: metrics.padding.xl,
+    backgroundColor: colors.background.light,
   },
   imageLayout: {
     flex: 1,
     width: '100%',
     height: Dimensions.get('window').height * 0.6,
     flexDirection: 'row',
-    padding: 16,
+    paddingHorizontal: metrics.padding.lg,
   },
   mainImage: {
     flex: 1,
-    borderRadius: 24,
-    marginRight: 8,
+    borderRadius: metrics.borderRadius.md,
+    marginRight: metrics.margin.sm,
   },
   smallImagesContainer: {
     width: '40%',
     justifyContent: 'space-between',
   },
   smallImage: {
-    height: '48%',
-    borderRadius: 24,
+    height: '49%',
+    borderRadius: metrics.borderRadius.md,
   },
   contentContainer: {
-    padding: 24,
+    paddingHorizontal: metrics.padding.lg,
     alignItems: 'center',
   },
   title: {
-    fontSize: 32,
+    fontSize: typography.fontSize.xxxl,
     fontFamily: 'Poppins-SemiBold',
-    color: '#000000',
+    color: colors.text.light,
     textAlign: 'center',
-    marginBottom: 8,
   },
   titleHighlight: {
     color: colors.primary,
   },
   subtitle: {
-    fontSize: 24,
-    color: '#000000',
-    marginBottom: 16,
+    fontSize: typography.fontSize.xl,
+    color: colors.text.light,
     textAlign: 'center',
     fontFamily: 'Poppins-Medium',
   },
   description: {
-    fontSize: 16,
-    color: '#666666',
+    fontSize: typography.fontSize.sm,
+    color: colors.dimGray,
     textAlign: 'center',
-    marginBottom: 32,
     fontFamily: 'Poppins-Regular',
   },
   signInContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 24,
+    marginTop: verticalScale(24),
   },
   signInText: {
-    fontSize: 16,
-    color: '#666666',
+    fontSize: moderateScale(16),
+    color: colors.dimGray,
     fontFamily: 'Poppins-Regular',
   },
   signInLink: {
-    fontSize: 16,
+    fontSize: moderateScale(16),
     color: colors.primary,
     fontFamily: 'Poppins-SemiBold',
   },
 });
 
 export default Welcome;
-//             <View style={styles.categoryContent}>
-//               <Image
-//                 source={{ uri: category.imageUrl }}
-//                 style={styles.categoryImage}
-//                 // defaultSource={require('assets/images/placeholder.png')}
-//               />
-//               <Text style={styles.categoryTitle}>{category.title}</Text>
-//               <Text style={styles.categoryDescription}>
-//                 {category.description}
-//               </Text>
-//             </View>
-//           </TouchableOpacity>
-//         ))}
-//       </View>
-
-//        <View style={styles.bottomSection}>
-//          <TouchableOpacity
-//            style={styles.button}
-//            onPress={() => {
-//              dispatch(setStartKey('user'));
-//              navigation.navigate('Home', { screen: HOMESCREEN });
-//            }}>
-//            <Text style={styles.buttonText}>Explore All Products</Text>
-//          </TouchableOpacity>
-
-//          <View style={styles.signInContainer}>
-//            <Text style={styles.signInText}>Already have an account?</Text>
-//            <TouchableOpacity onPress={() => navigation.navigate(LOGIN)}>
-//              <Text style={styles.signInLink}>Sign In</Text>
-//            </TouchableOpacity>
-//          </View>
-//        </View>
-//      </ScrollView>
-//    );
-//  };
-
-// export default Welcome;

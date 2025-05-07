@@ -5,6 +5,7 @@ import {BackIcon, CheckSquare, UncheckSquareNew} from 'assets/icons';
 import {styles} from './styles';
 import CSafeAreaView from 'src/Components/CSafeAreaView';
 import {useAppSelector} from 'src/store/hooks';
+import {metrics} from 'src/theme';
 
 const CommunicationScreen = () => {
   const [accountInfo, setAccountInfo] = useState(true);
@@ -35,9 +36,17 @@ const CommunicationScreen = () => {
               style={styles.checkboxContainer}
               onPress={() => setAccountInfo(!accountInfo)}>
               {accountInfo ? (
-                <Icon name={CheckSquare} height={25} width={25} />
+                <Icon
+                  name={CheckSquare}
+                  height={metrics.iconSize.md}
+                  width={metrics.iconSize.md}
+                />
               ) : (
-                <Icon name={UncheckSquareNew} height={25} width={25} />
+                <Icon
+                  name={UncheckSquareNew}
+                  height={metrics.iconSize.md}
+                  width={metrics.iconSize.md}
+                />
               )}
               <View style={styles.labelContainer}>
                 <Text style={styles.checkboxLabel}>

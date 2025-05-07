@@ -2,15 +2,13 @@ import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
-  SafeAreaView,
   FlatList,
   TouchableOpacity,
   Image,
   ActivityIndicator,
-  Alert,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import {useDispatch, useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
 
 import {CustomAlert, Header} from '../../../Components';
 import {BackIcon, Heart} from '../../../../assets/icons';
@@ -19,7 +17,6 @@ import {PRODUCT_DETAILS} from '../../../Navigation/home/routes';
 import {
   addToWishlist,
   removeFromWishlist,
-  isProductInWishlist,
 } from '../../../store/slices/wishlistSlice';
 import styles from './styles';
 import {useAppDispatch, useAppSelector} from 'src/store/hooks';
@@ -27,6 +24,7 @@ import {fetchProducts} from 'src/store/slices/productsSlice';
 import {getProductVariations} from 'src/services/wooCommerceApi';
 import LoadingLogo from 'src/Components/LoadingLogo';
 import CSafeAreaView from 'src/Components/CSafeAreaView';
+import {colors, metrics} from 'src/theme';
 
 function findVariation(variations, selectedAttributes) {
   return variations.find(variation => {
@@ -102,7 +100,10 @@ const ProductList = ({route}) => {
             onEndReachedThreshold={0.5}
             ListFooterComponent={() =>
               paginationLoading ? (
-                <ActivityIndicator size="small" style={{marginVertical: 10}} />
+                <ActivityIndicator
+                  size="small"
+                  style={{marginVertical: metrics.margin.md}}
+                />
               ) : null
             }
           />
@@ -206,14 +207,16 @@ const ProductItemCard = React.memo(
             onPress={() => handleWishlistToggle(item)}>
             <Icon
               name={Heart}
-              width={25}
-              height={25}
-              color={isInWishlist ? '#CC5656' : '#ffffff'}
+              width={metrics.iconSize.sm}
+              height={metrics.iconSize.sm}
+              color={isInWishlist ? colors.red : colors.white}
             />
           </TouchableOpacity>
         </View>
         <View style={styles.productInfo}>
-          <Text style={styles.productName}>{item.name}</Text>
+          <Text style={styles.productName} numberOfLines={2}>
+            {item.name}
+          </Text>
           <View style={styles.productDetails}>
             <View
               style={{
@@ -239,7 +242,7 @@ const ProductItemCard = React.memo(
           button2={{
             text: 'OK',
             onPress: () => setAlertVisible(false),
-            color: '#007bff',
+            color: colors.primary,
           }}
         />
       </TouchableOpacity>

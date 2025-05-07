@@ -1,4 +1,4 @@
-import {colors} from 'src/theme';
+import {colors, metrics, verticalScale} from 'src/theme';
 import React, {useEffect, useState} from 'react';
 import {View, Text, ScrollView} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
@@ -117,7 +117,10 @@ const ShippingAddressForm: React.FC = () => {
         <Header title="Shipping Address" icon1={BackIcon} />
         <ScrollView
           showsHorizontalScrollIndicator={false}
-          contentContainerStyle={{padding: 16, paddingBottom: 30}}
+          contentContainerStyle={{
+            padding: metrics.padding.md,
+            paddingBottom: metrics.padding.xl,
+          }}
           showsVerticalScrollIndicator={false}>
           <View style={styles.row}>
             <CustomTextInput
@@ -139,7 +142,6 @@ const ShippingAddressForm: React.FC = () => {
           </View>
 
           <CustomTextInput
-            containerStyle={styles.field}
             title="Company name (optional)"
             value={formData.companyName}
             onChangeText={value => handleChange('companyName', value)}
@@ -164,7 +166,6 @@ const ShippingAddressForm: React.FC = () => {
           />
 
           <CustomTextInput
-            containerStyle={styles.field}
             title="Apartment, suite, unit, etc. (optional)"
             value={formData.apartment}
             onChangeText={value => handleChange('apartment', value)}
@@ -173,7 +174,6 @@ const ShippingAddressForm: React.FC = () => {
 
           <CustomTextInput
             required
-            containerStyle={styles.field}
             title="Town / City"
             value={formData.townCity}
             onChangeText={value => handleChange('townCity', value)}
@@ -186,7 +186,7 @@ const ShippingAddressForm: React.FC = () => {
             </Text>
             <CDropdown
               data={states}
-              dropDownStyle={{height: 48}}
+              dropDownStyle={{height: verticalScale(35)}}
               title="State / County"
               selectedItem={selectedState}
               onSelect={(itemObject: any) => {
@@ -200,7 +200,6 @@ const ShippingAddressForm: React.FC = () => {
           </View>
 
           <CustomTextInput
-            containerStyle={styles.field}
             title="Postcode / ZIP"
             required
             value={formData.postcode}
@@ -210,7 +209,6 @@ const ShippingAddressForm: React.FC = () => {
           />
 
           <CustomTextInput
-            containerStyle={styles.field}
             title="Address Type"
             required
             value={formData.addressType}

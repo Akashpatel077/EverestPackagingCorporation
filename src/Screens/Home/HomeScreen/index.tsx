@@ -7,6 +7,7 @@ import {Search, Menu} from 'assets/icons';
 import {useNavigation, useIsFocused} from '@react-navigation/native';
 import {SEARCH_SCREEN} from 'src/Navigation/home/routes';
 import CSafeAreaView from 'src/Components/CSafeAreaView';
+import {colors} from 'src/theme';
 
 const HomeScreen = () => {
   const navigation = useNavigation();
@@ -15,15 +16,15 @@ const HomeScreen = () => {
 
   return (
     <CSafeAreaView removeBottomSafeArea>
+      <Header
+        icon1={Menu}
+        onPressFirst={() => navigation.openDrawer()}
+        icon2={Search}
+        icon2Color={colors.white}
+        onPressSecond={() => navigation.navigate(SEARCH_SCREEN)}
+        title={'Everest Packaging'}
+      />
       <View style={styles.container}>
-        <Header
-          icon1={Menu}
-          onPressFirst={() => navigation.openDrawer()}
-          icon2={Search}
-          icon2Color="#FFF"
-          onPressSecond={() => navigation.navigate(SEARCH_SCREEN)}
-          title={'Everest Packaging'}
-        />
         <View style={styles.videoContainer}>
           <VideoPlayer
             ref={videoRef}
@@ -33,7 +34,7 @@ const HomeScreen = () => {
             style={styles.video}
             disableFullscreen
             disableBack
-            controlColor="red"
+            // controlColor="red"
             controlTimeout={10000}
             paused={!isFocused}
             repeat={true}

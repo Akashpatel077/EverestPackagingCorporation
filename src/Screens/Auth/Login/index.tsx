@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import {
   Text,
   View,
-  TextInput,
   TouchableOpacity,
   BackHandler,
   ScrollView,
@@ -25,7 +24,7 @@ import {loginUser, logout} from 'src/store/slices/authSlice';
 import {RootState} from 'src/store';
 import {setShowWelcome} from 'src/store/slices/startKeySlice';
 import CSafeAreaView from 'src/Components/CSafeAreaView';
-import {colors} from 'src/theme';
+import {colors, metrics} from 'src/theme';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -65,13 +64,15 @@ const Login = () => {
   return (
     <CSafeAreaView removeBottomSafeArea style={styles.container}>
       <ScrollView
-        contentContainerStyle={{paddingTop: 20, paddingBottom: 50}}
+        contentContainerStyle={{
+          paddingTop: metrics.padding.lg,
+          paddingBottom: metrics.padding.xxl,
+        }}
         showsVerticalScrollIndicator={false}>
         <Text style={styles.logo}>{t('login.heading')}</Text>
         <Text style={styles.welcomeText}>{t('login.subTitle')}</Text>
 
         <CustomTextInput
-          containerStyle={styles.inputContainer}
           title={t('login.email')}
           required
           value={email}
@@ -82,7 +83,6 @@ const Login = () => {
         />
 
         <CustomTextInput
-          containerStyle={styles.inputContainer}
           title={t('login.password')}
           required
           value={password}
@@ -114,17 +114,29 @@ const Login = () => {
 
         <View style={styles.socialContainer}>
           <TouchableOpacity style={styles.socialButton}>
-            <Icon name={ic_Apple} height={30} width={30} />
+            <Icon
+              name={ic_Apple}
+              height={metrics.iconSize.md}
+              width={metrics.iconSize.md}
+            />
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.socialButton}
             onPress={() => {
               loginWithGoogle();
             }}>
-            <Icon name={ic_Google} height={30} width={30} />
+            <Icon
+              name={ic_Google}
+              height={metrics.iconSize.md}
+              width={metrics.iconSize.md}
+            />
           </TouchableOpacity>
           <TouchableOpacity style={styles.socialButton}>
-            <Icon name={ic_Facebook} height={30} width={30} />
+            <Icon
+              name={ic_Facebook}
+              height={metrics.iconSize.md}
+              width={metrics.iconSize.md}
+            />
           </TouchableOpacity>
         </View>
 

@@ -31,7 +31,7 @@ import {MYCART} from 'src/Navigation/home/routes';
 import {CommonActions} from '@react-navigation/native';
 import CSafeAreaView from 'src/Components/CSafeAreaView';
 import {useSelector} from 'react-redux';
-import {colors} from 'src/theme';
+import {colors, metrics, scale, typography, verticalScale} from 'src/theme';
 
 function findVariation(variations, selectedAttributes) {
   return variations.find(variation => {
@@ -378,7 +378,7 @@ const ProductDetails = ({navigation, route}) => {
                           <Text
                             style={[
                               styles.bulkDiscountRowText,
-                              {color: 'red'},
+                              {color: colors.red},
                             ]}>
                             ₹{priceAfterDiscount}
                           </Text>
@@ -404,7 +404,11 @@ const ProductDetails = ({navigation, route}) => {
                     <Text style={styles.sectionTitle}>
                       Select Color
                       {selectedColor && (
-                        <Text style={[styles.sectionTitle, {color: '#666666'}]}>
+                        <Text
+                          style={[
+                            styles.sectionTitle,
+                            {color: colors.dimGray},
+                          ]}>
                           {` : ${selectedColor}`}
                         </Text>
                       )}
@@ -457,42 +461,44 @@ const ProductDetails = ({navigation, route}) => {
                     <Text
                       style={[
                         styles.sectionTitle,
-                        {marginBottom: 10, marginTop: 15},
+                        {marginTop: metrics.margin.sm},
                       ]}>
                       Product Description:
                     </Text>
                     <View
                       style={{
-                        maxHeight: isExpanded ? 'auto' : 100,
+                        maxHeight: isExpanded ? 'auto' : scale(100),
                         overflow: 'hidden',
-                        borderRadius: 8,
-                        marginHorizontal: 5,
+                        borderRadius: metrics.borderRadius.md,
+                        marginHorizontal: metrics.margin.xxs,
                       }}>
                       <RenderHtml
                         contentWidth={300}
                         source={{html: cleanedHTML}}
                         tagsStyles={{
                           body: {
-                            color: '#666666',
-                            fontSize: 14,
-                            lineHeight: 22,
+                            color: colors.dimGray,
+                            fontSize: typography.fontSize.xs,
+                            lineHeight: scale(18),
                           },
                           p: {
-                            marginBottom: 8,
+                            marginBottom: metrics.margin.xs,
                           },
                           ul: {
-                            marginLeft: 20,
+                            marginLeft: metrics.margin.md,
                           },
                           li: {
-                            marginBottom: 5,
+                            marginBottom: metrics.margin.xxs,
                           },
                           strong: {
+                            color: colors.darkGray,
+                            fontFamily: 'Poppins-Bold',
                             fontWeight: '700',
-                            color: '#333333',
                           },
                           b: {
                             fontWeight: '700',
-                            color: '#333333',
+                            color: colors.darkGray,
+                            fontFamily: 'Poppins-Bold',
                           },
                         }}
                       />
@@ -500,7 +506,7 @@ const ProductDetails = ({navigation, route}) => {
                     <TouchableOpacity
                       style={{
                         alignItems: 'flex-start',
-                        paddingVertical: 10,
+                        paddingTop: metrics.padding.xs,
                       }}
                       onPress={() => setIsExpanded(prevValue => !prevValue)}>
                       <Text style={[styles.readMore, {color: colors.primary}]}>
@@ -527,9 +533,9 @@ const ProductDetails = ({navigation, route}) => {
                 }}>
                 <Icon
                   name={Heart}
-                  width={24}
-                  height={24}
-                  color={isInWishlist ? '#CC5656' : '#ffffff'}
+                  width={metrics.iconSize.sm}
+                  height={metrics.iconSize.sm}
+                  color={isInWishlist ? colors.red : colors.white}
                 />
               </TouchableOpacity>
               <CButton
@@ -610,7 +616,7 @@ const RenderAttributes = ({
       <Text style={styles.sectionTitle}>
         {item.name}
         {selectedItem && (
-          <Text style={[styles.sectionTitle, {color: '#666666'}]}>
+          <Text style={[styles.sectionTitle, {color: colors.dimGray}]}>
             {` : ${selectedItem}`}
           </Text>
         )}
@@ -669,7 +675,7 @@ const QuantitySelector = ({
       <TouchableOpacity
         activeOpacity={0.7}
         disabled={quantity <= filteredMetaData.min_quantity}
-        style={styles.incDecrButton}
+        style={styles.decrButton}
         onPress={() =>
           setQuantity(
             prevValue => prevValue - Number(filteredMetaData.product_step),
@@ -686,7 +692,7 @@ const QuantitySelector = ({
             prevValue => prevValue + Number(filteredMetaData.product_step),
           )
         }
-        style={styles.incDecrButton}>
+        style={styles.incButton}>
         <Text style={styles.plusMinusText}>+</Text>
       </TouchableOpacity>
     </View>
@@ -724,10 +730,13 @@ const RenderCustomExtraFields = ({
 
   return item.type === 'select' ? (
     <>
-      <Text style={[styles.sectionTitle, {marginBottom: 0}]}>{item.label}</Text>
+      <Text style={[styles.sectionTitle, {}]}>{item.label}</Text>
       <CDropdown
         data={item.values}
-        dropDownStyle={{height: 40}}
+        dropDownStyle={{
+          height: verticalScale(35),
+          marginBottom: metrics.margin.md,
+        }}
         selectedItem={selectedValue}
         onSelect={(itemObject: any) => {
           setSelectedCustomExtraFields(prevValue => ({
@@ -740,7 +749,7 @@ const RenderCustomExtraFields = ({
     </>
   ) : item.type === 'file' ? (
     <>
-      <Text style={[styles.sectionTitle, {marginBottom: 0}]}>{item.label}</Text>
+      <Text style={[styles.sectionTitle, {}]}>{item.label}</Text>
       <FilePicker
         placeHolder={item.placeholder}
         onUpdateFile={(fileObject: any) => {

@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, Text, TouchableOpacity, ScrollView, Alert} from 'react-native';
+import {View, Text, TouchableOpacity, ScrollView} from 'react-native';
 import {CButton, CustomAlert, Header, Icon} from 'src/Components';
 import {Home, BackIcon, Close} from 'assets/icons';
 import {styles} from './styles';
@@ -11,8 +11,8 @@ import {
   removeShippingAddress,
 } from 'src/store/slices/addressSlice';
 import {RootState} from 'src/store';
-import type {Address} from 'src/store/slices/addressSlice';
 import CSafeAreaView from 'src/Components/CSafeAreaView';
+import {colors, metrics} from 'src/theme';
 
 const ShippingAddressScreen = () => {
   const navigation = useNavigation();
@@ -40,7 +40,10 @@ const ShippingAddressScreen = () => {
         <Header title="Shipping Address" icon1={BackIcon} />
         <ScrollView
           showsHorizontalScrollIndicator={false}
-          contentContainerStyle={{padding: 16, flex: 1}}
+          contentContainerStyle={{
+            paddingHorizontal: metrics.padding.md,
+            flex: 1,
+          }}
           showsVerticalScrollIndicator={false}>
           {shippingAddresses.length > 0
             ? shippingAddresses.map(address => (
@@ -51,7 +54,11 @@ const ShippingAddressScreen = () => {
                     dispatch(setSelectedShippingAddress(address.id))
                   }>
                   <View style={styles.addressLeft}>
-                    <Icon name={Home} width={24} height={24} />
+                    <Icon
+                      name={Home}
+                      width={metrics.iconSize.md}
+                      height={metrics.iconSize.md}
+                    />
                     <View style={styles.addressDetails}>
                       <Text style={styles.addressType}>{address.name}</Text>
                       <Text
@@ -74,7 +81,11 @@ const ShippingAddressScreen = () => {
                           });
                           setAlertVisible(true);
                         }}>
-                        <Icon name={Close} width={20} height={20} />
+                        <Icon
+                          name={Close}
+                          width={metrics.iconSize.sm}
+                          height={metrics.iconSize.sm}
+                        />
                       </TouchableOpacity>
                     )}
                     <View
@@ -93,7 +104,7 @@ const ShippingAddressScreen = () => {
             textStyle={styles.addButtonText}
             style={[
               styles.addButton,
-              !shippingAddresses.length && {marginTop: 20},
+              !shippingAddresses.length && {marginTop: metrics.margin.md},
             ]}
             onPress={() => {
               navigation.navigate(SHIPPING_ADDRESS_FORM);
@@ -117,12 +128,13 @@ const ShippingAddressScreen = () => {
         title={alertConfig.title}
         description={alertConfig.description}
         button1={{
+          color: colors.gainsBoro,
           text: 'Cancel',
           onPress: () => setAlertVisible(false),
         }}
         button2={{
           text: 'Delete',
-          color: '#ff4d4f',
+          color: colors.red,
           onPress: () => {
             alertConfig.onConfirm();
             setAlertVisible(false);

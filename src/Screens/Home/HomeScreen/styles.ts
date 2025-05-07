@@ -1,17 +1,18 @@
-import {Dimensions, StyleSheet} from 'react-native';
+import {StyleSheet} from 'react-native';
+import {colors, metrics, scale} from 'src/theme';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5F6FA',
+    backgroundColor: colors.ghostWhite,
+    padding: metrics.padding.md,
   },
   videoContainer: {
-    width: '95%',
-    height: 220,
-    backgroundColor: '#000',
+    width: '100%',
+    height: scale(180),
+    backgroundColor: colors.black,
     justifyContent: 'center',
     alignItems: 'center',
-    margin: 10,
   },
   video: {
     width: '100%',

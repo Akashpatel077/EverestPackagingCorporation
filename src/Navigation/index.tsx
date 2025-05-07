@@ -11,6 +11,7 @@ import {
   BILLING_ADDRESS_FORM,
   CHECKOUT,
   PAYMENT_METHOD,
+  PAYMENT_SUCCESS_SCREEN,
   PAYMENT_WEBVIEW,
   PRODUCT_DETAILS,
   SHIPPING_ADDRESS,
@@ -27,6 +28,7 @@ import {
 import CheckoutScreen from 'src/Screens/Home/Checkout';
 import PaymentMethodScreen from 'src/Screens/Home/PaymentMethod';
 import DrawerNavigator from './DrawerNavigator';
+import PaymentSuccessScreen from 'src/Screens/Home/PaymentSuccessScreen';
 
 const MainStack = createNativeStackNavigator();
 
@@ -87,6 +89,10 @@ const MainContainer = () => {
             <MainStack.Screen
               name={PRODUCT_DETAILS}
               component={ProductDetails}
+            />
+            <MainStack.Screen
+              name={PAYMENT_SUCCESS_SCREEN}
+              component={PaymentSuccessScreen}
             />
           </>
         ) : (

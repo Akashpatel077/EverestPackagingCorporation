@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
     marginVertical: metrics.margin.xs,
     alignItems: 'center',
     borderRadius: metrics.borderRadius.md,
-    height: verticalScale(33),
+    height: verticalScale(35),
   },
   buttonText: {
     paddingHorizontal: metrics.padding.sm,

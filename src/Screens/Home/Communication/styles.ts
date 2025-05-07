@@ -1,49 +1,48 @@
 import {StyleSheet} from 'react-native';
+import {colors, metrics, typography} from 'src/theme';
 
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5F6FA',
+    backgroundColor: colors.ghostWhite,
   },
   content: {
     flex: 1,
-    padding: 16,
+    padding: metrics.padding.md,
   },
   title: {
-    fontSize: 16,
-    color: '#333333',
-    marginBottom: 24,
-    lineHeight: 24,
+    fontSize: typography.fontSize.sm,
+    color: colors.darkGray,
+    marginBottom: metrics.margin.md,
     fontFamily: 'Poppins-Regular',
   },
   emailText: {
-    fontSize: 14,
-    color: '#666666',
-    marginBottom: 32,
+    fontSize: typography.fontSize.xs,
+    color: colors.dimGray,
+    marginBottom: metrics.margin.md,
     fontFamily: 'Poppins-Regular',
   },
   preferencesContainer: {
-    marginBottom: 32,
+    marginBottom: metrics.margin.md,
   },
   checkboxContainer: {
     flexDirection: 'row',
     alignItems: 'flex-start',
-    marginBottom: 16,
+    marginBottom: metrics.margin.sm,
   },
   labelContainer: {
     flex: 1,
-    paddingLeft: 12,
+    paddingLeft: metrics.padding.sm,
   },
   checkboxLabel: {
-    fontSize: 16,
-    color: '#333333',
-    marginBottom: 4,
+    fontSize: typography.fontSize.sm,
+    color: colors.darkGray,
+    marginBottom: metrics.margin.xxs,
     fontFamily: 'Poppins-Regular',
   },
   checkboxDescription: {
-    fontSize: 14,
-    color: '#666666',
-    lineHeight: 20,
+    fontSize: typography.fontSize.xs,
+    color: colors.dimGray,
     fontFamily: 'Poppins-Regular',
   },
 });

@@ -1,15 +1,10 @@
 import {StyleSheet} from 'react-native';
+import {colors, metrics, typography} from 'src/theme';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // padding: 16,
-    backgroundColor: '#F5F6FA',
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 24,
+    backgroundColor: colors.ghostWhite,
   },
   row: {
     flexDirection: 'row',
@@ -19,58 +14,28 @@ const styles = StyleSheet.create({
     width: '48%',
   },
   field: {
-    marginBottom: 16,
+    marginBottom: metrics.margin.md,
   },
   label: {
-    fontSize: 14,
-    marginBottom: 3,
-    color: '#333',
+    fontSize: typography.fontSize.xs,
+    color: colors.darkGray,
+    marginBottom: metrics.margin.xs,
     fontFamily: 'Poppins-Regular',
   },
   required: {
-    color: 'red',
-  },
-  input: {
-    borderWidth: 1,
-    borderColor: '#ddd',
-    borderRadius: 10,
-    paddingHorizontal: 12,
-    fontSize: 14,
-    backgroundColor: '#f5f5f5',
-    flexDirection: 'row',
-    gap: 12,
-    fontFamily: 'Poppins-Regular',
-  },
-  typeButton: {
-    flex: 1,
-    padding: 12,
-    borderRadius: 10,
-    borderWidth: 1,
-    borderColor: '#ddd',
-    alignItems: 'center',
-    backgroundColor: '#fff',
-  },
-  selectedType: {
-    backgroundColor: '#000',
-    borderColor: '#000',
-  },
-  typeText: {
-    fontSize: 14,
-    color: '#333',
-  },
-  selectedTypeText: {
-    color: '#fff',
+    color: colors.red,
+    fontFamily: 'Poppins-SemiBold',
   },
   makeThisAsShippingAddress: {
     flexDirection: 'row',
     alignItems: 'center',
     alignSelf: 'flex-start',
-    marginBottom: 10,
+    marginBottom: metrics.margin.sm,
   },
   shippingCheckBoxText: {
-    fontSize: 14,
-    paddingLeft: 5,
-    color: '#555555',
+    fontSize: typography.fontSize.xs,
+    paddingLeft: metrics.padding.xs,
+    color: colors.dimGray,
     fontFamily: 'Poppins-SemiBold',
   },
 });

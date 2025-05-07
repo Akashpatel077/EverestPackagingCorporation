@@ -4,6 +4,7 @@ import {Header, Icon} from 'src/Components';
 import {BackIcon, Heart} from 'assets/icons';
 import {styles} from './styles';
 import {useNavigation} from '@react-navigation/native';
+import {PAYMENT_SUCCESS_SCREEN} from 'src/Navigation/home/routes';
 
 const AddCardScreen = () => {
   const navigation = useNavigation();
@@ -90,7 +91,7 @@ const AddCardScreen = () => {
 
           <TouchableOpacity
             style={styles.addButton}
-            onPress={() => navigation.navigate('PaymentSuccessScreen')}>
+            onPress={() => navigation.navigate(PAYMENT_SUCCESS_SCREEN)}>
             <Text style={styles.addButtonText}>Add Card</Text>
           </TouchableOpacity>
         </View>

@@ -14,6 +14,7 @@ import {selectCartItems} from 'src/store/slices/cartSlice';
 import {RootState} from 'src/store';
 import CSafeAreaView from 'src/Components/CSafeAreaView';
 import {decode} from 'he';
+import {metrics, scale} from 'src/theme';
 
 const getFormattedPrice = (price: string, currencyMinorUnit: number) => {
   const formattedPrice = (
@@ -25,7 +26,6 @@ const getFormattedPrice = (price: string, currencyMinorUnit: number) => {
 
 const CheckoutScreen = ({route}) => {
   const navigation = useNavigation();
-  const selectedShippingType = route.params?.selectedShipping;
   const {
     billingAddresses,
     selectedBillingAddressId,
@@ -42,15 +42,24 @@ const CheckoutScreen = ({route}) => {
   const {items: cartItems} = useSelector(selectCartItems);
 
   return (
-    <CSafeAreaView>
+    <CSafeAreaView removeBottomSafeArea>
       <View style={styles.container}>
         <Header title="Checkout" icon1={BackIcon} />
-        <View style={{flex: 1, paddingHorizontal: 16, marginTop: 12}}>
+        <View
+          style={{
+            flex: 1,
+            paddingHorizontal: metrics.padding.md,
+            marginTop: metrics.margin.md,
+          }}>
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>Billing Address</Text>
             <View style={styles.addressContainer}>
               <View style={styles.addressLeft}>
-                <Icon name={Home} width={24} height={24} />
+                <Icon
+                  name={Home}
+                  width={metrics.iconSize.md}
+                  height={metrics.iconSize.md}
+                />
                 <View style={styles.addressDetails}>
                   <Text style={styles.addressType}>
                     {selectedBillingAddress && selectedBillingAddress.name}
@@ -74,7 +83,11 @@ const CheckoutScreen = ({route}) => {
             <Text style={styles.sectionTitle}>Shipping Address</Text>
             <View style={styles.addressContainer}>
               <View style={styles.addressLeft}>
-                <Icon name={Home} width={24} height={24} />
+                <Icon
+                  name={Home}
+                  width={metrics.iconSize.md}
+                  height={metrics.iconSize.md}
+                />
                 <View style={styles.addressDetails}>
                   <Text style={styles.addressType}>
                     {selectedAddress ? selectedAddress.name : 'Home'}
@@ -99,15 +112,12 @@ const CheckoutScreen = ({route}) => {
             <ScrollView
               showsVerticalScrollIndicator={false}
               contentContainerStyle={{
-                paddingBottom: 380,
+                paddingBottom: scale(330),
                 justifyContent: 'center',
                 alignItems: 'center',
-                // width: '100%',
               }}>
               {cartItems.map(item => (
-                <View
-                  key={item.id}
-                  style={[styles.orderItem, {marginRight: 12}]}>
+                <View key={item.id} style={[styles.orderItem, {}]}>
                   <Image
                     source={item.images[0] && {uri: item.images[0].src}}
                     style={styles.orderImage}
@@ -124,14 +134,14 @@ const CheckoutScreen = ({route}) => {
                           </Text>
                         );
                       })}
-                    {Array.isArray(item.attributes) &&
+                    {/* {Array.isArray(item.attributes) &&
                       item.attributes
                         .filter(attr => attr.name !== 'HSN Code')
                         .map(attr => (
                           <Text key={attr.name} style={styles.orderSize}>
                             {attr.name}: {attr.value}
                           </Text>
-                        ))}
+                        ))} */}
                     <Text style={styles.orderPrice}>
                       ₹
                       {(

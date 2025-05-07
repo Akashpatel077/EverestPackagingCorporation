@@ -19,7 +19,7 @@ import {
   PAYMENT_WEBVIEW,
   SHIPPING_ADDRESS_FORM,
 } from 'src/Navigation/home/routes';
-import {CButton, CustomAlert, Header} from 'src/Components';
+import {CButton, CustomAlert, Header, Icon} from 'src/Components';
 import {decode} from 'he';
 import {
   clearCart,
@@ -30,6 +30,8 @@ import {
 import CSafeAreaView from 'src/Components/CSafeAreaView';
 import {resetStartKey, setShowWelcome} from 'src/store/slices/startKeySlice';
 import {cartCheckout} from 'src/services/wooCommerceApi';
+import {ic_Bags} from 'assets/icons';
+import {colors, metrics} from 'src/theme';
 
 interface CartItem {
   key: string;
@@ -197,7 +199,11 @@ const MyCart = ({}) => {
             <TouchableOpacity
               style={styles.quantityButton}
               onPress={() => decreaseQuantity(item.id)}>
-              <Text style={[styles.quantityButtonText, {paddingBottom: 2}]}>
+              <Text
+                style={[
+                  styles.quantityButtonText,
+                  {paddingBottom: metrics.padding.xxs},
+                ]}>
                 -
               </Text>
             </TouchableOpacity>
@@ -256,40 +262,7 @@ const MyCart = ({}) => {
           checkoutResponse.payment_result.payment_status === 'success'
         ) {
           dispatch(clearCart());
-          navigation.dispatch(
-            CommonActions.reset({
-              index: 0,
-              routes: [
-                {
-                  name: 'HomeDrawer',
-                  state: {
-                    index: 0,
-                    routes: [
-                      {
-                        name: 'Home',
-                        state: {
-                          index: 0,
-                          routes: [
-                            {
-                              name: 'Cart',
-                              state: {
-                                index: 0,
-                                routes: [
-                                  {
-                                    name: PAYMENT_SUCCESS_SCREEN,
-                                  },
-                                ],
-                              },
-                            },
-                          ],
-                        },
-                      },
-                    ],
-                  },
-                },
-              ],
-            }),
-          );
+          navigation.navigate(PAYMENT_SUCCESS_SCREEN);
         } else if (
           checkoutResponse.status &&
           checkoutResponse.payment_result.redirect_url
@@ -313,10 +286,6 @@ const MyCart = ({}) => {
         <View style={styles.container}>
           <Header title="My Cart" />
           <View style={styles.emptyCartContainer}>
-            <Image
-              source={require('assets/icons/Bags.svg')}
-              style={styles.emptyCartImage}
-            />
             <Text style={styles.emptyCartTitle}>Your Cart is Empty</Text>
             <Text style={styles.emptyCartText}>
               Looks like you haven't added anything to your cart yet
@@ -337,7 +306,12 @@ const MyCart = ({}) => {
       <View style={styles.container}>
         <Header title="My Cart" />
 
-        <View style={{paddingHorizontal: 16, flex: 1, paddingVertical: 8}}>
+        <View
+          style={{
+            paddingHorizontal: metrics.padding.md,
+            flex: 1,
+            paddingVertical: metrics.padding.md,
+          }}>
           <FlatList
             data={cartItems}
             renderItem={renderCartItem}
@@ -398,11 +372,7 @@ const MyCart = ({}) => {
               </View>
             )}
             <View style={styles.summaryRow}>
-              <Text
-                style={[
-                  styles.summaryLabel,
-                  {color: '#555555', fontWeight: '900'},
-                ]}>
+              <Text style={[styles.summaryLabel]}>
                 Shipping
                 <Text style={styles.subShippingText}>
                   ({shipping_rates?.[0]?.shipping_rates?.[0]?.name ?? ''})
@@ -415,9 +385,7 @@ const MyCart = ({}) => {
 
             {selectedPaymentMethod === 'cod' && (
               <View style={styles.summaryRow}>
-                <Text style={[styles.summaryLabel, {color: '#555555'}]}>
-                  Cash on Delivery
-                </Text>
+                <Text style={[styles.summaryLabel]}>Cash on Delivery</Text>
                 <Text style={styles.summaryValue}>₹50.00</Text>
               </View>
             )}
@@ -426,7 +394,7 @@ const MyCart = ({}) => {
               tax_lines.map((item, index) => {
                 return (
                   <View key={index} style={styles.summaryRow}>
-                    <Text style={[styles.summaryLabel, {color: '#555555'}]}>
+                    <Text style={[styles.summaryLabel]}>
                       {item.name && item.name?.trim()}
                     </Text>
                     <Text style={styles.summaryValue}>
@@ -560,7 +528,7 @@ const MyCart = ({}) => {
         button2={{
           text: 'OK',
           onPress: () => setAlertVisible(false),
-          color: '#007bff',
+          color: colors.primary,
         }}
       />
     </CSafeAreaView>

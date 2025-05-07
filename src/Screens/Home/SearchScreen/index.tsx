@@ -8,7 +8,7 @@ import {
   Image,
   ActivityIndicator,
 } from 'react-native';
-import {Header, Icon} from 'src/Components';
+import {CustomAlert, Header, Icon} from 'src/Components';
 import {Search, Close, Heart, BackIcon} from 'assets/icons';
 import {styles} from './styles';
 import {useNavigation} from '@react-navigation/native';
@@ -20,8 +20,16 @@ import {
   removeFromWishlist,
 } from '../../../store/slices/wishlistSlice';
 import CSafeAreaView from 'src/Components/CSafeAreaView';
-import {colors} from 'src/theme';
+import {colors, metrics} from 'src/theme';
+import {getProductVariations} from 'src/services/wooCommerceApi';
 
+function findVariation(variations, selectedAttributes) {
+  return variations.find(variation => {
+    return variation.attributes.every(
+      attr => selectedAttributes[attr.name] === attr.option,
+    );
+  });
+}
 const SearchScreen = () => {
   const navigation = useNavigation();
   const dispatch = useAppDispatch();
@@ -78,7 +86,12 @@ const SearchScreen = () => {
       <TouchableOpacity
         style={styles.deleteButton}
         onPress={() => deleteSearch(item)}>
-        <Icon name={Close} width={20} height={20} color={colors.primary} />
+        <Icon
+          name={Close}
+          width={metrics.iconSize.sm}
+          height={metrics.iconSize.sm}
+          color={colors.primary}
+        />
       </TouchableOpacity>
     </TouchableOpacity>
   );
@@ -91,8 +104,8 @@ const SearchScreen = () => {
         <View style={styles.searchContainer}>
           <Icon
             name={Search}
-            width={20}
-            height={20}
+            width={metrics.iconSize.sm}
+            height={metrics.iconSize.sm}
             color="#ffffff"
             style={styles.searchIcon}
           />
@@ -137,59 +150,7 @@ const SearchScreen = () => {
           <FlatList
             data={filteredProducts}
             renderItem={({item}) => (
-              <TouchableOpacity
-                style={styles.productCard}
-                onPress={() =>
-                  navigation.navigate(PRODUCT_DETAILS, {productId: item.id})
-                }>
-                <View style={styles.productImageContainer}>
-                  <Image
-                    source={
-                      item.images?.[0]?.src
-                        ? {uri: item.images[0].src}
-                        : require('../../../../assets/images/banner.png')
-                    }
-                    style={styles.productImage}
-                  />
-                  <TouchableOpacity
-                    style={styles.favoriteButton}
-                    onPress={() => {
-                      const isInWishlist = wishlistItems.some(
-                        wishlistItem => wishlistItem.id === item.id,
-                      );
-                      if (isInWishlist) {
-                        dispatch(removeFromWishlist(item.id));
-                      } else {
-                        dispatch(addToWishlist(item));
-                      }
-                    }}>
-                    <Icon
-                      name={Heart}
-                      width={20}
-                      height={20}
-                      color={
-                        wishlistItems.some(
-                          wishlistItem => wishlistItem.id === item.id,
-                        )
-                          ? '#CC5656'
-                          : '#FFFFFF'
-                      }
-                    />
-                  </TouchableOpacity>
-                </View>
-                <View style={styles.productInfo}>
-                  <Text style={styles.productName}>{item.name}</Text>
-                  <View style={styles.productDetails}>
-                    <Text style={styles.productPrice}>₹{item.price}</Text>
-                    <View style={styles.ratingContainer}>
-                      <Text style={styles.ratingIcon}>⭐</Text>
-                      <Text style={styles.ratingText}>
-                        {item.average_rating || '0.0'}
-                      </Text>
-                    </View>
-                  </View>
-                </View>
-              </TouchableOpacity>
+              <ProductItemCard item={item} wishlistItems={wishlistItems} />
             )}
             numColumns={2}
             keyExtractor={item => item.id.toString()}
@@ -203,3 +164,132 @@ const SearchScreen = () => {
 };
 
 export default SearchScreen;
+
+const ProductItemCard = React.memo(
+  ({item, wishlistItems}: {item: {}; wishlistItems: {}}) => {
+    const navigation = useNavigation();
+    const dispatch = useAppDispatch();
+    const [regularPrice, setRegularPrice] = useState(
+      item.regular_price ? parseFloat(item.regular_price).toFixed(2) : '0.00',
+    );
+    const [salePrice, setSalePrice] = useState(
+      item.price ? parseFloat(item.price).toFixed(2) : '0.00',
+    );
+    const isOutOfStock = item.stock_status === 'outofstock';
+
+    const [alertVisible, setAlertVisible] = useState(false);
+    const [alertMessage, setAlertMessage] = useState('');
+    const handleWishlistToggle = product => {
+      const isInWishlist = wishlistItems.some(item => item.id === product.id);
+      if (isInWishlist) {
+        dispatch(removeFromWishlist(product.id));
+      } else {
+        dispatch(addToWishlist(product));
+      }
+    };
+
+    const isInWishlist = wishlistItems.some(
+      wishlistItem => wishlistItem.id === item.id,
+    );
+
+    const getProductVariationList = async () => {
+      try {
+        let selectedAttributes = {};
+
+        item.attributes?.map(attr => {
+          selectedAttributes = {
+            ...selectedAttributes,
+            [attr.name]: attr.options[0],
+          };
+        });
+        const variationList = await getProductVariations(item.id);
+
+        if (variationList.length) {
+          const productVariation = findVariation(
+            variationList,
+            selectedAttributes,
+          );
+
+          if (productVariation) {
+            setRegularPrice(
+              productVariation.regular_price
+                ? (parseFloat(productVariation.regular_price) / 100).toFixed(2)
+                : '0.00',
+            );
+            setSalePrice(
+              productVariation.sale_price
+                ? (parseFloat(productVariation.sale_price) / 100).toFixed(2)
+                : '0.00',
+            );
+          }
+        }
+      } catch (e) {
+        setAlertMessage(e.message || 'Something went wrong');
+        setAlertVisible(true);
+      }
+    };
+
+    useEffect(() => {
+      if (item?.variations?.length) {
+        getProductVariationList();
+      }
+    }, [item]);
+
+    return (
+      <TouchableOpacity
+        style={[styles.productCard, {opacity: isOutOfStock ? 0.7 : 1}]}
+        onPress={() =>
+          navigation.navigate(PRODUCT_DETAILS, {productId: item.id})
+        }>
+        <View style={styles.productImageContainer}>
+          <Image
+            source={item.images?.[0]?.src && {uri: item.images[0].src}}
+            style={styles.productImage}
+            resizeMode="contain"
+          />
+          {isOutOfStock && (
+            <View style={styles.outOfStockOverlay}>
+              <Text style={styles.outOfStockText}>Out of Stock</Text>
+            </View>
+          )}
+          <TouchableOpacity
+            style={styles.favoriteButton}
+            onPress={() => handleWishlistToggle(item)}>
+            <Icon
+              name={Heart}
+              width={metrics.iconSize.sm}
+              height={metrics.iconSize.sm}
+              color={isInWishlist ? colors.red : colors.white}
+            />
+          </TouchableOpacity>
+        </View>
+        <View style={styles.productInfo}>
+          <Text style={styles.productName} numberOfLines={2}>
+            {item.name}
+          </Text>
+          <View style={styles.productDetails}>
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+              <Text style={styles.regularPrice}>₹{regularPrice}</Text>
+              <Text style={styles.salePrice}>₹{salePrice}</Text>
+            </View>
+          </View>
+        </View>
+        <CustomAlert
+          visible={alertVisible}
+          title="Attention!"
+          description={alertMessage}
+          button2={{
+            text: 'OK',
+            onPress: () => setAlertVisible(false),
+            color: colors.primary,
+          }}
+        />
+      </TouchableOpacity>
+    );
+  },
+);

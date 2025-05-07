@@ -1,68 +1,34 @@
 import {StyleSheet} from 'react-native';
+import {colors, metrics, scale, typography} from 'src/theme';
 
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5F6FA',
-    padding: 16,
+    backgroundColor: colors.ghostWhite,
+    padding: metrics.padding.md,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   header: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 24,
-  },
-  backButton: {
-    padding: 8,
-  },
-  headerTitle: {
-    fontSize: 20,
-    fontWeight: '600',
-    marginLeft: 12,
-  },
-  content: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingBottom: 40,
-  },
-  successIcon: {
-    width: 64,
-    height: 64,
-    borderRadius: 32,
-    backgroundColor: '#8B6B4D',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: 24,
+    marginBottom: metrics.margin.lg,
   },
   successTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-    marginBottom: 8,
+    fontSize: typography.fontSize.xl,
+    fontFamily: 'Poppins-SemiBold',
+    color: colors.green,
+    marginBottom: metrics.margin.md,
   },
   successMessage: {
-    fontSize: 16,
-    color: '#666666',
-    marginBottom: 48,
+    fontSize: typography.fontSize.sm,
+    color: colors.dimGray,
+    fontFamily: 'Poppins-Regular',
+    marginBottom: metrics.margin.md,
   },
-  button: {
-    backgroundColor: '#8B6B4D',
-    borderRadius: 25,
-    padding: 16,
-    width: '100%',
-    alignItems: 'center',
-    marginBottom: 16,
-  },
-  buttonText: {
-    color: '#FFFFFF',
-    fontSize: 16,
-    fontWeight: '600',
-  },
-  linkButton: {
-    padding: 8,
-  },
-  linkButtonText: {
-    color: '#8B6B4D',
-    fontSize: 16,
-    fontWeight: '500',
+  successIcon: {
+    height: scale(150),
+    width: scale(150),
+    marginBottom: metrics.margin.lg,
   },
 });

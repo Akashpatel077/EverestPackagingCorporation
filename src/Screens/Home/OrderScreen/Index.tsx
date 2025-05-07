@@ -1,14 +1,7 @@
 import React, {useEffect, useState} from 'react';
-import {
-  View,
-  Text,
-  Image,
-  TouchableOpacity,
-  FlatList,
-  SafeAreaView,
-} from 'react-native';
+import {View, Text, TouchableOpacity, FlatList} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import {BackIcon, Heart} from 'assets/icons';
+import {BackIcon} from 'assets/icons';
 import styles from './styles';
 import {REVIEW_SCREEN, TRACK_ORDER_SCREEN} from 'src/Navigation/home/routes';
 import {CButton, Header} from 'src/Components';
@@ -56,7 +49,17 @@ const OrderScreen = () => {
 
   const getActionButton = (status: string, item: OrderItem) => {
     switch (status) {
-      case 'active':
+      case 'processing':
+        return (
+          <CButton
+            style={styles.actionButton}
+            onPress={() => {
+              navigation.navigate(TRACK_ORDER_SCREEN);
+            }}
+            title={'Track Order'}
+          />
+        );
+      case 'pending':
         return (
           <CButton
             style={styles.actionButton}
@@ -79,7 +82,7 @@ const OrderScreen = () => {
       case 'cancelled':
         return <CButton style={styles.actionButton} title={'Re-Order'} />;
       case 'failed':
-        return <CButton style={styles.actionButton} title={'Track Order'} />;
+        return <CButton style={styles.actionButton} title={'Re-Order'} />;
       default:
         return null;
     }

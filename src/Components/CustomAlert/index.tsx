@@ -44,7 +44,10 @@ const CustomAlert: React.FC<CustomAlertProps> = ({
             )}
             {button2 && (
               <CButton
-                style={styles.button}
+                style={[
+                  styles.button,
+                  {backgroundColor: button2.color || colors.primary},
+                ]}
                 onPress={button2.onPress}
                 title={button2.text}
               />
@@ -64,9 +67,10 @@ const styles = StyleSheet.create({
     backgroundColor: colors.modalBackground,
     justifyContent: 'center',
     alignItems: 'center',
+    padding: metrics.padding.md,
   },
   container: {
-    width: scale(280),
+    width: '100%',
     backgroundColor: colors.white,
     borderRadius: metrics.borderRadius.lg,
     padding: metrics.padding.lg,
@@ -90,7 +94,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
   },
   button: {
-    width: scale(100),
+    width: scale(120),
+    height: verticalScale(35),
   },
   buttonText: {
     color: colors.black,

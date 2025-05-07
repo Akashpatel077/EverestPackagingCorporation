@@ -4,7 +4,7 @@ import {styles} from './styles';
 import {useNavigation} from '@react-navigation/native';
 import {Icon} from '../Icons';
 import {Buy} from 'assets/icons';
-import {metrics} from 'src/theme';
+import {colors, metrics} from 'src/theme';
 
 interface Props {
   onCartPress: () => void;
@@ -41,7 +41,7 @@ const Header: React.FC<Props> = ({
               name={icon1}
               width={metrics.iconSize.sm}
               height={metrics.iconSize.sm}
-              color="#FFF"
+              color={colors.white}
             />
           )}
         </TouchableOpacity>

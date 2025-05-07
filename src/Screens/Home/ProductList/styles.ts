@@ -1,54 +1,25 @@
 import {StyleSheet} from 'react-native';
-import {colors} from 'src/theme';
+import {colors, metrics, scale, typography, verticalScale} from 'src/theme';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5F6FA',
-  },
-  categoryContainer: {
-    marginVertical: 10,
+    backgroundColor: colors.ghostWhite,
   },
   categoriesContainer: {
-    padding: 6,
-    paddingBottom: 30,
+    padding: metrics.padding.xs,
+    paddingBottom: metrics.padding.xl,
   },
   loadingContainer: {
     flex: 1,
     alignItems: 'center',
   },
-  categoryList: {
-    paddingHorizontal: 15,
-  },
-  categoryButton: {
-    paddingHorizontal: 20,
-    paddingVertical: 8,
-    marginRight: 10,
-    borderRadius: 20,
-    backgroundColor: '#F5F5F5',
-  },
-  categoryButtonActive: {
-    backgroundColor: colors.primary,
-  },
-  categoryText: {
-    fontSize: 14,
-    color: '#666666',
-    fontFamily: 'Poppins-SemiBold',
-  },
-  categoryTextActive: {
-    color: '#FFFFFF',
-  },
-  productGrid: {
-    paddingHorizontal: 12,
-    paddingBottom: 20,
-    gap: 10,
-  },
   productCard: {
     width: '48%',
     margin: '1%',
-    backgroundColor: '#FFFFFF',
-    borderRadius: 12,
-    shadowColor: '#000',
+    backgroundColor: colors.white,
+    borderRadius: metrics.borderRadius.md,
+    shadowColor: colors.black,
     shadowOffset: {
       width: 0,
       height: 2,
@@ -60,9 +31,9 @@ const styles = StyleSheet.create({
   productImageContainer: {
     position: 'relative',
     width: '100%',
-    height: 180,
-    borderTopLeftRadius: 12,
-    borderTopRightRadius: 12,
+    height: verticalScale(135),
+    borderTopLeftRadius: metrics.borderRadius.md,
+    borderTopRightRadius: metrics.borderRadius.md,
     overflow: 'hidden',
   },
   productImage: {
@@ -75,21 +46,21 @@ const styles = StyleSheet.create({
     top: 10,
     right: 10,
     backgroundColor: 'rgba(255, 255, 255, 0.9)',
-    borderRadius: 20,
-    width: 32,
-    height: 32,
+    borderRadius: metrics.borderRadius.xl,
+    width: scale(30),
+    height: scale(30),
     justifyContent: 'center',
     alignItems: 'center',
   },
   productInfo: {
-    padding: 12,
+    paddingVertical: metrics.padding.md,
+    paddingHorizontal: metrics.padding.sm,
   },
   productName: {
-    fontSize: 14,
+    fontSize: typography.fontSize.xs,
     fontFamily: 'Poppins-SemiBold',
-    color: '#333333',
-    marginBottom: 8,
-    height: 40,
+    color: colors.darkGray,
+    marginBottom: metrics.margin.xs,
   },
   productDetails: {
     flexDirection: 'row',
@@ -97,16 +68,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   regularPrice: {
-    fontSize: 16,
+    fontSize: typography.fontSize.sm,
     fontFamily: 'Poppins-SemiBold',
-    color: '#666666',
+    color: colors.dimGray,
     textDecorationLine: 'line-through',
   },
   salePrice: {
-    fontSize: 18,
+    fontSize: typography.fontSize.md,
     fontFamily: 'Poppins-SemiBold',
     color: colors.primary,
-    marginLeft: 4,
+    marginLeft: metrics.margin.xs,
   },
   ratingContainer: {
     flexDirection: 'row',
@@ -127,17 +98,17 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-    backgroundColor: 'rgba(0, 0, 0, 0.7)',
+    backgroundColor: colors.outOfStockOverlay,
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 8,
+    borderRadius: metrics.borderRadius.md,
   },
   outOfStockText: {
-    color: '#FFFFFF',
-    fontSize: 16,
-    fontWeight: 'bold',
+    color: colors.white,
+    fontSize: typography.fontSize.sm,
+    fontFamily: 'Poppins-SemiBold',
     textTransform: 'uppercase',
-    textShadowColor: 'rgba(0, 0, 0, 0.75)',
+    textShadowColor: colors.outOfStockOverlay,
     textShadowOffset: {width: 1, height: 1},
     textShadowRadius: 2,
   },

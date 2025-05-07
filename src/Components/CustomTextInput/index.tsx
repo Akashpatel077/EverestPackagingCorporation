@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins-Regular',
   },
   requiredStar: {
-    color: 'red',
+    color: colors.red,
     fontFamily: 'Poppins-SemiBold',
   },
   inputWrapper: {

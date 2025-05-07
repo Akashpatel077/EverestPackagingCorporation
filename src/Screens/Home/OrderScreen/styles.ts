@@ -1,50 +1,19 @@
 import {StyleSheet} from 'react-native';
-import {colors} from 'src/theme';
+import {colors, metrics, typography} from 'src/theme';
 
 export default StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5F6FA',
-  },
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-  },
-  backButton: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: '#FFFFFF',
-    justifyContent: 'center',
-    alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
-  },
-  headerTitle: {
-    fontSize: 20,
-    fontWeight: '600',
-    color: '#000000',
-  },
-  emptyView: {
-    width: 40,
+    backgroundColor: colors.ghostWhite,
   },
   tabContainer: {
     flexDirection: 'row',
-    paddingHorizontal: 16,
-    marginBottom: 16,
+    paddingHorizontal: metrics.padding.md,
+    marginBottom: metrics.margin.md,
   },
   tab: {
     flex: 1,
-    paddingVertical: 12,
+    paddingVertical: metrics.padding.sm,
     alignItems: 'center',
   },
   activeTab: {
@@ -52,25 +21,25 @@ export default StyleSheet.create({
     borderBottomColor: colors.primary,
   },
   tabText: {
-    fontSize: 16,
-    color: '#666666',
+    fontSize: typography.fontSize.sm,
+    color: colors.dimGray,
   },
   activeTabText: {
     color: colors.primary,
-    fontWeight: '600',
+    fontFamily: 'Poppins-Medium',
   },
   ordersList: {
-    paddingHorizontal: 16,
-    paddingBottom: 20,
+    paddingHorizontal: metrics.padding.md,
+    // paddingBottom: metrics.padding.md,
   },
   orderItemContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#FFFFFF',
-    borderRadius: 12,
-    padding: 12,
-    marginBottom: 16,
-    shadowColor: '#000',
+    backgroundColor: colors.white,
+    borderRadius: metrics.borderRadius.md,
+    padding: metrics.padding.sm,
+    marginBottom: metrics.margin.md,
+    shadowColor: colors.black,
     shadowOffset: {
       width: 0,
       height: 2,
@@ -79,29 +48,24 @@ export default StyleSheet.create({
     shadowRadius: 4,
     elevation: 3,
   },
-  itemImage: {
-    width: 80,
-    height: 80,
-    borderRadius: 8,
-  },
   itemDetails: {
     flex: 1,
-    marginLeft: 12,
+    marginLeft: metrics.margin.sm,
   },
   itemName: {
-    fontSize: 16,
-    color: '#000000',
-    marginBottom: 4,
+    fontSize: typography.fontSize.sm,
+    color: colors.black,
+    marginBottom: metrics.margin.xxs,
     fontFamily: 'Poppins-SemiBold',
   },
   itemInfo: {
-    fontSize: 14,
-    color: '#666666',
-    marginBottom: 4,
+    fontSize: typography.fontSize.xs,
+    color: colors.dimGray,
+    marginBottom: metrics.margin.xxs,
     fontFamily: 'Poppins-Regular',
   },
   itemPrice: {
-    fontSize: 16,
+    fontSize: typography.fontSize.sm,
     fontFamily: 'Poppins-SemiBold',
     color: colors.primary,
   },

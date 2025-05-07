@@ -11,6 +11,7 @@ import {
 } from 'src/Navigation/home/routes';
 import {RootState} from 'src/store';
 import CSafeAreaView from 'src/Components/CSafeAreaView';
+import {metrics} from 'src/theme';
 
 const Addresses = () => {
   const navigation = useNavigation();
@@ -31,9 +32,8 @@ const Addresses = () => {
             <View style={styles.addressInfo}>
               <Icon
                 name={Location}
-                width={20}
-                height={20}
-                style={styles.locationIcon}
+                width={metrics.iconSize.sm}
+                height={metrics.iconSize.sm}
               />
               <View style={styles.addressDetails}>
                 <Text style={styles.addressType}>{address.name}</Text>

@@ -11,7 +11,6 @@ import {
 import {RootState} from '../../../store';
 import Header from '../../../Components/Header';
 import styles from './styles';
-import {BackIcon} from 'assets/icons';
 import {PRODUCT_LIST, SUB_CATEGORY_SCREEN} from 'src/Navigation/home/routes';
 import {getSubCategories} from 'src/services/wooCommerceApi';
 import CSafeAreaView from 'src/Components/CSafeAreaView';
