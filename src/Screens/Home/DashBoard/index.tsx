@@ -2,13 +2,7 @@ import React from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {Header, Icon} from 'src/Components';
-import {
-  Orders,
-  Addresses,
-  AccountDetails,
-  Logout,
-  BackIcon,
-} from 'assets/icons';
+import {Orders, Addresses, Profile, Logout, BackIcon} from 'assets/icons';
 import {styles} from './styles';
 import CSafeAreaView from 'src/Components/CSafeAreaView';
 
@@ -22,7 +16,7 @@ const DashBoard = () => {
     {
       id: 4,
       title: 'Account Details',
-      icon: AccountDetails,
+      icon: Profile,
       route: 'AccountDetails',
     },
     {id: 5, title: 'Logout', icon: Logout, route: 'Logout'},

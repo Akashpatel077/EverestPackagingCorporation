@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -7,7 +7,7 @@ import {
   FlatList,
   Modal,
 } from 'react-native';
-import {CommonActions, useNavigation, useRoute} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 import {useSelector, useDispatch} from 'react-redux';
 import styles from './styles';
 import {
@@ -19,7 +19,7 @@ import {
   PAYMENT_WEBVIEW,
   SHIPPING_ADDRESS_FORM,
 } from 'src/Navigation/home/routes';
-import {CButton, CustomAlert, Header, Icon} from 'src/Components';
+import {CButton, CustomAlert, Header} from 'src/Components';
 import {decode} from 'he';
 import {
   clearCart,
@@ -30,8 +30,8 @@ import {
 import CSafeAreaView from 'src/Components/CSafeAreaView';
 import {resetStartKey, setShowWelcome} from 'src/store/slices/startKeySlice';
 import {cartCheckout} from 'src/services/wooCommerceApi';
-import {ic_Bags} from 'assets/icons';
 import {colors, metrics} from 'src/theme';
+import {debounce} from 'src/utils/debounce';
 
 interface CartItem {
   key: string;
@@ -119,27 +119,6 @@ const MyCart = ({}) => {
     }
   }, [isSuccess]);
 
-  // Handle quantity increase
-  const increaseQuantity = (id: number) => {
-    const item = cartItems.find(item => item.id === id);
-
-    if (item && item.quantity < item.quantity_limits.maximum) {
-      const quantity = item.quantity + Number(item.quantity_limits.multiple_of);
-
-      dispatch(updateProductInCartAction({productKey: item.key, quantity}));
-    }
-  };
-
-  // Handle quantity decrease
-  const decreaseQuantity = (id: number) => {
-    const item = cartItems.find(item => item.id === id);
-    if (item && item.quantity > item.quantity_limits.minimum) {
-      const quantity = item.quantity - Number(item.quantity_limits.multiple_of);
-
-      dispatch(updateProductInCartAction({productKey: item.key, quantity}));
-    }
-  };
-
   // Handle remove item
   const handleRemoveItem = () => {
     if (selectedItem) {
@@ -165,63 +144,6 @@ const MyCart = ({}) => {
       // setDiscount(35);
       setPromoCode('');
     }
-  };
-
-  // Render cart item
-  const renderCartItem = ({item}: {item: CartItem}) => {
-    const decodedName = decode(item.name);
-
-    return (
-      <View style={styles.cartItemContainer}>
-        <Image source={{uri: item.images[0].src}} style={styles.itemImage} />
-        <View style={styles.itemDetails}>
-          <Text style={styles.itemName}>{decodedName}</Text>
-          {item.type === 'variation' &&
-            item.variation &&
-            item.variation.map(item => {
-              const decodedValue = decode(item.value);
-              return (
-                <Text style={styles.itemSize}>
-                  {item.attribute} : {decodedValue}
-                </Text>
-              );
-            })}
-          <Text style={styles.itemPrice}>
-            ₹
-            {(
-              getFormattedPrice(
-                item.prices.sale_price,
-                item.prices.currency_minor_unit,
-              ) * item.quantity
-            ).toFixed(2)}
-          </Text>
-          <View style={styles.quantityControl}>
-            <TouchableOpacity
-              style={styles.quantityButton}
-              onPress={() => decreaseQuantity(item.id)}>
-              <Text
-                style={[
-                  styles.quantityButtonText,
-                  {paddingBottom: metrics.padding.xxs},
-                ]}>
-                -
-              </Text>
-            </TouchableOpacity>
-            <Text style={styles.quantityText}>{item.quantity}</Text>
-            <TouchableOpacity
-              style={[styles.quantityButton, styles.increaseButton]}
-              onPress={() => increaseQuantity(item.id)}>
-              <Text style={styles.quantityButtonText}>+</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-        <TouchableOpacity
-          style={styles.removeButton}
-          onPress={() => showRemoveConfirmation(item)}>
-          <Text style={styles.removeButtonText}>🗑️</Text>
-        </TouchableOpacity>
-      </View>
-    );
   };
 
   const processPayment = async () => {
@@ -300,6 +222,10 @@ const MyCart = ({}) => {
       </CSafeAreaView>
     );
   }
+
+  const renderCartItem = ({item}) => (
+    <CartItem item={item} showRemoveConfirmation={showRemoveConfirmation} />
+  );
 
   return (
     <CSafeAreaView removeBottomSafeArea>
@@ -521,3 +447,92 @@ const MyCart = ({}) => {
 };
 
 export default MyCart;
+
+const CartItem = ({
+  item,
+  showRemoveConfirmation,
+}: {
+  item: CartItem;
+  showRemoveConfirmation: (item: CartItem) => {};
+}) => {
+  const decodedName = decode(item.name);
+  const [quantity, setQuantity] = useState(item.quantity);
+  const dispatch = useDispatch();
+
+  const debouncedUpdateQuantity = useCallback(
+    debounce((qty: number) => {
+      dispatch(
+        updateProductInCartAction({productKey: item.key, quantity: qty}),
+      );
+    }, 500),
+    [dispatch, item.key],
+  );
+
+  const increaseQuantity = () => {
+    if (quantity < item.quantity_limits.maximum) {
+      const newQty = quantity + Number(item.quantity_limits.multiple_of);
+      setQuantity(newQty);
+      debouncedUpdateQuantity(newQty);
+    }
+  };
+
+  const decreaseQuantity = () => {
+    if (quantity > item.quantity_limits.minimum) {
+      const newQty = quantity - Number(item.quantity_limits.multiple_of);
+      setQuantity(newQty);
+      debouncedUpdateQuantity(newQty);
+    }
+  };
+
+  return (
+    <View style={styles.cartItemContainer}>
+      <Image source={{uri: item.images[0].src}} style={styles.itemImage} />
+      <View style={styles.itemDetails}>
+        <Text style={styles.itemName}>{decodedName}</Text>
+        {item.type === 'variation' &&
+          item.variation &&
+          item.variation.map(item => {
+            const decodedValue = decode(item.value);
+            return (
+              <Text style={styles.itemSize}>
+                {item.attribute} : {decodedValue}
+              </Text>
+            );
+          })}
+        <Text style={styles.itemPrice}>
+          ₹
+          {(
+            getFormattedPrice(
+              item.prices.sale_price,
+              item.prices.currency_minor_unit,
+            ) * item.quantity
+          ).toFixed(2)}
+        </Text>
+        <View style={styles.quantityControl}>
+          <TouchableOpacity
+            style={styles.quantityButton}
+            onPress={() => decreaseQuantity(item.id)}>
+            <Text
+              style={[
+                styles.quantityButtonText,
+                {paddingBottom: metrics.padding.xxs},
+              ]}>
+              -
+            </Text>
+          </TouchableOpacity>
+          <Text style={styles.quantityText}>{quantity}</Text>
+          <TouchableOpacity
+            style={[styles.quantityButton, styles.increaseButton]}
+            onPress={() => increaseQuantity(item.id)}>
+            <Text style={styles.quantityButtonText}>+</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+      <TouchableOpacity
+        style={styles.removeButton}
+        onPress={() => showRemoveConfirmation(item)}>
+        <Text style={styles.removeButtonText}>🗑️</Text>
+      </TouchableOpacity>
+    </View>
+  );
+};

@@ -38,7 +38,6 @@ import Dashboard from './Dashboard.svg';
 import Orders from './Orders.svg';
 import Invoices from './Invoices.svg';
 import Addresses from './Addresses.svg';
-import AccountDetails from './AccountDetails.svg';
 import Communication from './Communication.svg';
 import Logout from './Logout.svg';
 import BulkOrder from './BulkOrder.svg';
@@ -49,6 +48,7 @@ import SelectedRadioButton from './SelectedRadioButton.svg';
 import NotSelectedRadioButton from './NotSelectedRadioButton.svg';
 import Menu from './Menu.svg';
 import DropDown from './DropDown.svg';
+//
 
 export {
   Buy,
@@ -91,7 +91,6 @@ export {
   Orders,
   Invoices,
   Addresses,
-  AccountDetails,
   Communication,
   Logout,
   BulkOrder,

@@ -1,12 +1,6 @@
 import React, {useState} from 'react';
 import {View, Text, TouchableOpacity, ScrollView} from 'react-native';
-import {
-  CButton,
-  CustomAlert,
-  CustomTextInput,
-  Header,
-  Icon,
-} from 'src/Components';
+import {CButton, CustomAlert, CustomTextInput, Header} from 'src/Components';
 import {BackIcon, Eye, Password_Hide} from 'assets/icons';
 import {styles} from './styles';
 import {useNavigation} from '@react-navigation/native';

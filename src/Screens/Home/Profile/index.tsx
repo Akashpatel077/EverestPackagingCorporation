@@ -7,7 +7,7 @@ import {
   Orders,
   Invoices,
   Addresses,
-  AccountDetails,
+  Profile,
   Communication,
   Logout,
   BulkOrder,
@@ -48,7 +48,7 @@ const ProfileScreen = () => {
     {
       id: 1,
       title: 'Account details',
-      icon: AccountDetails,
+      icon: Profile,
       screen: ACCOUNTDETAILS,
     },
     {id: 2, title: 'Bulk Order', icon: BulkOrder, screen: BULKORDERS},

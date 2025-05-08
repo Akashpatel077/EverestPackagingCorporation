@@ -16,7 +16,7 @@ import {
 import {RootState} from '@reduxjs/toolkit/query';
 import {useAppSelector} from 'src/store/hooks';
 import {
-  AccountDetails,
+  Profile,
   Buy,
   Category,
   Heart,
@@ -45,7 +45,7 @@ const menuItems = [
   {id: 4, title: 'Wishlist', icon: Heart, screen: 'Wishlist'},
   {id: 3, title: 'Orders', icon: Orders, screen: ORDER_SCREEN},
   {id: 5, title: 'My Cart', icon: Buy, screen: 'Cart'},
-  {id: 6, title: 'Profile', icon: AccountDetails, screen: 'Profile'},
+  {id: 6, title: 'Profile', icon: Profile, screen: 'Profile'},
   {id: 7, title: 'Log out', icon: Logout},
 ];
 
