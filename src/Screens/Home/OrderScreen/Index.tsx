@@ -100,7 +100,7 @@ const OrderScreen = () => {
         <Text style={styles.itemInfo}>Status : {item.status}</Text>
         <Text style={styles.itemPrice}>Total : ₹{item.total}</Text>
       </View>
-      {getActionButton(item.status, item)}
+      {/* {getActionButton(item.status, item)} */}
     </View>
   );
 

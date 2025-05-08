@@ -10,7 +10,7 @@ import {
 import {search} from '../../Constants/images';
 import {useNavigation} from '@react-navigation/native';
 import {SEARCH_SCREEN} from 'src/Navigation/home/routes';
-import {scale, typography, verticalScale, metrics, colors} from '../../theme';
+import {scale, typography, metrics, colors} from '../../theme';
 
 interface SearchBarProps extends TextInputProps {
   placeholder?: string;
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
     borderRadius: metrics.borderRadius.md,
     paddingHorizontal: metrics.padding.sm,
-    height: verticalScale(40),
+    height: scale(40),
     borderWidth: 1,
     borderColor: colors.gainsBoro,
   },

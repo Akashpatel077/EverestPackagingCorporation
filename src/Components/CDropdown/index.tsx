@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import {Icon} from '../Icons';
 import {DropDown} from 'assets/icons';
-import {scale, typography, verticalScale, metrics, colors} from '../../theme';
+import {typography, metrics, colors, scale} from '../../theme';
 
 interface DropdownItem {
   label: string;
@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     borderRadius: metrics.borderRadius.md,
-    height: verticalScale(33),
+    height: scale(40),
   },
   selectedText: {
     fontSize: typography.fontSize.xs,

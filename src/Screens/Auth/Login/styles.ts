@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {colors, metrics, typography, scale, verticalScale} from 'src/theme';
+import {colors, metrics, typography, scale} from 'src/theme';
 
 export const styles = StyleSheet.create({
   container: {
@@ -39,7 +39,7 @@ export const styles = StyleSheet.create({
   forgotPasswordText: {
     color: colors.primary,
     fontSize: typography.fontSize.sm,
-    fontFamily: 'Poppins-Regular',
+    fontFamily: 'Poppins-Medium',
   },
   dividerContainer: {
     flexDirection: 'row',
@@ -63,8 +63,8 @@ export const styles = StyleSheet.create({
     gap: metrics.margin.lg,
   },
   socialButton: {
-    width: scale(48),
-    height: scale(48),
+    width: scale(40),
+    height: scale(40),
     borderRadius: scale(24),
     borderWidth: 1,
     borderColor: colors.gainsBoro,
@@ -85,6 +85,6 @@ export const styles = StyleSheet.create({
     color: colors.primary,
     fontSize: typography.fontSize.sm,
     marginLeft: metrics.margin.xs,
-    fontFamily: 'Poppins-Regular',
+    fontFamily: 'Poppins-Medium',
   },
 });

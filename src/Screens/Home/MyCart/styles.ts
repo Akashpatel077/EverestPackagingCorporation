@@ -1,6 +1,6 @@
 // styles.js
 import {StyleSheet} from 'react-native';
-import {colors, metrics, scale, typography, verticalScale} from 'src/theme';
+import {colors, metrics, scale, typography} from 'src/theme';
 
 export default StyleSheet.create({
   container: {
@@ -14,13 +14,14 @@ export default StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: metrics.margin.md,
-    padding: metrics.padding.sm,
+    paddingVertical: metrics.padding.sm,
     backgroundColor: colors.white,
     borderRadius: metrics.borderRadius.md,
   },
   itemImage: {
-    width: scale(70),
-    height: scale(70),
+    width: scale(100),
+    height: '100%',
+    resizeMode: 'contain',
     marginRight: metrics.margin.md,
   },
   itemDetails: {
@@ -212,7 +213,7 @@ export default StyleSheet.create({
     marginRight: metrics.margin.sm,
     justifyContent: 'center',
     alignItems: 'center',
-    height: verticalScale(35),
+    height: scale(40),
   },
   modalCancelButtonText: {
     color: colors.darkGray,

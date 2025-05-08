@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {colors, metrics, scale, typography, verticalScale} from 'src/theme';
+import {colors, metrics, scale, typography} from 'src/theme';
 
 const styles = StyleSheet.create({
   container: {
@@ -7,8 +7,8 @@ const styles = StyleSheet.create({
     backgroundColor: colors.ghostWhite,
   },
   categoriesContainer: {
-    paddingHorizontal: metrics.padding.md,
-    paddingVertical: metrics.padding.sm,
+    paddingHorizontal: metrics.padding.xs,
+    paddingTop: metrics.padding.xs,
   },
   loadingContainer: {
     flex: 1,
@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
   },
   productCard: {
     width: '48%',
-    margin: '1.5%',
+    margin: '1%',
     backgroundColor: colors.white,
     borderRadius: metrics.borderRadius.md,
     shadowColor: colors.black,
@@ -27,12 +27,12 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.15,
     shadowRadius: 5,
     elevation: 4,
-    height: verticalScale(220),
+    height: scale(250),
   },
   productImageContainer: {
     position: 'relative',
     width: '100%',
-    height: verticalScale(135),
+    height: scale(160),
     borderTopLeftRadius: metrics.borderRadius.md,
     borderTopRightRadius: metrics.borderRadius.md,
     overflow: 'hidden',
@@ -67,6 +67,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    marginTop: metrics.margin.sm,
   },
   regularPrice: {
     fontSize: typography.fontSize.sm,

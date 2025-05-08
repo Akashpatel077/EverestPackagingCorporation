@@ -4,7 +4,7 @@ import {colors, metrics, typography} from 'src/theme';
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.white,
+    backgroundColor: colors.ghostWhite,
   },
   contentContainer: {
     flex: 1,
@@ -20,7 +20,7 @@ export const styles = StyleSheet.create({
     marginBottom: metrics.margin.sm,
   },
   addressContainer: {
-    backgroundColor: colors.whiteSmoke6,
+    backgroundColor: colors.white,
     borderRadius: metrics.borderRadius.lg,
     padding: metrics.padding.md,
     marginBottom: metrics.margin.md,

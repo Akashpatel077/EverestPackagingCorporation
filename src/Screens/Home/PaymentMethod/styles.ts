@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {colors, metrics, scale} from 'src/theme';
+import {colors, metrics, scale, typography} from 'src/theme';
 
 export const styles = StyleSheet.create({
   container: {
@@ -17,18 +17,17 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
   paymentOptionText: {
-    marginLeft: 10,
-    fontSize: 16,
-    color: '#000000',
-    paddingTop: 5,
+    marginLeft: scale(10),
+    fontSize: typography.fontSize.md,
+    // color: '#000000',
+    paddingTop: scale(5),
     fontFamily: 'Poppins-Medium',
   },
   razorPayTitle: {
-    marginLeft: 10,
-    fontSize: 16,
-    fontWeight: '500',
+    marginLeft: scale(10),
+    fontSize: typography.fontSize.md,
     fontFamily: 'Poppins-Medium',
-    paddingTop: 5,
+    paddingTop: scale(5),
   },
   paymentButton: {
     position: 'absolute',

@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {colors, metrics, scale, typography, verticalScale} from 'src/theme';
+import {colors, metrics, scale, typography} from 'src/theme';
 
 export const styles = StyleSheet.create({
   header: {
@@ -10,7 +10,7 @@ export const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: '#e6e6e6',
     backgroundColor: '#FFFFFF',
-    height: verticalScale(45),
+    height: scale(60),
     position: 'relative',
   },
   headerContainer: {
@@ -19,8 +19,8 @@ export const styles = StyleSheet.create({
     flex: 1,
   },
   backButton: {
-    width: scale(35),
-    height: scale(35),
+    width: scale(40),
+    height: scale(40),
     borderRadius: scale(20),
     backgroundColor: colors.white,
     justifyContent: 'center',
@@ -35,8 +35,8 @@ export const styles = StyleSheet.create({
     elevation: 5,
   },
   RightButton: {
-    width: scale(35),
-    height: scale(35),
+    width: scale(40),
+    height: scale(40),
     borderRadius: scale(20),
     backgroundColor: colors.white,
     justifyContent: 'center',

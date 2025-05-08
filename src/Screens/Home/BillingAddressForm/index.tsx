@@ -1,11 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  ScrollView,
-  TextInput,
-} from 'react-native';
+import {View, Text, TouchableOpacity, ScrollView} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {useDispatch} from 'react-redux';
 import {
@@ -32,7 +26,7 @@ import {colors, metrics} from 'src/theme';
 
 const BillingAddressForm: React.FC = ({route}) => {
   const navigation = useNavigation();
-  const {hideCheckbox} = route.params || {};
+  // const {hideCheckbox} = route.params || {};
   const [formData, setFormData] = React.useState({
     firstName: '',
     lastName: '',

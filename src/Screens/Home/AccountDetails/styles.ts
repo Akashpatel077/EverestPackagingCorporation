@@ -1,10 +1,10 @@
 import {StyleSheet} from 'react-native';
-import {colors, metrics, typography, scale} from 'src/theme';
+import {colors, metrics, typography} from 'src/theme';
 
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.white,
+    backgroundColor: colors.ghostWhite,
   },
   content: {
     flex: 1,
@@ -12,7 +12,7 @@ export const styles = StyleSheet.create({
   },
   passwordSection: {
     marginTop: metrics.margin.sm,
-    backgroundColor: colors.whiteSmoke6,
+    backgroundColor: colors.white,
     padding: metrics.padding.sm,
     borderRadius: metrics.borderRadius.md,
     marginBottom: metrics.margin.sm,

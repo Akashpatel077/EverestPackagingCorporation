@@ -36,6 +36,7 @@ import {clearCookies} from 'src/services/wooCommerceApi';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import CSafeAreaView from 'src/Components/CSafeAreaView';
 import {clearAddresses} from 'src/store/slices/addressSlice';
+import {colors, metrics, scale, typography} from 'src/theme';
 
 const Drawer = createDrawerNavigator();
 
@@ -108,11 +109,21 @@ const CustomDrawerContent = (props: any) => {
               key={index}
               style={styles.navItem}
               onPress={() => onItemPress(item)}>
-              <Icon name={item.icon} width={28} height={28} color="white" />
+              <Icon
+                name={item.icon}
+                width={metrics.iconSize.md}
+                height={metrics.iconSize.md}
+                color="white"
+              />
               <Text style={styles.navText}>
                 {item.title === 'Log out' && hasStarted ? 'Log in' : item.title}
               </Text>
-              <Icon name={RightArrow} width={28} height={28} color="white" />
+              <Icon
+                name={RightArrow}
+                width={metrics.iconSize.md}
+                height={metrics.iconSize.md}
+                color="white"
+              />
             </TouchableOpacity>
           ))}
         </View>
@@ -125,7 +136,7 @@ const CustomDrawerContent = (props: any) => {
             onPress: () => {
               setShowAlert(false);
             },
-            color: '#D3D3D3',
+            color: colors.gainsBoro,
           }}
           button2={{
             text: 'LOGOUT',
@@ -140,7 +151,7 @@ const CustomDrawerContent = (props: any) => {
               clearCookies();
               await AsyncStorage.setItem('userToken', '');
             },
-            color: '#CC5656',
+            color: colors.red,
           }}
         />
       </CSafeAreaView>
@@ -163,51 +174,45 @@ export default DrawerNavigator;
 const styles = StyleSheet.create({
   drawerContainer: {},
   profileContainer: {
-    marginBottom: 20,
-    paddingHorizontal: 20,
+    marginBottom: metrics.margin.md,
+    paddingHorizontal: metrics.padding.md,
     alignItems: 'center',
   },
-  profileImage: {
-    width: 80,
-    height: 80,
-    borderRadius: 40,
-    marginBottom: 10,
-  },
   profileName: {
-    fontSize: 20,
+    fontSize: typography.fontSize.xl,
     fontFamily: 'Poppins-Medium',
-    paddingTop: 10,
+    paddingTop: metrics.padding.sm,
   },
   separator: {
     height: 1,
-    backgroundColor: '#CCCCCC',
-    marginBottom: 15,
+    backgroundColor: colors.gainsBoro,
+    marginBottom: metrics.margin.sm,
   },
   navItemsContainer: {
-    paddingHorizontal: 20,
+    paddingHorizontal: metrics.padding.md,
   },
   navItem: {
-    paddingVertical: 12,
+    paddingVertical: metrics.padding.sm,
     flexDirection: 'row',
     alignItems: 'center',
   },
   navText: {
-    fontSize: 15,
+    fontSize: typography.fontSize.sm,
     fontFamily: 'Poppins-Medium',
-    paddingLeft: 12,
-    paddingTop: 5,
+    paddingLeft: metrics.padding.md,
+    paddingTop: metrics.padding.xs,
     flex: 1,
   },
   avatar: {
-    width: 80,
-    height: 80,
-    borderRadius: 40,
+    width: scale(80),
+    height: scale(80),
+    borderRadius: scale(40),
     elevation: 5,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: colors.white,
   },
   email: {
-    fontSize: 14,
-    color: '#777777',
-    fontFamily: 'Poppins-Medium',
+    fontSize: typography.fontSize.xs,
+    color: colors.dimGray,
+    fontFamily: 'Poppins-Regular',
   },
 });

@@ -1,7 +1,7 @@
 import React, {useCallback, useState} from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {pick} from '@react-native-documents/picker';
-import {scale, typography, verticalScale, metrics, colors} from '../../theme';
+import {scale, typography, metrics, colors} from '../../theme';
 
 interface FilePickerProps {
   onUpdateFile: (val: any) => void;
@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
     marginVertical: metrics.margin.xs,
     alignItems: 'center',
     borderRadius: metrics.borderRadius.md,
-    height: verticalScale(35),
+    height: scale(40),
   },
   buttonText: {
     paddingHorizontal: metrics.padding.sm,
@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
     fontSize: typography.fontSize.xs,
   },
   buttonTextContainer: {
-    height: verticalScale(33),
+    height: scale(40),
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: colors.primary,

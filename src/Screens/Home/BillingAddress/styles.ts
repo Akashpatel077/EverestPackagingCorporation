@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {colors, metrics, scale, verticalScale, typography} from 'src/theme';
+import {colors, metrics, scale, typography} from 'src/theme';
 
 export const styles = StyleSheet.create({
   applyButton: {

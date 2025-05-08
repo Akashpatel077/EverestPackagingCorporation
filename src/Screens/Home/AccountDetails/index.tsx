@@ -1,9 +1,8 @@
 import React, {useState} from 'react';
-import {View, Text, TouchableOpacity, ScrollView} from 'react-native';
+import {View, Text, ScrollView} from 'react-native';
 import {CButton, CustomAlert, CustomTextInput, Header} from 'src/Components';
 import {BackIcon, Eye, Password_Hide} from 'assets/icons';
 import {styles} from './styles';
-import {useNavigation} from '@react-navigation/native';
 import CSafeAreaView from 'src/Components/CSafeAreaView';
 import {useAppDispatch, useAppSelector} from 'src/store/hooks';
 import {changePassword, updateProfile} from 'src/services/wooCommerceApi';
@@ -11,7 +10,6 @@ import {updateUserProfile} from 'src/store/slices/authSlice';
 import {colors} from 'src/theme';
 
 const AccountDetails = () => {
-  const navigation = useNavigation();
   const dispatch = useAppDispatch();
   const {user, token} = useAppSelector((state: RootState) => state.auth);
   const {first_name, last_name, username, email} = user || {};

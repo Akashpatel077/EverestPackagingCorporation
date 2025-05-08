@@ -15,12 +15,12 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   categoriesContainer: {
-    paddingHorizontal: metrics.padding.md,
-    paddingVertical: metrics.padding.sm,
+    paddingHorizontal: metrics.padding.xs,
+    paddingTop: metrics.padding.xs,
   },
   categoryWrapper: {
     width: '48%',
-    margin: '1.5%',
+    margin: '1%',
     backgroundColor: colors.white,
     borderRadius: metrics.borderRadius.md,
     shadowColor: colors.black,
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
   categoryImage: {
     width: '100%',
     height: scale(130),
-    resizeMode: 'cover',
+    resizeMode: 'contain',
     backgroundColor: colors.white,
   },
   categoryName: {

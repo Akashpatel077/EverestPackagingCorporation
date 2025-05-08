@@ -24,12 +24,12 @@ export const styles = StyleSheet.create({
     shadowOpacity: 0.15,
     shadowRadius: 5,
     elevation: 4,
-    height: verticalScale(210),
+    height: scale(250),
   },
   productImageContainer: {
     position: 'relative',
     width: '100%',
-    height: verticalScale(135),
+    height: scale(160),
     borderTopLeftRadius: metrics.borderRadius.md,
     borderTopRightRadius: metrics.borderRadius.md,
     overflow: 'hidden',
@@ -64,6 +64,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    marginTop: metrics.margin.sm,
   },
   regularPrice: {
     fontSize: typography.fontSize.sm,

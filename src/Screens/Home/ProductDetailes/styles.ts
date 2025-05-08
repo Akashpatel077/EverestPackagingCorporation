@@ -1,12 +1,5 @@
 import {StyleSheet, Dimensions} from 'react-native';
-import {
-  colors,
-  metrics,
-  typography,
-  spacing,
-  scale,
-  verticalScale,
-} from 'src/theme';
+import {colors, metrics, typography, spacing, scale} from 'src/theme';
 
 const {width} = Dimensions.get('window');
 
@@ -115,7 +108,7 @@ export const styles = StyleSheet.create({
   },
   optionButton: {
     width: scale(88),
-    height: scale(35),
+    height: scale(40),
     borderRadius: metrics.borderRadius.md,
     borderWidth: 1,
     borderColor: colors.black,
@@ -145,8 +138,8 @@ export const styles = StyleSheet.create({
     gap: spacing.sm,
   },
   colorButton: {
-    width: scale(35),
-    height: scale(35),
+    width: scale(40),
+    height: scale(40),
     borderRadius: metrics.borderRadius.xxl,
     marginRight: metrics.margin.sm,
   },
@@ -177,8 +170,8 @@ export const styles = StyleSheet.create({
     fontFamily: 'Poppins-SemiBold',
   },
   wishListButton: {
-    width: verticalScale(35),
-    height: verticalScale(35),
+    width: scale(40),
+    height: scale(40),
     borderRadius: scale(20),
     backgroundColor: colors.white,
     justifyContent: 'center',
@@ -194,8 +187,9 @@ export const styles = StyleSheet.create({
     elevation: 5,
   },
   addToCartButton: {
-    flex: 1,
-    height: verticalScale(35),
+    // flex: 1,
+    height: scale(40),
+    width: scale(130),
   },
   alertLabel: {
     color: colors.red,

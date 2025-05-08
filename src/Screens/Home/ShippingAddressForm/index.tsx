@@ -1,4 +1,4 @@
-import {colors, metrics, verticalScale} from 'src/theme';
+import {colors, metrics, scale} from 'src/theme';
 import React, {useEffect, useState} from 'react';
 import {View, Text, ScrollView} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
@@ -186,7 +186,7 @@ const ShippingAddressForm: React.FC = () => {
             </Text>
             <CDropdown
               data={states}
-              dropDownStyle={{height: verticalScale(35)}}
+              dropDownStyle={{height: scale(40)}}
               title="State / County"
               selectedItem={selectedState}
               onSelect={(itemObject: any) => {

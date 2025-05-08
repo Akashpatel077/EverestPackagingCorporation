@@ -11,8 +11,8 @@ interface IIconProps {
 
 const Icon = ({
   name,
-  height = metrics.iconSize.sm,
-  width = metrics.iconSize.sm,
+  height = metrics.iconSize.md,
+  width = metrics.iconSize.md,
   color,
 }: IIconProps) => {
   return <SvgXml xml={name} height={height} width={width} fill={color} />;

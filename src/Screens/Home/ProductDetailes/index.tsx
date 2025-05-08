@@ -31,7 +31,7 @@ import {MYCART} from 'src/Navigation/home/routes';
 import {CommonActions} from '@react-navigation/native';
 import CSafeAreaView from 'src/Components/CSafeAreaView';
 import {useSelector} from 'react-redux';
-import {colors, metrics, scale, typography, verticalScale} from 'src/theme';
+import {colors, metrics, scale, typography} from 'src/theme';
 
 function findVariation(variations, selectedAttributes) {
   return variations.find(variation => {
@@ -533,15 +533,19 @@ const ProductDetails = ({navigation, route}) => {
                 }}>
                 <Icon
                   name={Heart}
-                  width={metrics.iconSize.sm}
-                  height={metrics.iconSize.sm}
+                  width={metrics.iconSize.md}
+                  height={metrics.iconSize.md}
                   color={isInWishlist ? colors.red : colors.white}
                 />
               </TouchableOpacity>
               <CButton
-                disabled={isLoading}
+                disabled={isLoading || isOutOfStock}
                 isLoading={isLoading}
-                style={styles.addToCartButton}
+                style={[
+                  styles.addToCartButton,
+                  isOutOfStock && {backgroundColor: colors.red},
+                ]}
+                // textStyle={isOutOfStock && {color: colors.white}}
                 onPress={() => {
                   if (isOutOfStock) {
                   } else if (isVariationNotAvailable) {
@@ -734,7 +738,7 @@ const RenderCustomExtraFields = ({
       <CDropdown
         data={item.values}
         dropDownStyle={{
-          height: verticalScale(35),
+          height: scale(40),
           marginBottom: metrics.margin.md,
         }}
         selectedItem={selectedValue}

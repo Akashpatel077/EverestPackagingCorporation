@@ -39,8 +39,8 @@ const Header: React.FC<Props> = ({
           {icon1 && (
             <Icon
               name={icon1}
-              width={metrics.iconSize.sm}
-              height={metrics.iconSize.sm}
+              width={metrics.iconSize.md}
+              height={metrics.iconSize.md}
               color={colors.white}
             />
           )}
@@ -57,8 +57,8 @@ const Header: React.FC<Props> = ({
           <TouchableOpacity style={styles.RightButton} onPress={onCartPress}>
             <Icon
               name={Buy}
-              width={metrics.iconSize.sm}
-              height={metrics.iconSize.sm}
+              width={metrics.iconSize.md}
+              height={metrics.iconSize.md}
               color={'#ffffff'}
             />
             <View style={styles.cartBadgeStyle}>
@@ -74,7 +74,7 @@ const Header: React.FC<Props> = ({
             {icon2 && (
               <Icon
                 name={icon2}
-                width={metrics.iconSize.sm}
+                width={metrics.iconSize.md}
                 height={metrics.iconSize.sm}
                 color={icon2Color}
               />

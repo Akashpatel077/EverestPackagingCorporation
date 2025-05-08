@@ -1,5 +1,5 @@
 import {StyleSheet, Dimensions} from 'react-native';
-import {colors, metrics, scale, typography, verticalScale} from 'src/theme';
+import {colors, metrics, scale, typography} from 'src/theme';
 
 const {width} = Dimensions.get('window');
 const CARD_WIDTH = (width - 36) / 2;
@@ -17,7 +17,7 @@ export const styles = StyleSheet.create({
     marginHorizontal: metrics.margin.md,
     marginVertical: metrics.margin.sm,
     paddingHorizontal: metrics.padding.sm,
-    height: verticalScale(35),
+    height: scale(40),
   },
   searchIcon: {
     marginRight: metrics.margin.xs,
@@ -81,7 +81,7 @@ export const styles = StyleSheet.create({
   },
   productImageContainer: {
     width: '100%',
-    height: verticalScale(135),
+    height: scale(135),
     borderTopLeftRadius: metrics.borderRadius.md,
     borderTopRightRadius: metrics.borderRadius.md,
     overflow: 'hidden',

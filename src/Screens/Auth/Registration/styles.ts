@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {colors, metrics, typography, scale, verticalScale} from 'src/theme';
+import {colors, metrics, typography, scale} from 'src/theme';
 
 export const styles = StyleSheet.create({
   container: {
@@ -68,8 +68,8 @@ export const styles = StyleSheet.create({
     gap: metrics.margin.lg,
   },
   socialButton: {
-    width: scale(48),
-    height: scale(48),
+    width: scale(40),
+    height: scale(40),
     borderRadius: scale(24),
     borderWidth: 1,
     borderColor: colors.gainsBoro,
@@ -84,7 +84,7 @@ export const styles = StyleSheet.create({
   signInText: {
     color: colors.dimGray,
     fontSize: typography.fontSize.sm,
-    fontFamily: 'Poppins-Medium',
+    fontFamily: 'Poppins-Regular',
   },
   signInLink: {
     color: colors.primary,

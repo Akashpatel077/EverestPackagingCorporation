@@ -5,7 +5,7 @@ import {
   ActivityIndicator,
   StyleSheet,
 } from 'react-native';
-import {scale, typography, verticalScale, metrics, colors} from '../../theme';
+import {scale, typography, metrics, colors} from '../../theme';
 
 interface CButtonProps {
   title: string;
@@ -41,7 +41,7 @@ const CButton: React.FC<CButtonProps> = ({
 const styles = StyleSheet.create({
   button: {
     backgroundColor: colors.primary,
-    height: verticalScale(35),
+    height: scale(40),
     borderRadius: metrics.borderRadius.md,
     justifyContent: 'center',
     alignItems: 'center',

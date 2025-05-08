@@ -10,6 +10,7 @@ import {styles} from './styles';
 import {CommonActions, useNavigation} from '@react-navigation/native';
 import {MYCART} from 'src/Navigation/home/routes';
 import CSafeAreaView from 'src/Components/CSafeAreaView';
+import {colors, metrics, scale, typography} from 'src/theme';
 
 const PaymentMethodScreen = () => {
   const navigation = useNavigation();
@@ -68,8 +69,8 @@ const PaymentMethodScreen = () => {
           <View style={styles.paymentOptionLeft}>
             <Icon
               name={isRazorPay ? SelectedRadioButton : NotSelectedRadioButton}
-              width={24}
-              height={24}
+              width={metrics.iconSize.md}
+              height={metrics.iconSize.md}
             />
             <Text style={styles.razorPayTitle}>Pay by Razorpay</Text>
           </View>
@@ -78,10 +79,10 @@ const PaymentMethodScreen = () => {
               style={[
                 styles.paymentOptionText,
                 {
-                  fontSize: 14,
-                  marginLeft: 35,
-                  fontWeight: '500',
-                  color: '#666666',
+                  fontSize: typography.fontSize.sm,
+                  marginLeft: scale(33),
+                  fontFamily: 'Poppins-Medium',
+                  color: colors.dimGray,
                 },
               ]}>
               Pay securely by Credit or Debit card or Internet Banking through
@@ -96,8 +97,8 @@ const PaymentMethodScreen = () => {
           <View style={styles.paymentOptionLeft}>
             <Icon
               name={isRazorPay ? NotSelectedRadioButton : SelectedRadioButton}
-              width={24}
-              height={24}
+              width={metrics.iconSize.md}
+              height={metrics.iconSize.md}
             />
             <Text style={styles.paymentOptionText}>Cash on delivery</Text>
           </View>
@@ -106,10 +107,10 @@ const PaymentMethodScreen = () => {
               style={[
                 styles.paymentOptionText,
                 {
-                  fontSize: 14,
-                  marginLeft: 35,
-                  fontWeight: '500',
-                  color: '#666666',
+                  fontSize: typography.fontSize.sm,
+                  marginLeft: scale(33),
+                  fontFamily: 'Poppins-Medium',
+                  color: colors.dimGray,
                 },
               ]}>
               Pay with cash upon delivery.

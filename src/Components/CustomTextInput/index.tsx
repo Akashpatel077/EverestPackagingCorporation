@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {Icon} from 'src/Components';
-import {scale, typography, verticalScale, metrics, colors} from '../../theme';
+import {scale, typography, metrics, colors} from '../../theme';
 
 interface CustomTextInputProps extends TextInputProps {
   title: string;
@@ -75,6 +75,7 @@ const styles = StyleSheet.create({
   inputWrapper: {
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'center',
     position: 'relative',
   },
   input: {
@@ -82,10 +83,10 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: colors.gainsBoro,
     borderRadius: metrics.borderRadius.md,
-    padding: metrics.padding.sm,
+    paddingHorizontal: metrics.padding.sm,
     fontSize: typography.fontSize.xs,
     fontFamily: 'Poppins-Regular',
-    height: verticalScale(35),
+    height: scale(40),
   },
   inputWithIcon: {
     paddingRight: metrics.padding.xxl,

@@ -51,13 +51,14 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: colors.white,
-    padding: metrics.padding.md,
+    paddingVertical: metrics.padding.sm,
     borderRadius: metrics.borderRadius.md,
     marginVertical: metrics.margin.sm,
   },
   orderImage: {
-    width: scale(85),
-    height: scale(85),
+    width: scale(100),
+    height: '100%',
+    resizeMode: 'contain',
     marginRight: metrics.margin.md,
   },
   orderDetails: {

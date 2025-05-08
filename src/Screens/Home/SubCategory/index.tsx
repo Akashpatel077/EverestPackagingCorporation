@@ -69,25 +69,25 @@ const SubCategoryScreen = ({route}) => {
     <CSafeAreaView removeBottomSafeArea>
       <View style={styles.container}>
         <Header title={category} icon1={BackIcon} />
-        <View style={styles.contentContainer}>
-          {isLoading ? (
-            <View style={styles.loadingContainer}>
-              <LoadingLogo size={120} />
-            </View>
-          ) : (
-            <FlatList
-              data={subCategories
-                .filter(category => category.count > 0)
-                .sort((a, b) => (a.menu_order || 0) - (b.menu_order || 0))}
-              renderItem={renderSubCategoryItem}
-              numColumns={2}
-              showsVerticalScrollIndicator={false}
-              contentContainerStyle={styles.categoriesContainer}
-              keyExtractor={item => item.id.toString()}
-            />
-          )}
-        </View>
+        {/* <View style={styles.contentContainer}> */}
+        {isLoading ? (
+          <View style={styles.loadingContainer}>
+            <LoadingLogo size={120} />
+          </View>
+        ) : (
+          <FlatList
+            data={subCategories
+              .filter(category => category.count > 0)
+              .sort((a, b) => (a.menu_order || 0) - (b.menu_order || 0))}
+            renderItem={renderSubCategoryItem}
+            numColumns={2}
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={styles.categoriesContainer}
+            keyExtractor={item => item.id.toString()}
+          />
+        )}
       </View>
+      {/* </View> */}
     </CSafeAreaView>
   );
 };

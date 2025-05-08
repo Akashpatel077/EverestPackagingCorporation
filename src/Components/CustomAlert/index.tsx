@@ -1,7 +1,7 @@
 import React from 'react';
 import {Modal, View, Text, StyleSheet} from 'react-native';
 import CButton from '../CButton';
-import {scale, typography, verticalScale, metrics, colors} from '../../theme';
+import {scale, typography, metrics, colors} from '../../theme';
 
 interface ButtonProps {
   text: string;
@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
   },
   button: {
     width: scale(120),
-    height: verticalScale(35),
+    height: scale(40),
   },
   buttonText: {
     color: colors.black,
