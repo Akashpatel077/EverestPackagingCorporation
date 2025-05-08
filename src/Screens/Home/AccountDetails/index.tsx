@@ -191,8 +191,9 @@ const AccountDetails = () => {
 
             <CustomTextInput
               title="Current Password"
-              placeholder="Current password (leave blank to leave unchanged)"
+              placeholder="Enter Here..."
               required
+              numberOfLines={1}
               icon={showCurrentPassword ? Password_Hide : Eye}
               onIconPress={() => setShowCurrentPassword(!showCurrentPassword)}
               secureTextEntry={!showCurrentPassword}
@@ -202,7 +203,8 @@ const AccountDetails = () => {
 
             <CustomTextInput
               title="New Password"
-              placeholder="New password (leave blank to leave unchanged)"
+              numberOfLines={1}
+              placeholder="Enter Here..."
               required
               icon={showNewPassword ? Password_Hide : Eye}
               onIconPress={() => setShowNewPassword(!showNewPassword)}
@@ -213,7 +215,8 @@ const AccountDetails = () => {
 
             <CustomTextInput
               title="Confirm Password"
-              placeholder="Confirm new password"
+              placeholder="Enter Here..."
+              numberOfLines={1}
               required
               icon={showConfirmPassword ? Password_Hide : Eye}
               onIconPress={() => setShowConfirmPassword(!showConfirmPassword)}

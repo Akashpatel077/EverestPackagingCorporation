@@ -27,8 +27,8 @@ export const styles = StyleSheet.create({
     marginBottom: metrics.margin.md,
   },
   successIcon: {
-    height: scale(150),
-    width: scale(150),
+    height: scale(300),
+    width: scale(300),
     marginBottom: metrics.margin.lg,
   },
 });

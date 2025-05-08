@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
-import {Header, Icon} from 'src/Components';
+import {CButton, Header, Icon} from 'src/Components';
 import {
   BackIcon,
   SelectedRadioButton,
@@ -55,10 +55,10 @@ const PaymentMethodScreen = () => {
   };
 
   return (
-    <CSafeAreaView>
-      <View style={styles.container}>
-        <Header title="Payment Methods" icon1={BackIcon} />
+    <CSafeAreaView removeBottomSafeArea>
+      <Header title="Payment Methods" icon1={BackIcon} />
 
+      <View style={styles.container}>
         <TouchableOpacity
           style={styles.paymentOption}
           activeOpacity={0.7}
@@ -117,9 +117,14 @@ const PaymentMethodScreen = () => {
           )}
         </TouchableOpacity>
 
-        <TouchableOpacity style={[styles.paymentButton]} onPress={onPlaceOrder}>
+        {/* <TouchableOpacity style={[styles.paymentButton]} onPress={onPlaceOrder}>
           <Text style={styles.paymentButtonText}>Continue</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
+        <CButton
+          style={styles.paymentButton}
+          title="Continue"
+          onPress={onPlaceOrder}
+        />
       </View>
     </CSafeAreaView>
   );

@@ -1,14 +1,14 @@
 import {StyleSheet} from 'react-native';
-import {colors, metrics} from 'src/theme';
+import {colors, metrics, scale} from 'src/theme';
 
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.ghostWhite,
+    paddingHorizontal: metrics.padding.md,
   },
   paymentOption: {
     paddingVertical: metrics.padding.md,
-    paddingHorizontal: metrics.padding.md,
     borderBottomWidth: 1,
     borderBottomColor: colors.gainsBoro,
   },
@@ -31,18 +31,9 @@ export const styles = StyleSheet.create({
     paddingTop: 5,
   },
   paymentButton: {
-    backgroundColor: colors.primary,
-    padding: 15,
-    borderRadius: 10,
-    alignItems: 'center',
     position: 'absolute',
-    bottom: 8,
+    bottom: scale(20),
     left: 16,
     right: 16,
-  },
-  paymentButtonText: {
-    color: '#FFFFFF',
-    fontSize: 16,
-    fontWeight: '600',
   },
 });

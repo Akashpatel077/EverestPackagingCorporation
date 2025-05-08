@@ -7,8 +7,8 @@ const styles = StyleSheet.create({
     backgroundColor: colors.ghostWhite,
   },
   categoriesContainer: {
-    padding: metrics.padding.xs,
-    paddingBottom: metrics.padding.xl,
+    paddingHorizontal: metrics.padding.md,
+    paddingVertical: metrics.padding.sm,
   },
   loadingContainer: {
     flex: 1,
@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
   },
   productCard: {
     width: '48%',
-    margin: '1%',
+    margin: '1.5%',
     backgroundColor: colors.white,
     borderRadius: metrics.borderRadius.md,
     shadowColor: colors.black,
@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.15,
     shadowRadius: 5,
     elevation: 4,
-    height: verticalScale(210),
+    height: verticalScale(220),
   },
   productImageContainer: {
     position: 'relative',

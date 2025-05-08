@@ -193,7 +193,7 @@ export default StyleSheet.create({
   modalItemSize: {
     fontSize: typography.fontSize.xs,
     color: colors.dimGray,
-    fontFamily: 'Poppins-Regular',
+    fontFamily: 'Poppins-Medium',
   },
   modalItemPrice: {
     fontSize: typography.fontSize.sm,

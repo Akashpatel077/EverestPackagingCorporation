@@ -46,7 +46,7 @@ const CustomTextInput: React.FC<CustomTextInputProps> = ({
               name={icon}
               width={metrics.iconSize.sm}
               height={metrics.iconSize.sm}
-              color="#FFFFFF"
+              color={colors.white}
             />
           </TouchableOpacity>
         )}

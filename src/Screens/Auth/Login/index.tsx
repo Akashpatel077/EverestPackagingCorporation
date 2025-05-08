@@ -8,7 +8,13 @@ import {
 } from 'react-native';
 import {styles} from './styles';
 import {useTranslation} from 'react-i18next';
-import {CButton, CustomAlert, CustomTextInput, Icon} from '../../../Components';
+import {
+  CButton,
+  CustomAlert,
+  CustomTextInput,
+  Icon,
+  LoadingOverlay,
+} from '../../../Components';
 import {
   Eye,
   ic_Apple,
@@ -25,6 +31,7 @@ import {RootState} from 'src/store';
 import {setShowWelcome} from 'src/store/slices/startKeySlice';
 import CSafeAreaView from 'src/Components/CSafeAreaView';
 import {colors, metrics} from 'src/theme';
+import {forgotPassword} from 'src/services/wooCommerceApi';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -36,9 +43,25 @@ const Login = () => {
   const {loading, error} = useSelector((state: RootState) => state.auth);
   const isButtonDisabled = !email || !password || loading;
   const [showAlert, setShowAlert] = useState(false);
+  const [alertConfig, setAlertConfig] = useState({
+    title: '',
+    description: '',
+    buttonText: '',
+    onPress: () => {},
+  });
+  const [forgotPasswordLoading, setForgotPasswordLoading] = useState(false);
 
   useEffect(() => {
     if (error && error.code && error.code.includes('authentication_failed')) {
+      setAlertConfig({
+        title: 'New Everest Packaging',
+        description: 'Username or Password is incorrect!',
+        buttonText: 'OK',
+        onPress: () => {
+          setShowAlert(false);
+          dispatch(logout());
+        },
+      });
       setShowAlert(true);
     }
   }, [error]);
@@ -59,6 +82,55 @@ const Login = () => {
 
   const handleLogin = async () => {
     dispatch(loginUser({username: email, password}));
+  };
+
+  const onForgotPassword = async () => {
+    try {
+      setForgotPasswordLoading(true);
+      if (!email) {
+        setAlertConfig({
+          title: 'Attention',
+          description: 'Please enter your email address.',
+          buttonText: 'OK',
+          onPress: () => setShowAlert(false),
+        });
+        setShowAlert(true);
+        return;
+      }
+
+      const response = await forgotPassword(email);
+
+      console.log('forgotPassword response', response);
+
+      if (response.success) {
+        setAlertConfig({
+          title: 'Success',
+          description: response.message,
+          buttonText: 'OK',
+          onPress: () => setShowAlert(false),
+        });
+        setShowAlert(true);
+        return;
+      } else {
+        setAlertConfig({
+          title: 'Error',
+          description: response.message,
+          buttonText: 'OK',
+          onPress: () => setShowAlert(false),
+        });
+        setShowAlert(true);
+      }
+    } catch (error) {
+      setAlertConfig({
+        title: 'Error',
+        description: error.response.data.message,
+        buttonText: 'OK',
+        onPress: () => setShowAlert(false),
+      });
+      setShowAlert(true);
+    } finally {
+      setForgotPasswordLoading(false);
+    }
   };
 
   return (
@@ -93,7 +165,9 @@ const Login = () => {
           onIconPress={() => setShowPassword(!showPassword)}
         />
 
-        <TouchableOpacity style={styles.forgotPassword}>
+        <TouchableOpacity
+          style={styles.forgotPassword}
+          onPress={onForgotPassword}>
           <Text style={styles.forgotPasswordText}>
             {t('login.forgotPassword')}
           </Text>
@@ -152,17 +226,15 @@ const Login = () => {
       </ScrollView>
       <CustomAlert
         visible={showAlert}
-        title="Everest Packaging"
-        description="Username or Password is incorrect!"
+        title={alertConfig.title}
+        description={alertConfig.description}
         button2={{
-          text: 'Ok',
-          onPress: () => {
-            setShowAlert(false);
-            dispatch(logout());
-          },
-          color: colors.primary,
+          text: alertConfig.buttonText,
+          onPress: alertConfig.onPress,
+          color: alertConfig.title === 'Success' ? colors.primary : colors.red,
         }}
       />
+      <LoadingOverlay visible={forgotPasswordLoading} />
     </CSafeAreaView>
   );
 };

@@ -120,6 +120,21 @@ export const changePassword = async (
   }
 };
 
+export const forgotPassword = async (email: string) => {
+  try {
+    const response = await axios.post(
+      `${AUTH_BASE_URL}/wp-json/custom/v1/forgot-password`,
+      {
+        email,
+      },
+    );
+
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export const updateProfile = async (
   token: string,
   userInfo: {

@@ -14,11 +14,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   categoriesContainer: {
-    padding: metrics.padding.sm,
+    paddingHorizontal: metrics.padding.md,
+    paddingVertical: metrics.padding.sm,
   },
   categoryWrapper: {
     width: '48%',
-    margin: '1%',
+    margin: '1.5%',
     backgroundColor: colors.white,
     borderRadius: metrics.borderRadius.md,
     shadowColor: colors.black,

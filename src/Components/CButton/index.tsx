@@ -46,7 +46,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     paddingHorizontal: metrics.padding.md,
-    width: '100%',
   },
   disabled: {
     backgroundColor: colors.suvaGray,

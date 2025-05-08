@@ -465,7 +465,7 @@ const MyCart = ({}) => {
                         {decode(selectedItem.name)}
                       </Text>
                       <Text style={styles.modalItemSize}>
-                        Size : {selectedItem.size}
+                        Quantity: {selectedItem.quantity}
                       </Text>
                       <Text style={styles.modalItemPrice}>
                         ₹
@@ -476,21 +476,6 @@ const MyCart = ({}) => {
                           ) * selectedItem.quantity
                         ).toFixed(2)}
                       </Text>
-                      <View style={styles.quantityControl}>
-                        <TouchableOpacity
-                          style={styles.quantityButton}
-                          disabled={true}>
-                          <Text style={styles.quantityButtonText}>-</Text>
-                        </TouchableOpacity>
-                        <Text style={styles.quantityText}>
-                          {selectedItem.quantity}
-                        </Text>
-                        <TouchableOpacity
-                          style={[styles.quantityButton, styles.increaseButton]}
-                          disabled={true}>
-                          <Text style={styles.quantityButtonText}>+</Text>
-                        </TouchableOpacity>
-                      </View>
                     </View>
                   </View>
                 )}

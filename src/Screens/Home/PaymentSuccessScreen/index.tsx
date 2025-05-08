@@ -1,22 +1,25 @@
 import React from 'react';
-import {View, Text, TouchableOpacity, Image} from 'react-native';
-import {CButton, Header, Icon} from 'src/Components';
-import {BackIcon, Heart} from 'assets/icons';
+import {View, Text} from 'react-native';
+import {CButton} from 'src/Components';
 import {styles} from './styles';
 import {CommonActions, useNavigation} from '@react-navigation/native';
 import {ORDER_SCREEN} from 'src/Navigation/home/routes';
-import {paymentSuccess} from 'src/Constants/images';
 import CSafeAreaView from 'src/Components/CSafeAreaView';
+import LottieView from 'lottie-react-native';
+import successAnim from '../../../../assets/animations/successAnim.json';
 
 const PaymentSuccessScreen = () => {
   const navigation = useNavigation();
 
   return (
     <CSafeAreaView>
-      <Header title="Payment" icon1={BackIcon} />
-
       <View style={styles.container}>
-        <Image source={paymentSuccess} style={styles.successIcon} />
+        <LottieView
+          source={successAnim}
+          autoPlay
+          loop={false}
+          style={styles.successIcon}
+        />
         <Text style={styles.successTitle}>Payment Successful!</Text>
         <Text style={styles.successMessage}>Thank you for your purchase.</Text>
 
