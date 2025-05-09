@@ -42,7 +42,11 @@ const BillingAddress = () => {
         <Header title="Billing Address" icon1={BackIcon} />
         <ScrollView
           showsHorizontalScrollIndicator={false}
-          contentContainerStyle={{padding: metrics.padding.md, flex: 1}}
+          contentContainerStyle={{
+            padding: metrics.padding.md,
+            // flex: 1,
+            paddingBottom: scale(125),
+          }}
           showsVerticalScrollIndicator={false}>
           {billingAddresses.length > 0 &&
             billingAddresses.map((address: Address) => (
@@ -95,29 +99,28 @@ const BillingAddress = () => {
                 </View>
               </TouchableOpacity>
             ))}
-
-          <CButton
-            textStyle={styles.addButtonText}
-            style={[
-              styles.addButton,
-              !billingAddresses.length && {marginTop: scale(20)},
-            ]}
-            onPress={() => {
-              navigation.navigate(BILLING_ADDRESS_FORM, {hideCheckbox: true});
-            }}
-            title={'Add New Billing Address'}
-          />
-          <CButton
-            style={styles.applyButton}
-            disabled={!selectedAddressData}
-            onPress={() => {
-              navigation.navigate(CHECKOUT, {
-                selectedAddress: selectedAddressData,
-              });
-            }}
-            title={'Apply'}
-          />
         </ScrollView>
+        <CButton
+          textStyle={styles.addButtonText}
+          style={[
+            styles.addButton,
+            !billingAddresses.length && {marginTop: scale(20)},
+          ]}
+          onPress={() => {
+            navigation.navigate(BILLING_ADDRESS_FORM, {hideCheckbox: true});
+          }}
+          title={'Add New Billing Address'}
+        />
+        <CButton
+          style={styles.applyButton}
+          disabled={!selectedAddressData}
+          onPress={() => {
+            navigation.navigate(CHECKOUT, {
+              selectedAddress: selectedAddressData,
+            });
+          }}
+          title={'Apply'}
+        />
       </View>
       <CustomAlert
         visible={alertVisible}

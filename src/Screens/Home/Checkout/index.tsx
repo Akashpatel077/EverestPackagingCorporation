@@ -116,25 +116,62 @@ const CheckoutScreen = ({route}) => {
                 justifyContent: 'center',
                 alignItems: 'center',
               }}>
-              {cartItems.map(item => (
-                <View key={item.id} style={[styles.orderItem, {}]}>
-                  <Image
-                    source={item.images[0] && {uri: item.images[0].src}}
-                    style={styles.orderImage}
-                  />
-                  <View style={styles.orderDetails}>
-                    <Text style={styles.orderTitle}>{decode(item.name)}</Text>
-                    {item.type === 'variation' &&
-                      item.variation &&
-                      item.variation.map(item => {
-                        const decodedValue = decode(item.value);
-                        return (
-                          <Text style={styles.itemSize}>
-                            {item.attribute} : {decodedValue}
-                          </Text>
-                        );
-                      })}
-                    {/* {Array.isArray(item.attributes) &&
+              {cartItems &&
+                cartItems.map(
+                  (item: {
+                    id: React.Key | null | undefined;
+                    images: {src: any}[];
+                    name: any;
+                    type: string;
+                    variation: any[];
+                    prices: {sale_price: string; currency_minor_unit: number};
+                    quantity:
+                      | string
+                      | number
+                      | bigint
+                      | boolean
+                      | React.ReactElement<
+                          unknown,
+                          string | React.JSXElementConstructor<any>
+                        >
+                      | Iterable<React.ReactNode>
+                      | Promise<
+                          | string
+                          | number
+                          | bigint
+                          | boolean
+                          | React.ReactPortal
+                          | React.ReactElement<
+                              unknown,
+                              string | React.JSXElementConstructor<any>
+                            >
+                          | Iterable<React.ReactNode>
+                          | null
+                          | undefined
+                        >
+                      | null
+                      | undefined;
+                  }) => (
+                    <View key={item.id} style={[styles.orderItem, {}]}>
+                      <Image
+                        source={item.images[0] && {uri: item.images[0].src}}
+                        style={styles.orderImage}
+                      />
+                      <View style={styles.orderDetails}>
+                        <Text style={styles.orderTitle}>
+                          {decode(item.name)}
+                        </Text>
+                        {item.type === 'variation' &&
+                          item.variation &&
+                          item.variation.map(item => {
+                            const decodedValue = decode(item.value);
+                            return (
+                              <Text style={styles.itemSize}>
+                                {item.attribute} : {decodedValue}
+                              </Text>
+                            );
+                          })}
+                        {/* {Array.isArray(item.attributes) &&
                       item.attributes
                         .filter(attr => attr.name !== 'HSN Code')
                         .map(attr => (
@@ -142,21 +179,22 @@ const CheckoutScreen = ({route}) => {
                             {attr.name}: {attr.value}
                           </Text>
                         ))} */}
-                    <Text style={styles.orderPrice}>
-                      ₹
-                      {(
-                        getFormattedPrice(
-                          item.prices.sale_price,
-                          item.prices.currency_minor_unit,
-                        ) * item.quantity
-                      ).toFixed(2)}
-                    </Text>
-                    <Text style={styles.quantity}>
-                      Quantity: {item.quantity}
-                    </Text>
-                  </View>
-                </View>
-              ))}
+                        <Text style={styles.orderPrice}>
+                          ₹
+                          {(
+                            getFormattedPrice(
+                              item.prices.sale_price,
+                              item.prices.currency_minor_unit,
+                            ) * item.quantity
+                          ).toFixed(2)}
+                        </Text>
+                        <Text style={styles.quantity}>
+                          Quantity: {item.quantity}
+                        </Text>
+                      </View>
+                    </View>
+                  ),
+                )}
             </ScrollView>
           </View>
 

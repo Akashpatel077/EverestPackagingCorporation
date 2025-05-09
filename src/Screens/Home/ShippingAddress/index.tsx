@@ -12,7 +12,7 @@ import {
 } from 'src/store/slices/addressSlice';
 import {RootState} from 'src/store';
 import CSafeAreaView from 'src/Components/CSafeAreaView';
-import {colors, metrics} from 'src/theme';
+import {colors, metrics, scale} from 'src/theme';
 
 const ShippingAddressScreen = () => {
   const navigation = useNavigation();
@@ -42,7 +42,8 @@ const ShippingAddressScreen = () => {
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={{
             paddingHorizontal: metrics.padding.md,
-            flex: 1,
+            paddingBottom: scale(125),
+            // flex: 1,
           }}
           showsVerticalScrollIndicator={false}>
           {shippingAddresses.length > 0
@@ -99,29 +100,28 @@ const ShippingAddressScreen = () => {
                 </TouchableOpacity>
               ))
             : null}
-
-          <CButton
-            textStyle={styles.addButtonText}
-            style={[
-              styles.addButton,
-              !shippingAddresses.length && {marginTop: metrics.margin.md},
-            ]}
-            onPress={() => {
-              navigation.navigate(SHIPPING_ADDRESS_FORM);
-            }}
-            title={'Add New Shipping Address'}
-          />
-          <CButton
-            style={styles.applyButton}
-            disabled={!selectedAddressData}
-            onPress={() => {
-              navigation.navigate(CHECKOUT, {
-                selectedAddress: selectedAddressData,
-              });
-            }}
-            title={'Apply'}
-          />
         </ScrollView>
+        <CButton
+          textStyle={styles.addButtonText}
+          style={[
+            styles.addButton,
+            !shippingAddresses.length && {marginTop: metrics.margin.md},
+          ]}
+          onPress={() => {
+            navigation.navigate(SHIPPING_ADDRESS_FORM);
+          }}
+          title={'Add New Shipping Address'}
+        />
+        <CButton
+          style={styles.applyButton}
+          disabled={!selectedAddressData}
+          onPress={() => {
+            navigation.navigate(CHECKOUT, {
+              selectedAddress: selectedAddressData,
+            });
+          }}
+          title={'Apply'}
+        />
       </View>
       <CustomAlert
         visible={alertVisible}

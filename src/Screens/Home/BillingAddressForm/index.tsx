@@ -26,7 +26,9 @@ import {colors, metrics} from 'src/theme';
 
 const BillingAddressForm: React.FC = ({route}) => {
   const navigation = useNavigation();
-  // const {hideCheckbox} = route.params || {};
+  const {hideCheckbox, fromAddresses} = route.params || {};
+  console.log('route', route);
+
   const [formData, setFormData] = React.useState({
     firstName: '',
     lastName: '',
@@ -116,7 +118,8 @@ const BillingAddressForm: React.FC = ({route}) => {
       dispatch(addShippingAddress(addressData));
       dispatch(setSelectedBillingAddress(addressData.id));
       dispatch(setSelectedShippingAddress(addressData.id));
-      navigation.navigate(CHECKOUT);
+      fromAddresses ? navigation.goBack() : navigation.navigate(CHECKOUT);
+      // navigation.navigate(CHECKOUT);
     } else {
       dispatch(addBillingAddress(addressData));
       dispatch(setSelectedBillingAddress(addressData.id));

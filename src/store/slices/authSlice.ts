@@ -33,7 +33,7 @@ export const loginUser = createAsyncThunk(
       const userDetails = await fetchUserDetails(userProfile.id, data.token);
 
       // Dispatch billing address
-      if (userDetails?.billing) {
+      if (userDetails?.billing && userDetails.billing.first_name) {
         const billingAddress = {
           id: Date.now().toString(),
           name: `${userDetails.billing.first_name} ${userDetails.billing.last_name}`,
@@ -49,7 +49,7 @@ export const loginUser = createAsyncThunk(
       }
 
       // Dispatch shipping address
-      if (userDetails?.shipping) {
+      if (userDetails?.shipping && userDetails.shipping.first_name) {
         const shippingAddress = {
           id: Date.now().toString(),
           name: `${userDetails.shipping.first_name} ${userDetails.shipping.last_name}`,

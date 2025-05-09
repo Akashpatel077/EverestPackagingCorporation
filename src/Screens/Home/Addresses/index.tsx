@@ -50,7 +50,7 @@ const Addresses = () => {
         </Text>
       )}
       <CButton
-        onPress={() => navigation.navigate(formRoute)}
+        onPress={() => navigation.navigate(formRoute, {fromAddresses: true})}
         title={`Add ${title}`}
       />
     </View>

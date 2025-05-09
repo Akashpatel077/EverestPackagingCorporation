@@ -20,8 +20,9 @@ import {CHECKOUT} from 'src/Navigation/home/routes';
 import {getStates} from 'src/services/wooCommerceApi';
 import CSafeAreaView from 'src/Components/CSafeAreaView';
 
-const ShippingAddressForm: React.FC = () => {
+const ShippingAddressForm: React.FC = ({route}) => {
   const navigation = useNavigation();
+  const {hideCheckbox, fromAddresses} = route.params || {};
   const [formData, setFormData] = React.useState({
     firstName: '',
     lastName: '',
@@ -108,7 +109,7 @@ const ShippingAddressForm: React.FC = () => {
     dispatch(addShippingAddress(addressData));
     dispatch(setSelectedShippingAddress(addressData.id));
 
-    navigation.navigate(CHECKOUT);
+    fromAddresses ? navigation.goBack() : navigation.navigate(CHECKOUT);
   };
 
   return (
