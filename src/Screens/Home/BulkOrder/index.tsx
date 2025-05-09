@@ -1,134 +1,64 @@
-import React, {useState, useCallback} from 'react';
-import {View, TouchableOpacity, Text, StatusBar} from 'react-native';
-import {
-  GiftedChat,
-  Bubble,
-  Send,
-  BubbleProps,
-  IMessage,
-  SendProps,
-  InputToolbar,
-  Composer,
-} from 'react-native-gifted-chat';
-import {Header, Icon} from 'src/Components';
-import {BackIcon, SendMessage} from 'assets/icons';
-import {styles} from './styles';
+import React from 'react';
+import {View, Text, Linking} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
+import {BackIcon, WhatsApp} from 'assets/icons';
+import {styles} from './styles';
+import {CButton, Header} from 'src/Components';
 import CSafeAreaView from 'src/Components/CSafeAreaView';
-import {KeyboardProvider} from 'react-native-keyboard-controller';
+import Toast from 'react-native-toast-message';
+import {metrics, typography} from 'src/theme';
 
 const BulkOrder = () => {
   const navigation = useNavigation();
-  const [messages, setMessages] = useState([]);
 
-  const onSend = useCallback((newMessages = []) => {
-    setMessages(previousMessages =>
-      GiftedChat.append(previousMessages, newMessages),
-    );
+  const handleContactUs = async () => {
+    const whatsappMessage = 'Hi, I would like to inquire about bulk orders.';
+    const whatsappUrl = `whatsapp://send?phone=+919173300810&text=${encodeURIComponent(
+      whatsappMessage,
+    )}`;
 
-    // Simulate bot response after a short delay
-    setTimeout(() => {
-      const botMessage = {
-        _id: Math.round(Math.random() * 1000000),
-        text: 'Thank you for your message. How can I assist you with your bulk order today?',
-        createdAt: new Date(),
-        user: {
-          _id: 2,
-          name: 'Bulk Order Bot',
-          avatar: require('../../../../assets/images/logo.png'),
-        },
-      };
-      setMessages(previousMessages =>
-        GiftedChat.append(previousMessages, [botMessage]),
-      );
-    }, 1000);
-  }, []);
-
-  const renderBubble = (
-    props: React.JSX.IntrinsicAttributes & BubbleProps<IMessage>,
-  ) => {
-    return (
-      <Bubble
-        {...props}
-        wrapperStyle={{
-          right: {
-            backgroundColor: '#E1FFC7',
-            borderRadius: 15,
-            padding: 5,
-            marginVertical: 3,
-          },
-          left: {
-            backgroundColor: '#FFFFFF',
-            borderRadius: 15,
-            padding: 5,
-            marginVertical: 3,
-          },
-        }}
-        textStyle={{
-          right: {
-            color: '#000000',
-            fontSize: 16,
-          },
-          left: {
-            color: '#000000',
-            fontSize: 16,
-          },
-        }}
-      />
-    );
-  };
-
-  const renderSend = (
-    props: React.JSX.IntrinsicAttributes & SendProps<IMessage>,
-  ) => {
-    return (
-      <Send {...props}>
-        <View style={styles.sendButton}>
-          <Icon name={SendMessage} width={24} height={24} color="#FFFFFF" />
-        </View>
-      </Send>
-    );
-  };
-
-  const renderInputToolbar = (props: any) => {
-    return (
-      <InputToolbar
-        {...props}
-        containerStyle={styles.inputToolbar}
-        primaryStyle={styles.inputContainer}
-      />
-    );
+    try {
+      await Linking.openURL(whatsappUrl);
+    } catch (error) {
+      Toast.show({
+        type: 'error',
+        text1: 'WhatsApp is not installed!',
+        position: 'bottom',
+      });
+    }
   };
 
   return (
-    <CSafeAreaView>
-      <KeyboardProvider
-        navigationBarTranslucent={true}
-        statusBarTranslucent={true}>
-        <View style={styles.container}>
-          <Header title="Bulk Order Bot" icon1={BackIcon} />
-          <GiftedChat
-            messages={messages}
-            onSend={newMessages => onSend(newMessages)}
-            user={{
-              _id: 1,
-            }}
-            renderBubble={renderBubble}
-            renderSend={renderSend}
-            renderInputToolbar={renderInputToolbar}
-            placeholder="Message"
-            alwaysShowSend
-            bottomOffset={80}
-            timeTextStyle={{
-              right: {color: '#8B8B8B'},
-              left: {color: '#8B8B8B'},
-            }}
-            maxComposerHeight={100}
-            // messageContainerStyle={styles.messageContainer}
-            // textInputStyle={styles.messageText}
-          />
+    <CSafeAreaView removeBottomSafeArea>
+      <View style={styles.container}>
+        <Header title="Bulk Order" icon1={BackIcon} />
+        <View style={styles.contentContainer}>
+          <Text style={styles.title}>Bulk Orders Made Easy!</Text>
+          <Text style={styles.message}>
+            Save more when you order in bulk! Get exclusive discounts, dedicated
+            support, and customized packaging solutions for your business needs.
+          </Text>
+          <View style={styles.highlightsContainer}>
+            <Text style={styles.highlight}>✓ Volume-based discounts</Text>
+            <Text style={styles.highlight}>
+              ✓ Customized packaging solutions
+            </Text>
+            <Text style={styles.highlight}>✓ Dedicated support team</Text>
+            <Text style={styles.highlight}>✓ Fast turnaround time</Text>
+          </View>
         </View>
-      </KeyboardProvider>
+        <CButton
+          style={styles.contactButton}
+          title="Contact Us on WhatsApp"
+          onPress={handleContactUs}
+          icon={WhatsApp}
+          textStyle={{
+            marginRight: metrics.margin.md,
+            fontSize: typography.fontSize.sm,
+          }}
+          iconPosition="right"
+        />
+      </View>
     </CSafeAreaView>
   );
 };

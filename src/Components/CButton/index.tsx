@@ -5,6 +5,7 @@ import {
   ActivityIndicator,
   StyleSheet,
 } from 'react-native';
+import {Icon} from '../Icons';
 import {scale, typography, metrics, colors} from '../../theme';
 
 interface CButtonProps {
@@ -14,6 +15,9 @@ interface CButtonProps {
   isLoading?: boolean;
   style?: object;
   textStyle?: object;
+  icon?: any;
+  iconPosition?: 'left' | 'right';
+  iconStyle?: object;
 }
 
 const CButton: React.FC<CButtonProps> = ({
@@ -23,6 +27,8 @@ const CButton: React.FC<CButtonProps> = ({
   isLoading = false,
   style,
   textStyle,
+  icon,
+  iconPosition = 'left',
 }) => {
   return (
     <TouchableOpacity
@@ -32,7 +38,25 @@ const CButton: React.FC<CButtonProps> = ({
       {isLoading ? (
         <ActivityIndicator color={colors.primary} size="small" />
       ) : (
-        <Text style={[styles.buttonText, textStyle]}>{title}</Text>
+        <>
+          {icon && iconPosition === 'left' && (
+            <Icon
+              name={icon}
+              width={metrics.iconSize.sm}
+              height={metrics.iconSize.sm}
+              color={colors.white}
+            />
+          )}
+          <Text style={[styles.buttonText, textStyle]}>{title}</Text>
+          {icon && iconPosition === 'right' && (
+            <Icon
+              name={icon}
+              width={metrics.iconSize.sm}
+              height={metrics.iconSize.sm}
+              color={colors.white}
+            />
+          )}
+        </>
       )}
     </TouchableOpacity>
   );
@@ -46,6 +70,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     paddingHorizontal: metrics.padding.md,
+    flexDirection: 'row',
   },
   disabled: {
     backgroundColor: '#97ceea',
@@ -55,6 +80,16 @@ const styles = StyleSheet.create({
     color: colors.white,
     fontSize: typography.fontSize.xs,
     fontFamily: 'Poppins-SemiBold',
+  },
+  icon: {
+    width: metrics.iconSize.sm,
+    height: metrics.iconSize.sm,
+  },
+  leftIcon: {
+    marginRight: metrics.margin.xs,
+  },
+  rightIcon: {
+    marginLeft: metrics.margin.xs,
   },
 });
 

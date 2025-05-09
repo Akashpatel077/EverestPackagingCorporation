@@ -48,6 +48,7 @@ import SelectedRadioButton from './SelectedRadioButton.svg';
 import NotSelectedRadioButton from './NotSelectedRadioButton.svg';
 import Menu from './Menu.svg';
 import DropDown from './DropDown.svg';
+import WhatsApp from './WhatsApp.svg';
 //
 
 export {
@@ -98,6 +99,7 @@ export {
   CheckSquare,
   UncheckSquareNew,
   SelectedRadioButton,
+  WhatsApp,
   NotSelectedRadioButton,
   Menu,
   DropDown,

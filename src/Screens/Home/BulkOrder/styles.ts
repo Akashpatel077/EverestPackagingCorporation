@@ -1,74 +1,45 @@
-import {StyleSheet, Dimensions} from 'react-native';
+import {StyleSheet} from 'react-native';
+import {colors, metrics, scale, typography} from 'src/theme';
 
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: colors.ghostWhite,
   },
-  sendButton: {
-    width: 45,
-    height: 45,
-    borderRadius: 22.5,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#25D366',
-    marginLeft: 8,
-    marginRight: 5,
-    marginBottom: 5,
-  },
-  quickReplyButton: {
-    backgroundColor: '#E1FFC7',
-    borderRadius: 18,
-    paddingHorizontal: 16,
-    paddingVertical: 8,
-    marginRight: 8,
-    marginBottom: 8,
-    borderWidth: 1,
-    borderColor: '#DCF8C6',
-    elevation: 1,
-  },
-  quickReplyText: {
-    color: '#075E54',
-    fontSize: 15,
-    fontWeight: '500',
-  },
-  inputToolbar: {
-    backgroundColor: 'transparent',
-    borderTopWidth: 1,
-    borderTopColor: '#E8E8E8',
-    paddingVertical: 6,
-    paddingHorizontal: 8,
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  inputContainer: {
+  contentContainer: {
     flex: 1,
-    backgroundColor: '#F0F0F0',
-    borderRadius: 25,
-    paddingHorizontal: 16,
-    paddingVertical: 6,
-    minHeight: 36,
+    padding: metrics.padding.xl,
+    alignItems: 'center',
   },
-  messageContainer: {
-    marginVertical: 4,
-    marginHorizontal: 12,
-    maxWidth: '80%',
-    borderRadius: 12,
-    padding: 10,
+  title: {
+    fontSize: typography.fontSize.xl,
+    fontFamily: 'Poppins-SemiBold',
+    color: colors.primary,
+    marginBottom: metrics.margin.lg,
+    textAlign: 'center',
   },
-  userMessage: {
-    alignSelf: 'flex-end',
-    backgroundColor: '#DCF8C6',
+  message: {
+    fontSize: typography.fontSize.md,
+    color: colors.black,
+    textAlign: 'center',
+    lineHeight: scale(24),
+    marginBottom: metrics.margin.xl,
   },
-  botMessage: {
-    alignSelf: 'flex-start',
-    backgroundColor: '#FFFFFF',
-    borderWidth: 1,
-    borderColor: '#E8E8E8',
+  highlightsContainer: {
+    width: '100%',
+    marginBottom: metrics.margin.xl,
   },
-  messageText: {
-    fontSize: 16,
-    lineHeight: 22,
-    color: '#000000',
+  highlight: {
+    fontSize: typography.fontSize.md,
+    color: colors.black,
+    marginBottom: metrics.margin.md,
+    paddingLeft: metrics.padding.sm,
+  },
+  contactButton: {
+    alignItems: 'center',
+    position: 'absolute',
+    bottom: scale(200),
+    left: 16,
+    right: 16,
   },
 });
