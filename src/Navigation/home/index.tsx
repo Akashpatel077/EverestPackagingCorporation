@@ -17,6 +17,7 @@ import {
   AccountDetails,
   CommunicationScreen,
   BulkOrder,
+  ChangePassword,
 } from 'src/Screens/Home';
 import {
   ADD_CARD_SCREEN,
@@ -39,6 +40,7 @@ import {
   ACCOUNTDETAILS,
   COMMUNICATION,
   BULKORDERS,
+  CHANGE_PASSWORD,
 } from './routes';
 import {SvgProps} from 'react-native-svg';
 import {Home, Buy, Heart, Profile, Category} from 'assets/icons';
@@ -211,6 +213,10 @@ const ProfileStack = () => {
     {
       name: ACCOUNTDETAILS,
       component: AccountDetails,
+    },
+    {
+      name: CHANGE_PASSWORD,
+      component: ChangePassword,
     },
     {
       name: COMMUNICATION,

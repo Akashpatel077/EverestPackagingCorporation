@@ -5,7 +5,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import {Header, Icon, CustomAlert, CButton} from 'src/Components';
 import {BackIcon, Home, Close} from 'assets/icons';
 import {styles} from './styles';
-import {BILLING_ADDRESS_FORM} from 'src/Navigation/home/routes';
+import {BILLING_ADDRESS_FORM, CHECKOUT} from 'src/Navigation/home/routes';
 import {
   setSelectedBillingAddress,
   removeBillingAddress,

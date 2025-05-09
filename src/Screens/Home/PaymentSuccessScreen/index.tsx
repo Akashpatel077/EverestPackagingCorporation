@@ -3,7 +3,7 @@ import {View, Text} from 'react-native';
 import {CButton} from 'src/Components';
 import {styles} from './styles';
 import {CommonActions, useNavigation} from '@react-navigation/native';
-import {ORDER_SCREEN} from 'src/Navigation/home/routes';
+import {ORDER_SCREEN, PROFILE} from 'src/Navigation/home/routes';
 import CSafeAreaView from 'src/Components/CSafeAreaView';
 import LottieView from 'lottie-react-native';
 import successAnim from '../../../../assets/animations/successAnim.json';
@@ -43,8 +43,11 @@ const PaymentSuccessScreen = () => {
                               {
                                 name: 'Profile',
                                 state: {
-                                  index: 0,
+                                  index: 1,
                                   routes: [
+                                    {
+                                      name: PROFILE,
+                                    },
                                     {
                                       name: ORDER_SCREEN,
                                     },

@@ -11,6 +11,7 @@ import {
   Communication,
   Logout,
   BulkOrder,
+  ChangePassword,
 } from 'assets/icons';
 import {styles} from './styles';
 import {useNavigation} from '@react-navigation/native';
@@ -18,6 +19,7 @@ import {
   ACCOUNTDETAILS,
   ADDRESSES,
   BULKORDERS,
+  CHANGE_PASSWORD,
   COMMUNICATION,
   ORDER_SCREEN,
   WELCOME,
@@ -59,6 +61,12 @@ const ProfileScreen = () => {
 
       {id: 4, title: 'Your Invoices', icon: Invoices, screen: ''},
       {id: 5, title: 'Addresses', icon: Addresses, screen: ADDRESSES},
+      {
+        id: 6,
+        title: 'Change Password',
+        icon: ChangePassword,
+        screen: CHANGE_PASSWORD,
+      },
       {id: 7, title: 'Log out', icon: Logout, screen: WELCOME},
     ];
 

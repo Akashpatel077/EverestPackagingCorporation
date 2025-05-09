@@ -23,6 +23,7 @@ import Addresses from './Addresses';
 import AccountDetails from './AccountDetails';
 import CommunicationScreen from './Communication';
 import BulkOrder from './BulkOrder';
+import ChangePassword from './ChangePassword';
 
 export {
   HomeScreen,
@@ -48,6 +49,7 @@ export {
   DashBoard,
   Addresses,
   AccountDetails,
+  ChangePassword,
   CommunicationScreen,
   BulkOrder,
 };

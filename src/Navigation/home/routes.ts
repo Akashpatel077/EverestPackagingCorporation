@@ -27,6 +27,7 @@ export const WELCOME = `${homePrefix}/WELCOME`;
 export const DASHBOARD = `${homePrefix}/DASHBOARD`;
 export const ADDRESSES = `${homePrefix}/ADDRESSES`;
 export const ACCOUNTDETAILS = `${homePrefix}/ACCOUNTDETAILS`;
+export const CHANGE_PASSWORD = `${homePrefix}/CHANGE_PASSWORD`;
 export const COMMUNICATION = `${homePrefix}/COMMUNICATION`;
 export const BULKORDERS = `${homePrefix}/BULKORDERS`;
 export const PAYMENT_WEBVIEW = `${homePrefix}/PAYMENT_WEBVIEW`;

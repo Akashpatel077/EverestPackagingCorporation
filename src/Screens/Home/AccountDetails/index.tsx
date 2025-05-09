@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
-import {View, Text, ScrollView} from 'react-native';
+import {View, ScrollView} from 'react-native';
 import {CButton, CustomAlert, CustomTextInput, Header} from 'src/Components';
-import {BackIcon, Eye, Password_Hide} from 'assets/icons';
+import {BackIcon} from 'assets/icons';
 import {styles} from './styles';
 import CSafeAreaView from 'src/Components/CSafeAreaView';
 import {useAppDispatch, useAppSelector} from 'src/store/hooks';
-import {changePassword, updateProfile} from 'src/services/wooCommerceApi';
+import {updateProfile} from 'src/services/wooCommerceApi';
 import {updateUserProfile} from 'src/store/slices/authSlice';
 import {colors} from 'src/theme';
 
@@ -20,14 +20,7 @@ const AccountDetails = () => {
     email: email,
   });
 
-  const [currentPassword, setCurrentPassword] = useState('');
-  const [newPassword, setNewPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [showCurrentPassword, setShowCurrentPassword] = useState(false);
-  const [showNewPassword, setShowNewPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
-  const [changePasswordLoading, setChangePasswordLoading] = useState(false);
   const [updateProfileLoading, setUpdateProfileLoading] = useState(false);
   const [alertConfig, setAlertConfig] = useState({
     title: '',
@@ -38,9 +31,6 @@ const AccountDetails = () => {
 
   const disableSaveChangesButton =
     !formData.firstName || !formData.lastName || !formData.displayName;
-
-  const disableSavePasswordButton =
-    !currentPassword || !newPassword || !confirmPassword;
 
   const handleSaveChanges = async () => {
     try {
@@ -57,7 +47,6 @@ const AccountDetails = () => {
       console.log('res update profile : ', response);
 
       if (response.success) {
-        // Update user details in Redux store
         await dispatch(updateUserProfile({token}));
 
         setAlertConfig({
@@ -85,57 +74,6 @@ const AccountDetails = () => {
       });
     } finally {
       setUpdateProfileLoading(false);
-    }
-  };
-
-  const handlePasswordChange = async () => {
-    try {
-      setChangePasswordLoading(true);
-      if (newPassword !== confirmPassword) {
-        setAlertConfig({
-          title: 'Attention',
-          description: 'Passwords do not match',
-          buttonText: 'OK',
-          onPress: () => setShowAlert(false),
-        });
-        setShowAlert(true);
-        return;
-      }
-
-      const response = await changePassword(
-        currentPassword,
-        newPassword,
-        token,
-      );
-
-      if (response.success) {
-        setAlertConfig({
-          title: 'Success',
-          description: response.message,
-          buttonText: 'OK',
-          onPress: () => setShowAlert(false),
-        });
-        setShowAlert(true);
-        return;
-      } else {
-        setAlertConfig({
-          title: 'Error',
-          description: response.message,
-          buttonText: 'OK',
-          onPress: () => setShowAlert(false),
-        });
-        setShowAlert(true);
-      }
-    } catch (error) {
-      setAlertConfig({
-        title: 'Error',
-        description: error.response.data.message,
-        buttonText: 'OK',
-        onPress: () => setShowAlert(false),
-      });
-      setShowAlert(true);
-    } finally {
-      setChangePasswordLoading(false);
     }
   };
 
@@ -176,53 +114,6 @@ const AccountDetails = () => {
             value={formData.email}
             onChangeText={text => setFormData({...formData, email: text})}
             keyboardType="email-address"
-          />
-
-          <View style={styles.passwordSection}>
-            <Text style={styles.passwordTitle}>PASSWORD CHANGE</Text>
-
-            <CustomTextInput
-              title="Current Password"
-              placeholder="Enter Here..."
-              required
-              numberOfLines={1}
-              icon={showCurrentPassword ? Password_Hide : Eye}
-              onIconPress={() => setShowCurrentPassword(!showCurrentPassword)}
-              secureTextEntry={!showCurrentPassword}
-              value={currentPassword}
-              onChangeText={setCurrentPassword}
-            />
-
-            <CustomTextInput
-              title="New Password"
-              numberOfLines={1}
-              placeholder="Enter Here..."
-              required
-              icon={showNewPassword ? Password_Hide : Eye}
-              onIconPress={() => setShowNewPassword(!showNewPassword)}
-              secureTextEntry={!showNewPassword}
-              value={newPassword}
-              onChangeText={setNewPassword}
-            />
-
-            <CustomTextInput
-              title="Confirm Password"
-              placeholder="Enter Here..."
-              numberOfLines={1}
-              required
-              icon={showConfirmPassword ? Password_Hide : Eye}
-              onIconPress={() => setShowConfirmPassword(!showConfirmPassword)}
-              secureTextEntry={!showConfirmPassword}
-              value={confirmPassword}
-              onChangeText={setConfirmPassword}
-            />
-          </View>
-
-          <CButton
-            disabled={disableSavePasswordButton || changePasswordLoading}
-            isLoading={changePasswordLoading}
-            onPress={handlePasswordChange}
-            title={'CHANGE PASSWORD'}
           />
 
           <CButton
