@@ -12,6 +12,7 @@ import {BackIcon, Heart} from 'assets/icons';
 import {CDropdown, Header, Icon, CustomAlert, CButton} from 'src/Components';
 import {useAppDispatch, useAppSelector} from 'src/store/hooks';
 import {fetchProductDetails} from '../../../store/slices/productDetailsSlice';
+import Toast from 'react-native-toast-message';
 import {
   addToWishlist,
   removeFromWishlist,
@@ -27,7 +28,6 @@ import {getCartItems, getProductVariations} from 'src/services/wooCommerceApi';
 import {FilePicker} from '../../../Components';
 import LoadingLogo from 'src/Components/LoadingLogo';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {MYCART} from 'src/Navigation/home/routes';
 import {CommonActions} from '@react-navigation/native';
 import CSafeAreaView from 'src/Components/CSafeAreaView';
 import {useSelector} from 'react-redux';
@@ -79,6 +79,7 @@ const ProductDetails = ({navigation, route}) => {
   const {loading, productDetails, error} = useAppSelector(
     state => state.productDetails,
   );
+  const user = useAppSelector(state => state.auth.user);
   const {
     isAddSuccess,
     loading: isLoading,
@@ -101,10 +102,11 @@ const ProductDetails = ({navigation, route}) => {
 
   useEffect(() => {
     if (isAddSuccess) {
-      setAlertTitle('Success');
-      setAlertMessage('Product added to cart');
-      setShowAlert(true);
-
+      Toast.show({
+        type: 'success',
+        text1: 'Product added to cart',
+        position: 'bottom',
+      });
       dispatch(resetFlags());
     }
   }, [isAddSuccess]);
@@ -525,6 +527,14 @@ const ProductDetails = ({navigation, route}) => {
               <TouchableOpacity
                 style={styles.wishListButton}
                 onPress={() => {
+                  if (!user) {
+                    Toast.show({
+                      type: 'error',
+                      text1: 'Login First to Add Wishlist!',
+                      position: 'bottom',
+                    });
+                    return;
+                  }
                   if (isInWishlist) {
                     dispatch(removeFromWishlist(productId));
                   } else {
@@ -568,24 +578,26 @@ const ProductDetails = ({navigation, route}) => {
           </View>
         )}
       </View>
-      <CustomAlert
-        visible={showAlert}
-        title={alertTitle}
-        description={alertMessage}
-        button2={{
-          text: 'OK',
-          onPress: () => {
-            setShowAlert(false);
-            if (
-              alertTitle === 'Attention!' &&
-              alertMessage === addToCartError
-            ) {
-              dispatch(resetFlags());
-            }
-          },
-          color: colors.primary,
-        }}
-      />
+      {addToCartError && (
+        <CustomAlert
+          visible={showAlert}
+          title={alertTitle}
+          description={alertMessage}
+          button2={{
+            text: 'OK',
+            onPress: () => {
+              setShowAlert(false);
+              if (
+                alertTitle === 'Attention!' &&
+                alertMessage === addToCartError
+              ) {
+                dispatch(resetFlags());
+              }
+            },
+            color: colors.primary,
+          }}
+        />
+      )}
     </CSafeAreaView>
   );
 };

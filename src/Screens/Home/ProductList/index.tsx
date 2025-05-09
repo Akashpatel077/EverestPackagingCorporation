@@ -25,6 +25,7 @@ import {getProductVariations} from 'src/services/wooCommerceApi';
 import LoadingLogo from 'src/Components/LoadingLogo';
 import CSafeAreaView from 'src/Components/CSafeAreaView';
 import {colors, metrics} from 'src/theme';
+import Toast from 'react-native-toast-message';
 
 function findVariation(variations, selectedAttributes) {
   return variations.find(variation => {
@@ -129,7 +130,16 @@ const ProductItemCard = React.memo(
 
     const [alertVisible, setAlertVisible] = useState(false);
     const [alertMessage, setAlertMessage] = useState('');
+    const user = useAppSelector(state => state.auth.user);
     const handleWishlistToggle = product => {
+      if (!user) {
+        Toast.show({
+          type: 'error',
+          text1: 'Login First to Add Wishlist!',
+          position: 'bottom',
+        });
+        return;
+      }
       const isInWishlist = wishlistItems.some(item => item.id === product.id);
       if (isInWishlist) {
         dispatch(removeFromWishlist(product.id));

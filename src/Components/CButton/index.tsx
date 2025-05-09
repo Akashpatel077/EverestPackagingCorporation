@@ -48,8 +48,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: metrics.padding.md,
   },
   disabled: {
-    backgroundColor: colors.suvaGray,
-    opacity: 0.7,
+    backgroundColor: '#97ceea',
+    // opacity: 0.7,
   },
   buttonText: {
     color: colors.white,

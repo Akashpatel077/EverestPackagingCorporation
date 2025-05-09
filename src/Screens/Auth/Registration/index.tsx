@@ -154,7 +154,7 @@ const Registration = () => {
             required
             value={password}
             onChangeText={setPassword}
-            placeholder="****************"
+            placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;"
             secureTextEntry={!showPassword}
             icon={showPassword ? Password_Hide : Eye}
             onIconPress={() => setShowPassword(!showPassword)}
