@@ -2,6 +2,22 @@ import {StyleSheet} from 'react-native';
 import {colors, metrics, typography} from 'src/theme';
 
 export default StyleSheet.create({
+  loginContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: metrics.padding.md,
+  },
+  loginTitle: {
+    fontSize: typography.fontSize.md,
+    fontFamily: 'Poppins-Regular',
+    color: colors.darkGray,
+    marginBottom: metrics.margin.md,
+    textAlign: 'center',
+  },
+  loginButton: {
+    width: '50%',
+  },
   container: {
     flex: 1,
     backgroundColor: colors.ghostWhite,

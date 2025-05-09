@@ -4,6 +4,7 @@ import {useNavigation} from '@react-navigation/native';
 import {BackIcon} from 'assets/icons';
 import styles from './styles';
 import {REVIEW_SCREEN, TRACK_ORDER_SCREEN} from 'src/Navigation/home/routes';
+import {resetStartKey} from 'src/store/slices/startKeySlice';
 import {CButton, Header} from 'src/Components';
 import {useDispatch, useSelector} from 'react-redux';
 import {fetchOrders} from 'src/store/slices/ordersSlice';
@@ -108,49 +109,68 @@ const OrderScreen = () => {
     <CSafeAreaView removeBottomSafeArea>
       <View style={styles.container}>
         <Header title="My Orders" icon1={BackIcon} />
-        <View style={styles.tabContainer}>
-          <TouchableOpacity
-            style={[styles.tab, activeTab === 'active' && styles.activeTab]}
-            onPress={() => setActiveTab('active')}>
-            <Text
-              style={[
-                styles.tabText,
-                activeTab === 'active' && styles.activeTabText,
-              ]}>
-              Active
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[styles.tab, activeTab === 'completed' && styles.activeTab]}
-            onPress={() => setActiveTab('completed')}>
-            <Text
-              style={[
-                styles.tabText,
-                activeTab === 'completed' && styles.activeTabText,
-              ]}>
-              Completed
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[styles.tab, activeTab === 'cancelled' && styles.activeTab]}
-            onPress={() => setActiveTab('cancelled')}>
-            <Text
-              style={[
-                styles.tabText,
-                activeTab === 'cancelled' && styles.activeTabText,
-              ]}>
-              Cancelled
-            </Text>
-          </TouchableOpacity>
-        </View>
+        {!user ? (
+          <View style={styles.loginContainer}>
+            <Text style={styles.loginTitle}>Login to view Your Orders</Text>
+            <CButton
+              style={styles.loginButton}
+              onPress={() => dispatch(resetStartKey())}
+              title={'Login'}
+            />
+          </View>
+        ) : (
+          <>
+            <View style={styles.tabContainer}>
+              <TouchableOpacity
+                style={[styles.tab, activeTab === 'active' && styles.activeTab]}
+                onPress={() => setActiveTab('active')}>
+                <Text
+                  style={[
+                    styles.tabText,
+                    activeTab === 'active' && styles.activeTabText,
+                  ]}>
+                  Active
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={[
+                  styles.tab,
+                  activeTab === 'completed' && styles.activeTab,
+                ]}
+                onPress={() => setActiveTab('completed')}>
+                <Text
+                  style={[
+                    styles.tabText,
+                    activeTab === 'completed' && styles.activeTabText,
+                  ]}>
+                  Completed
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={[
+                  styles.tab,
+                  activeTab === 'cancelled' && styles.activeTab,
+                ]}
+                onPress={() => setActiveTab('cancelled')}>
+                <Text
+                  style={[
+                    styles.tabText,
+                    activeTab === 'cancelled' && styles.activeTabText,
+                  ]}>
+                  Cancelled
+                </Text>
+              </TouchableOpacity>
+            </View>
 
-        <FlatList
-          data={filteredOrders}
-          renderItem={renderOrderItem}
-          keyExtractor={item => item.id}
-          contentContainerStyle={styles.ordersList}
-          showsVerticalScrollIndicator={false}
-        />
+            <FlatList
+              data={filteredOrders}
+              renderItem={renderOrderItem}
+              keyExtractor={item => item.id}
+              contentContainerStyle={styles.ordersList}
+              showsVerticalScrollIndicator={false}
+            />
+          </>
+        )}
       </View>
     </CSafeAreaView>
   );
